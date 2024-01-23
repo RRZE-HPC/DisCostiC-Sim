@@ -1,0 +1,89 @@
+	
+         	} //!< end of loop over time step 
+        	numOperations=DisCosTiC->getNumOps();//DisCosTiC->allNodes.size(); //15
+        	ID[rank].resize(numOperations);
+        	
+            /**
+     		 * \brief find the root nodes (private)
+     		*/
+        	for (std::vector<DisCosTiC::AST_OP*>::iterator it =  DisCosTiC->allNodes.begin(); it != DisCosTiC->allNodes.end(); it++) {  //DisCosTiC->allNodes.size():15
+				if ((**it).depCount == 0) DisCosTiC->RootNodes.push_back(*it); //DisCosTiC->RootNodes.size():1
+			}
+
+			DisCosTiC_Datatype count = 0;        	
+         	DisCosTiC::AST_OP_ N;
+
+         	for (std::vector<DisCosTiC::AST_OP*>::iterator it = DisCosTiC->allNodes.begin(); it != DisCosTiC->allNodes.end(); it++) 
+         	{	         	
+				N.depCount = (**it).depCount;
+				N.type = (**it).type;
+				N.target = (**it).target;
+				N.bufSize = (**it).bufSize;
+				N.tag = (**it).tag;
+				N.node = (**it).node;
+				N.network = (**it).network;
+				N.label = (**it).label;
+				N.depsCount = (**it).DepOperations.size();
+				N.depApdxStartLabel = count;
+            	count += (**it).DepOperations.size();
+				N.idepsCount = (**it).IdepOperations.size();	
+				N.idepApdxStartLabel = count;
+            	count += (**it).IdepOperations.size();
+            	//DisCosTiC->insertdeserialID(indicesDeserializedTable, toCharPointer(rank) , N);
+            	ID[rank][(**it).label] = std::make_pair(rank,N);  									
+			}
+
+        	DisCosTiC->Rank_Finalize();         
+	    } //!< end of loop over rank
+	    DisCosTiC->File_Write();
+	    delete DisCosTiC;	  
+	    /*print_pairedVec_NonPointer2T(ID); 
+	  	print_pairedVec2T(compIDs); 
+   	 	print_pairedVec2T(sendIDs);
+        print_pairedVec2T(recvIDs); 
+        DisCosTiC->print_indicesTable();
+    	DisCosTiC->print_depTable();
+    	DisCosTiC->print_indicesDeserializedTable();*/
+    	return ID;//std::make_tuple(compIDs,sendIDs,recvIDs);  //(root_Node,*send.second,*recv.second); 	
+	} //!< end of Oneway_PositiveDisplacement
+
+    /**
+     * \brief the maximum number of the nodes
+     */
+    uint8_t GetNumCores() {
+        return nodesCount+1;
+    }
+    
+    /**
+     * \brief the maximum number of the network interface controller
+     */
+    uint8_t GetNumNetworks() {
+        return networksCount+1;
+    }
+    
+    /**
+     * \brief destructor
+     */
+    ~Benchmark() 
+    {			
+    }
+    
+	public:
+	DisCosTiC_Datatype nodesCount;
+	DisCosTiC_Datatype networksCount;
+    DisCosTiC_Datatype systemsize;
+    DisCosTiC_Datatype numOperations;
+
+	private:
+ 	AST* DisCosTiC;
+    DisCosTiC::VecDeserialNode Nodes; 
+        
+    DisCosTiC_Datatype datasize;
+    DisCosTiC_Datatype numTimesteps;
+};  //!< end of Benchmark class
+
+    using  VecGraph_t = std::vector<Benchmark>;
+
+} //!< end namespace DisCosTiC
+
+#endif //!< end P2P_HPP

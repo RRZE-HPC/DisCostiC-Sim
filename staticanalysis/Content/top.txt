@@ -1,0 +1,50 @@
+#ifndef P2P_HPP
+#define P2P_HPP
+#include <tuple>
+#include <mpi.h>
+#include "../include/CompModel.hpp"
+#include "../include/AST.hpp"
+#include "../include/DataStruct.hpp"
+
+namespace DisCosTiC {
+  	
+    class Benchmark {
+	
+    public: 
+ 	
+    /**
+     * \brief constructor that initializes the coordinates
+	 * \param CFG_args 
+     */
+	Benchmark(UserInterface::ConfigParser *CFG_args) {
+    	systemsize = CFG_args->getValue<DisCosTiC_Datatype>("number_of_processes");
+    	numTimesteps = CFG_args->getValue<DisCosTiC_Datatype>("number_of_timesteps");    
+    	nodesCount = 0;
+		networksCount =0;  	    
+    }
+
+
+    	/*DisCosTiC::tupleIdNodePair*/
+		DisCosTiC::idNodeTypePair Oneway_PositiveDisplacement(DisCosTiC_Datatype process_Rank, DisCosTiC_Datatype N_size_Of_Cluster, MPI_Comm comm)
+		{ 
+        	DisCosTiC = new AST(&CFG_args, systemsize);    
+        	DisCosTiC::Event recv, send, comp;  
+	        DisCosTiC::idNodeTypePair ID(systemsize);
+        	//DisCosTiC::AST_OP root_Node;
+         	//DisCosTiC::idNodePair compIDs(systemsize), sendIDs(systemsize), recvIDs(systemsize);
+
+			for (auto rank : DisCosTiC::getRange(systemsize))
+			{
+
+        		DisCosTiC->Rank_Init(rank);
+	    		DisCosTiC->SetNumRanks(systemsize);  //std::cout <<DisCosTiC->ranks<< std::endl; //18  
+        		recv.first = INVALID_ID; 
+        		send.first = INVALID_ID;
+        		comp.first = INVALID_ID;
+        		/*compIDs[rank].resize(numTimesteps);
+        		sendIDs[rank].resize(numTimesteps);
+        		recvIDs[rank].resize(numTimesteps);*/
+        		
+			for (auto timestep : DisCosTiC::getRange(numTimesteps))
+			{
+            	
