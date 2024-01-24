@@ -4,23 +4,23 @@
   <img alt="Docs" src="https://img.shields.io/badge/read-the_docs-blue" />
   </a><a href="https://github.com/RRZE-HPC/DisCostiC-Sim/src/Dev/discussions">
   <img alt="Join the discussion on Github" src="https://img.shields.io/badge/Github%20Discussions%20%26%20Support-Chat%20now!-blue" />
+  </a><a href="https://www.linkedin.com/in/ayeshaafzal-/">
+    <img alt="linkedin" src="https://i.stack.imgur.com/gVE0j.png" />
+  <a href="https://github.com/AyeshaAfzal91" rel="nofollow noreferrer">
+    <img alt="github" src="https://i.stack.imgur.com/tskMh.png">
+  </a>
   </a><a href="https://github.com/RRZE-HPC/DisCostiC-Sim/src/Dev/" target="\_parent">
   <img alt="" src="https://img.shields.io/github/stars/tanstack/react-table.svg?style=social&label=Star" />
-  </a><a href="https://www.linkedin.com/in/ayeshaafzal-/">
-    <img alt="linkedin" src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" />
-  <a href="https://github.com/AyeshaAfzal91" rel="nofollow noreferrer">
-    <img alt="github" src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white">
-  </a>
   </a><a href="https://twitter.com/AyeshaHamad4" target="\_parent">
   <img alt="" src="https://img.shields.io/twitter/follow/AyeshaHamad4.svg?style=social&label=Follow" />
 
-Table of Contents
+## Table of Contents
 
   * [💡Description](#description)
     * [⚙️ Framework workflow](#workflow)
     * [🖍 Advantages over existing tools](#advantages)
   * [:octocat: Compilation and build](#compilation-and-build)
-    * [⚡Installation](#installation)
+    * [⚡ Installation](#installation)
     * [⏱️ Configuration settings](#configuration)
     * [🥅 Compilation](#compilation)
     * [:green_circle: Run](#run)
@@ -29,13 +29,13 @@ Table of Contents
     * [🌐 1. In-browser output visualization with Google Chrome (DMS file format)](#chrome)
     * [📊 2. Output visualization with Vampir (OTF2 file format)](#vampir)
     * [📊 3. Output visualization with ITAC (STF file format)](#itac)
+    * [🗄️ 4. Statistical or log data](#stat)
   * [💻 Cluster configuration: Hypothetical or actual](#cluster-configuration)
     * [🔌 Cluster level](#cluster)
     * [🔌 Node level](#node)
     * [🔌 Network level](#network)
   * [👩‍💻 Automating DSEL generation through static analysis](#automating-dsel-generation-through-static-analysis)
-    * [📝 DSEL code example: Hypothetical or actual](#example)
-    * [📝 Seven essential DisCostiC routines](#seven-essential-routines)
+    * [📝 Essential DisCostiC routines](#essential-routines)
     * [📝 Code blueprint as DisCostiC input](#DSEL)
     * [📝 Code documentation](#documentation)
     * [📝 Suite of C++ data structures and enumerated types](#suite-of-c---data-structures-and-enumerated-types)
@@ -53,19 +53,19 @@ Table of Contents
 
 A cross-architecture resource-based parallel simulation framework that can efficiently predict the performance of real or hypothetical massively parallel MPI programs on current and future heterogeneous systems.
 
-This simulator aims to predict the runtime for massively parallel applications in a _`straightforward, portable, scalable, and efficient`_ manner.:star:
+This simulator aims to predict the runtime for massively parallel applications in a _`straightforward, portable, scalable, and efficient`_ manner.⭐
 
-The simulation framework is _`built on first-principles analytical performance models`_.:star2:
+The simulation framework is _`built on first-principles analytical performance models`_.🌟
 
-It is specifically tuned and designed to simulate MPI parallel micro-benchmarks or proxy application test cases that use highly parallel systems and are _`compute- and memory-bound`_ (such as stencil codes).:sparkles:
+It is specifically tuned and designed to simulate MPI parallel micro-benchmarks or proxy application test cases that use highly parallel systems and are _`compute- and memory-bound`_ (such as stencil codes).✨
 
-The toolkit is intended to serve as a vehicle for testing the performance of any _`actual or hypothetical parallel distributed memory applications and systems`_ under controlled experimental conditions.:fire:
+The toolkit is intended to serve as a vehicle for testing the performance of any _`actual or hypothetical parallel distributed memory applications and systems`_ under controlled experimental conditions.🔥
 
-DisCostiC facilitates _`key concepts and elements embedded in the modern C++ language`_ to cater for higher expressivity and readability for domain experts.:boom:
+DisCostiC facilitates _`key concepts and elements embedded in the modern C++ language`_ to cater for higher expressivity and readability for domain experts.💥
 
 
 <a name="workflow"></a>
-**Framework workflow**
+**Framework workflow**✳️
 
 ```diff
 - Dependency graph generation
@@ -85,7 +85,7 @@ DisCostiC facilitates _`key concepts and elements embedded in the modern C++ lan
 ```
 
 <a name="advantages"></a>
-**Advantages over existing tools**
+**Advantages over existing tools**💬
 
 ```diff
 - Zero dependency 
@@ -113,7 +113,8 @@ First, clone the git repository using the command:
 `git clone git@github.com:RRZE-HPC/DisCostiC-Sim.git && cd DisCostiC-Sim`
 
 <a name="installation"></a>
-**Installation**
+**Installation**:thought_balloon:
+
 Before continuing, make sure the environment is prepared for the compilation.
 The installation steps are listed below:
 ```
@@ -126,7 +127,8 @@ The installation steps are listed below:
 One way to check the installation is to print the version of the DisCostiC using `./discostic --version`.
 
 <a name="configuration"></a>
-**Configuration settings**
+**Configuration settings**:thought_balloon:
+
 The `test` folder in DisCostiC offers multiple MPI-parallelized <testcase>s (`benchmark_kernel`) in four distinct functionalities (`benchmark_mode`). For illustration, a few examples are given below:
 
 benchmark_kernel                  | Description
@@ -144,7 +146,7 @@ benchmark_kernel                  | Description
 `SRC`               | Kerncraft interated
 
 <a name="compilation"></a>
-**Compilation**
+**Compilation**:thought_balloon:
 
 Upon compilation, an executable will be produced, with two options for enabling tracing and generating the output report:
 
@@ -157,7 +159,7 @@ Command                  | Description
 
 
 <a name="run"></a>
-**Run**
+**Run**:thought_balloon:
 
 In the batch script, the number of the simulator processes is configured as the `number of simulated processes + 1`. To run the batch script on any system, ITAC profiling can be enabled or disabled:
 
@@ -176,7 +178,7 @@ export VT_LOGFILE_NAME=discostic
 ```
 
 <a name="clean"></a>
-**Clean and uninstall**
+**Clean and uninstall**:thought_balloon:
 
 Command                  | Description
 --------------------- | -------------
@@ -188,14 +190,16 @@ Command                  | Description
 ## DisCostiC output visualization
 
 <a name="chrome"></a>
-**1. In-browser output visualization with Google Chrome (DMS file format)**
+**1. In-browser output visualization with Google Chrome (DMS file format)**:speech_balloon:
 
 Upon completion of the run, DisCostiC generates a report referred to as `DisCostiC.dms`.
-`DisCostiC.dms` is a (straightforward, but non-optimized) [JSON object data format file](https://docs.google.com/document/d/1CvAClvFfyA5R-PhYUmn5OOQtYMH4h6I0nSsKchNAySU/edit) that can be viewed using the [Google Chrome browser](chrome://tracing).
+`DisCostiC.dms` is a (straightforward, but non-optimized) [JSON object data format file](https://docs.google.com/document/d/1CvAClvFfyA5R-PhYUmn5OOQtYMH4h6I0nSsKchNAySU/edit) that can be viewed using the <picture>
+  <source media="([Google Chrome browser](chrome://tracing).)" srcset="[https://user-images.githubusercontent.com/25423296/163456776-7f95b81a-f1ed-45f7-b7ab-8fa810d529fa.png](https://img.shields.io/badge/Google_chrome-4285F4?style=for-the-badge&logo=Google-chrome&logoColor=white)">
+</picture>
 The generated JSON file can then be loaded after entering [chrome://tracing](chrome://tracing) in the URL bar of the Google Chrome browser.
 
 <a name="vampir"></a>
-**2. Output visualization with Vampir (OTF2 file format)**
+**2. Output visualization with Vampir (OTF2 file format)**:speech_balloon:
 
 The `DisCostiC.otf2` file is an [OTF2 object data format](https://perftools.pages.jsc.fz-juelich.de/cicd/otf2/tags/otf2-3.0.2/html/) file and can be viewed using third-party tools like [ITAC](https://www.intel.com/content/www/us/en/developer/tools/oneapi/trace-analyzer.html), [Vampir](https://vampir.eu), [Score-P](https://www.vi-hps.org/projects/score-p/), and others.
 This format is produced by the [ChromeTrace2Otf2](https://profilerpedia.markhansen.co.nz/converters/otf2-cli-chrome-trace-converter/) converter, which converts the JSON object data format file `(DisCostiC.dms)` to the OTF2 object data format file `(DisCostiC.otf2)`.
@@ -209,7 +213,7 @@ To convert a DMS file to the OTF2 file format and to open an OTF2 small trace fi
 ```
 
 <a name="itac"></a>
-**3. Output visualization with ITAC (STF file format)**
+**3. Output visualization with ITAC (STF file format)**:speech_balloon:
 
 To convert a DMS file to a single.stf file format and to open an STF trace file (DisCosTiC.single.stf) in [ITAC](https://www.intel.com/content/www/us/en/developer/tools/oneapi/trace-analyzer.html) follow the below steps:
 
@@ -221,8 +225,8 @@ To convert a DMS file to a single.stf file format and to open an STF trace file 
     (5) From the Files of a type field, select Open Trace Format, navigate to the `DisCosTiC/traces.otf2` file, and double-click to open it
     (6) The OTF2 to STF conversion dialog appears. Review the available fields and checkboxes, and click Start to start the conversion. As a result, the OTF2 file will be converted to STF (DisCosTiC/traces.otf2.single.stf), and you will be able to view it in the Intel Trace Analyzer.
 ```
-
-**4. Statistical or log data**
+<a name="stat"></a>
+**4. Statistical or log data**:thought_balloon:
 
 		----------------------------------------------------------------
 		DisCostiC:
@@ -231,7 +235,7 @@ To convert a DMS file to a single.stf file format and to open an STF trace file 
 		version: v0.0.0 (initial release)
 		timestamp: Sun Oct 27 14:24:48 2019
 		author: Ayesha Afzal <ayesha.afzal@fau.de>
-        copyright: © 2023 HPC, FAU Erlangen-Nuremberg. All rights reserved
+        	copyright: © 2023 HPC, FAU Erlangen-Nuremberg. All rights reserved
         
 		verbose							| more verbose output (0=disable, 1=enable)
 		progress						| progress printing information (0=disable, 1=enable)
@@ -258,8 +262,136 @@ To convert a DMS file to a single.stf file format and to open an STF trace file 
 		N-1            	30710          	3.071e-05
 
 
+<a name="cluster-configuration"></a>
+## System model: Hypothetical or actual
+
+All parameters (hypothetical or actual) can be tuned by editing the `config.cfg` file.
+For detailed documentation, please take a look at the `config.cfg` file available in the current directory.
+
+<a name="cluster"></a>    
+**Cluster level**:thought_balloon:
+
+|Metadata information                  | Description |
+--------------------- | -------------
+|`name`										| the name of the cluster, processor, network, or running kernel |
+|`number of homogeneous nodes`				| the number of nodes in the cluster |
+|`number of sockets per node`				| the number of sockets in one node |
+|`number of cores per socket`				| the number of cores in one socket |
+|`number of pinned node`					| the number of utilizing nodes of the cluster |
+|`numbering of pinned chips cores`			| the numbering of utilizing cores of the chip in the cluster |
+
+<a name="node"></a>    
+**Node level**:thought_balloon:
+
+Metadata information                  | Description
+--------------------- | -------------
+`FP instructions per cycle`					| node level floating point instructions per cycle (ADD, MUL)
+`FP operations per instruction (SP/DP)`		| node level single precision/ double precision floating point operations per instruction
+`clock frequency`							| node level clock frequency [unit: GHz]
+`memory bandwidth`							| node level memory bandwidth [unit: GB/s]
+
+<a name="network"></a>    
+**Network level**:thought_balloon:
+
+Metadata information                  | Description
+--------------------- | -------------
+`intra chip`							    | communication inside chip
+`inter chip`							    | communication across chips
+`inter node`							    | communication across nodes
+`latency`							        | networking level latency parameter for various kind of network [unit: s]
+`bandwidth`							        | networking level bandwidth parameter for various kind of network [unit: GB/s]
+`eager limit`							    | data size at which communication mode change from eager to rendezvous protocol for various kind of network [unit: bytes]
+
+
+<a name="automating-dsel-generation-through-static-analysis"></a>
+## Automating DSEL generation through static analysis
+  
+To perform this static analysis, the following procedures must be followed:
+```
+pip install -r staticanalysis/requirements.txt
+python staticanalysis/Convert-<testcase>.py
+```
+
+Now run discostic as previously described.
+
+Files                  | Description
+--------------------- | -------------
+`Convert-<testcase>.py`          | A helper script that takes the original code and, through annotation, locates code loops and communication and identifies user-defined variables, such as dimx and dimy in the Cartesian stencil heat.c code, and ultimately generates DSEL code.
+`requirements.txt`               | Each (sub)dependency is listed and pinned using "==" to specify a particular package version. This project makes use of the lightweight `Python tree data structure` [anytree==2.8.0](https://pypi.org/project/anytree) and `type hints for Python 3.7+` [typing_extensions==4.4.0](https://pypi.org/project/typing-extensions). These dependencies are later installed (normally in a virtual environment) through pip using the `pip install -r requirements.txt` command. The generated tree's syntax is the same as the original C/C++ code.
+
+For the specified <testcase>, this will produce following files
+
+Files                  | Folder location       |Description
+--------------------- | ------------- | -------------
+`<testcase>.cfg`          |  nodelevel/configs  | It contains computational loop kernels
+`<testcase>_<mode>.hpp`   |  test               | It contains the generated DSEL code
+
+<a name="essential-routines"></a>
+**Essential DisCostiC routines**:thought_balloon:
+
+The goal is to offer convenient, compact and practically usable application programming interfaces (APIs) with appropriate abstractions.
+
+```cpp
+1. DisCostiC->Rank_Init(DisCostiC::Indextype rank);
+
+2. DisCostiC->Exec("LBL:STREAM_TRIAD", 
+					DisCostiC::Event depending_operations);
+   DisCostiC->Exec("COMP:TOL=2.0||TnOL=1.0|TL1L2=3.0|TL2L3=6.0|TL3Mem=14.2", 
+   					DisCostiC::Event depending_operations);
+   DisCostiC->Exec("FILE:copy.c//BREAK:COPY//./BroadwellEP_E5-2697v4_CoD.yml//18//-D N 100000", 
+   					DisCostiC::Event depending_operations);
+   DisCostiC->Exec("SRC:double s, a[N],b[N],c[N];\n\nfor(int i=0; i<N; i++)\n\ta[i]=b[i]+s*c[i];\n//BREAK:DAXPY//./BroadwellEP_E5-2697v4_CoD.yml//18//-D N 100000",
+   					DisCostiC::Event depending_operations);
+
+3. DisCostiC->Send(DisCostiC::Datatype sending_message_size_in_bytes, 
+					DisCostiC::Indextype destination_rank, 
+					DisCostiC::Event depending_operations);
+
+4. DisCostiC->Isend(DisCostiC::Datatype sending_message_size_in_bytes, 
+					DisCostiC::Indextype destination_rank, 
+					DisCostiC::Event depending_operations);
+
+5. DisCostiC->Recv(DisCostiC::Datatype receiving_message_size_in_bytes, 
+					DisCostiC::Indextype source_rank, 
+					DisCostiC::Event depending_operations);
+
+6. DisCostiC->Irecv(DisCostiC::Datatype receiving_message_size_in_bytes,
+					DisCostiC::Indextype source_rank,
+					DisCostiC::Event depending_operations);
+					
+7. DisCostiC->Rank_Finalize(); 
+
+```
+
+<a name="DSEL"></a>
+**Code blueprint as DisCostiC input**:thought_balloon:
+
+This DSEL code example shows a simplest illustration of how the domain knowledge of the applications is expressed in the DisCostiC language is provided below.
+
+```cpp
+DisCostiC::Event recv, send, comp;  
+for (auto rank : DisCostiC::getRange(NP))
+{
+   DisCostiC->Rank_Init(rank);
+   for (auto timestep : DisCostiC::getRange(5))
+   {
+      comp = DisCostiC->Exec("STREAM_TRIAD", recv); 
+      send = DisCostiC->Send(8, ((rank + 1) % NP), comp); 
+      if(rank != 0)
+      {
+         recv = DisCostiC->Recv(8, rank - 1, comp);
+      } 
+      else 
+      {
+   	     recv = DisCostiC->Recv(8, NP - 1, comp);
+      }	
+   } 
+   DisCostiC->Rank_Finalize(); 
+} 
+```
+
 <a name="documentation"></a>    
-## Code documentation
+**Code documentation**:thought_balloon:
 
 The HTML documentation can be generated by [doxygen](http://www.doxygen.nl). To build the documentation, navigate to the `Doxyfile` file available in the current directory and run the command:
 
@@ -268,7 +400,7 @@ The HTML documentation can be generated by [doxygen](http://www.doxygen.nl). To 
 To read the documentation, point to a web browser at `html/index.html`.
 
 <a name="suite-of-c---data-structures-and-enumerated-types"></a>
-**Suite of C++ data structures and enumerated types**
+**Suite of C++ data structures and enumerated types**:thought_balloon:
 
 * **Single Operation**: accessors for local operations and their individual information at a certain grid point
 
@@ -320,7 +452,7 @@ Metadata information     | Description
 `depCount`				| number of dependencies
  
 
-* **Custom data types, keywords and high-level classes functionality**
+* **Custom data types, keywords and high-level classes functionality**:thought_balloon:
 
     * **accessors** for local vectors and matrices and their individual components without the need for index accesses
     * **abstract base classes** for the AST generated grid to access the operations and their associated features
@@ -331,143 +463,6 @@ Metadata information     | Description
 	* DisCostiC::Indextype
 	* DisCostiC::Networktype
 ```	
-
-<a name="cluster-configuration"></a>
-## System model: Hypothetical or actual
-
-All parameters (hypothetical or actual) can be tuned by editing the `config.cfg` file.
-For detailed documentation, please take a look at the `config.cfg` file available in the current directory.
-
-<a name="cluster"></a>    
-**Cluster level**
-
-|Metadata information                  | Description |
---------------------- | -------------
-|`name`										| the name of the cluster, processor, network, or running kernel |
-|`number of homogeneous nodes`				| the number of nodes in the cluster |
-|`number of sockets per node`				| the number of sockets in one node |
-|`number of cores per socket`				| the number of cores in one socket |
-|`number of pinned node`					| the number of utilizing nodes of the cluster |
-|`numbering of pinned chips cores`			| the numbering of utilizing cores of the chip in the cluster |
-
-<a name="node"></a>    
-**Node level**
-
-Metadata information                  | Description
---------------------- | -------------
-`FP instructions per cycle`					| node level floating point instructions per cycle (ADD, MUL)
-`FP operations per instruction (SP/DP)`		| node level single precision/ double precision floating point operations per instruction
-`clock frequency`							| node level clock frequency [unit: GHz]
-`memory bandwidth`							| node level memory bandwidth [unit: GB/s]
-
-<a name="network"></a>    
-**Network level**
-
-Metadata information                  | Description
---------------------- | -------------
-`intra chip`							    | communication inside chip
-`inter chip`							    | communication across chips
-`inter node`							    | communication across nodes
-`latency`							        | networking level latency parameter for various kind of network [unit: s]
-`bandwidth`							        | networking level bandwidth parameter for various kind of network [unit: GB/s]
-`eager limit`							    | data size at which communication mode change from eager to rendezvous protocol for various kind of network [unit: bytes]
-
-<a name="example"></a>
-## DSEL code example: Hypothetical or actual
-
-<a name="seven-essential-routines"></a>
-**Seven basic DisCostiC routines**
-
-The goal is to offer convenient, compact and practically usable application programming interfaces (APIs) with appropriate abstractions.
-
-```cpp
-1. DisCostiC->Rank_Init(DisCostiC::Indextype rank);
-
-2. DisCostiC->Exec("LBL:STREAM_TRIAD", 
-					DisCostiC::Event depending_operations);
-   DisCostiC->Exec("COMP:TOL=2.0||TnOL=1.0|TL1L2=3.0|TL2L3=6.0|TL3Mem=14.2", 
-   					DisCostiC::Event depending_operations);
-   DisCostiC->Exec("FILE:copy.c//BREAK:COPY//./BroadwellEP_E5-2697v4_CoD.yml//18//-D N 100000", 
-   					DisCostiC::Event depending_operations);
-   DisCostiC->Exec("SRC:double s, a[N],b[N],c[N];\n\nfor(int i=0; i<N; i++)\n\ta[i]=b[i]+s*c[i];\n//BREAK:DAXPY//./BroadwellEP_E5-2697v4_CoD.yml//18//-D N 100000",
-   					DisCostiC::Event depending_operations);
-
-3. DisCostiC->Send(DisCostiC::Datatype sending_message_size_in_bytes, 
-					DisCostiC::Indextype destination_rank, 
-					DisCostiC::Event depending_operations);
-
-4. DisCostiC->Isend(DisCostiC::Datatype sending_message_size_in_bytes, 
-					DisCostiC::Indextype destination_rank, 
-					DisCostiC::Event depending_operations);
-
-5. DisCostiC->Recv(DisCostiC::Datatype receiving_message_size_in_bytes, 
-					DisCostiC::Indextype source_rank, 
-					DisCostiC::Event depending_operations);
-
-6. DisCostiC->Irecv(DisCostiC::Datatype receiving_message_size_in_bytes,
-					DisCostiC::Indextype source_rank,
-					DisCostiC::Event depending_operations);
-					
-7. DisCostiC->Rank_Finalize(); 
-
-```
-
-<a name="DSEL"></a>
-**Code blueprint as DisCostiC input**
-
-The simplest illustration of how the domain knowledge of the applications is expressed in the DisCostiC language is provided below.
-
-```cpp
-DisCostiC::Event recv, send, comp;  
-for (auto rank : DisCostiC::getRange(NP))
-{
-   DisCostiC->Rank_Init(rank);
-   for (auto timestep : DisCostiC::getRange(5))
-   {
-      comp = DisCostiC->Exec("STREAM_TRIAD", recv); 
-      send = DisCostiC->Send(8, ((rank + 1) % NP), comp); 
-      if(rank != 0)
-      {
-         recv = DisCostiC->Recv(8, rank - 1, comp);
-      } 
-      else 
-      {
-   	     recv = DisCostiC->Recv(8, NP - 1, comp);
-      }	
-   } 
-   DisCostiC->Rank_Finalize(); 
-} 
-```
-
-<a name="automating-dsel-generation-through-static-analysis"></a>
-## Automating DSEL generation through static analysis
-  
-To perform this static analysis, the following procedures must be followed:
-```
-pip install -r staticanalysis/requirements.txt
-python staticanalysis/Convert-<testcase>.py
-```
-
-Current <testcase> options:
-```
-1. HEAT
-2. HPCG
-3. STREAM
-```
-
-For the specified <testcase>, this will produce following files
-
-Files                  | Folder location       |Description
---------------------- | ------------- | -------------
-`<testcase>.cfg`          |  nodelevel/configs  | It contains computational loop kernels
-`<testcase>_<mode>.hpp`   |  test               | It contains the generated DSEL code
-
-Now run discostic as previously described.
-
-Files                  | Description
---------------------- | -------------
-`Convert-<testcase>.py`          | A helper script that takes the original code and, through annotation, locates code loops and communication and identifies user-defined variables, such as dimx and dimy in the Cartesian stencil heat.c code, and ultimately generates DSEL code.
-`requirements.txt`               | Each (sub)dependency is listed and pinned using "==" to specify a particular package version. This project makes use of the lightweight `Python tree data structure` [anytree==2.8.0](https://pypi.org/project/anytree) and `type hints for Python 3.7+` [typing_extensions==4.4.0](https://pypi.org/project/typing-extensions). These dependencies are later installed (normally in a virtual environment) through pip using the `pip install -r requirements.txt` command. The generated tree's syntax is the same as the original C/C++ code.
 
 
 <a name="mpi-parallelized-implementation"></a>
@@ -482,7 +477,7 @@ Terms                  | Description
 `master simulator process Q_0`  | master process from the parallel simulation framework point of view
 
 
-**Initialization**
+**Initialization**:thought_balloon:
 In the MPI implementation, only the master process of the default communicator makes any print `std::cout` calls, and all other processes of the new communicator initialize root operations only once in each run. 
 
 <table>
@@ -534,7 +529,7 @@ queue.emplace(op);
 </tr>
 </table>
 
-**Start of simulation**
+**Start of simulation**:thought_balloon:
 Do loop over the number of iterations and the number of steps per iteration. Processes connected to the new communicator, or "newcomm," are only used in the main simulation.
 
 <table>
@@ -565,7 +560,7 @@ do{
 </tr>
 </table>
 
-**SEND operation**
+**SEND operation**:thought_balloon:
 The currently active process sends the operation object or array to the process listed as "operation.target," which is specific to the communication pattern simulation program.
  
 <table>
@@ -607,7 +602,7 @@ queue.emplace(operation);
 </tr>
 </table>
 
-**RECV operation**
+**RECV operation**:thought_balloon:
 The currently running process receives the operation object or array from the process listed as "operation.target".
  Debug why the discostic Irecv and Recv have a BLOCKING mode_t value.
  
@@ -657,7 +652,7 @@ else {
 </tr>
 </table>
 
-**MSG operation**
+**MSG operation**:thought_balloon:
 If MSG is not found, the cycle will continue (cycle = true) until it is found.
  
 <table>
@@ -712,7 +707,7 @@ if ((earliestFinish = operation.time) <= ...){
 </tr>
 </table>
 
-**Adding new sorted operations in queue in order**
+**Adding new sorted operations in queue in order**:thought_balloon:
 <table>
 <tr>
 <th>MPI-parallelized</th>
@@ -806,13 +801,19 @@ while(!queue.empty() || newOps)
 <a name="references"></a>
 ## References about the theory of potential application scenarios for DisCostiC
 
-[^1]: A. Afzal et al.: Propagation and Decay of Injected One-Off Delays on Clusters: A Case Study. [DOI:10.1109/CLUSTER.2019.8890995](https://doi.org/10.1109/CLUSTER.2019.8890995)
-[^2]: A. Afzal et al.: Desynchronization and Wave Pattern Formation in MPI-Parallel and Hybrid Memory-Bound Programs. [DOI:10.1007/978-3-030-50743-5_20](https://doi.org/10.1007/978-3-030-50743-5_20)
-[^3]: A. Afzal et al.: Analytic Modeling of Idle Waves in Parallel Programs: Communication, Cluster Topology, and Noise Impact. [DOI:10.1007/978-3-030-78713-4_19](https://doi.org/10.1007/978-3-030-78713-4_19)
-[^4]: A. Afzal et al.: The Role of Idle Waves, Desynchronization, and Bottleneck Evasion in the Performance of Parallel Programs. [DOI:10.1109/TPDS.2022.3221085](https://doi.org/10.1109/TPDS.2022.3221085)
-[^5]: A. Afzal et al.: Analytic performance model for parallel overlapping memory-bound kernels. [DOI:10.1002/cpe.6816](https://doi.org/10.1002/cpe.6816)
-[^5]: A. Afzal et al.: Exploring Techniques for the Analysis of Spontaneous Asynchronicity in MPI-Parallel Applications. [DOI:10.1007/978-3-031-30442-2_12](https://doi.org/10.1007/978-3-031-30442-2_12)
-[^5]: A. Afzal et al.: Making applications faster by asynchronous execution: Slowing down processes or relaxing MPI collectives. [DOI:10.1016/j.future.2023.06.017](https://10.1016/j.future.2023.06.017)
+[1]: A. Afzal et al.: Propagation and Decay of Injected One-Off Delays on Clusters: A Case Study. [DOI:10.1109/CLUSTER.2019.8890995](https://doi.org/10.1109/CLUSTER.2019.8890995)
+
+[2]: A. Afzal et al.: Desynchronization and Wave Pattern Formation in MPI-Parallel and Hybrid Memory-Bound Programs. [DOI:10.1007/978-3-030-50743-5_20](https://doi.org/10.1007/978-3-030-50743-5_20)
+
+[3]: A. Afzal et al.: Analytic Modeling of Idle Waves in Parallel Programs: Communication, Cluster Topology, and Noise Impact. [DOI:10.1007/978-3-030-78713-4_19](https://doi.org/10.1007/978-3-030-78713-4_19)
+
+[4]: A. Afzal et al.: The Role of Idle Waves, Desynchronization, and Bottleneck Evasion in the Performance of Parallel Programs. [DOI:10.1109/TPDS.2022.3221085](https://doi.org/10.1109/TPDS.2022.3221085)
+
+[5]: A. Afzal et al.: Analytic performance model for parallel overlapping memory-bound kernels. [DOI:10.1002/cpe.6816](https://doi.org/10.1002/cpe.6816)
+
+[6]: A. Afzal et al.: Exploring Techniques for the Analysis of Spontaneous Asynchronicity in MPI-Parallel Applications. [DOI:10.1007/978-3-031-30442-2_12](https://doi.org/10.1007/978-3-031-30442-2_12)
+
+[7]: A. Afzal et al.: Making applications faster by asynchronous execution: Slowing down processes or relaxing MPI collectives. [DOI:10.1016/j.future.2023.06.017](https://10.1016/j.future.2023.06.017)
 
 <a name="license"></a>
 ## License
@@ -833,7 +834,7 @@ This work is funded by the **[KONWHIR](https://www.konwihr.de)** project **OMI4P
 <a name="contact"></a>
 ## Contact
 
-Ayesha Afzal (@github/AyeshaAfzal91), Erlangen National High Performance Computing Center (NHR@FAU)
+Ayesha Afzal, Erlangen National High Performance Computing Center (NHR@FAU)
 [<img src="https://github.com/AyeshaAfzal91.png?size=115" width=115><br><sub>@AyeshaAfzal91</sub>](https://github.com/AyeshaAfzal91) <br><br> 
 
 mailto: [ayesha.afzal@fau.de](mailto:ayesha.afzal@fau.de)
