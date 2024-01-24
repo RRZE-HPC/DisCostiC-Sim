@@ -23,6 +23,10 @@ module list
 PROCNUMBERS=$(cat config.cfg | grep "number_of_processes" | head -1 | sed 's/[^0-9]*//g')
 PROCNUMBERS=$(( PROCNUMBERS + 1 ))
 
+export VT_FLUSH_PREFIX=/tmp
+export VT_LOGFILE_FORMAT=SINGLESTF
+export VT_LOGFILE_NAME=discostic
+
 MODE=$(cat config.cfg | grep "P2P_mode" | cut -d"=" -f 2 | cut -d"#" -f 1 | tr -d ' ')
 FILENAME=$(cat config.cfg | grep "benchmark_kernel" | cut -d"=" -f 2 | cut -d"#" -f 1 | tr -d ' ')
 
@@ -39,8 +43,6 @@ else
 
     exit 1
 fi
-
-make
 
 HETEROGENEOUS=$(cat config.cfg | grep "heteregeneous" | cut -d"#" -f1 $1 | sed 's/[^0-9]*//g')
 
