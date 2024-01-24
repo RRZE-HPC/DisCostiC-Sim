@@ -1,48 +1,56 @@
 # DisCostiC: Distributed Cost in Cluster
-======================================================================================
 
-  </a><a href="https://DisCostiC-Sim.readthedocs.io/en/latest/?badge=latest">
-  <img alt="Documentation Status" src="https://readthedocs.org/projects/DisCostiC-Sim/badge/?version=latest" />
   </a><a href="https://DisCostiC-Sim.readthedocs.io/">
   <img alt="Docs" src="https://img.shields.io/badge/read-the_docs-blue" />
   </a><a href="https://github.com/RRZE-HPC/DisCostiC-Sim/src/Dev/discussions">
   <img alt="Join the discussion on Github" src="https://img.shields.io/badge/Github%20Discussions%20%26%20Support-Chat%20now!-blue" />
-  </a><a href="https://github.com/RRZE-HPC/DisCostiC-Sim/src/Dev/actions">
-  <img alt="Build Status" src="https://github.com/RRZE-HPC/DisCostiC-Sim/src/Dev/workflows/test-n-publish/badge.svg?branch=master&event=push" />
   </a><a href="https://github.com/RRZE-HPC/DisCostiC-Sim/src/Dev/" target="\_parent">
   <img alt="" src="https://img.shields.io/github/stars/tanstack/react-table.svg?style=social&label=Star" />
+  </a><a href="https://www.linkedin.com/in/ayeshaafzal-/">
+    <img alt="linkedin" src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" />
+  <a href="https://github.com/AyeshaAfzal91" rel="nofollow noreferrer">
+    <img alt="github" src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white">
+  </a>
   </a><a href="https://twitter.com/AyeshaHamad4" target="\_parent">
   <img alt="" src="https://img.shields.io/twitter/follow/AyeshaHamad4.svg?style=social&label=Follow" />
-  </a>
 
 Table of Contents
-=================
 
-  * [Description](#description)
-    * [Framework workflow](#workflow)
-    * [Advantages over existing tools](#advantages)
-  * [Compilation and build](#compilation-and-build)
-  * [DisCostiC output](#visualisation)
-  * [Code documentation](#documentation)
-    * [Suite of C++ data structures and enumerated types](#suite-of-c---data-structures-and-enumerated-types)
-  * [Cluster configuration: Hypothetical or actual](#cluster-configuration)
-    * [Cluster level](#cluster)
-    * [Node level](#node)
-    * [Network level](#network)
-  * [DSEL code example: Hypothetical or actual](#example)
-    * [Seven essential DisCostiC routines](#seven-essential-routines)
-    * [Code blueprint as DisCostiC input](#DSEL)
-  * [Automating DSEL generation through static analysis](#automating-dsel-generation-through-static-analysis)
-  * [MPI-parallelized implementation](#mpi-parallelized-implementation)
-  * [Planned features for further development](#library-limitations)
-  * [License](#license)
-  * [Disclaimer](#disclaimer)
-  * [Acknowledgement](#acknowledgement)
-  * [Contact](#contact)
+  * [💡Description](#description)
+    * [⚙️ Framework workflow](#workflow)
+    * [🖍 Advantages over existing tools](#advantages)
+  * [:octocat: Compilation and build](#compilation-and-build)
+    * [⚡Installation](#installation)
+    * [⏱️ Configuration settings](#configuration)
+    * [🥅 Compilation](#compilation)
+    * [:green_circle: Run](#run)
+    * [🔁 Clean and uninstall](#clean)
+  * [:signal_strength: DisCostiC output](#visualisation)
+    * [🌐 1. In-browser output visualization with Google Chrome (DMS file format)](#chrome)
+    * [📊 2. Output visualization with Vampir (OTF2 file format)](#vampir)
+    * [📊 3. Output visualization with ITAC (STF file format)](#itac)
+  * [💻 Cluster configuration: Hypothetical or actual](#cluster-configuration)
+    * [🔌 Cluster level](#cluster)
+    * [🔌 Node level](#node)
+    * [🔌 Network level](#network)
+  * [👩‍💻 Automating DSEL generation through static analysis](#automating-dsel-generation-through-static-analysis)
+    * [📝 DSEL code example: Hypothetical or actual](#example)
+    * [📝 Seven essential DisCostiC routines](#seven-essential-routines)
+    * [📝 Code blueprint as DisCostiC input](#DSEL)
+    * [📝 Code documentation](#documentation)
+    * [📝 Suite of C++ data structures and enumerated types](#suite-of-c---data-structures-and-enumerated-types)
+  * [🧐 MPI-parallelized implementation](#mpi-parallelized-implementation)
+  * [🚀 Planned features for further development](#library-limitations)
+  * [📚 References about the theory of potential application scenarios for DisCostiC](#references)
+  * [🔒 License](#license)
+  * [:warning: Disclaimer](#disclaimer)
+  * [🔗 Acknowledgement](#acknowledgement)
+  * [📱Contact](#contact)
+
 
 <a name="description"></a>
-## Description:speech_balloon:
--------------------------
+## Description
+
 A cross-architecture resource-based parallel simulation framework that can efficiently predict the performance of real or hypothetical massively parallel MPI programs on current and future heterogeneous systems.
 
 This simulator aims to predict the runtime for massively parallel applications in a _`straightforward, portable, scalable, and efficient`_ manner.:star:
@@ -57,7 +65,7 @@ DisCostiC facilitates _`key concepts and elements embedded in the modern C++ lan
 
 
 <a name="workflow"></a>
-**Framework workflow**:speech_balloon:
+**Framework workflow**
 
 ```diff
 - Dependency graph generation
@@ -77,7 +85,7 @@ DisCostiC facilitates _`key concepts and elements embedded in the modern C++ lan
 ```
 
 <a name="advantages"></a>
-**Advantages over existing tools**:speech_balloon:
+**Advantages over existing tools**
 
 ```diff
 - Zero dependency 
@@ -98,123 +106,110 @@ DisCostiC facilitates _`key concepts and elements embedded in the modern C++ lan
 ```
 
 <a name="compilation-and-build"></a>
-## Compilation and build:speech_balloon:
----------------------------------------
+## Compilation and build
 
 First, clone the git repository using the command:
  
-`$ git clone git@github.com:RRZE-HPC/DisCostiC-Sim.git && cd DisCostiC-Sim`
- 
+`git clone git@github.com:RRZE-HPC/DisCostiC-Sim.git && cd DisCostiC-Sim`
+
+<a name="installation"></a>
+**Installation**
 Before continuing, make sure the environment is prepared for the compilation.
 The installation steps are listed below:
 ```
-    $ module load python git intel intelmpi itac cmake
-    $ conda create --name XYZ
-    $ conda activate XYZ
-    $ conda install pip 
-    $ cmake -DCMAKE_INSTALL_PREFIX=~/.local . && make all install
+    module load python git intel intelmpi itac cmake
+    conda create --name XYZ
+    conda activate XYZ
+    conda install pip 
+    cmake -DCMAKE_INSTALL_PREFIX=~/.local . && make all install
 ```
+One way to check the installation is to print the version of the DisCostiC using `./discostic --version`.
 
-**Configuration settings**:speech_balloon:
-The test folder in DisCostiC offers four <testcase>s 
+<a name="configuration"></a>
+**Configuration settings**
+The `test` folder in DisCostiC offers multiple MPI-parallelized <testcase>s (`benchmark_kernel`) in four distinct functionalities (`benchmark_mode`). For illustration, a few examples are given below:
 
-    1. HEAT
-    2. STREAM
-    3. HPCG
-    4. SOR
+benchmark_kernel                  | Description
+--------------------- | -------------
+`HEAT`          |       Two-dimensional five-point Jacobi
+`STREAM`               | STREAM Triad
+`SOR`          |    Gauss-Seidel Successive Over-Relaxation solver
+`HPCG`               | High Performance Conjugate Gradients
 
-of following four distinct functionalities:
+benchmark_kernel                  | Description
+--------------------- | -------------
+`COMP`          |       no external tool 
+`LBL`               |   no external tool
+`FILE`          |       Kerncraft interated
+`SRC`               | Kerncraft interated
 
-	1. COMP <without Kerncraft>
-	2. LBL <without Kerncraft>
-	3. FILE <with Kerncraft>
-	4. SRC <with Kerncraft>
+<a name="compilation"></a>
+**Compilation**
 
-Use one of these functionalities and test case of your choice:
-
-`cp <testcase>.hpp P2P.hpp`
-
-In the `config.cfg` file: 
-```
-1. The name of the kernel needs to be updated for the `benchmark_kernel` value
-2. The number of the simulated processes needs to be updated as the `number of simulator processes - 1`
-```
- 
-**Compilation without ITAC profiling**:speech_balloon:
-
-```
-$ make
-```
-
-**Compilation with ITAC profiling**:speech_balloon:
-
-During compilation, the ITAC tracing can be enabled in two ways.
+Upon compilation, an executable will be produced, with two options for enabling tracing and generating the output report:
 
 Command                  | Description
 --------------------- | -------------
-`$ make trace_MPI`          | This will enable standard tracing mode without the information on user-defined functions (enabled -trace flag).
-`$ make trace_all`               | This will enable verbose tracing mode with information on user-defined functions (enabled -trace -tcollect flag).
+`make`          | This will enable JSON data format without ITAC profiling.
+`make otf2`          | This will enable both JSON and OTF2 data format without ITAC profiling.
+`make trace_MPI`          | This will enable JSON data format and the standard ITAC tracing mode with the information about MPI call functions (enabled flag: `-trace`).
+`make trace_all`               | This will enable JSON data format and the verbose ITAC tracing mode with the information on both MPI calls and user-defined functions (enabled flag: `-trace -tcollect flag`).
 
-**Run without ITAC profiling**:speech_balloon:
 
-Run the batch script on Fritz using this command:
+<a name="run"></a>
+**Run**
+
+In the batch script, the number of the simulator processes is configured as the `number of simulated processes + 1`. To run the batch script on any system, ITAC profiling can be enabled or disabled:
+
+Command                  | Description
+--------------------- | -------------
+`sbatch Run_Simulation.sh`          | This performs the simulation without tracing the implementation of the simulator itself using ITAC.
+`sbatch Run_Simulation.sh`          | To investigate the implementation of the simulator, this will dump the simulator's own trace in ITAC. 
+
+
+The `Run_Simulation_ITAC.sh` script only generates a single STF file (`discostic.single.stf`) in the main directory due to the export of the following variables:
 
 ```
-$ sbatch Run-Fritz.sh
+export VT_FLUSH_PREFIX=/tmp
+export VT_LOGFILE_FORMAT=SINGLESTF
+export VT_LOGFILE_NAME=discostic
 ```
 
-**Run with ITAC profiling**:speech_balloon:
+<a name="clean"></a>
+**Clean and uninstall**
 
-To generate only a single stf file (Exec.single.stf) in the DisCostiC directory, export the following variables in your bash or add them to the Run-Fritz.sh bash script beforehand when running the batch script on a system:
-
-```
-$ export VT_FLUSH_PREFIX=/tmp
-$ export VT_LOGFILE_FORMAT=SINGLESTF
-$ export VT_LOGFILE_NAME=Exec
-$ sbatch Run-Fritz.sh
-```
-
-**Clean**:speech_balloon:
-
-To clean up your working directory and get rid of all the unwanted DisCostiC files, including *.dms, *.otf, *.csv files, use this command:
-```
-$ make clear
-```
-
-**Uninstall**:speech_balloon:
-
-To uninstall the whole DisCostiC framework, including installed files and CMAKE specific files, use this command:
-```
-$ make uninstall
-```
+Command                  | Description
+--------------------- | -------------
+`make clear`            |   This will clean up your working directory and get rid of all the unwanted DisCostiC files, including *.dms, *.otf, *.csv files
+`make uninstall`        |   This will uninstall the whole DisCostiC framework, including installed files and CMAKE specific files, use this command:
 
 
 <a name="visualization"></a>
-## DisCostiC output:speech_balloon:
----------------------------------------
+## DisCostiC output visualization
 
-**1. In-browser output visualization with Google Chrome (DMS file format)**:speech_balloon:
+<a name="chrome"></a>
+**1. In-browser output visualization with Google Chrome (DMS file format)**
 
 Upon completion of the run, DisCostiC generates a report referred to as `DisCostiC.dms`.
 `DisCostiC.dms` is a (straightforward, but non-optimized) [JSON object data format file](https://docs.google.com/document/d/1CvAClvFfyA5R-PhYUmn5OOQtYMH4h6I0nSsKchNAySU/edit) that can be viewed using the [Google Chrome browser](chrome://tracing).
 The generated JSON file can then be loaded after entering [chrome://tracing](chrome://tracing) in the URL bar of the Google Chrome browser.
 
-
-**2. Output visualization with Vampir (OTF2 file format)**:speech_balloon:
+<a name="vampir"></a>
+**2. Output visualization with Vampir (OTF2 file format)**
 
 The `DisCostiC.otf2` file is an [OTF2 object data format](https://perftools.pages.jsc.fz-juelich.de/cicd/otf2/tags/otf2-3.0.2/html/) file and can be viewed using third-party tools like [ITAC](https://www.intel.com/content/www/us/en/developer/tools/oneapi/trace-analyzer.html), [Vampir](https://vampir.eu), [Score-P](https://www.vi-hps.org/projects/score-p/), and others.
 This format is produced by the [ChromeTrace2Otf2](https://profilerpedia.markhansen.co.nz/converters/otf2-cli-chrome-trace-converter/) converter, which converts the JSON object data format file `(DisCostiC.dms)` to the OTF2 object data format file `(DisCostiC.otf2)`.
 
 To convert a DMS file to the OTF2 file format and to open an OTF2 small trace file (DisCosTiC.otf2) in [Vampir](https://vampir.eu) follow the below steps:
 ```
-    $ make otf2
-    $ module use ~unrz139/.modules/modulefiles
-    $ module load vampir
-    $ vampir DisCostiC/traces.otf2
+    make otf2
+    module use ~unrz139/.modules/modulefiles
+    module load vampir
+    vampir DisCostiC/traces.otf2
 ```
 
-
-**3. Output visualization with ITAC (STF file format)**:speech_balloon:
+<a name="itac"></a>
+**3. Output visualization with ITAC (STF file format)**
 
 To convert a DMS file to a single.stf file format and to open an STF trace file (DisCosTiC.single.stf) in [ITAC](https://www.intel.com/content/www/us/en/developer/tools/oneapi/trace-analyzer.html) follow the below steps:
 
@@ -227,7 +222,7 @@ To convert a DMS file to a single.stf file format and to open an STF trace file 
     (6) The OTF2 to STF conversion dialog appears. Review the available fields and checkboxes, and click Start to start the conversion. As a result, the OTF2 file will be converted to STF (DisCosTiC/traces.otf2.single.stf), and you will be able to view it in the Intel Trace Analyzer.
 ```
 
-**4. Statistical or log data**:speech_balloon:
+**4. Statistical or log data**
 
 		----------------------------------------------------------------
 		DisCostiC:
@@ -264,17 +259,16 @@ To convert a DMS file to a single.stf file format and to open an STF trace file 
 
 
 <a name="documentation"></a>    
-## Code documentation:speech_balloon:
--------------------------
+## Code documentation
 
 The HTML documentation can be generated by [doxygen](http://www.doxygen.nl). To build the documentation, navigate to the `Doxyfile` file available in the current directory and run the command:
 
-`$ doxygen Doxyfile`
+`doxygen Doxyfile`
 
 To read the documentation, point to a web browser at `html/index.html`.
 
 <a name="suite-of-c---data-structures-and-enumerated-types"></a>
-** Suite of C++ data structures and enumerated types:speech_balloon:**
+**Suite of C++ data structures and enumerated types**
 
 * **Single Operation**: accessors for local operations and their individual information at a certain grid point
 
@@ -339,14 +333,13 @@ Metadata information     | Description
 ```	
 
 <a name="cluster-configuration"></a>
-## Cluster configuration: Hypothetical or actual:speech_balloon:
------------------------------------
+## System model: Hypothetical or actual
 
 All parameters (hypothetical or actual) can be tuned by editing the `config.cfg` file.
 For detailed documentation, please take a look at the `config.cfg` file available in the current directory.
 
 <a name="cluster"></a>    
-**Cluster level**:speech_balloon:
+**Cluster level**
 
 |Metadata information                  | Description |
 --------------------- | -------------
@@ -358,7 +351,7 @@ For detailed documentation, please take a look at the `config.cfg` file availabl
 |`numbering of pinned chips cores`			| the numbering of utilizing cores of the chip in the cluster |
 
 <a name="node"></a>    
-**Node level**:speech_balloon:
+**Node level**
 
 Metadata information                  | Description
 --------------------- | -------------
@@ -368,7 +361,7 @@ Metadata information                  | Description
 `memory bandwidth`							| node level memory bandwidth [unit: GB/s]
 
 <a name="network"></a>    
-**Network level**:speech_balloon:
+**Network level**
 
 Metadata information                  | Description
 --------------------- | -------------
@@ -380,11 +373,10 @@ Metadata information                  | Description
 `eager limit`							    | data size at which communication mode change from eager to rendezvous protocol for various kind of network [unit: bytes]
 
 <a name="example"></a>
-## DSEL code example: Hypothetical or actual:speech_balloon:
--------------------------
+## DSEL code example: Hypothetical or actual
 
 <a name="seven-essential-routines"></a>
-**Seven basic DisCostiC routines:speech_balloon:**
+**Seven basic DisCostiC routines**
 
 The goal is to offer convenient, compact and practically usable application programming interfaces (APIs) with appropriate abstractions.
 
@@ -421,7 +413,7 @@ The goal is to offer convenient, compact and practically usable application prog
 ```
 
 <a name="DSEL"></a>
-**Code blueprint as DisCostiC input**:speech_balloon:
+**Code blueprint as DisCostiC input**
 
 The simplest illustration of how the domain knowledge of the applications is expressed in the DisCostiC language is provided below.
 
@@ -448,14 +440,12 @@ for (auto rank : DisCostiC::getRange(NP))
 ```
 
 <a name="automating-dsel-generation-through-static-analysis"></a>
-## Automating DSEL generation through static analysis:speech_balloon:
----------------------------------------
+## Automating DSEL generation through static analysis
   
 To perform this static analysis, the following procedures must be followed:
 ```
-$ cd staticanalysis
-$ pip install -r requirements.txt
-$ python Convert-<testcase>.py
+pip install -r staticanalysis/requirements.txt
+python staticanalysis/Convert-<testcase>.py
 ```
 
 Current <testcase> options:
@@ -465,12 +455,14 @@ Current <testcase> options:
 3. STREAM
 ```
 
-For the specified <testcase>, this will produce files with the names `converted.cfg` (which contains computational loop kernels) and `converted.c` (which contains the DSEL code) in the folders `../staticanalysis/nodelevel/configs` and `../staticanalysis/,` respectively.
-Now, after completing the copying step listed below, run discostic as previously described.
-```
-$ cp ../test/P2P-<testcase>.hpp ../test/P2P.hpp
-$ cd .. && ./DisCostiC.sh 
-```
+For the specified <testcase>, this will produce following files
+
+Files                  | Folder location       |Description
+--------------------- | ------------- | -------------
+`<testcase>.cfg`          |  nodelevel/configs  | It contains computational loop kernels
+`<testcase>_<mode>.hpp`   |  test               | It contains the generated DSEL code
+
+Now run discostic as previously described.
 
 Files                  | Description
 --------------------- | -------------
@@ -479,8 +471,7 @@ Files                  | Description
 
 
 <a name="mpi-parallelized-implementation"></a>
-## MPI-parallelized implementation:speech_balloon:
----------------------------------------
+## MPI-parallelized implementation
 
 The underlying principle of parallel simulation is that each operation's entire data is transmitted via blocking or non-blocking MPI routines to the processes it communicates with.
 
@@ -491,51 +482,8 @@ Terms                  | Description
 `master simulator process Q_0`  | master process from the parallel simulation framework point of view
 
 
-```cpp
-#include <mpi.h>
-
-/**
- *\brief A function that converts an operation object into a double array.
- * The array, called "arr," needs to be communicated via pairwise MPI routines.
- */
-double *serialize(DisCostiC::DisCostiC_OP op, double c, double arr[13])
-{
-    arr[0] = op.time;
-    arr[1] = op.starttime;
-    arr[2] = op.syncstart;
-    arr[3] = op.numOpsInQueue;
-    arr[4] = op.bufSize;
-    arr[5] = op.target;
-    arr[6] = op.rank;
-    arr[7] = op.label;
-    arr[8] = op.tag;
-    arr[9] = op.node;
-    arr[10] = op.network;
-    arr[11] = op.type;
-    arr[12] = c;
-    return arr;
-}
-
-/**
- *\brief A function that limits operations to the necessary data only.
- * At the end of the simulation, all necessary data about operations from every process must be sent to the master process. 
- */
-double *finalize(double a, double b, double c, double d, double e, double arr[13])
-{
-    arr[0] = a;
-    arr[1] = b;
-    arr[2] = c;
-    arr[3] = d;
-    arr[4] = e;
-    return arr;
-}
-```
-
 **Initialization**
-/**
- *\brief In the MPI implementation, only the master process of the default communicator makes any print `std::cout` calls,
- * and all other processes of the new communicator initialize root operations only once in each run. 
- */
+In the MPI implementation, only the master process of the default communicator makes any print `std::cout` calls, and all other processes of the new communicator initialize root operations only once in each run. 
 
 <table>
 <tr>
@@ -587,10 +535,7 @@ queue.emplace(op);
 </table>
 
 **Start of simulation**
-/**
- *\brief Do loop over the number of iterations and the number of steps per iteration.
- * Processes connected to the new communicator, or "newcomm," are only used in the main simulation.
- */
+Do loop over the number of iterations and the number of steps per iteration. Processes connected to the new communicator, or "newcomm," are only used in the main simulation.
 
 <table>
 <tr>
@@ -621,10 +566,8 @@ do{
 </table>
 
 **SEND operation**
-/**
- *\brief The currently active process sends the operation object or array to the process listed as "operation.target,"
- * which is specific to the communication pattern simulation program.
- */
+The currently active process sends the operation object or array to the process listed as "operation.target," which is specific to the communication pattern simulation program.
+ 
 <table>
 <tr>
 <th>MPI-parallelized</th>
@@ -665,10 +608,9 @@ queue.emplace(operation);
 </table>
 
 **RECV operation**
-/**
- *\brief The currently running process receives the operation object or array from the process listed as "operation.target".
- * Debug why the discostic Irecv and Recv have a BLOCKING mode_t value.
- */
+The currently running process receives the operation object or array from the process listed as "operation.target".
+ Debug why the discostic Irecv and Recv have a BLOCKING mode_t value.
+ 
 <table>
 <tr>
 <th>MPI-parallelized</th>
@@ -716,9 +658,7 @@ else {
 </table>
 
 **MSG operation**
-/**
- *\brief If MSG is not found, the cycle will continue (cycle = true) until it is found.
- */
+If MSG is not found, the cycle will continue (cycle = true) until it is found.
  
 <table>
 <tr>
@@ -801,11 +741,10 @@ queue.emplace(op);
 </tr>
 </table>
 
-**End of while statement**
-/**
- *\brief End of the do loops over the number of iterations and the number of steps per iteration.
- * The necessary information gathered from all processes of the new communicator is communicated to the default communicator's master process.
- */
+**End of while statement**:thought_balloon:
+End of the do loops over the number of iterations and the number of steps per iteration.
+The necessary information gathered from all processes of the new communicator is communicated to the default communicator's master process.
+ 
 <table>
 <tr>
 <th>MPI-parallelized</th>
@@ -858,34 +797,43 @@ while(!queue.empty() || newOps)
 
 
 <a name="library-limitations"></a>
-**Planned features for further development**:thought_balloon:
+## Planned features for further development
 
-	* Threading model beyond message passing
-	* Networking-level contention model
-    * Energy consumption model
+* Threading model beyond message passing
+* Networking-level contention model
+* Energy consumption model
+
+<a name="references"></a>
+## References about the theory of potential application scenarios for DisCostiC
+
+[^1]: A. Afzal et al.: Propagation and Decay of Injected One-Off Delays on Clusters: A Case Study. [DOI:10.1109/CLUSTER.2019.8890995](https://doi.org/10.1109/CLUSTER.2019.8890995)
+[^2]: A. Afzal et al.: Desynchronization and Wave Pattern Formation in MPI-Parallel and Hybrid Memory-Bound Programs. [DOI:10.1007/978-3-030-50743-5_20](https://doi.org/10.1007/978-3-030-50743-5_20)
+[^3]: A. Afzal et al.: Analytic Modeling of Idle Waves in Parallel Programs: Communication, Cluster Topology, and Noise Impact. [DOI:10.1007/978-3-030-78713-4_19](https://doi.org/10.1007/978-3-030-78713-4_19)
+[^4]: A. Afzal et al.: The Role of Idle Waves, Desynchronization, and Bottleneck Evasion in the Performance of Parallel Programs. [DOI:10.1109/TPDS.2022.3221085](https://doi.org/10.1109/TPDS.2022.3221085)
+[^5]: A. Afzal et al.: Analytic performance model for parallel overlapping memory-bound kernels. [DOI:10.1002/cpe.6816](https://doi.org/10.1002/cpe.6816)
+[^5]: A. Afzal et al.: Exploring Techniques for the Analysis of Spontaneous Asynchronicity in MPI-Parallel Applications. [DOI:10.1007/978-3-031-30442-2_12](https://doi.org/10.1007/978-3-031-30442-2_12)
+[^5]: A. Afzal et al.: Making applications faster by asynchronous execution: Slowing down processes or relaxing MPI collectives. [DOI:10.1016/j.future.2023.06.017](https://10.1016/j.future.2023.06.017)
 
 <a name="license"></a>
-## License:speech_balloon:
--------------------------
+## License
  
- `AGPL-3.0 </LICENSE>`
+[AGPL-3.0](LICENSE)
  
 <a name="disclaimer"></a>
-## Disclaimer:speech_balloon:
--------------------------
+## Disclaimer
 
-> A note to the reader: Please report any bugs to the issue tracker or contact [ayesha.afzal@fau.de](ayesha.afzal@fau.de"Ayesha Afzal").
-
+> [!NOTE]
+> A note to the reader: Please report any bugs to the issue tracker or contact [ayesha.afzal@fau.de](ayesha.afzal@fau.de).
 
 <a name="acknowledgement"></a>
-## Acknowledgement:speech_balloon:
--------------------------
+## Acknowledgement
 
-This work is funded by the **[KONWHIR](https://www.konwihr.de"KONWHIR")** project **OMI4PAPPS**.
+This work is funded by the **[KONWHIR](https://www.konwihr.de)** project **OMI4PAPPS**.
 
 <a name="contact"></a>
-## Contact:speech_balloon:
--------------------------
+## Contact
 
-Ayesha Afzal, Erlangen National High Performance Computing Center (NHR@FAU)
-Email: [ayesha.afzal@fau.de](ayesha.afzal@fau.de"Ayesha Afzal")
+Ayesha Afzal (@github/AyeshaAfzal91), Erlangen National High Performance Computing Center (NHR@FAU)
+[<img src="https://github.com/AyeshaAfzal91.png?size=115" width=115><br><sub>@AyeshaAfzal91</sub>](https://github.com/AyeshaAfzal91) <br><br> 
+
+mailto: [ayesha.afzal@fau.de](mailto:ayesha.afzal@fau.de)
