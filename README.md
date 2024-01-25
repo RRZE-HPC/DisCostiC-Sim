@@ -198,8 +198,7 @@ Command                  | Description
 🌐 **1. In-browser output visualization with Google Chrome (DMS file format)**:speech_balloon:
 
 Upon completion of the run, DisCostiC generates a report referred to as `DisCostiC.dms`.
-`DisCostiC.dms` is a straightforward [JSON object data format file](https://docs.google.com/document/d/1CvAClvFfyA5R-PhYUmn5OOQtYMH4h6I0nSsKchNAySU/edit) that can be viewed using the
-![[Google Chrome browser](chrome://tracing)](https://user-images.githubusercontent.com/25423296/163456776-7f95b81a-f1ed-45f7-b7ab-8fa810d529fa.png).
+`DisCostiC.dms` is a straightforward [JSON object data format file](https://docs.google.com/document/d/1CvAClvFfyA5R-PhYUmn5OOQtYMH4h6I0nSsKchNAySU/edit) that can be viewed using the [Google Chrome browser](chrome://tracing).
 Use the following Google Chrome web browser to load the generated JSON file:
 
 ```
@@ -270,8 +269,7 @@ To convert a DMS file to a single.stf file format and to open an STF trace file 
 ## 💻 System model
 
 All system parameters (hypothetical or actual) can be tuned by editing the [config.cfg](config.cfg) file available in the current directory.
-For the detailed documentation of the system model, please take a look at the [config.cfg](config.cfg) file and the `YAML files` available in the [machine files](nodelevel
-/machine-files) and [network files](nodelevel/network-files) directories.
+For the detailed documentation of the system model, please take a look at the [config.cfg](config.cfg) file and the `YAML files` available in the [machine files](nodelevel/machine-files) and [network files](nodelevel/network-files) directories.
 
 <a name="cluster"></a>    
 🔌 **Cluster model**:thought_balloon:
@@ -460,13 +458,12 @@ Metadata information                  | Description
 `type`								| Type of this current operation
 
 ```
-    				enum Operation_t{		| Operation_t enum defines different opertation types of entities
-        				SEND = 1,         	| Send operation type
-        				RECV = 2,        	| Recv operation type
-        				COMP = 3,        	| Compuation operation type
-        				MSG = 4         	| Message operation type
-    				};
- 
+enum Operation_t {		| Operation_t enum defines different opertation types of entities
+	SEND = 1,         	| Send operation type
+        RECV = 2,        	| Recv operation type
+        COMP = 3,        	| Compuation operation type
+        MSG = 4         	| Message operation type
+}; 
 ```
 
   				
@@ -475,10 +472,10 @@ Metadata information | Description
 `mode`	|  mode of this current calling operation  
 
 ```
-			    	enum Mode_t {		| Mode_t enum defines operation type of SEND and RECV entities (send/isend and recv/irecv)
-        				NONBLOCKING, 	| Routines that return with start of operation (next operation not be executed before starting of previous operation)
-        				BLOCKING     	| Routines that return only on completion of operation (next operation not be executed before finishing of previous operation)
-    				};
+enum Mode_t {		| Mode_t enum defines operation type of SEND and RECV entities (send/isend and recv/irecv)
+        NONBLOCKING, 	| Routines that return with start of operation (next operation not be executed before starting of previous operation)
+        BLOCKING     	| Routines that return only on completion of operation (next operation not be executed before finishing of previous operation)
+};
 ```
 
 * **Performance model**
@@ -488,12 +485,12 @@ Metadata information     | Description
 `Model_t`				| analytic first-principle performance model for computation and communication
 
 ```
-			    	enum Model_t {		| Mode_t enum defines the used performance model 
-        				Roofline,		| Simple computation model type
-        				ECM,		| Advanced computation model type
-                        LOGGP,		| Simple communication model type
-        				HOCKNEY		| Advanced communication model type
-    				};
+enum Model_t {		| Mode_t enum defines the used performance model 
+        Roofline,		| Simple computation model type
+        ECM,		| Advanced computation model type
+        LOGGP,		| Simple communication model type
+        HOCKNEY		| Advanced communication model type
+};
 ```
 
 * **Custom data types, keywords and high-level classes functionality**:thought_balloon:
