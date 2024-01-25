@@ -199,7 +199,7 @@ Command                  | Description
 
 Upon completion of the run, DisCostiC generates a report referred to as `DisCostiC.dms`.
 `DisCostiC.dms` is a straightforward [JSON object data format file](https://docs.google.com/document/d/1CvAClvFfyA5R-PhYUmn5OOQtYMH4h6I0nSsKchNAySU/edit) that can be viewed using the
-![[Google Chrome browser](chrome://tracing).](https://user-images.githubusercontent.com/25423296/163456776-7f95b81a-f1ed-45f7-b7ab-8fa810d529fa.png](https://img.shields.io/badge/Google_chrome-4285F4?style=for-the-badge&logo=Google-chrome&logoColor=white).
+![[Google Chrome browser](chrome://tracing)](https://user-images.githubusercontent.com/25423296/163456776-7f95b81a-f1ed-45f7-b7ab-8fa810d529fa.png).
 Use the following Google Chrome web browser to load the generated JSON file:
 
 ```
