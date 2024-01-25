@@ -53,7 +53,7 @@ namespace DisCosTiC
 			// DisCosTiC::AST_OP root_Node;
 			// DisCosTiC::idNodePair compIDs(systemsize), sendIDs(systemsize), recvIDs(systemsize);
 
-			long int N_ = system_number == 0 ? CFG_args.getValue<long int>("N") : CFG_args.getValue<long int>("secondary_N");
+			long int N_ = system_number == 0 ? CFG_args.getValue<long int>("dim_x") : CFG_args.getValue<long int>("secondary_dim_x");
 
 			int Nlocal = system_number == 0 ? N_ / primary_processes : N_ / secondary_processes;
 

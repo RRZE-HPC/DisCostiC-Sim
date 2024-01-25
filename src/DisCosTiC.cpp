@@ -287,10 +287,15 @@ int main(int argc, char **argv)
 
     const DisCosTiC_Datatype nunmberofiter = CFG_args.getValue<DisCosTiC_Datatype>("number_of_timesteps");
 
-    const DisCosTiC_Datatype desync_feature = CFG_args.getValue<DisCosTiC_Datatype>("desync");
-    const DisCosTiC_Datatype idlewave_feature = CFG_args.getValue<DisCosTiC_Datatype>("idlewave");
-    const DisCosTiC_Datatype desync_rank = CFG_args.getValue<DisCosTiC_Datatype>("which_rank");
-    const DisCosTiC_Datatype desync_timestep = CFG_args.getValue<DisCosTiC_Datatype>("at_timestep");
+    const DisCosTiC_Datatype noise = CFG_args.getValue<DisCosTiC_Datatype>("noise");
+    const DisCosTiC_Datatype noise_start_timestep = CFG_args.getValue<DisCosTiC_Datatype>("noise_start_timestep");
+    const DisCosTiC_Datatype noise_stop_timestep = CFG_args.getValue<DisCosTiC_Datatype>("noise_stop_timestep");
+    const DisCosTiC_Datatype noise_intensity = CFG_args.getValue<DisCosTiC_Datatype>("noise_intensity");
+
+    const DisCosTiC_Datatype delay = CFG_args.getValue<DisCosTiC_Datatype>("delay");
+    const DisCosTiC_Datatype delay_intensity = CFG_args.getValue<DisCosTiC_Datatype>("delay_intensity");
+    const DisCosTiC_Datatype delay_rank = CFG_args.getValue<DisCosTiC_Datatype>("delay_rank");
+    const DisCosTiC_Datatype delay_timestep = CFG_args.getValue<DisCosTiC_Datatype>("delay_timestep");
 
 #ifdef USE_VERBOSE
     std::cout << "Rank : " << process_Rank << " completed network configuration" << std::endl;
@@ -688,11 +693,11 @@ int main(int argc, char **argv)
                         oSuccessor[operation.rank][operation.node] = operation.time + operation.bufSize;
 
                         /// injected long disturbance at given rank and given timestep
-                        if (!initialized && (operation.rank == desync_rank) && (iter_num == desync_timestep) && (idlewave_feature == 1))
+                        if (!initialized && (operation.rank == delay_rank) && (iter_num == delay_timestep) && (delay == 1))
                         {
 
                             initialized = true;
-                            oSuccessor[operation.rank][operation.node] = operation.time + operation.bufSize + 25 * operation.bufSize;
+                            oSuccessor[operation.rank][operation.node] = operation.time + operation.bufSize + delay_intensity * operation.bufSize;
 
 #ifdef USE_VERBOSE
                             std::cout << "Rank : " << N_process_Rank << " in iter : " << iter_num << " injected delay to create idle wave" << std::endl;
@@ -1040,12 +1045,12 @@ int main(int argc, char **argv)
 
                         finishedRankList.push_back(operation.rank);
 
-                        if ((desync_feature == 1) && (iter_num > 50 && iter_num < 200))
+                        if ((noise == 1) && (iter_num > noise_start_timestep && iter_num < noise_stop_timestep))
                         {
 #ifdef USE_VERBOSE
                             std::cout << "Rank : " << N_process_Rank << " in iter : " << iter_num << " desynchronizing simulation by injecting noise" << std::endl;
 #endif
-                            oSuccessor[operation.rank][operation.node] += rand() % 5000;
+                            oSuccessor[operation.rank][operation.node] += rand() % noise_intensity;
                         }
                     }
 #ifdef USE_VERBOSE

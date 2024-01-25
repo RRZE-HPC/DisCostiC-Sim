@@ -53,8 +53,8 @@ namespace DisCosTiC
 			// DisCosTiC::AST_OP root_Node;
 			// DisCosTiC::idNodePair compIDs(systemsize), sendIDs(systemsize), recvIDs(systemsize);
 
-			long int imax = system_number == 0 ? CFG_args.getValue<long int>("imax") : CFG_args.getValue<long int>("secondary_imax");
-			long int jmax = system_number == 0 ? CFG_args.getValue<long int>("jmax") : CFG_args.getValue<long int>("secondary_jmax");
+			long int imax = system_number == 0 ? CFG_args.getValue<long int>("dim_x") : CFG_args.getValue<long int>("secondary_dim_x");
+			long int jmax = system_number == 0 ? CFG_args.getValue<long int>("dim_y") : CFG_args.getValue<long int>("secondary_dim_y");
 
 			int local_system_size = system_number == 0 ? primary_processes : secondary_processes;
 

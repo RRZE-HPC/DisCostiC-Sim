@@ -23,7 +23,7 @@ module list
 PROCNUMBERS=$(cat config.cfg | grep "number_of_processes" | head -1 | sed 's/[^0-9]*//g')
 PROCNUMBERS=$(( PROCNUMBERS + 1 ))
 
-MODE=$(cat config.cfg | grep "P2P_mode" | cut -d"=" -f 2 | cut -d"#" -f 1 | tr -d ' ')
+MODE=$(cat config.cfg | grep "kernel_mode" | cut -d"=" -f 2 | cut -d"#" -f 1 | tr -d ' ')
 FILENAME=$(cat config.cfg | grep "benchmark_kernel" | cut -d"=" -f 2 | cut -d"#" -f 1 | tr -d ' ')
 
 FILEMODE=$FILENAME"_"$MODE".hpp"

@@ -526,7 +526,7 @@ static const DisCosTiC_Indextype MPI_ANY_TA = ~0;
 			<< "\t benchmark_kernel"                                                                                                                                    \
 			<< "\t\t\t " << std::endl;                                                                                                                                  \
 		std::cout                                                                                                                                                       \
-			<< "\t P2P_mode"                                                                                                                                            \
+			<< "\t kernel_mode"                                                                                                                                            \
 			<< "\t\t\t choose either of FILE, SRC, LBL, SRC modes. Concatenated with benchmark kernel during runtime to determine which P2P file to use." << std::endl; \
 		std::cout                                                                                                                                                       \
 			<< "\t FLOPs_per_iteration"                                                                                                                                 \
