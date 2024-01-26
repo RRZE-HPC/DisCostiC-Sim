@@ -2,7 +2,7 @@
 
   </a><a href="https://DisCostiC-Sim.readthedocs.io/">
   <img alt="Docs" src="https://img.shields.io/badge/read-the_docs-blue" />
-  </a><a href="https://github.com/RRZE-HPC/DisCostiC-Sim/src/Dev/discussions">
+  </a><a href="https://matrix.to/#/!OeNPngEkrqRRkBJjwz:gwaaf.rrze.fau.de?via=gwaaf.rrze.fau.de">
   <img alt="Join the discussion on Matrix" src="https://img.shields.io/badge/Github%20Discussions%20%26%20Support-Chat%20now!-blue" />
   </a><a href="https://www.linkedin.com/in/ayeshaafzal-/">
     <img alt="linkedin" src="https://i.stack.imgur.com/gVE0j.png" />
@@ -50,7 +50,7 @@
 <a name="description"></a>
 ## 💡 Description
 
-A `cross-architecture resource-based parallel simulation framework` that can efficiently predict the performance of `real or hypothetical massively parallel MPI programs on current and future highly parallel heterogeneous systems.✨
+A `cross-architecture resource-based parallel simulation framework` that can efficiently predict the performance of real or hypothetical massively parallel MPI programs on current and future highly parallel heterogeneous systems.✨
 
 The runtime predictions are carried out in a controlled environment through _`straightforward, portable, scalable, and efficient simulations`_.⭐
 
@@ -65,12 +65,12 @@ The application blueprint created using `Domain Specific Embedded Language (DSEL
 ```diff
 - Application model
 
-    * Domain knowledge of the application written in DisCostiC DSEL language
+    * Domain knowledge of the application expressed in the DisCostiC DSEL language provides information on call dependencies and properties for computation (data access pattern, flop count) and communication (volume, mode and protocol).
 
 - Analytic first-principle performance models
     
     * Computation models: Fundamental analytic Roofline and refined ECM models with including memory bandwidth bottleneck concept at system level
-    * Communication model: Fundamental latency-bandwidth and refined LogGP models
+    * Communication models: Fundamental latency-bandwidth and refined LogGP models
 
 - System models
     
@@ -114,18 +114,18 @@ git clone git@github.com:RRZE-HPC/DisCostiC-Sim.git && cd DisCostiC-Sim
 Before proceeding, make sure the environment is prepared for the compilation.
 The installation steps are listed below:
 ```
-    module load python git intel intelmpi cmake itac vampir
-    conda create --name XYZ
-    conda activate XYZ
-    conda install pip 
-    cmake -DCMAKE_INSTALL_PREFIX=~/.local . && make all install
+module load python git intel intelmpi cmake itac vampir
+conda create --name XYZ
+conda activate XYZ
+conda install pip 
+cmake -DCMAKE_INSTALL_PREFIX=~/.local . && make all install
 ```
 One way to check the installation is to print the version of the DisCostiC using `./discostic --version`.
 
 <a name="configuration"></a>
 ⏱️ **Configuration settings**:thought_balloon:
 
-The [test](test) folder in DisCostiC offers multiple MPI-parallelized programs (`benchmark_kernel`) in distinct functionality for computation (`kernel_mode`) and communication (`exchange_mode`). For illustration, a few examples are given below:
+The [test](test) folder in DisCostiC offers multiple MPI-parallelized programs (`benchmark_kernel`) in distinct functionality for computation (`kernel_mode`) and communication (`exchange_mode`). The `exchange_mode` mode is provided to enable model-base exploration through experimenting with various communication patterns in MPI applications. For illustration, a few examples are given below:
 
 `benchmark_kernel`                 | Description
 --------------------- | -------------
@@ -145,7 +145,7 @@ The [test](test) folder in DisCostiC offers multiple MPI-parallelized programs (
 --------------------- | -------------
 `direction`          |       It specifies the direction of message exchange as an int (1: uni-directional upwards shift in only positive direction, 2: bi-directional upwards and downwards shift in both positive and negative directions) 
 `stepsize`          |       It describes the step size of message exchange as an int (1: distance one communication, 2: distance two communication, ...)
-`periodic`          |       It enables or disables the periodicity as a bool (1: true, 0: false)
+`periodic`          |       It enables or disables the communication periodicity as a bool (0: false, 1: true)
 
 
 <a name="compilation"></a>
@@ -157,8 +157,8 @@ Command                  | Description
 --------------------- | -------------
 `make`          | This enables JSON data format without ITAC profiling of simulator implementation.
 `make otf2`          | This enables both JSON and OTF2 data format without ITAC profiling of simulator implementation.
-`make trace_MPI`          | This enables JSON data format and the standard ITAC tracing mode with the information about MPI call functions (enabled flag: `-trace`).
-`make trace_all`               | This enables JSON data format and the verbose ITAC tracing mode with the information on both user-defined and MPI call functions (enabled flag: `-trace -tcollect flag`).
+`make trace_MPI`          | This enables JSON data format and the standard ITAC tracing mode of simulator implementation with the information about MPI call functions (enabled flag: `-trace`).
+`make trace_all`               | This enables JSON data format and the verbose ITAC tracing mode of simulator implementation with the information on both user-defined and MPI call functions (enabled flag: `-trace -tcollect flag`).
 
 
 <a name="run"></a>
@@ -202,30 +202,30 @@ Upon completion of the run, DisCostiC generates a report referred to as `DisCost
 Use the following Google Chrome web browser to load the generated JSON file:
 
 ```
-    chrome://tracing
+chrome://tracing
 ```
 
 <a name="vampir"></a>
 📊 **2. Output visualization with Vampir (OTF2 file format)**:speech_balloon:
 
-The `DisCosTiC/traces.otf2` file is an [OTF2 object data format](https://perftools.pages.jsc.fz-juelich.de/cicd/otf2/tags/otf2-3.0.2/html/) file and can be viewed using third-party tools like [ITAC](https://www.intel.com/content/www/us/en/developer/tools/oneapi/trace-analyzer.html) and [Vampir](https://vampir.eu).
-This format is produced by the [ChromeTrace2Otf2](https://profilerpedia.markhansen.co.nz/converters/otf2-cli-chrome-trace-converter/) converter, which converts the JSON object data format file `(DisCostiC.dms)` to the OTF2 object data format file `(DisCosTiC/traces.otf2)`.
+Upon completion of a run that was compiled with `make otf2`, DisCostiC generates a report called `DisCostiC/traces.otf2`. The `DisCostiC/traces.otf2` file is an [OTF2 object data format](https://perftools.pages.jsc.fz-juelich.de/cicd/otf2/tags/otf2-3.0.2/html/) file and can be viewed using third-party tools like [ITAC](https://www.intel.com/content/www/us/en/developer/tools/oneapi/trace-analyzer.html) and [Vampir](https://vampir.eu).
+This format is produced by the [ChromeTrace2Otf2](https://profilerpedia.markhansen.co.nz/converters/otf2-cli-chrome-trace-converter/) converter, which converts the JSON object data format file `(DisCostiC.dms)` to the OTF2 object data format file `(DisCostiC/traces.otf2)`.
 
-Use the following commond to open an OTF2 small trace file (`DisCosTiC/traces.ot2`) in [Vampir](https://vampir.eu):
+Use the following commond to open an OTF2 small trace file (`DisCostiC/traces.ot2`) in [Vampir](https://vampir.eu):
 
 ```
-    vampir DisCostiC/traces.otf2
+vampir DisCostiC/traces.otf2
 ```
 
 <a name="itac"></a>
 📊 **3. Output visualization with ITAC (STF file format)**:speech_balloon:
 
-To convert a DMS file to a single.stf file format and to open an STF trace file (DisCosTiC.single.stf) in [ITAC](https://www.intel.com/content/www/us/en/developer/tools/oneapi/trace-analyzer.html), invoke the Intel Trace Analyzer GUI and follow the below steps:
+To convert an OTF2 file to a single Structured Trace File (STF) file format `DisCostiC.single.stf` and to open it in [ITAC](https://www.intel.com/content/www/us/en/developer/tools/oneapi/trace-analyzer.html), invoke the Intel Trace Analyzer GUI and follow the below steps:
 
 ```
-    (1) traceanalyzer &
-    (2) Go to File > Open; from the Files of a type field, select Open Trace Format, navigate to the `DisCosTiC/traces.otf2` file, and double-click to open it
-    (3) The OTF2 to STF conversion dialog appears. Review the available fields and checkboxes, and click Start to start the conversion. As a result, the OTF2 file will be converted to STF (DisCosTiC/traces.otf2.single.stf), and you will be able to view it in the Intel Trace Analyzer.
+(1) traceanalyzer &
+(2) Go to File > Open; from the Files of a type field, select Open Trace Format, navigate to the `DisCostiC/traces.otf2` file, and double-click to open it
+(3) The OTF2 to STF conversion dialog appears. Review the available fields and checkboxes, and click Start to start the conversion. As a result, the OTF2 file will be converted to STF (DisCostiC/traces.otf2.single.stf), and you will be able to view it in the Intel Trace Analyzer.
 ```
 
 <a name="stat"></a>
@@ -268,7 +268,7 @@ To convert a DMS file to a single.stf file format and to open an STF trace file 
 <a name="cluster-configuration"></a>
 ## 💻 System model
 
-All system parameters (hypothetical or actual) can be tuned by editing the [config.cfg](config.cfg) file available in the current directory.
+The system parameters, either hypothetical or actual, can be tuned by editing the [config.cfg](config.cfg) file available in the current directory.
 For the detailed documentation of the system model, please take a look at the [config.cfg](config.cfg) file and the `YAML files` available in the [machine files](nodelevel/machine-files) and [network files](nodelevel/network-files) directories.
 
 <a name="cluster"></a>    
@@ -289,7 +289,7 @@ For the detailed documentation of the system model, please take a look at the [c
 🔌 **Network model**:thought_balloon:
 
 Metadata information                  | Description
---------------------- | -------------
+------------------------------------- | -------------
 `intra chip`							    | Communication inside chip
 `inter chip`							    | Communication across chips
 `inter node`							    | Communication across nodes
@@ -301,16 +301,16 @@ For illustration, a few examples of available [network files](nodelevel/network-
 
 Network files (YAML format)                 | Description
 --------------------- | -------------
-`InfiniBand_WaitIO_intercluster`          |       Communication across clusters for WaitIO library and InfiniBand interconnect
-`InfiniBand_WaitIO_internode`          |       Communication across nodes for WaitIO library and InfiniBand interconnect
-`InfiniBand_WaitIO_interchip`          |       Communication across chips for WaitIO library and InfiniBand interconnect
-`InfiniBand_WaitIO_intrachip`          |       Communication inside chip for WaitIO library and InfiniBand interconnect
+`InfiniBand_WaitIO_intercluster`          |       Communication across clusters for WaitIO MPI library and InfiniBand interconnect
+`InfiniBand_WaitIO_internode`          |       Communication across nodes for WaitIO MPI library and InfiniBand interconnect
+`InfiniBand_WaitIO_interchip`          |       Communication across chips for WaitIO MPI library and InfiniBand interconnect
+`InfiniBand_WaitIO_intrachip`          |       Communication inside chip for WaitIO MPI library and InfiniBand interconnect
 `Tofu-D_WaitIO_internode`          |       Communication across nodes for WaitIO MPI library and Tofu-D interconnect
 `Tofu-D_WaitIO_interchip`          |       Communication across chips for WaitIO MPI library and Tofu-D interconnect
 `Tofu-D_WaitIO_intrachip`          |       Communication inside chip for WaitIO MPI library and Tofu-D interconnect
-`InfiniBand_IntelMPI_internode`          |       Communication across nodes for Intel library and InfiniBand interconnect
-`InfiniBand_IntelMPI_interchip`          |       Communication across chips for Intel library and InfiniBand interconnect
-`InfiniBand_IntelMPI_intrachip`          |       Communication inside chip for Intel library and InfiniBand interconnect
+`InfiniBand_IntelMPI_internode`          |       Communication across nodes for Intel MPI library and InfiniBand interconnect
+`InfiniBand_IntelMPI_interchip`          |       Communication across chips for Intel MPI library and InfiniBand interconnect
+`InfiniBand_IntelMPI_intrachip`          |       Communication inside chip for Intel MPI library and InfiniBand interconnect
 `OmniPath_IntelMPI_internode`          |       Communication across nodes for Intel MPI library and Omni-Path interconnect
 `OmniPath_IntelMPI_interchip`          |       Communication across chips for Intel MPI library and Omni-Path interconnect
 `OmniPath_IntelMPI_intrachip`          |       Communication inside chip for Intel MPI library and Omni-Path interconnect
@@ -321,10 +321,10 @@ Network files (YAML format)                 | Description
 
 Metadata information                  | Description
 --------------------- | -------------
-`FP instructions per cycle`					| Floating point instructions per cycle (ADD, MUL)
-`FP operations per instruction (SP/DP)`		| Single precision/ double precision floating point operations per instruction
-`clock frequency`							| Clock frequency [unit: GHz]
-`memory bandwidth`							| Memory bandwidth [unit: GB/s]
+`FP instructions per cycle`					| Floating point instructions (ADD, MUL) per cycle 
+`FP operations per instruction (SP/DP)`		| Single precision or double precision floating point operations per instruction
+`clock frequency`							| Clock frequency in GHz
+`memory bandwidth`							| Memory bandwidth in GB/s
 
 
 For illustration, a few examples of available [machine files](nodelevel/machine-files) are given below:
@@ -349,7 +349,7 @@ Machine files (YAML format)                 | Description
 <a name="automating-dsel-generation-through-static-analysis"></a>
 ## 👩‍💻 Automating DSEL generation through static analysis
 
-To perform this static analysis, the following procedure must be followed before runing the discostic batch script:
+To perform the static analysis, the following procedure must be followed before runing the discostic batch script:
 ```
 pip install -r staticanalysis/requirements.txt
 python staticanalysis/Convert-<program>.py
@@ -362,20 +362,22 @@ Files                  | Description
 
 For the specified program, this will produce following files:
 
-Files                  | Folder location       |Description
+Files                  | Location       |Description
 --------------------- | ------------- | -------------
-`<program>.cfg`          |  nodelevel/configs  | It contains the generated computational loop kernel.
-`<program>_<mode>.hpp`   |  test               | It contains the generated DSEL code.
+`<program>.cfg`          |  [nodelevel/configs](nodelevel/configs)  | It comprises only the generated computational loop kernel of the MPI parallel program.
+`<program>_<mode>.hpp`   |  [test](test)               | It includes the entire generated code expressed in DisCostiC DSEL language.
 
 <a name="essential-routines"></a>
 📝 **Essential DisCostiC routines**:thought_balloon:
 
-The goal is to offer convenient, compact and practically usable application programming interfaces (APIs) with appropriate abstractions.
+The goal is to offer convenient, compact and practically usable application programming interfaces (APIs) with appropriate abstractions. It provides information about call tree and attributes for communication (volume, mode, and protocol) and computation (data access pattern, flop count).
 
 ```cpp
 1. DisCostiC->Rank_Init(DisCostiC::Indextype rank);
 
-2. DisCostiC->Exec("LBL:STREAM_TRIAD", 
+2. SetNumRanks(DisCosTiC::Datatype numrank);
+
+3. DisCostiC->Exec("LBL:STREAM_TRIAD", 
 					DisCostiC::Event depending_operations);
    DisCostiC->Exec("COMP:TOL=2.0||TnOL=1.0|TL1L2=3.0|TL2L3=6.0|TL3Mem=14.2", 
    					DisCostiC::Event depending_operations);
@@ -384,23 +386,37 @@ The goal is to offer convenient, compact and practically usable application prog
    DisCostiC->Exec("SRC:double s, a[N],b[N],c[N];\n\nfor(int i=0; i<N; i++)\n\ta[i]=b[i]+s*c[i];\n//BREAK:DAXPY//./BroadwellEP_E5-2697v4_CoD.yml//18//-D N 100000",
    					DisCostiC::Event depending_operations);
 
-3. DisCostiC->Send(DisCostiC::Datatype sending_message_size_in_bytes, 
-					DisCostiC::Indextype destination_rank, 
-					DisCostiC::Event depending_operations);
+4. DisCostiC->Send(const void *message, 
+                    DisCosTiC::Datatype sending_message_size_in_bytes, 
+                    DisCostiC::Datatype sending_message_datatype, 
+                    DisCostiC::Indextype destination_rank,
+                    DisCostiC::Commtype communicator, 
+                    DisCosTiC::Event depending_operations);
 
-4. DisCostiC->Isend(DisCostiC::Datatype sending_message_size_in_bytes, 
-					DisCostiC::Indextype destination_rank, 
-					DisCostiC::Event depending_operations);
+5. DisCostiC->Isend(const void *message, 
+                    DisCosTiC::Datatype sending_message_size_in_bytes, 
+                    DisCostiC::Datatype sending_message_datatype, 
+                    DisCostiC::Indextype destination_rank,
+                    DisCostiC::Commtype communicator,
+                    DisCostiC::Request *request,
+                    DisCosTiC::Event depending_operations);
 
-5. DisCostiC->Recv(DisCostiC::Datatype receiving_message_size_in_bytes, 
-					DisCostiC::Indextype source_rank, 
-					DisCostiC::Event depending_operations);
+6. DisCostiC->Recv(const void *message, 
+                    DisCosTiC::Datatype receiving_message_size_in_bytes, 
+                    DisCostiC::Datatype receiving_message_datatype, 
+                    DisCostiC::Indextype source_rank,
+                    DisCostiC::Commtype communicator, 
+                    DisCosTiC::Event depending_operations);
 
-6. DisCostiC->Irecv(DisCostiC::Datatype receiving_message_size_in_bytes,
-					DisCostiC::Indextype source_rank,
-					DisCostiC::Event depending_operations);
+7. DisCostiC->Irecv(const void *message,
+					DisCosTiC::Datatype receiving_message_size_in_bytes, 
+                    DisCostiC::Datatype receiving_message_datatype, 
+                    DisCostiC::Indextype source_rank,
+                    DisCostiC::Commtype communicator,
+                    DisCostiC::Request *request,
+                    DisCosTiC::Event depending_operations);
 					
-7. DisCostiC->Rank_Finalize(); 
+8. DisCostiC->Rank_Finalize(); 
 
 ```
 
@@ -442,7 +458,7 @@ To read the documentation, point to a web browser at `html/index.html`.
 * **Single Operation**: accessors for local operations and their individual information at a certain grid point
 
 Metadata information                  | Description
---------------------- | -------------
+------------------------------------- | -------------
 `bufSize`						| Number of bytes (data size) transmitted in the communication operation (no real buffer size for comp, just added for completeness)
 `DepOperations`				| Dependencies for blocking routines, i.e., other operations that depend on this current operation
 `IdepOperations`				| Dependencies for non-blocking routines, i.e., other operations that depend on current operation
@@ -482,7 +498,7 @@ enum Mode_t {		| Mode_t enum defines operation type of SEND and RECV entities (s
 
 Metadata information     | Description
 --------------------- | -------------
-`Model_t`				| analytic first-principle performance model for computation and communication
+`model`				| analytic first-principle performance model for computation and communication
 
 ```
 enum Model_t {		| Mode_t enum defines the used performance model 
@@ -513,13 +529,13 @@ The underlying principle of parallel simulation is that each operation's entire 
 
 Terms                  | Description
 --------------------- | -------------
-`simulator processes Q_i`    | processes from the parallel simulation framework point of view
 `simulated processes P_i`    | processes from the application point of view
+`simulator processes Q_i`    | processes from the parallel simulation framework point of view
 `master simulator process Q_0`  | master process from the parallel simulation framework point of view
 
 
 **Initialization**:thought_balloon:
-In the MPI implementation, only the master process of the default communicator makes any print calls, and all other processes of the new communicator initialize root operations only once in each run. 
+In the MPI implementation, only the master process of the default communicator makes any print calls for debug and verbose output reporting, and all other processes of the new communicator initialize root operations only once in each run. 
 
 <table>
 <tr>
@@ -600,6 +616,7 @@ do{
 </td>
 </tr>
 </table>
+Within each ccNUMA domain, runtime corrections are made by monitoring number of processes that are concurrently engaged in each computation and communication step. 
 
 **SEND operation**:thought_balloon:
 The currently active process sends the operation object or array to the process listed as "operation.target," which is specific to the communication pattern simulation program.
@@ -879,4 +896,5 @@ This work is funded by the **[KONWHIR](https://www.konwihr.de)** project **OMI4P
 Ayesha Afzal, Erlangen National High Performance Computing Center (NHR@FAU)
 
 mailto: [ayesha.afzal@fau.de](mailto:ayesha.afzal@fau.de)
+
 
