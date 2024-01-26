@@ -375,64 +375,64 @@ Copyright : 2023 HPC, FAU Erlangen-Nuremberg. All rights reserved
 ====================================
  Arguments for ./discostic
 ====================================
-     --version, -v         show simulator's version number and exit
-     --help, -h         show this help message and exit
+     --version, -v          show simulator's version number and exit
+     --help, -h             show this help message and exit
 
 ====================================
  Application model for config.cfg
 ====================================
-     benchmark_kernel     name of the kernel used in the program
-     kernel_mode         mode of the kernel (FILE, SRC, LBL, COMP)
+     benchmark_kernel       name of the kernel used in the program
+     kernel_mode            mode of the kernel (FILE, SRC, LBL, COMP)
 
 ====================================
  Cluster model for config.cfg
 ====================================
-     heteregeneous         a bool flag to enable or disable the second system (1: enabled, 0: disabled)
-     number_of_iterations     number of iterations of the program
-     dim_x, dim_y, dim_z     problem size; high-dimensional parameters will be disregarded for low-dimensional problems.
-     task_per_node         number of running processes on one node
-     --version, -v         total number of running processes
+     heteregeneous          a bool flag to enable or disable the second system (1: enabled, 0: disabled)
+     number_of_iterations   number of iterations of the program
+     dim_x, dim_y, dim_z    problem size; high-dimensional parameters will be disregarded for low-dimensional problems.
+     task_per_node          number of running processes on one node
+     number_of_processes    total number of running processes
 
 ====================================
  Interconnect model for config.cfg
 ====================================
-     interconnect         name of the interconnect
-     MPI_library         name of the MPI library for the first system (IntelMPI, WaitIO)
-     comm_model         performance model for communication (0: LogGP, 1: HOCKNEY)
-     waitio_mode         mode of the WaitIO MPI library (socket, file or hybrid)
+     interconnect           name of the interconnect
+     MPI_library            name of the MPI library for the first system (IntelMPI, WaitIO)
+     comm_model             performance model for communication (0: LogGP, 1: HOCKNEY)
+     waitio_mode            mode of the WaitIO MPI library (socket, file or hybrid)
 
 ====================================
  Node model for config.cfg
 ====================================
      micro_architecture     name of the YAML machine file
      compiler-flags         STD and SIMD optimizations for the first system (-03 -xCORE-AVX512 -qopt-zmm-usage=high, -03 -xHost -xAVX, -Kfast -DTOFU); If not set, flags are taken from the YAML formatted machine file.
-     pmodel             performance model for computation for the first system (ECM, Roofline)
-     vvv             a bool flag to enable or disable the verbose node output for the first system (0: disabled, 1: enabled)
-     cache-predictor     cache prediction with layer conditions or ache simulation with pycachesim for the first system (LC, SIM)
-     penalty         penalty for the computation model in nanoseconds, used only in LBL or COMP mode
+     pmodel                 performance model for computation for the first system (ECM, Roofline)
+     vvv                    a bool flag to enable or disable the verbose node output for the first system (0: disabled, 1: enabled)
+     cache-predictor        cache prediction with layer conditions or ache simulation with pycachesim for the first system (LC, SIM)
+     penalty                penalty for the computation model in nanoseconds, used only in LBL or COMP mode
 
 ====================================
  Delay injection mode for config.cfg
 ====================================
-     delay             a bool flag to enable or disable the delay injection (0: disabled, 1: enabled)
-     delay_intensity     intensity of delay as a multiple of computation time of one iteration
-     -delay_rank         process rank of the injected delay
+     delay                  a bool flag to enable or disable the delay injection (0: disabled, 1: enabled)
+     delay_intensity        intensity of delay as a multiple of computation time of one iteration
+     delay_rank             process rank of the injected delay
      delay_timestep         iteration for the occurrence of the injected delay
 
 ====================================
  Noise injection mode for config.cfg
 ====================================
-     noise             a bool flag to enable or disable the noise injection (0: disabled, 1: enabled)
-     noise_intensity     intensity of random noise, i.e., rand() % noise_intensity 
-     noise_start_timestep     starting iteration for the injected noise
-     noise_stop_timestep     ending iteration for the injected noise
+     noise                  a bool flag to enable or disable the noise injection (0: disabled, 1: enabled)
+     noise_intensity        intensity of random noise, i.e., rand() % noise_intensity 
+     noise_start_timestep   starting iteration for the injected noise
+     noise_stop_timestep    ending iteration for the injected noise
 
 ====================================
  Output for config.cfg
 ====================================
-     filename         output file name that contains details for the debug purpose
-     chromevizfilename     output file name that contains all time-rank tracing data for visualization with Chrome tracing browser
-     Verbose         a bool flag to enable or disable the verbose output (0: disabled, 1: enabled)
+     filename               output file name that contains details for the debug purpose
+     chromevizfilename      output file name that contains all time-rank tracing data for visualization with Chrome tracing browser
+     Verbose                a bool flag to enable or disable the verbose output (0: disabled, 1: enabled)
 ```
 
 <a name="automating-dsel-generation-through-static-analysis"></a>

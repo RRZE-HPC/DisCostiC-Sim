@@ -492,7 +492,7 @@ std::cout << "\t heteregeneous" << "\t\t a bool flag to enable or disable the se
 std::cout << "\t number_of_iterations" << "\t number of iterations of the program" << std::endl; \
 std::cout << "\t dim_x, dim_y, dim_z" << "\t problem size; high-dimensional parameters will be disregarded for low-dimensional problems." << std::endl; \
 std::cout << "\t task_per_node" << "\t\t number of running processes on one node" << std::endl; \
-std::cout << "\t --version, -v" << "\t\t total number of running processes" << std::endl; \
+std::cout << "\t number_of_processes" << "\t\t total number of running processes" << std::endl; \
 std::cout                                                                                                                                               \
     << "\n====================================" << std::endl                                                                                        \
     << " Interconnect model for config.cfg" << std::endl                                                                                                                 \
@@ -517,7 +517,7 @@ std::cout                                                                       
     << "====================================" << std::endl;                                                                                                                                               \
 std::cout << "\t delay" << "\t\t\t a bool flag to enable or disable the delay injection (0: disabled, 1: enabled)" << std::endl; \
 std::cout << "\t delay_intensity" << "\t intensity of delay as a multiple of computation time of one iteration" << std::endl; \
-std::cout << "\t -delay_rank" << "\t\t process rank of the injected delay" << std::endl; \
+std::cout << "\t delay_rank" << "\t\t process rank of the injected delay" << std::endl; \
 std::cout << "\t delay_timestep" << "\t\t iteration for the occurrence of the injected delay" << std::endl; \
 std::cout                                                                                                                                               \
     << "\n====================================" << std::endl                                                                                        \
