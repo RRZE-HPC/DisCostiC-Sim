@@ -154,7 +154,7 @@ add_custom_target(uninstall
 add_custom_target(clear
 		WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
 		COMMAND make clean
-		COMMAND bash -c [[rm -f DisCostiC_Simulation.* *.o *.csv *.out *.viz *.dms Exec.* *.stf *.prot]])
+		COMMAND bash -c [[rm -f discostic.* *.o *.csv *.out *.viz *.dms Exec.* *.stf *.prot]])
 
 add_custom_target(trace_MPI
 		WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}

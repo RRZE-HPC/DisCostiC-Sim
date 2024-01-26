@@ -473,96 +473,72 @@ static const DisCosTiC_Indextype MPI_ANY_TA = ~0;
 	}
 
 #define help()                                                                                                                                                          \
-	{                                                                                                                                                                   \
+	{                                             \
 		version()                                                                                                                                                       \
-				std::cout                                                                                                                                               \
-			<< "\n==================================================" << std::endl                                                                                        \
-			<< " Parameter for config.cfg" << std::endl                                                                                                                 \
-			<< "==================================================" << std::endl                                                                                        \
-			<< std::endl;                                                                                                                                               \
-		std::cout                                                                                                                                                       \
-			<< "\t task_per_node"                                                                                                                                       \
-			<< "\t\t\t number of runing processes on one node" << std::endl;                                                                                            \
-		std::cout                                                                                                                                                       \
-			<< "\t number_of_processes"                                                                                                                                 \
-			<< "\t\t number of runing processes on all nodes" << std::endl;                                                                                           \
-		std::cout                                                                                                                                                       \
-			<< "\t idlewave"                                                                                                                                            \
-			<< "\t\t\t  1 to insert delay and create idlewave." << std::endl;                                                                                           \
-		std::cout                                                                                                                                                       \
-			<< "\t which_rank"                                                                                                                                          \
-			<< "\t\t\t which rank should introduce the disturbance" << std::endl;                                                                                       \
-		std::cout                                                                                                                                                       \
-			<< "\t at_timestep"                                                                                                                                         \
-			<< "\t\t\t at which timestep the given rank should introduce the disturbance" << std::endl;                                                                 \
-		std::cout                                                                                                                                                       \
-			<< "\t desync"                                                                                                                                              \
-			<< "\t\t\t\t 0 to turn off the desynchronization feature and 1 to turn on." << std::endl;                                                                     \
-		std::cout                                                                                                                                                       \
-			<< "\t comm_model"                                                                                                                                          \
-			<< "\t\t\t 0 for LogGP model and 1 for HOCKNEY model" << std::endl;                                                                                         \
-		std::cout                                                                                                                                                       \
-			<< "\t filename"                                                                                                                                            \
-			<< "\t\t\t [optional: for debug puspose] output file name that contain details of the generated graph" << std::endl;                                        \
-		std::cout                                                                                                                                                       \
-			<< "\t timeunit_conv"                                                                                                                                       \
-			<< "\t\t\t time multiplier for conversation from baseline unit of nanoseconds to some other unit" << std::endl;                                             \
-		std::cout                                                                                                                                                       \
-			<< "\t chromevizfilename"                                                                                                                                   \
-			<< "\t\t the name of the output file contains all time rank tracing data for visulization with Chrome tracing browser" << std::endl;                      \
-		std::cout                                                                                                                                                       \
-			<< "\t Verbose"                                                                                                                                             \
-			<< "\t\t\t enable/disable more verbose output (0=disable, 1=enable)" << std::endl;                                                                          \
-		std::cout                                                                                                                                                       \
-			<< "\t batchmode"                                                                                                                                           \
-			<< "\t\t\t enable/disable batchmode (0=disable i.e., printing performance for each rank, 1=enable i.e., never print detailed all rank info)" << std::endl;  \
-		std::cout                                                                                                                                                       \
-			<< "\t micro_architecture"                                                                                                                                  \
-			<< "\t\t\t " << std::endl;                                                                                                                                  \
-		std::cout                                                                                                                                                       \
-			<< "\t FP_instructions_per_cycle"                                                                                                                           \
-			<< "\t\t\t " << std::endl;                                                                                                                                  \
-		std::cout                                                                                                                                                       \
-			<< "\t benchmark_kernel"                                                                                                                                    \
-			<< "\t\t\t " << std::endl;                                                                                                                                  \
-		std::cout                                                                                                                                                       \
-			<< "\t kernel_mode"                                                                                                                                            \
-			<< "\t\t\t choose either of FILE, SRC, LBL, SRC modes. Concatenated with benchmark kernel during runtime to determine which P2P file to use." << std::endl; \
-		std::cout                                                                                                                                                       \
-			<< "\t FLOPs_per_iteration"                                                                                                                                 \
-			<< "\t\t number of flops in one iteration" << std::endl;                                                                                                  \
-		std::cout                                                                                                                                                       \
-			<< "\t R_streams"                                                                                                                                           \
-			<< "\t\t\t number of read streams" << std::endl;                                                                                                            \
-		std::cout                                                                                                                                                       \
-			<< "\t W_streams"                                                                                                                                           \
-			<< "\t\t\t number of write streams" << std::endl;                                                                                                           \
-		std::cout                                                                                                                                                       \
-			<< "\t datasize_in_GB"                                                                                                                                      \
-			<< "\t\t\t number of array elements * (R_streams + W_streams) * size of datatype" << std::endl;                                                             \
-		std::cout                                                                                                                                                       \
-			<< "\t penalty"                                                                                                                                             \
-			<< "\t\t\t penalty in nanoseconds. Used only in LBL and COMP mode." << std::endl;                                                                           \
-		std::cout                                                                                                                                                       \
-			<< "\t compiler-flags"                                                                                                                                      \
-			<< "\t\t\t " << std::endl;                                                                                                                                  \
-		std::cout                                                                                                                                                       \
-			<< "\t pmodel"                                                                                                                                              \
-			<< "\t\t\t " << std::endl;                                                                                                                                  \
-		std::cout                                                                                                                                                       \
-			<< "\t vvv"                                                                                                                                                 \
-			<< "\t\t\t " << std::endl;                                                                                                                                  \
-		std::cout                                                                                                                                                       \
-			<< "\t cache-predictor"                                                                                                                                     \
-			<< "\t\t\t " << std::endl;                                                                                                                                  \
-		std::cout                                                                                                                                                       \
-			<< "\n\t Other user defined P2P file parameters for domain size etc. etc."                                                                                  \
-			<< std::endl;                                                                                                                                               \
+std::cout << "\n====================================" << std::endl << " Arguments for ./discostic" << std::endl << "====================================" << std::endl; \
+std::cout << "\t --version, -v" << "\t\t show simulator's version number and exit" << std::endl; \
+std::cout << "\t --help, -h" << "\t\t show this help message and exit" << std::endl; \
+std::cout                                                                                                                                               \
+    << "\n====================================" << std::endl                                                                                        \
+    << " Application model for config.cfg" << std::endl                                                                                                                 \
+    << "====================================" << std::endl;                                                                                                                                               \
+std::cout << "\t benchmark_kernel" << "\t name of the kernel used in the program" << std::endl; \
+std::cout << "\t kernel_mode" << "\t\t mode of the kernel (FILE, SRC, LBL, COMP)" << std::endl; \
+        std::cout                                                                                                                                               \
+			<< "\n====================================" << std::endl                                                                                        \
+			<< " Cluster model for config.cfg" << std::endl                                                                                                                 \
+			<< "====================================" << std::endl;                                                                                                                                               \
+std::cout << "\t heteregeneous" << "\t\t a bool flag to enable or disable the second system (1: enabled, 0: disabled)" << std::endl; \
+std::cout << "\t number_of_iterations" << "\t number of iterations of the program" << std::endl; \
+std::cout << "\t dim_x, dim_y, dim_z" << "\t problem size; high-dimensional parameters will be disregarded for low-dimensional problems." << std::endl; \
+std::cout << "\t task_per_node" << "\t\t number of running processes on one node" << std::endl; \
+std::cout << "\t --version, -v" << "\t\t total number of running processes" << std::endl; \
+std::cout                                                                                                                                               \
+    << "\n====================================" << std::endl                                                                                        \
+    << " Interconnect model for config.cfg" << std::endl                                                                                                                 \
+    << "====================================" << std::endl;                                                                                                                                               \
+std::cout << "\t interconnect" << "\t\t name of the interconnect" << std::endl; \
+std::cout << "\t MPI_library" << "\t\t name of the MPI library for the first system (IntelMPI, WaitIO)" << std::endl; \
+std::cout << "\t comm_model" << "\t\t performance model for communication (0: LogGP, 1: HOCKNEY)" << std::endl; \
+std::cout << "\t waitio_mode" << "\t\t mode of the WaitIO MPI library (socket, file or hybrid)" << std::endl; \
+std::cout                                                                                                                                               \
+    << "\n====================================" << std::endl                                                                                        \
+    << " Node model for config.cfg" << std::endl                                                                                                                 \
+    << "====================================" << std::endl;                                                                                                                                               \
+std::cout << "\t micro_architecture" << "\t name of the YAML machine file" << std::endl; \
+std::cout << "\t compiler-flags" << "\t\t STD and SIMD optimizations for the first system (-03 -xCORE-AVX512 -qopt-zmm-usage=high, -03 -xHost -xAVX, -Kfast -DTOFU); If not set, flags are taken from the YAML formatted machine file." << std::endl; \
+std::cout << "\t pmodel" << "\t\t\t performance model for computation for the first system (ECM, Roofline)" << std::endl; \
+std::cout << "\t vvv" << "\t\t\t a bool flag to enable or disable the verbose node output for the first system (0: disabled, 1: enabled)" << std::endl; \
+std::cout << "\t cache-predictor" << "\t cache prediction with layer conditions or ache simulation with pycachesim for the first system (LC, SIM)" << std::endl; \
+std::cout << "\t penalty" << "\t\t penalty for the computation model in nanoseconds, used only in LBL or COMP mode" << std::endl; \
+std::cout                                                                                                                                               \
+    << "\n====================================" << std::endl                                                                                        \
+    << " Delay injection mode for config.cfg" << std::endl                                                                                                                 \
+    << "====================================" << std::endl;                                                                                                                                               \
+std::cout << "\t delay" << "\t\t\t a bool flag to enable or disable the delay injection (0: disabled, 1: enabled)" << std::endl; \
+std::cout << "\t delay_intensity" << "\t intensity of delay as a multiple of computation time of one iteration" << std::endl; \
+std::cout << "\t -delay_rank" << "\t\t process rank of the injected delay" << std::endl; \
+std::cout << "\t delay_timestep" << "\t\t iteration for the occurrence of the injected delay" << std::endl; \
+std::cout                                                                                                                                               \
+    << "\n====================================" << std::endl                                                                                        \
+    << " Noise injection mode for config.cfg" << std::endl                                                                                                                 \
+    << "====================================" << std::endl;                                                                                                                                               \
+std::cout << "\t noise" << "\t\t\t a bool flag to enable or disable the noise injection (0: disabled, 1: enabled)" << std::endl; \
+std::cout << "\t noise_intensity" << "\t intensity of random noise, i.e., rand() % noise_intensity " << std::endl; \
+std::cout << "\t noise_start_timestep" << "\t starting iteration for the injected noise" << std::endl; \
+std::cout << "\t noise_stop_timestep" << "\t ending iteration for the injected noise" << std::endl; \
+std::cout                                                                                                                                               \
+    << "\n====================================" << std::endl                                                                                        \
+    << " Output for config.cfg" << std::endl                                                                                                                 \
+    << "====================================" << std::endl;                                                                                                                                               \
+std::cout << "\t filename" << "\t\t output file name that contains details for the debug purpose" << std::endl; \
+std::cout << "\t chromevizfilename" << "\t output file name that contains all time-rank tracing data for visualization with Chrome tracing browser" << std::endl; \
+std::cout << "\t Verbose" << "\t\t a bool flag to enable or disable the verbose output (0: disabled, 1: enabled)" << std::endl; \
 	}
 #define version()                                                                                      \
 	{                                                                                                  \
-		std::cout << "\nDistributed CosT in Cluster ( DisCosTiC )" << std::endl;                       \
-		std::cout << "Version : v1.0 (initial release)" << std::endl;                                  \
+		std::cout << "\nDistributed Cost in Cluster (DisCostiC)" << std::endl;                       \
+		std::cout << "Version : v1.0.0 (initial release)" << std::endl;                                  \
 		std::cout << "Author : Ayesha Afzal <ayesha.afzal@fau.de>" << std::endl;                       \
 		std::cout << "Copyright : 2023 HPC, FAU Erlangen-Nuremberg. All rights reserved" << std::endl; \
 	}

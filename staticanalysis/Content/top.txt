@@ -18,7 +18,7 @@ namespace DisCosTiC {
      */
 	Benchmark(UserInterface::ConfigParser *CFG_args) {
     	systemsize = CFG_args->getValue<DisCosTiC_Datatype>("number_of_processes");
-    	numTimesteps = CFG_args->getValue<DisCosTiC_Datatype>("number_of_timesteps");    
+    	numTimesteps = CFG_args->getValue<DisCosTiC_Datatype>("number_of_iterations");    
     	nodesCount = 0;
 		networksCount =0;  	    
     }

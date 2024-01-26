@@ -59,6 +59,9 @@ int primary_processes = 0;
 int secondary_processes = 0;
 int heteregeneous_mode = 0;
 std::string arch_name = "";
+std::string interconnect_name = "";
+std::string MPIlibrary_name = "";
+
 
 DisCosTiC::DisCosTiC_OP copy(DisCosTiC::DisCosTiC_OP op_og, DisCosTiC::DisCosTiC_OP op_copy)
 {
@@ -137,6 +140,8 @@ int main(int argc, char **argv)
     virtual_rank = system_number == 0 ? N_process_Rank : N_process_Rank - primary_processes;
 
     arch_name = system_number == 0 ? CFG_args.getValue<std::string>("micro_architecture") : CFG_args.getValue<std::string>("secondary_micro_architecture");
+    interconnect_name = system_number == 0 ? CFG_args.getValue<std::string>("interconnect") : CFG_args.getValue<std::string>("secondary_interconnect");
+    MPIlibrary_name = system_number == 0 ? CFG_args.getValue<std::string>("MPI_library") : CFG_args.getValue<std::string>("secondary_MPI_library");
 
     if (heteregeneous_mode == 0)
     {
@@ -226,24 +231,24 @@ int main(int argc, char **argv)
     if (heteregeneous_mode == 0)
     {
 
-        IntrachipCFG_args.readData("./nodelevel/network-files/" + arch_name + "_intrachip.cfg");
+        IntrachipCFG_args.readData("./nodelevel/network-files/" + arch_name + "_" + interconnect_name + "_" + MPIlibrary_name + "_intrachip.cfg");
 
-        InterchipCFG_args.readData("./nodelevel/network-files/" + arch_name + "_interchip.cfg");
+        InterchipCFG_args.readData("./nodelevel/network-files/" + arch_name + "_" + interconnect_name + "_" + MPIlibrary_name + "_interchip.cfg");
 
-        InternodeCFG_args.readData("./nodelevel/network-files/" + arch_name + "_internode.cfg");
+        InternodeCFG_args.readData("./nodelevel/network-files/" + arch_name + "_" + interconnect_name + "_" + MPIlibrary_name + "_internode.cfg");
 
-        InterclusterCFG_args.readData("./nodelevel/network-files/" + arch_name + "_internode.cfg");
+        InterclusterCFG_args.readData("./nodelevel/network-files/" + arch_name + "_" + interconnect_name + "_" + MPIlibrary_name + "_internode.cfg");
     }
     else
     {
 
-        IntrachipCFG_args.readData("./nodelevel/network-files/" + arch_name + "_waitio_" + CFG_args.getValue<std::string>("waitio_mode") + "_intrachip.cfg");
+        IntrachipCFG_args.readData("./nodelevel/network-files/" + arch_name + "_" + interconnect_name + "_" + MPIlibrary_name + "_" + CFG_args.getValue<std::string>("waitio_mode") + "_intrachip.cfg");
 
-        InterchipCFG_args.readData("./nodelevel/network-files/" + arch_name + "_waitio_" + CFG_args.getValue<std::string>("waitio_mode") + "_interchip.cfg");
+        InterchipCFG_args.readData("./nodelevel/network-files/" + arch_name + "_" + interconnect_name + "_" + MPIlibrary_name + "_" + CFG_args.getValue<std::string>("waitio_mode") + "_interchip.cfg");
 
-        InternodeCFG_args.readData("./nodelevel/network-files/" + arch_name + "_waitio_" + CFG_args.getValue<std::string>("waitio_mode") + "_internode.cfg");
+        InternodeCFG_args.readData("./nodelevel/network-files/" + arch_name + "_" + interconnect_name + "_" + MPIlibrary_name + "_" + CFG_args.getValue<std::string>("waitio_mode") + "_internode.cfg");
 
-        InterclusterCFG_args.readData("./nodelevel/network-files/" + arch_name + "_waitio_" + CFG_args.getValue<std::string>("waitio_mode") + "_intercluster.cfg");
+        InterclusterCFG_args.readData("./nodelevel/network-files/" + arch_name + "_" + interconnect_name + "_" + MPIlibrary_name + "_" + CFG_args.getValue<std::string>("waitio_mode") + "_intercluster.cfg");
     }
 
     IntrachipCFG_args.setData(bytes_to_send);
@@ -285,7 +290,7 @@ int main(int argc, char **argv)
 
     const DisCosTiC_Datatype eagerLimit = InternodeCFG_args.getValue<DisCosTiC_Datatype>("comm_eagerlimit_in_bytes");
 
-    const DisCosTiC_Datatype nunmberofiter = CFG_args.getValue<DisCosTiC_Datatype>("number_of_timesteps");
+    const DisCosTiC_Datatype nunmberofiter = CFG_args.getValue<DisCosTiC_Datatype>("number_of_iterations");
 
     const DisCosTiC_Datatype noise = CFG_args.getValue<DisCosTiC_Datatype>("noise");
     const DisCosTiC_Datatype noise_start_timestep = CFG_args.getValue<DisCosTiC_Datatype>("noise_start_timestep");
