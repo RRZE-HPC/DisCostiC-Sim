@@ -3,7 +3,7 @@
   </a><a href="https://DisCostiC-Sim.readthedocs.io/">
   <img alt="Docs" src="https://img.shields.io/badge/read-the_docs-blue" />
   </a><a href="https://github.com/RRZE-HPC/DisCostiC-Sim/src/Dev/discussions">
-  <img alt="Join the discussion on Github" src="https://img.shields.io/badge/Github%20Discussions%20%26%20Support-Chat%20now!-blue" />
+  <img alt="Join the discussion on Matrix" src="https://img.shields.io/badge/Github%20Discussions%20%26%20Support-Chat%20now!-blue" />
   </a><a href="https://www.linkedin.com/in/ayeshaafzal-/">
     <img alt="linkedin" src="https://i.stack.imgur.com/gVE0j.png" />
   <a href="https://github.com/AyeshaAfzal91" rel="nofollow noreferrer">
