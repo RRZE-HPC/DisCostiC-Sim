@@ -65,11 +65,11 @@ The application blueprint created using `Domain Specific Embedded Language (DSEL
 ```diff
 - Application model
 
-    * Domain knowledge of the application expressed in the DisCostiC DSEL language provides information on call dependencies and properties for computation (data access pattern, flop count) and communication (volume, mode and protocol).
+    * Domain knowledge of the application expressed in the DisCostiC DSEL language provides information on call dependencies and properties for computation (data access pattern, flop count) and communication (volume, mode and protocol)
 
 - Analytic first-principle performance models
     
-    * Computation models: Fundamental analytic Roofline and refined ECM models with including memory bandwidth bottleneck concept at system level
+    * Computation models: Fundamental analytic Roofline and refined ECM models including memory bandwidth bottleneck concept at the system level
     * Communication models: Fundamental latency-bandwidth and refined LogGP models
 
 - System models
@@ -96,7 +96,7 @@ The application blueprint created using `Domain Specific Embedded Language (DSEL
     * No intermediate tracing files requirement like any offline, trace-driven tools 
     * No high memory requirement like any online tools that use the host architectures to execute code
 	
-+ Last but not least, an open-source low entry cost lightweight simulator enabling model-based design-space exploration 
++ Last but not least, an open-source low-entry cost lightweight simulator enabling model-based design-space exploration 
 ```
 
 <a name="compilation-and-build"></a>
@@ -120,7 +120,7 @@ conda activate XYZ
 conda install pip 
 cmake -DCMAKE_INSTALL_PREFIX=~/.local . && make all install
 ```
-One way to check the installation is to print the version of the DisCostiC using `./discostic --version`.
+One way to check the installation is to print the version and the help of the DisCostiC using `./discostic --version` and `./discostic --help`.
 
 <a name="configuration"></a>
 ⏱️ **Configuration settings**:thought_balloon:
@@ -134,7 +134,7 @@ The [test](test) folder in DisCostiC offers multiple MPI-parallelized programs (
 `SOR`          |    Gauss-Seidel Successive Over-Relaxation solver
 `HPCG`               | High Performance Conjugate Gradients
 
-The following `kernel_mode` is exclusively offered for the flexibility of the framework; the simulator's prediction remains unaffected by the selection of the `kernel_mode`. Further explanation of this mode canbe found in the [📝 Code blueprint as DisCostiC input](#DSEL) section.
+The following `kernel_mode` is exclusively offered for the flexibility of the framework; the simulator's prediction remains unaffected by the selection of the `kernel_mode`. Further explanation of this mode can be found in the Essential DisCostiC routines](#essential-routines) section.
 
 `kernel_mode`                 | Integrated tool | Description
 --------------------- | ------------- | -------------
@@ -143,12 +143,12 @@ The following `kernel_mode` is exclusively offered for the flexibility of the fr
 `SRC`           |   [Kerncraft](https://github.com/RRZE-HPC/kerncraft) integrated      |  This directly embeds the source code of the computational kernel into the simulator.
 `FILE`          |   [Kerncraft](https://github.com/RRZE-HPC/kerncraft) integrated      |  This reads the source code for the computational kernel from an external file located at [nodelevel/kernels](nodelevel/kernels) folder. 
 
-The following `exchange_mode` is provided to enable model-base exploration through experimenting with various communication patterns in MPI applications. 
+The following `exchange_mode` is provided to enable model-based exploration through experimenting with various communication patterns in MPI applications. 
 
 `exchange_mode`                  | Description
 --------------------- | -------------
 `direction`          |       It specifies the direction of message exchange as an int (1: uni-directional upwards shift in only positive direction, 2: bi-directional upwards and downwards shift in both positive and negative directions).
-`stepsize`          |       It describes the step size of message exchange as an int (1: distance one communication, 2: distance two communication, ...).
+`stepsize`          |       It describes the step size of the message exchange as an int (1: distance one communication, 2: distance two communication, ...).
 `periodic`          |       It enables or disables the communication periodicity as a bool (0: false, 1: true).
 
 The `config.cfg` file can be edited to select the `benchmark_kernel` and `kernel_mode`.
@@ -156,7 +156,7 @@ The `config.cfg` file can be edited to select the `benchmark_kernel` and `kernel
 <a name="compilation"></a>
 🥅 **Compilation**:thought_balloon:
 
-The compilation offers following choices to enable the output report's data formats generation and to enable the tracing of the simulator's own implementation. An executable will be generated after compilation. 
+The compilation offers the following choices to enable the output report's data format generation and to enable the tracing of the simulator's own implementation. An executable will be generated after compilation. 
 
 Command                  | Description
 --------------------- | -------------
@@ -193,7 +193,7 @@ The formats, names and locations of output files in these environmental variable
 Command                  | Description
 --------------------- | -------------
 `make clear`            |   This cleans up the working directory by removing all unnecessary DisCostiC files, such as *.dms, *.otf, *.csv files.
-`make uninstall`        |   This uninstalls the DisCostiC framework, including installed files and CMAKE specific files.
+`make uninstall`        |   This uninstalls the DisCostiC framework, including installed files and CMake-specific files.
 
 
 <a name="visualization"></a>
@@ -286,14 +286,14 @@ Metadata information                  | Description
 `number_of_nodes`             		    | Number of utilizing nodes on a cluster 
 `task_per_node`			                | Number of utilizing cores on the node of a cluster 
 `number_of_processes`                   | Number of running processes on the cluster 
-`inter_cluster or hetrogeneous`		    | Communication across clusters (0: inter cluster disabled; 1: inter cluster enabled)
-`number_of_timesteps`                   | Numer of iterations for the program run
+`inter_cluster or heterogeneous`		    | Communication across clusters (0: inter cluster disabled; 1: inter cluster enabled)
+`number_of_iterations`                   | Number of iterations for the program run
 `dim_x, dim_y, dim_z`                   | Problem size for the program run; high-dimensional parameters will be disregarded for low-dimensional problems.
 
 <a name="network"></a>    
 🔌 **Network model**:thought_balloon:
 
-The YAML formatted network files and the choice of performance model and mode of the communication are included in the network model.
+The YAML formatted network files and the choice of performance model and mode of communication are included in the network model.
 
 Metadata information                  | Description
 ------------------------------------- | -------------
@@ -301,7 +301,7 @@ Metadata information                  | Description
 `intra_chip`							    | Communication inside chip
 `inter_chip`							    | Communication across chips
 `inter_node`							    | Communication across nodes
-`latency`							        | Latency in sec for various kind of interconnects
+`latency`							        | Latency in sec for various kinds of interconnects
 `bandwidth`							        | Bandwidth in GB/s for various kind of interconnects
 `eager_limit`							    | Data size in bytes at which communication mode changes from eager to rendezvous protocol
 `waitio_mode`                               | Mode of the WaitIO MPI library (socket, file or hybrid)
@@ -314,22 +314,22 @@ Network files (YAML format)                 | Description
 `InfiniBand_WaitIO_intercluster`          |       Communication across clusters for WaitIO MPI library and InfiniBand interconnect
 `InfiniBand_WaitIO_internode`          |       Communication across nodes for WaitIO MPI library and InfiniBand interconnect
 `InfiniBand_WaitIO_interchip`          |       Communication across chips for WaitIO MPI library and InfiniBand interconnect
-`InfiniBand_WaitIO_intrachip`          |       Communication inside chip for WaitIO MPI library and InfiniBand interconnect
+`InfiniBand_WaitIO_intrachip`          |       Communication inside the chip for WaitIO MPI library and InfiniBand interconnect
 `Tofu-D_WaitIO_internode`          |       Communication across nodes for WaitIO MPI library and Tofu-D interconnect
 `Tofu-D_WaitIO_interchip`          |       Communication across chips for WaitIO MPI library and Tofu-D interconnect
-`Tofu-D_WaitIO_intrachip`          |       Communication inside chip for WaitIO MPI library and Tofu-D interconnect
+`Tofu-D_WaitIO_intrachip`          |       Communication inside the chip for WaitIO MPI library and Tofu-D interconnect
 `InfiniBand_IntelMPI_internode`          |       Communication across nodes for Intel MPI library and InfiniBand interconnect
 `InfiniBand_IntelMPI_interchip`          |       Communication across chips for Intel MPI library and InfiniBand interconnect
-`InfiniBand_IntelMPI_intrachip`          |       Communication inside chip for Intel MPI library and InfiniBand interconnect
+`InfiniBand_IntelMPI_intrachip`          |       Communication inside the chip for Intel MPI library and InfiniBand interconnect
 `OmniPath_IntelMPI_internode`          |       Communication across nodes for Intel MPI library and Omni-Path interconnect
 `OmniPath_IntelMPI_interchip`          |       Communication across chips for Intel MPI library and Omni-Path interconnect
-`OmniPath_IntelMPI_intrachip`          |       Communication inside chip for Intel MPI library and Omni-Path interconnect
+`OmniPath_IntelMPI_intrachip`          |       Communication inside the chip for Intel MPI library and Omni-Path interconnect
 
 
 <a name="node"></a>    
 🔌 **Node model**:thought_balloon:
 
-The machine files in YAML format and the selection of compiler settings and the performance model of computation are included in the node model.
+The machine files in YAML format, the selection of compiler settings and the performance model of computation are included in the node model.
 
 Metadata information                  | Description
 --------------------- | -------------
@@ -338,11 +338,11 @@ Metadata information                  | Description
 `ccNUMA_domains_per_socket`                 | Number of ccNUMA domains in one socket 
 `cores_per_ccNUMA_domain`                   | Number of cores in one ccNUMA domain 
 `FP_instructions_per_cycle`					| Floating point instructions (ADD, MUL) per cycle 
-`FP_operations_per_instruction_(SP/DP)`		| Single precision or double precision floating point operations per instruction
+`FP_operations_per_instruction_(SP/DP)`		| Single or double precision floating point operations per instruction
 `clock_frequency`							| Clock frequency in GHz
 `memory_bandwidth`							| Memory bandwidth in GB/s
-`compiler_flags`                            | STD and SIMD optimizations of the compiler
-`comp_model`                                | Performance model for computatuion (ECM, Roofline)
+`compiler-flags`                            | STD and SIMD optimizations of the compiler
+`pmodel`                                | Performance model for computation (Roofline, ECM)
 
 For illustration, a few examples of available [machine files](nodelevel/machine-files) are given below:
 
@@ -363,10 +363,82 @@ Machine files (YAML format)                 | Description
 `IvyBridgeEP_E5-2690v2`          |       10 core Intel(R) Xeon(R) IvyBridge EN/EP/EX E5-2690 v2 CPU @ 3.0 GHz
 `SandyBridgeEP_E5-2680`          |    8 core Intel(R) Xeon(R) SandyBridge EN/EP E5-2680 CPU @ 2.7 GHz   
 
+
+The help of DisCostiC (`./discostic --help`) lists as:
+
+```
+Distributed Cost in Cluster (DisCostiC)
+Version : v1.0.0 (initial release)
+Author : Ayesha Afzal <ayesha.afzal@fau.de>
+Copyright : 2023 HPC, FAU Erlangen-Nuremberg. All rights reserved
+
+====================================
+ Arguments for ./discostic
+====================================
+     --version, -v         show simulator's version number and exit
+     --help, -h         show this help message and exit
+
+====================================
+ Application model for config.cfg
+====================================
+     benchmark_kernel     name of the kernel used in the program
+     kernel_mode         mode of the kernel (FILE, SRC, LBL, COMP)
+
+====================================
+ Cluster model for config.cfg
+====================================
+     heteregeneous         a bool flag to enable or disable the second system (1: enabled, 0: disabled)
+     number_of_iterations     number of iterations of the program
+     dim_x, dim_y, dim_z     problem size; high-dimensional parameters will be disregarded for low-dimensional problems.
+     task_per_node         number of running processes on one node
+     --version, -v         total number of running processes
+
+====================================
+ Interconnect model for config.cfg
+====================================
+     interconnect         name of the interconnect
+     MPI_library         name of the MPI library for the first system (IntelMPI, WaitIO)
+     comm_model         performance model for communication (0: LogGP, 1: HOCKNEY)
+     waitio_mode         mode of the WaitIO MPI library (socket, file or hybrid)
+
+====================================
+ Node model for config.cfg
+====================================
+     micro_architecture     name of the YAML machine file
+     compiler-flags         STD and SIMD optimizations for the first system (-03 -xCORE-AVX512 -qopt-zmm-usage=high, -03 -xHost -xAVX, -Kfast -DTOFU); If not set, flags are taken from the YAML formatted machine file.
+     pmodel             performance model for computation for the first system (ECM, Roofline)
+     vvv             a bool flag to enable or disable the verbose node output for the first system (0: disabled, 1: enabled)
+     cache-predictor     cache prediction with layer conditions or ache simulation with pycachesim for the first system (LC, SIM)
+     penalty         penalty for the computation model in nanoseconds, used only in LBL or COMP mode
+
+====================================
+ Delay injection mode for config.cfg
+====================================
+     delay             a bool flag to enable or disable the delay injection (0: disabled, 1: enabled)
+     delay_intensity     intensity of delay as a multiple of computation time of one iteration
+     -delay_rank         process rank of the injected delay
+     delay_timestep         iteration for the occurrence of the injected delay
+
+====================================
+ Noise injection mode for config.cfg
+====================================
+     noise             a bool flag to enable or disable the noise injection (0: disabled, 1: enabled)
+     noise_intensity     intensity of random noise, i.e., rand() % noise_intensity 
+     noise_start_timestep     starting iteration for the injected noise
+     noise_stop_timestep     ending iteration for the injected noise
+
+====================================
+ Output for config.cfg
+====================================
+     filename         output file name that contains details for the debug purpose
+     chromevizfilename     output file name that contains all time-rank tracing data for visualization with Chrome tracing browser
+     Verbose         a bool flag to enable or disable the verbose output (0: disabled, 1: enabled)
+```
+
 <a name="automating-dsel-generation-through-static-analysis"></a>
 ## 👩‍💻 Automating DSEL generation through static analysis
 
-To perform the static analysis, the following procedure must be followed before runing the discostic batch script:
+To perform the static analysis, the following procedure must be followed before running the DisCostiC batch script:
 ```
 pip install -r staticanalysis/requirements.txt
 python staticanalysis/Convert-<program>.py
@@ -374,10 +446,10 @@ python staticanalysis/Convert-<program>.py
 
 Files                  | Description
 --------------------- | -------------
-`Convert-<program>.py`          | A helper script that takes the original code and, through annotation, locates code loops and communication and identifies user-defined variables, such as dimx and dimy in the Cartesian stencil heat.c code, and ultimately generates DSEL code.
+`Convert-<program>.py`          | A helper script that takes the original code and, through annotation, locates code loops and communication and identifies user-defined variables, such as dim_x and dim_y in the Cartesian stencil heat.c code, and ultimately generates DSEL code.
 `requirements.txt`               | Each (sub)dependency is listed and pinned using "==" to specify a particular package version. This project makes use of the lightweight `Python tree data structure` [anytree==2.8.0](https://pypi.org/project/anytree) and `type hints for Python 3.7+` [typing_extensions==4.4.0](https://pypi.org/project/typing-extensions). These dependencies are later installed (normally in a virtual environment) through pip using the `pip install -r requirements.txt` command. The generated tree's syntax is the same as the original C/C++ code.
 
-For the specified program, this will produce following files:
+For the specified program, this will produce the following files:
 
 Files                  | Location       |Description
 --------------------- | ------------- | -------------
@@ -387,7 +459,8 @@ Files                  | Location       |Description
 <a name="essential-routines"></a>
 📝 **Essential DisCostiC routines**:thought_balloon:
 
-The goal is to offer convenient, compact and practically usable application programming interfaces (APIs) with appropriate abstractions. It provides information about call tree and attributes for communication (volume, mode, and protocol) and computation (data access pattern, flop count).
+The goal is to offer convenient, compact and practically usable application programming interfaces (APIs) with appropriate abstractions. It provides information about the call tree and attributes for communication (volume, mode, and protocol) and computation (data access pattern, flop count).
+ 
 
 ```cpp
 1. DisCostiC->Rank_Init(DisCostiC::Indextype rank);
@@ -440,7 +513,7 @@ The goal is to offer convenient, compact and practically usable application prog
 <a name="DSEL"></a>
 📝 **Code blueprint as DisCostiC input**:thought_balloon:
 
-This DSEL code example shows a simplest illustration of how the domain knowledge of the applications is expressed in the DisCostiC language:
+The following DSEL code example shows the simplest illustration of how the domain knowledge of the applications is expressed in the DisCostiC language:
 
 ```cpp
 DisCostiC::Event recv, send, comp;  
@@ -478,23 +551,23 @@ Metadata information                  | Description
 ------------------------------------- | -------------
 `bufSize`						| Number of bytes (data size) transmitted in the communication operation (no real buffer size for comp, just added for completeness)
 `DepOperations`				| Dependencies for blocking routines, i.e., other operations that depend on this current operation
-`IdepOperations`				| Dependencies for non-blocking routines, i.e., other operations that depend on current operation
+`IdepOperations`				| Dependencies for non-blocking routines, i.e., other operations that depend on the current operation
 `depCount`					| Number of dependencies for this current operation
 `label`						| Index/identifier of this current operation for each rack
-`target` 						| Rank of target/partner (source for recv / dest for send / no real target for comp, just added for completeness)
+`target` 						| Rank of target/partner (source for recv or destination for send or no real target for comp but added for completeness)
 `rank`      					| Owning rank of this current operation
 `tag`							| Tag of this current operation	(no real tag for comp, just added for completeness)
-`node`						| Node or proceessing element for this current operation						
+`node`						| Node or processing element for this current operation						
 `network`						| Type of network for this current operation
 `time`						|	Ending time of this current operation
 `starttime`					|	Starting time of this current operation
 `type`								| Type of this current operation
 
 ```cpp
-enum Operation_t {		| Operation_t enum defines different opertation types of entities
+enum Operation_t {		| Operation_t defines different operation types of entities
 	SEND = 1,         	| Send operation type
         RECV = 2,        	| Recv operation type
-        COMP = 3,        	| Compuation operation type
+        COMP = 3,        	| Computation operation type
         MSG = 4         	| Message operation type
 }; 
 ```
@@ -505,9 +578,9 @@ Metadata information | Description
 `mode`	|  mode of this current calling operation  
 
 ```cpp
-enum Mode_t {		| Mode_t enum defines operation type of SEND and RECV entities (send/isend and recv/irecv)
-        NONBLOCKING, 	| Routines that return with start of operation (next operation not be executed before starting of previous operation)
-        BLOCKING     	| Routines that return only on completion of operation (next operation not be executed before finishing of previous operation)
+enum Mode_t {		| Mode_t defines the operation type for communication
+        NONBLOCKING, 	| Routines returning with the start of an operation so the next operation does not execute before starting the previous one; such as Isend, Irecv.
+        BLOCKING     	| Routines returning only on completion of operation so the next operation does not execute before finishing the previous one; such as Send, Recv.
 };
 ```
 
@@ -515,11 +588,11 @@ enum Mode_t {		| Mode_t enum defines operation type of SEND and RECV entities (s
 
 Metadata information     | Description
 --------------------- | -------------
-`model`				| analytic first-principle performance model for computation and communication
+`model`				| Analytic first-principle performance model for computation and communication
 
 ```cpp
-enum Model_t {		| Mode_t enum defines the used performance model 
-        Roofline,		| Simple computation model type
+enum Model_t {		| Mode_t defines the used performance model 
+        Roofline,	| Simple computation model type
         ECM,		| Advanced computation model type
         LOGGP,		| Simple communication model type
         HOCKNEY		| Advanced communication model type
@@ -529,13 +602,13 @@ enum Model_t {		| Mode_t enum defines the used performance model
 * **Custom data types, keywords and high-level classes functionality**:thought_balloon:
 
     * **accessors** for local vectors and matrices and their individual components without the need for index accesses
-    * **abstract base classes** for the AST generated grid to access the operations and their associated features
-    * **solver-specific data types**, e.g., time steps, operations, identifiers etc., are declared globally (or part of a special global declaration block)
+    * **abstract base classes** for the AST-generated grid to access the operations and their associated features
+    * **solver-specific data types**, e.g., time steps, operations, identifiers, etc., are declared globally (or part of a special global declaration block)
 ```cpp
-* DisCostiC::Timetype
-* DisCostiC::Datatype
-* DisCostiC::Indextype
-* DisCostiC::Networktype
+    * DisCostiC::Timetype
+    * DisCostiC::Datatype
+    * DisCostiC::Indextype
+    * DisCostiC::Networktype
 ```	
 
 
@@ -633,7 +706,7 @@ do{
 </td>
 </tr>
 </table>
-Within each ccNUMA domain, runtime corrections are made by monitoring number of processes that are concurrently engaged in each computation and communication step. 
+Within each ccNUMA domain, runtime corrections are made by monitoring the number of processes that are concurrently engaged in each computation and communication step. 
 
 **SEND operation**:thought_balloon:
 The currently active process sends the operation object or array to the process listed as "operation.target," which is specific to the communication pattern simulation program.
@@ -679,7 +752,6 @@ queue.emplace(operation);
 
 **RECV operation**:thought_balloon:
 The currently running process receives the operation object or array from the process listed as "operation.target".
- Debug why the discostic Irecv and Recv have a BLOCKING mode_t value.
  
 <table>
 <tr>
@@ -812,7 +884,7 @@ queue.emplace(op);
 </table>
 
 **End of while statement**:thought_balloon:
-End of the do loops over the number of iterations and the number of steps per iteration.
+The end of the do loops over the number of iterations and the number of steps per iteration.
 The necessary information gathered from all processes of the new communicator is communicated to the default communicator's master process.
  
 <table>
