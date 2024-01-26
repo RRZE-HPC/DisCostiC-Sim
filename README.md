@@ -3,13 +3,13 @@
   </a><a href="https://DisCostiC-Sim.readthedocs.io/">
   <img alt="Docs" src="https://img.shields.io/badge/read-the_docs-blue" />
   </a><a href="https://matrix.to/#/!OeNPngEkrqRRkBJjwz:gwaaf.rrze.fau.de?via=gwaaf.rrze.fau.de">
-  <img alt="Join the discussion on Matrix" src="https://img.shields.io/badge/Github%20Discussions%20%26%20Support-Chat%20now!-blue" />
+  <img alt="Join the discussion on Matrix" src="https://img.shields.io/badge/Discussions%20%26%20Support-Chat%20now!-blue" />
   </a><a href="https://www.linkedin.com/in/ayeshaafzal-/">
     <img alt="linkedin" src="https://i.stack.imgur.com/gVE0j.png" />
   <a href="https://github.com/AyeshaAfzal91" rel="nofollow noreferrer">
     <img alt="github" src="https://i.stack.imgur.com/tskMh.png">
   </a>
-  </a><a href="https://github.com/RRZE-HPC/DisCostiC-Sim/src/Dev/" target="\_parent">
+  </a><a href="https://matrix.to/#/!OeNPngEkrqRRkBJjwz:gwaaf.rrze.fau.de?via=gwaaf.rrze.fau.de" target="\_parent">
   <img alt="" src="https://img.shields.io/github/stars/tanstack/react-table.svg?style=social&label=Star" />
   </a><a href="https://twitter.com/AyeshaHamad4" target="\_parent">
   <img alt="" src="https://img.shields.io/twitter/follow/AyeshaHamad4.svg?style=social&label=Follow" />
@@ -26,9 +26,9 @@
     * [:green_circle: Run](#run)
     * [🔁 Clean and uninstall](#clean)
   * [:signal_strength: DisCostiC output](#visualisation)
-    * [🌐 1. In-browser output visualization with Google Chrome (DMS file format)](#chrome)
-    * [📊 2. Output visualization with Vampir (OTF2 file format)](#vampir)
-    * [📊 3. Output visualization with ITAC (STF file format)](#itac)
+    * [🌐 1. Web interface with Google Chrome browser (DMS file format)](#chrome)
+    * [📊 2. Graphical user interface with Vampir (OTF2 file format)](#vampir)
+    * [📊 3. Graphical user interface with ITAC (STF file format)](#itac)
     * [🗄️ 4. Statistical or log data](#stat)
   * [💻 System model](#cluster-configuration)
     * [🔌 Cluster model](#cluster)
@@ -85,7 +85,7 @@ The application blueprint created using `Domain Specific Embedded Language (DSEL
 ```diff
 - DSEL approach for creating application blueprint 
 
-	* Accurately encoding inter-process dependencies without introducing unknown consequences from the actual systems 
+    * Accurately encoding inter-process dependencies without introducing unknown consequences from the actual systems 
 
 - A full-scale first-principle-model-based simulator 
 
@@ -93,8 +93,8 @@ The application blueprint created using `Domain Specific Embedded Language (DSEL
 
 - Efficient speed 
 
-	* No intermediate tracing files requirement like any offline, trace-driven tools 
-	* No high memory requirement like any online tools that use the host architectures to execute code
+    * No intermediate tracing files requirement like any offline, trace-driven tools 
+    * No high memory requirement like any online tools that use the host architectures to execute code
 	
 + Last but not least, an open-source low entry cost lightweight simulator enabling model-based design-space exploration 
 ```
@@ -125,7 +125,7 @@ One way to check the installation is to print the version of the DisCostiC using
 <a name="configuration"></a>
 ⏱️ **Configuration settings**:thought_balloon:
 
-The [test](test) folder in DisCostiC offers multiple MPI-parallelized programs (`benchmark_kernel`) in distinct functionality for computation (`kernel_mode`) and communication (`exchange_mode`). The `exchange_mode` mode is provided to enable model-base exploration through experimenting with various communication patterns in MPI applications. For illustration, a few examples are given below:
+The [test](test) folder in DisCostiC offers multiple MPI-parallelized programs (`benchmark_kernel`) in distinct functionality for computation (`kernel_mode`) and communication (`exchange_mode`). For illustration, a few examples are given below:
 
 `benchmark_kernel`                 | Description
 --------------------- | -------------
@@ -134,19 +134,24 @@ The [test](test) folder in DisCostiC offers multiple MPI-parallelized programs (
 `SOR`          |    Gauss-Seidel Successive Over-Relaxation solver
 `HPCG`               | High Performance Conjugate Gradients
 
-`kernel_mode`                 | Description
---------------------- | -------------
-`COMP`          |       no external tool 
-`LBL`               |   no external tool
-`FILE`          |       [Kerncraft](https://github.com/RRZE-HPC/kerncraft) integrated
-`SRC`               | [Kerncraft](https://github.com/RRZE-HPC/kerncraft) integrated
+The following `kernel_mode` is exclusively offered for the flexibility of the framework; the simulator's prediction remains unaffected by the selection of the `kernel_mode`. Further explanation of this mode canbe found in the [📝 Code blueprint as DisCostiC input](#DSEL) section.
+
+`kernel_mode`                 | Integrated tool | Description
+--------------------- | ------------- | -------------
+`COMP`          |   no external tool integrated |  This directly embeds the single-core pre-recorded ECM performance model data of the computational kernel into the simulator. 
+`LBL`           |   no external tool integrated |  This reads the pre-recorded ECM performance model data for the computational kernel from an external file located at [nodelevel/configs](nodelevel/configs) folder.
+`SRC`           |   [Kerncraft](https://github.com/RRZE-HPC/kerncraft) integrated      |  This directly embeds the source code of the computational kernel into the simulator.
+`FILE`          |   [Kerncraft](https://github.com/RRZE-HPC/kerncraft) integrated      |  This reads the source code for the computational kernel from an external file located at [nodelevel/kernels](nodelevel/kernels) folder. 
+
+The following `exchange_mode` is provided to enable model-base exploration through experimenting with various communication patterns in MPI applications. 
 
 `exchange_mode`                  | Description
 --------------------- | -------------
-`direction`          |       It specifies the direction of message exchange as an int (1: uni-directional upwards shift in only positive direction, 2: bi-directional upwards and downwards shift in both positive and negative directions) 
-`stepsize`          |       It describes the step size of message exchange as an int (1: distance one communication, 2: distance two communication, ...)
-`periodic`          |       It enables or disables the communication periodicity as a bool (0: false, 1: true)
+`direction`          |       It specifies the direction of message exchange as an int (1: uni-directional upwards shift in only positive direction, 2: bi-directional upwards and downwards shift in both positive and negative directions).
+`stepsize`          |       It describes the step size of message exchange as an int (1: distance one communication, 2: distance two communication, ...).
+`periodic`          |       It enables or disables the communication periodicity as a bool (0: false, 1: true).
 
+The `config.cfg` file can be edited to select the `benchmark_kernel` and `kernel_mode`.
 
 <a name="compilation"></a>
 🥅 **Compilation**:thought_balloon:
@@ -195,7 +200,7 @@ Command                  | Description
 ## :signal_strength: DisCostiC output visualization
 
 <a name="chrome"></a>
-🌐 **1. In-browser output visualization with Google Chrome (DMS file format)**:speech_balloon:
+🌐 **1. Web interface with Google Chrome browser (DMS file format)**:speech_balloon:
 
 Upon completion of the run, DisCostiC generates a report referred to as `DisCostiC.dms`.
 `DisCostiC.dms` is a straightforward [JSON object data format file](https://docs.google.com/document/d/1CvAClvFfyA5R-PhYUmn5OOQtYMH4h6I0nSsKchNAySU/edit) that can be viewed using the [Google Chrome browser](chrome://tracing).
@@ -206,7 +211,7 @@ chrome://tracing
 ```
 
 <a name="vampir"></a>
-📊 **2. Output visualization with Vampir (OTF2 file format)**:speech_balloon:
+📊 **2. Graphical user interface with Vampir (OTF2 file format)**:speech_balloon:
 
 Upon completion of a run that was compiled with `make otf2`, DisCostiC generates a report called `DisCostiC/traces.otf2`. The `DisCostiC/traces.otf2` file is an [OTF2 object data format](https://perftools.pages.jsc.fz-juelich.de/cicd/otf2/tags/otf2-3.0.2/html/) file and can be viewed using third-party tools like [ITAC](https://www.intel.com/content/www/us/en/developer/tools/oneapi/trace-analyzer.html) and [Vampir](https://vampir.eu).
 This format is produced by the [ChromeTrace2Otf2](https://profilerpedia.markhansen.co.nz/converters/otf2-cli-chrome-trace-converter/) converter, which converts the JSON object data format file `(DisCostiC.dms)` to the OTF2 object data format file `(DisCostiC/traces.otf2)`.
@@ -218,7 +223,7 @@ vampir DisCostiC/traces.otf2
 ```
 
 <a name="itac"></a>
-📊 **3. Output visualization with ITAC (STF file format)**:speech_balloon:
+📊 **3. Graphical user interface with ITAC (STF file format)**:speech_balloon:
 
 To convert an OTF2 file to a single Structured Trace File (STF) file format `DisCostiC.single.stf` and to open it in [ITAC](https://www.intel.com/content/www/us/en/developer/tools/oneapi/trace-analyzer.html), invoke the Intel Trace Analyzer GUI and follow the below steps:
 
@@ -243,7 +248,7 @@ To convert an OTF2 file to a single Structured Trace File (STF) file format `Dis
 		verbose							| more verbose output (0=disable, 1=enable)
 		progress						| progress printing information (0=disable, 1=enable)
 		batchmode						| batchmode (0=disable i.e., print runtime for each rank, 1=enable i.e., only print runtime for slowest rank)
-		operationCount					| total number of operations for DisCostiC test cases
+		operationCount              | total number of operations for DisCostiC test cases
 		time							| DisCostiC speed / performance [unit: s]
 		speed							| DisCostiC speed / performance [unit: operations/s]
 
@@ -274,28 +279,33 @@ For the detailed documentation of the system model, please take a look at the [c
 <a name="cluster"></a>    
 🔌 **Cluster model**:thought_balloon:
 
-|Metadata information                  | Description |
---------------------- | -------------
-|`name`										| Name of the cluster, processor, network, or running kernel |
-|`number of homogeneous nodes`				| Number of nodes in the cluster |
-|`number of sockets per node`				| Number of sockets in one node |
-|`number of cores per socket`				| Number of cores in one socket |
-|`number of pinned node`					| Number of utilizing nodes of the cluster |
-|`numbering of pinned chips cores`			| Number of utilizing cores of the chip in the cluster |
-|`inter cluster`							| Communication across clusters
+The resource allocation, intercluster characteristics, and runtime modalities are all included in the cluster model.
 
+Metadata information                  | Description 
+--------------------- | -------------
+`number_of_nodes`             		    | Number of utilizing nodes on a cluster 
+`task_per_node`			                | Number of utilizing cores on the node of a cluster 
+`number_of_processes`                   | Number of running processes on the cluster 
+`inter_cluster or hetrogeneous`		    | Communication across clusters (0: inter cluster disabled; 1: inter cluster enabled)
+`number_of_timesteps`                   | Numer of iterations for the program run
+`dim_x, dim_y, dim_z`                   | Problem size for the program run; high-dimensional parameters will be disregarded for low-dimensional problems.
 
 <a name="network"></a>    
 🔌 **Network model**:thought_balloon:
 
+The YAML formatted network files and the choice of performance model and mode of the communication are included in the network model.
+
 Metadata information                  | Description
 ------------------------------------- | -------------
-`intra chip`							    | Communication inside chip
-`inter chip`							    | Communication across chips
-`inter node`							    | Communication across nodes
-`latency`							        | Networking latency parameter for various kind of network [unit: s]
-`bandwidth`							        | Networking bandwidth parameter for various kind of network [unit: GB/s]
-`eager limit`							    | Data size at which communication mode change from eager to rendezvous protocol for various kind of network [unit: bytes]
+`name`                                      | Name of the YAML formatted interconnect file
+`intra_chip`							    | Communication inside chip
+`inter_chip`							    | Communication across chips
+`inter_node`							    | Communication across nodes
+`latency`							        | Latency in sec for various kind of interconnects
+`bandwidth`							        | Bandwidth in GB/s for various kind of interconnects
+`eager_limit`							    | Data size in bytes at which communication mode changes from eager to rendezvous protocol
+`waitio_mode`                               | Mode of the WaitIO MPI library (socket, file or hybrid)
+`comm_model`                                | Performance model for communication (0: LogGP, 1: HOCKNEY)
 
 For illustration, a few examples of available [network files](nodelevel/network-files) are given below:
 
@@ -319,13 +329,20 @@ Network files (YAML format)                 | Description
 <a name="node"></a>    
 🔌 **Node model**:thought_balloon:
 
+The machine files in YAML format and the selection of compiler settings and the performance model of computation are included in the node model.
+
 Metadata information                  | Description
 --------------------- | -------------
-`FP instructions per cycle`					| Floating point instructions (ADD, MUL) per cycle 
-`FP operations per instruction (SP/DP)`		| Single precision or double precision floating point operations per instruction
-`clock frequency`							| Clock frequency in GHz
-`memory bandwidth`							| Memory bandwidth in GB/s
-
+`name`                                      | Name of the YAML formatted processor file 
+`sockets_per_node`                          | Number of sockets in one node 
+`ccNUMA_domains_per_socket`                 | Number of ccNUMA domains in one socket 
+`cores_per_ccNUMA_domain`                   | Number of cores in one ccNUMA domain 
+`FP_instructions_per_cycle`					| Floating point instructions (ADD, MUL) per cycle 
+`FP_operations_per_instruction_(SP/DP)`		| Single precision or double precision floating point operations per instruction
+`clock_frequency`							| Clock frequency in GHz
+`memory_bandwidth`							| Memory bandwidth in GB/s
+`compiler_flags`                            | STD and SIMD optimizations of the compiler
+`comp_model`                                | Performance model for computatuion (ECM, Roofline)
 
 For illustration, a few examples of available [machine files](nodelevel/machine-files) are given below:
 
@@ -364,7 +381,7 @@ For the specified program, this will produce following files:
 
 Files                  | Location       |Description
 --------------------- | ------------- | -------------
-`<program>.cfg`          |  [nodelevel/configs](nodelevel/configs)  | It comprises only the generated computational loop kernel of the MPI parallel program.
+`<program>.c`          |  [nodelevel/kernels](nodelevel/kernels)  | It comprises only the generated computational loop kernel of the MPI parallel program.
 `<program>_<mode>.hpp`   |  [test](test)               | It includes the entire generated code expressed in DisCostiC DSEL language.
 
 <a name="essential-routines"></a>
@@ -375,7 +392,7 @@ The goal is to offer convenient, compact and practically usable application prog
 ```cpp
 1. DisCostiC->Rank_Init(DisCostiC::Indextype rank);
 
-2. SetNumRanks(DisCosTiC::Datatype numrank);
+2. DisCostiC->SetNumRanks(DisCosTiC::Datatype numrank);
 
 3. DisCostiC->Exec("LBL:STREAM_TRIAD", 
 					DisCostiC::Event depending_operations);
@@ -409,7 +426,7 @@ The goal is to offer convenient, compact and practically usable application prog
                     DisCosTiC::Event depending_operations);
 
 7. DisCostiC->Irecv(const void *message,
-					DisCosTiC::Datatype receiving_message_size_in_bytes, 
+                    DisCosTiC::Datatype receiving_message_size_in_bytes, 
                     DisCostiC::Datatype receiving_message_datatype, 
                     DisCostiC::Indextype source_rank,
                     DisCostiC::Commtype communicator,
@@ -440,7 +457,7 @@ for (auto rank : DisCostiC::getRange(systemsize))
       } 
       else 
       {
-   	     recv = DisCostiC->Recv(res, 8, MPI_DOUBLE, systemsize - 1, MPI_COMM_WORLD, comp);
+         recv = DisCostiC->Recv(res, 8, MPI_DOUBLE, systemsize - 1, MPI_COMM_WORLD, comp);
       }	
    DisCostiC->Rank_Finalize(); 
 } 
@@ -473,7 +490,7 @@ Metadata information                  | Description
 `starttime`					|	Starting time of this current operation
 `type`								| Type of this current operation
 
-```
+```cpp
 enum Operation_t {		| Operation_t enum defines different opertation types of entities
 	SEND = 1,         	| Send operation type
         RECV = 2,        	| Recv operation type
@@ -487,7 +504,7 @@ Metadata information | Description
 --------------------- | -------------   
 `mode`	|  mode of this current calling operation  
 
-```
+```cpp
 enum Mode_t {		| Mode_t enum defines operation type of SEND and RECV entities (send/isend and recv/irecv)
         NONBLOCKING, 	| Routines that return with start of operation (next operation not be executed before starting of previous operation)
         BLOCKING     	| Routines that return only on completion of operation (next operation not be executed before finishing of previous operation)
@@ -500,7 +517,7 @@ Metadata information     | Description
 --------------------- | -------------
 `model`				| analytic first-principle performance model for computation and communication
 
-```
+```cpp
 enum Model_t {		| Mode_t enum defines the used performance model 
         Roofline,		| Simple computation model type
         ECM,		| Advanced computation model type
@@ -515,10 +532,10 @@ enum Model_t {		| Mode_t enum defines the used performance model
     * **abstract base classes** for the AST generated grid to access the operations and their associated features
     * **solver-specific data types**, e.g., time steps, operations, identifiers etc., are declared globally (or part of a special global declaration block)
 ```cpp
-	* DisCostiC::Timetype
-	* DisCostiC::Datatype
-	* DisCostiC::Indextype
-	* DisCostiC::Networktype
+* DisCostiC::Timetype
+* DisCostiC::Datatype
+* DisCostiC::Indextype
+* DisCostiC::Networktype
 ```	
 
 
