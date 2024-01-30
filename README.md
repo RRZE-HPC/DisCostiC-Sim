@@ -236,7 +236,7 @@ To convert an OTF2 file to a single Structured Trace File (STF) file format `Dis
 <a name="stat"></a>
 🗄️ **4. Statistical or log data**:thought_balloon:
 
-	----------------------------------------------------------------
+	      ----------------------------------------------------------------
         DisCostiC
         ----------------------------------------------------------------
         Full form: Distributed Cost in Cluster
@@ -288,7 +288,7 @@ To convert an OTF2 file to a single Structured Trace File (STF) file format `Dis
 ## 💻 System model
 
 The system parameters, either hypothetical or actual, can be tuned by editing the [config.cfg](config.cfg) file available in the current directory.
-For the detailed documentation of the system model, please take a look at the [config.cfg](config.cfg) file and the `YAML files` available in the [machine files](nodelevel/machine-files) and [network files](nodelevel/network-files) directories.
+For the detailed documentation of the system model, please take a look at the [config.cfg](config.cfg) file and the `YAML files` available in the [machine files](nodelevel/machine-files) and [network files](interconnectlevel/network-files) directories.
 
 <a name="cluster"></a>    
 🔌 **Cluster model**:thought_balloon:
@@ -321,7 +321,7 @@ Metadata information                  | Description
 `waitio_mode`                               | Mode of the WaitIO MPI library (socket, file or hybrid)
 `comm_model`                                | Performance model for communication (0: LogGP, 1: HOCKNEY)
 
-For illustration, a few examples of available [network files](nodelevel/network-files) are given below:
+For illustration, a few examples of available [network files](interconnectlevel/network-files) are given below:
 
 Network files (YAML format)                 | Description
 --------------------- | -------------
@@ -378,7 +378,7 @@ Machine files (YAML format)                 | Description
 `SandyBridgeEP_E5-2680`          |    8 core Intel(R) Xeon(R) SandyBridge EN/EP E5-2680 CPU @ 2.7 GHz   
 
 <a name="help"></a>    
-**[DisCostiC help**:thought_balloon:
+**DisCostiC help**:thought_balloon:
 
 The help of DisCostiC (`./discostic --help`) lists as:
 
@@ -463,7 +463,7 @@ python staticanalysis/Convert-<benchmark_kernel>.py
 Files                  | Description
 --------------------- | -------------
 `Convert-<benchmark_kernel>.py`          | A helper script that takes the original code and, through annotation, locates code loops and communication and identifies user-defined variables, such as dim_x and dim_y in the Cartesian stencil heat.c code, and ultimately generates DSEL code.
-`[requirements.txt](staticanalysis/requirements.txt)`               | Each (sub)dependency is listed and pinned using "==" to specify a particular package version. This project makes use of the lightweight `Python tree data structure` [anytree==2.8.0](https://pypi.org/project/anytree) and `type hints for Python 3.7+` [typing_extensions==4.4.0](https://pypi.org/project/typing-extensions). These dependencies are later installed (normally in a virtual environment) through pip using the `pip install -r staticanalysis/requirements.txt` command. The generated tree's syntax is the same as the original C/C++ code.
+`requirements.txt`               | Each (sub)dependency is listed and pinned using "==" to specify a particular package version; see [requirements.txt](staticanalysis/requirements.txt). This project makes use of the lightweight `Python tree data structure` [anytree==2.8.0](https://pypi.org/project/anytree) and `type hints for Python 3.7+` [typing_extensions==4.4.0](https://pypi.org/project/typing-extensions). These dependencies are later installed (normally in a virtual environment) through pip using the `pip install -r staticanalysis/requirements.txt` command. The generated tree's syntax is the same as the original C/C++ code.
 
 For the specified program, this will produce the following files:
 
@@ -595,8 +595,8 @@ Metadata information | Description
 
 ```cpp
 enum Mode_t {		| Mode_t defines the operation type of communication
-        NONBLOCKING, 	| Routines returning with the start of an operation so the next operation doesn't execute before starting the previous one; such as Isend, Irecv.
-        BLOCKING     	| Routines returning only on completion of operation so the next operation doesn't execute before finishing the previous one; such as Send, Recv.
+        NONBLOCKING, 	| Routines returning with the start of an operation so the next operation doesnot execute before starting the previous one; such as Isend, Irecv.
+        BLOCKING     	| Routines returning only on completion of operation so the next operation doesnot execute before finishing the previous one; such as Send, Recv.
 };
 ```
 

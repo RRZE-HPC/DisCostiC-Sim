@@ -243,24 +243,24 @@ int main(int argc, char **argv)
     if (heteregeneous_mode == 0)
     {
 
-        IntrachipCFG_args.readData("./nodelevel/network-files/" + arch_name + "_" + interconnect_name + "_" + MPIlibrary_name + "_intrachip.cfg");
+        IntrachipCFG_args.readData("./interconnectlevel/network-files/" + arch_name + "_" + interconnect_name + "_" + MPIlibrary_name + "_intrachip.cfg");
 
-        InterchipCFG_args.readData("./nodelevel/network-files/" + arch_name + "_" + interconnect_name + "_" + MPIlibrary_name + "_interchip.cfg");
+        InterchipCFG_args.readData("./interconnectlevel/network-files/" + arch_name + "_" + interconnect_name + "_" + MPIlibrary_name + "_interchip.cfg");
 
-        InternodeCFG_args.readData("./nodelevel/network-files/" + arch_name + "_" + interconnect_name + "_" + MPIlibrary_name + "_internode.cfg");
+        InternodeCFG_args.readData("./interconnectlevel/network-files/" + arch_name + "_" + interconnect_name + "_" + MPIlibrary_name + "_internode.cfg");
 
-        InterclusterCFG_args.readData("./nodelevel/network-files/" + arch_name + "_" + interconnect_name + "_" + MPIlibrary_name + "_internode.cfg");
+        InterclusterCFG_args.readData("./interconnectlevel/network-files/" + arch_name + "_" + interconnect_name + "_" + MPIlibrary_name + "_internode.cfg");
     }
     else
     {
 
-        IntrachipCFG_args.readData("./nodelevel/network-files/" + arch_name + "_" + interconnect_name + "_" + MPIlibrary_name + "_" + CFG_args.getValue<std::string>("waitio_mode") + "_intrachip.cfg");
+        IntrachipCFG_args.readData("./interconnectlevel/network-files/" + arch_name + "_" + interconnect_name + "_" + MPIlibrary_name + "_" + CFG_args.getValue<std::string>("waitio_mode") + "_intrachip.cfg");
 
-        InterchipCFG_args.readData("./nodelevel/network-files/" + arch_name + "_" + interconnect_name + "_" + MPIlibrary_name + "_" + CFG_args.getValue<std::string>("waitio_mode") + "_interchip.cfg");
+        InterchipCFG_args.readData("./interconnectlevel/network-files/" + arch_name + "_" + interconnect_name + "_" + MPIlibrary_name + "_" + CFG_args.getValue<std::string>("waitio_mode") + "_interchip.cfg");
 
-        InternodeCFG_args.readData("./nodelevel/network-files/" + arch_name + "_" + interconnect_name + "_" + MPIlibrary_name + "_" + CFG_args.getValue<std::string>("waitio_mode") + "_internode.cfg");
+        InternodeCFG_args.readData("./interconnectlevel/network-files/" + arch_name + "_" + interconnect_name + "_" + MPIlibrary_name + "_" + CFG_args.getValue<std::string>("waitio_mode") + "_internode.cfg");
 
-        InterclusterCFG_args.readData("./nodelevel/network-files/" + arch_name + "_" + interconnect_name + "_" + MPIlibrary_name + "_" + CFG_args.getValue<std::string>("waitio_mode") + "_intercluster.cfg");
+        InterclusterCFG_args.readData("./interconnectlevel/network-files/" + arch_name + "_" + interconnect_name + "_" + MPIlibrary_name + "_" + CFG_args.getValue<std::string>("waitio_mode") + "_intercluster.cfg");
     }
 
     IntrachipCFG_args.setData(bytes_to_send);
