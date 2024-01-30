@@ -18,7 +18,7 @@ cd $SLURM_SUBMIT_DIR
 
 module load python git intel cmake intelmpi likwid itac
 module list
-#conda activate XYZ
+conda activate XYZ
 
 PROCNUMBERS=$(cat config.cfg | grep "number_of_processes" | head -1 | sed 's/[^0-9]*//g')
 PROCNUMBERS=$(( PROCNUMBERS + 1 ))

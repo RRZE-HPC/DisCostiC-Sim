@@ -57,7 +57,7 @@ def findFuncs(nodes):
             func = findFuncName(i.id)
             func += ".cpp"
             found = False
-            for path, subdirs, files in os.walk(os.path.join(here, "codes")):
+            for path, subdirs, files in os.walk(os.path.join(here, "multifiles_HPCG")):
                 for name in files:
                     if name.strip() == func:
                         code = getCode(name)
@@ -263,7 +263,7 @@ def findPurpose(line):
 
 def getCode(filename):
     code = ""
-    with open(os.path.join(sys.path[0], "codes", filename), "r") as f:
+    with open(os.path.join(sys.path[0], "multifiles_HPCG", filename), "r") as f:
         temp = f.read()
         code += temp
     return code
@@ -392,7 +392,7 @@ def funcCode(node, here):
     func = findFuncName(node.id)
     func += ".cpp"
     found = False
-    for path, subdirs, files in os.walk(os.path.join(here, "codes")):
+    for path, subdirs, files in os.walk(os.path.join(here, "multifiles_HPCG")):
         for name in files:
             if name.strip() == func:
                 code = getCode(name)

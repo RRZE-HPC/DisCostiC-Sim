@@ -62,32 +62,32 @@ namespace DisCosTiC
 			int remainder_cores = systemsize > task_per_node_ ? systemsize % task_per_node_ : 0;
 			int ECM_core = 1;
 
-			assert(task_per_node_ <= YAML_args.cores_per_chip);
+            assert(task_per_node_ <= (YAML_args.cores_per_chip * YAML_args.chips_per_node));
 
-			if (task_per_node_ != 1)
-			{
-				if (systemsize <= task_per_node_)
-				{
-					Nlocal = N_;
-					ECM_core = systemsize;
-				}
-				else if (remainder_cores == 0)
-				{
-					Nlocal = Nlocal * task_per_node_;
-					ECM_core = task_per_node_;
-				}
-				else
-				{
-					if (core <= systemsize - remainder_cores)
-					{
-						Nlocal = Nlocal * task_per_node_;
-						ECM_core = task_per_node_;
-					}
-					else
-					{
-						Nlocal = Nlocal * remainder_cores;
-						ECM_core = remainder_cores;
-					}
+            if (task_per_node_ != 1)
+            {
+                if (systemsize <= task_per_node_)
+                {
+                    Nlocal = Nlocal * std::min(task_per_node_, cores_per_socket);;
+                    ECM_core = std::min(task_per_node_, cores_per_socket);
+                }
+                else if (remainder_cores == 0)
+                {
+                    Nlocal = Nlocal * std::min(task_per_node_, cores_per_socket);
+                    ECM_core = std::min(task_per_node_, cores_per_socket);
+                }
+                else
+                {
+                    if (core <= systemsize - remainder_cores)
+                    {
+                        Nlocal = Nlocal * std::min(task_per_node_, cores_per_socket);
+                        ECM_core = std::min(task_per_node_, cores_per_socket);
+                    }
+                    else
+                    {
+                        Nlocal = Nlocal * remainder_cores;
+                        ECM_core = remainder_cores;
+                    }
 				}
 			}
 

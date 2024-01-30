@@ -2,7 +2,7 @@
 ///    \file
 ///    NODEMODEL_HPP
 ///
-///    \Copyright © 2019 HPC, FAU Erlangen-Nuremberg. All rights reserved.
+///    \Copyright © 2024 HPC, FAU Erlangen-Nuremberg. All rights reserved.
 ///
 
 #ifndef NodeModel_HPP
@@ -55,6 +55,7 @@ struct ECM
 	DisCosTiC_Timetype T_L3Mem_;
 	DisCosTiC_Timetype T_ECM_;
 	DisCosTiC_Timetype T_MECM_;
+	DisCosTiC_Timetype ECM_core;
 };
 
 class NodeModel
@@ -92,10 +93,9 @@ public:
 			ecm_.T_L3Mem_ = CFG_args2->getValue<DisCosTiC_Timetype>("T_L3Mem");
 			ecm_.T_ECM_ = CFG_args2->getValue<DisCosTiC_Timetype>("T_ECM");
 			ecm_.T_MECM_ = CFG_args2->getValue<DisCosTiC_Timetype>("T_" + ECM_core + "ECM");
+			ecm_.ECM_core = std::stod(ECM_core);
 
-			// std::cout << "Scaling cores before conversion : " << CFG_args2->getValue<std::string>("Scaling_cores_Secondary") << std::endl;
 			scaling_cores = std::strcmp(CFG_args2->getValue<std::string>("Scaling_cores").c_str(), "inf") == 0 ? -1 : CFG_args2->getValue<DisCosTiC_Timetype>("Scaling_cores");
-			// std::cout << "Scaling cores after conversion : " << scaling_cores << std::endl;
 		}
 		else
 		{
@@ -106,15 +106,15 @@ public:
 			ecm_.T_L3Mem_ = CFG_args2->getValue<DisCosTiC_Timetype>("T_L3Mem_Secondary");
 			ecm_.T_ECM_ = CFG_args2->getValue<DisCosTiC_Timetype>("T_ECM_Secondary");
 			ecm_.T_MECM_ = CFG_args2->getValue<DisCosTiC_Timetype>("T_" + ECM_core + "ECM_Secondary");
-			// std::cout << "Scaling cores before conversion : " << CFG_args2->getValue<std::string>("Scaling_cores_Secondary") << std::endl;
+			ecm_.ECM_core = std::stod(ECM_core);
+
 			scaling_cores = std::strcmp(CFG_args2->getValue<std::string>("Scaling_cores_Secondary").c_str(), "inf") == 0 ? -1 : CFG_args2->getValue<DisCosTiC_Timetype>("Scaling_cores_Secondary");
-			// std::cout << "Scaling cores after conversion : " << scaling_cores << std::endl;
 		}
 		filename_ = CFG_args->getValue<std::string>("filename");
 		flops_ = CFG_args->getValue<DisCosTiC_Datatype>("FLOPs_per_iteration");
 		benchmark_kernel = CFG_args->getValue<std::string>("benchmark_kernel");
 	}
-	NodeModel(UserInterface::ConfigParser *CFG_args, UserInterface::YAMLParser YAML_args, DisCosTiC_Timetype T_OL, DisCosTiC_Timetype T_nOL, DisCosTiC_Timetype T_L1L2, DisCosTiC_Timetype T_L2L3, DisCosTiC_Timetype T_L3Mem, DisCosTiC_Timetype T_ECM)
+	NodeModel(UserInterface::ConfigParser *CFG_args, UserInterface::YAMLParser YAML_args, DisCosTiC_Timetype T_OL, DisCosTiC_Timetype T_nOL, DisCosTiC_Timetype T_L1L2, DisCosTiC_Timetype T_L2L3, DisCosTiC_Timetype T_L3Mem, DisCosTiC_Timetype T_ECM, DisCosTiC_Timetype ECM_core)
 	{
 		machine_.n_cores_ = YAML_args.cores_per_chip * YAML_args.chips_per_node;
 
@@ -132,6 +132,7 @@ public:
 		ecm_.T_L3Mem_ = T_L3Mem;
 		ecm_.T_ECM_ = T_ECM;
 		ecm_.T_MECM_ = 0.0;
+		ecm_.ECM_core = ECM_core;
 
 		filename_ = CFG_args->getValue<std::string>("filename");
 		flops_ = CFG_args->getValue<DisCosTiC_Datatype>("FLOPs_per_iteration");

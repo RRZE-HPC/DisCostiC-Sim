@@ -323,15 +323,17 @@ static const DisCosTiC_Indextype MPI_ANY_TA = ~0;
  * \brief print final time for all ranks
  */
 #define allRanksTime(numRanks, nexto)                                                                 \
-	std::cout << "\nFULL APPLICATION PERFORMANCE (for all ranks):" << std::endl;                      \
-	std::cout << "----------------------------------------------------------------" << std::endl;     \
-	std::cout << "rank            runtime [ns]            runtime [s]" << std::endl;                  \
-	std::cout << "----------------------------------------------------------------" << std::endl;     \
+  std::cout << "\n----------------------------------------------------------------" << std::endl;     \
+	std::cout << "FULL APPLICATION PERFORMANCE (for all MPI processes)" << std::endl;                      \
+	std::cout << "rank                         runtime [s]" << std::endl;                  \
+  std::cout << "----------------------------------------------------------------" << std::endl;     \
 	for (auto rank : DisCosTiC::getRange(numRanks))                                                   \
 	{                                                                                                 \
 		DisCosTiC_Timetype maxo = *(std::max_element(nexto[rank].begin(), nexto[rank].end()));        \
-		std::cout << rank << "            	" << maxo << "          	" << maxo / 1e9 << std::endl; \
-	}
+		std::cout << rank << "            	              " << maxo / 1e9 << std::endl; \
+	}                                                                                                 \
+  std::cout << "----------------------------------------------------------------" << std::endl;     
+
 
 /**
  * \brief print final maximum time for only rank taking maximum time
@@ -472,74 +474,53 @@ static const DisCosTiC_Indextype MPI_ANY_TA = ~0;
 				  << " ns" << std::endl;                                                     \
 	}
 
-#define help()                                                                                                                                                          \
+#define help()                                    \
 	{                                             \
-		version()                                                                                                                                                       \
-std::cout << "\n====================================" << std::endl << " Arguments for ./discostic" << std::endl << "====================================" << std::endl; \
-std::cout << "\t --version, -v" << "\t\t show simulator's version number and exit" << std::endl; \
-std::cout << "\t --help, -h" << "\t\t show this help message and exit" << std::endl; \
-std::cout                                                                                                                                               \
-    << "\n====================================" << std::endl                                                                                        \
-    << " Application model for config.cfg" << std::endl                                                                                                                 \
-    << "====================================" << std::endl;                                                                                                                                               \
-std::cout << "\t benchmark_kernel" << "\t name of the kernel used in the program" << std::endl; \
-std::cout << "\t kernel_mode" << "\t\t mode of the kernel (FILE, SRC, LBL, COMP)" << std::endl; \
-        std::cout                                                                                                                                               \
-			<< "\n====================================" << std::endl                                                                                        \
-			<< " Cluster model for config.cfg" << std::endl                                                                                                                 \
-			<< "====================================" << std::endl;                                                                                                                                               \
+		version()                                 \
+std::cout << "\n------------------------------------" << std::endl << " Arguments for ./discostic" << std::endl << "------------------------------------" << std::endl;                                            \
+std::cout << "\t --version, -v" << "\t\t show simulator's version information and exit" << std::endl;    \
+std::cout << "\t --help, -h" << "\t\t show this help message and exit" << std::endl;                \
+std::cout << "\n------------------------------------" << std::endl << " Application model for config.cfg" << std::endl << "------------------------------------" << std::endl;                                            \
+std::cout << "\t benchmark_kernel" << "\t name of the kernel used in the program" << std::endl;     \
+std::cout << "\t kernel_mode" << "\t\t mode of the kernel (FILE, SRC, LBL, COMP)" << std::endl;     \
+std::cout << "\n------------------------------------" << std::endl << " Cluster model for config.cfg" << std::endl << "------------------------------------" << std::endl;                                            \
 std::cout << "\t heteregeneous" << "\t\t a bool flag to enable or disable the second system (1: enabled, 0: disabled)" << std::endl; \
-std::cout << "\t number_of_iterations" << "\t number of iterations of the program" << std::endl; \
+std::cout << "\t number_of_iterations" << "\t number of iterations of the program" << std::endl;    \
 std::cout << "\t dim_x, dim_y, dim_z" << "\t problem size; high-dimensional parameters will be disregarded for low-dimensional problems." << std::endl; \
-std::cout << "\t task_per_node" << "\t\t number of running processes on one node" << std::endl; \
-std::cout << "\t number_of_processes" << "\t\t total number of running processes" << std::endl; \
-std::cout                                                                                                                                               \
-    << "\n====================================" << std::endl                                                                                        \
-    << " Interconnect model for config.cfg" << std::endl                                                                                                                 \
-    << "====================================" << std::endl;                                                                                                                                               \
-std::cout << "\t interconnect" << "\t\t name of the interconnect" << std::endl; \
-std::cout << "\t MPI_library" << "\t\t name of the MPI library for the first system (IntelMPI, WaitIO)" << std::endl; \
-std::cout << "\t comm_model" << "\t\t performance model for communication (0: LogGP, 1: HOCKNEY)" << std::endl; \
-std::cout << "\t waitio_mode" << "\t\t mode of the WaitIO MPI library (socket, file or hybrid)" << std::endl; \
-std::cout                                                                                                                                               \
-    << "\n====================================" << std::endl                                                                                        \
-    << " Node model for config.cfg" << std::endl                                                                                                                 \
-    << "====================================" << std::endl;                                                                                                                                               \
-std::cout << "\t micro_architecture" << "\t name of the YAML machine file" << std::endl; \
-std::cout << "\t compiler-flags" << "\t\t STD and SIMD optimizations for the first system (-03 -xCORE-AVX512 -qopt-zmm-usage=high, -03 -xHost -xAVX, -Kfast -DTOFU); If not set, flags are taken from the YAML formatted machine file." << std::endl; \
-std::cout << "\t pmodel" << "\t\t\t performance model for computation for the first system (ECM, Roofline)" << std::endl; \
-std::cout << "\t vvv" << "\t\t\t a bool flag to enable or disable the verbose node output for the first system (0: disabled, 1: enabled)" << std::endl; \
-std::cout << "\t cache-predictor" << "\t cache prediction with layer conditions or ache simulation with pycachesim for the first system (LC, SIM)" << std::endl; \
-std::cout << "\t penalty" << "\t\t penalty for the computation model in nanoseconds, used only in LBL or COMP mode" << std::endl; \
-std::cout                                                                                                                                               \
-    << "\n====================================" << std::endl                                                                                        \
-    << " Delay injection mode for config.cfg" << std::endl                                                                                                                 \
-    << "====================================" << std::endl;                                                                                                                                               \
+std::cout << "\t task_per_node" << "\t\t number of running processes on one node" << std::endl;     \
+std::cout << "\t number_of_processes" << "\t total number of running processes" << std::endl;     \
+std::cout << "\n------------------------------------" << std::endl << " Interconnect model for config.cfg" << std::endl << "------------------------------------" << std::endl;                                            \
+std::cout << "\t interconnect" << "\t\t name of the interconnect" << std::endl;                     \
+std::cout << "\t MPI_library" << "\t\t name of the MPI library for the first system (IntelMPI, WaitIO)" << std::endl;           \
+std::cout << "\t comm_model" << "\t\t performance model of communication (0: LogGP, 1: HOCKNEY)" << std::endl;                 \
+std::cout << "\t waitio_mode" << "\t\t mode of the WaitIO MPI library (socket, file or hybrid)" << std::endl;                   \
+std::cout << "\n------------------------------------" << std::endl << " Node model for config.cfg" << std::endl << "------------------------------------" << std::endl;                                            \
+std::cout << "\t micro_architecture" << "\t name of the YAML machine file" << std::endl;            \
+std::cout << "\t compiler-flags" << "\t\t STD and SIMD optimizations (-03 -xCORE-AVX512 -qopt-zmm-usage=high, -03 -xHost -xAVX, -Kfast -DTOFU); If not set, flags are taken from the YAML formatted machine file." << std::endl;           \
+std::cout << "\t pmodel" << "\t\t\t performance model of computation (ECM, Roofline)" << std::endl;        \
+std::cout << "\t vvv" << "\t\t\t a bool flag to enable or disable the verbose node output (0: disabled, 1: enabled)" << std::endl;                                                                         \
+std::cout << "\t cache-predictor" << "\t cache prediction with layer conditions or cache simulation with pycachesim (LC, SIM)" << std::endl;                                                                 \
+std::cout << "\t penalty" << "\t\t runtime penalty for the computation model in nanoseconds, used only in LBL or COMP mode" << std::endl;\
+std::cout << "\n------------------------------------" << std::endl << " Delay injection mode for config.cfg" << std::endl << "------------------------------------" << std::endl;                                            \
 std::cout << "\t delay" << "\t\t\t a bool flag to enable or disable the delay injection (0: disabled, 1: enabled)" << std::endl; \
-std::cout << "\t delay_intensity" << "\t intensity of delay as a multiple of computation time of one iteration" << std::endl; \
-std::cout << "\t delay_rank" << "\t\t process rank of the injected delay" << std::endl; \
-std::cout << "\t delay_timestep" << "\t\t iteration for the occurrence of the injected delay" << std::endl; \
-std::cout                                                                                                                                               \
-    << "\n====================================" << std::endl                                                                                        \
-    << " Noise injection mode for config.cfg" << std::endl                                                                                                                 \
-    << "====================================" << std::endl;                                                                                                                                               \
+std::cout << "\t delay_intensity" << "\t intensity of delay as a multiple of computation time of one iteration" << std::endl;    \
+std::cout << "\t delay_rank" << "\t\t process rank of the injected delay" << std::endl;             \
+std::cout << "\t delay_timestep" << "\t\t iteration for the occurrence of the injected delay" << std::endl;                      \
+std::cout << "\n------------------------------------" << std::endl << " Noise injection mode for config.cfg" << std::endl << "------------------------------------" << std::endl;                                            \
 std::cout << "\t noise" << "\t\t\t a bool flag to enable or disable the noise injection (0: disabled, 1: enabled)" << std::endl; \
-std::cout << "\t noise_intensity" << "\t intensity of random noise, i.e., rand() % noise_intensity " << std::endl; \
-std::cout << "\t noise_start_timestep" << "\t starting iteration for the injected noise" << std::endl; \
+std::cout << "\t noise_intensity" << "\t intensity of random noise, i.e., rand() % noise_intensity " << std::endl;               \
+std::cout << "\t noise_start_timestep" << "\t starting iteration for the injected noise" << std::endl;                           \
 std::cout << "\t noise_stop_timestep" << "\t ending iteration for the injected noise" << std::endl; \
-std::cout                                                                                                                                               \
-    << "\n====================================" << std::endl                                                                                        \
-    << " Output for config.cfg" << std::endl                                                                                                                 \
-    << "====================================" << std::endl;                                                                                                                                               \
-std::cout << "\t filename" << "\t\t output file name that contains details for the debug purpose" << std::endl; \
-std::cout << "\t chromevizfilename" << "\t output file name that contains all time-rank tracing data for visualization with Chrome tracing browser" << std::endl; \
-std::cout << "\t Verbose" << "\t\t a bool flag to enable or disable the verbose output (0: disabled, 1: enabled)" << std::endl; \
+std::cout << "\n------------------------------------" << std::endl << " Output for config.cfg" << std::endl << "------------------------------------" << std::endl;                                            \
+std::cout << "\t filename" << "\t\t output file name that contains details for the debug purpose" << std::endl;                  \
+std::cout << "\t chromevizfilename" << "\t output file name that contains all time-rank tracing data for visualization with Chrome tracing browser" << std::endl;                                                                  \
+std::cout << "\t Verbose" << "\t\t a bool flag to enable or disable the verbose output (0: disabled, 1: enabled)" << std::endl;  \
 	}
 #define version()                                                                                      \
 	{                                                                                                  \
 		std::cout << "\nDistributed Cost in Cluster (DisCostiC)" << std::endl;                       \
-		std::cout << "Version : v1.0.0 (initial release)" << std::endl;                                  \
+		std::cout << "Version : v1.0.0" << std::endl;                                  \
 		std::cout << "Author : Ayesha Afzal <ayesha.afzal@fau.de>" << std::endl;                       \
-		std::cout << "Copyright : 2023 HPC, FAU Erlangen-Nuremberg. All rights reserved" << std::endl; \
+		std::cout << "Copyright : 2024 HPC, FAU Erlangen-Nuremberg. All rights reserved" << std::endl; \
 	}
 #endif //!< end P2P_HPP

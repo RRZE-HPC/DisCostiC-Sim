@@ -25,7 +25,7 @@
     * [🥅 Compilation](#compilation)
     * [:green_circle: Run](#run)
     * [🔁 Clean and uninstall](#clean)
-  * [:signal_strength: DisCostiC output](#visualisation)
+  * [:signal_strength: DisCostiC output](#output)
     * [🌐 1. Web interface with Google Chrome browser (DMS file format)](#chrome)
     * [📊 2. Graphical user interface with Vampir (OTF2 file format)](#vampir)
     * [📊 3. Graphical user interface with ITAC (STF file format)](#itac)
@@ -134,7 +134,7 @@ The [test](test) folder in DisCostiC offers multiple MPI-parallelized programs (
 `SOR`          |    Gauss-Seidel Successive Over-Relaxation solver
 `HPCG`               | High Performance Conjugate Gradients
 
-The following `kernel_mode` is exclusively offered for the flexibility of the framework; the simulator's prediction remains unaffected by the selection of the `kernel_mode`. Further explanation of this mode can be found in the Essential DisCostiC routines](#essential-routines) section.
+The following `kernel_mode` is exclusively offered for the flexibility of the framework; the simulator's prediction remains unaffected by the selection of the `kernel_mode`. Further explanation of this mode can be found in the [Essential DisCostiC routines](#essential-routines) section.
 
 `kernel_mode`                 | Integrated tool | Description
 --------------------- | ------------- | -------------
@@ -151,7 +151,7 @@ The following `exchange_mode` is provided to enable model-based exploration thro
 `stepsize`          |       It describes the step size of the message exchange as an int (1: distance one communication, 2: distance two communication, ...).
 `periodic`          |       It enables or disables the communication periodicity as a bool (0: false, 1: true).
 
-The `config.cfg` file can be edited to select the `benchmark_kernel` and `kernel_mode`.
+The `config.cfg` file can be edited to select the `benchmark_kernel` and `kernel_mode`. More information about this `config.cfg` file is available in the [DisCostiC help](#help) documentation.
 
 <a name="compilation"></a>
 🥅 **Compilation**:thought_balloon:
@@ -196,8 +196,8 @@ Command                  | Description
 `make uninstall`        |   This uninstalls the DisCostiC framework, including installed files and CMake-specific files.
 
 
-<a name="visualization"></a>
-## :signal_strength: DisCostiC output visualization
+<a name="output"></a>
+## :signal_strength: DisCostiC output
 
 <a name="chrome"></a>
 🌐 **1. Web interface with Google Chrome browser (DMS file format)**:speech_balloon:
@@ -236,39 +236,53 @@ To convert an OTF2 file to a single Structured Trace File (STF) file format `Dis
 <a name="stat"></a>
 🗄️ **4. Statistical or log data**:thought_balloon:
 
-		----------------------------------------------------------------
-		DisCostiC:
-		----------------------------------------------------------------
-		full form: Distributed CosT in Cluster
-		version: v0.0.0 (initial release)
-		timestamp: Sun Oct 27 14:24:48 2019
-		author: Ayesha Afzal <ayesha.afzal@fau.de>
-        	copyright: © 2023 HPC, FAU Erlangen-Nuremberg. All rights reserved
-        
-		verbose							| more verbose output (0=disable, 1=enable)
-		progress						| progress printing information (0=disable, 1=enable)
-		batchmode						| batchmode (0=disable i.e., print runtime for each rank, 1=enable i.e., only print runtime for slowest rank)
-		operationCount              | total number of operations for DisCostiC test cases
-		time							| DisCostiC speed / performance [unit: s]
-		speed							| DisCostiC speed / performance [unit: operations/s]
+	----------------------------------------------------------------
+        DisCostiC
+        ----------------------------------------------------------------
+        Full form: Distributed Cost in Cluster
+        Version: v1.0.0
+        Timestamp: Tue Jan 20 11:16:42 2024
+        Author: Ayesha Afzal <ayesha.afzal@fau.de>
+        Copyright: © 2024 HPC, FAU Erlangen-Nuremberg. All rights reserved
 
-		DisCostiC PERFORMANCE:
-		----------------------------------------------------------------
-		Number of operations    	Runtime [ns]    	 Speed [operations/ns]
-		----------------------------------------------------------------
-		800     			7.79465e+09   		1.02634e-07
+        HEAT program in FILE mode of kernel is simulated for 100000 iterations and 72 processes
 
-		FULL APPLICATION PERFORMANCE (for all ranks):
-		----------------------------------------------------------------
-		rank            runtime [ns]     runtime [s]
-		----------------------------------------------------------------
-		0            	27710          	2.771e-05
-		1            	28210          	2.821e-05
-		.				.....			.........
-		.				.....			.........
-		.				.....			.........    	     
-		N-1            	30710          	3.071e-05
+        ----------------------------------------------------------------
+        COMPUTATIONAL PERFORMANCE MODEL
+        ----------------------------------------------------------------
+        Code simulating on IcelakeSP_Platinum-8360Y chip of cores: {1 , 2 , 3 , 4 , 5 , 6 , 7 , 8 , 9 , 10 , 11 , 12 , 13 , 14 , 15 , 16 , 17 , 18 , 19 , 20 , 21 , 22 , 23 , 24 , 25 , 26 , 27 , 28 , 29 , 30 , 31 , 32 , 33 , 34 , 35 , 36 }
+        Single-precision maximum chip performance [GF/s]: {614.4 , 1228.8 , 1843.2 , 2457.6 , 3072 , 3686.4 , 4300.8 , 4915.2 , 5529.6 , 6144 , 6758.4 , 7372.8 , 7987.2 , 8601.6 , 9216 , 9830.4 , 10444.8 , 11059.2 , 11673.6 , 12288 , 12902.4 , 13516.8 , 14131.2 , 14745.6 , 15360 , 15974.4 , 16588.8 , 17203.2 , 17817.6 , 18432 , 19046.4 , 19660.8 , 20275.2 , 20889.6 , 21504 , 22118.4 }
+        Double-precision maximum chip performance [GF/s]: {307.2 , 614.4 , 921.6 , 1228.8 , 1536 , 1843.2 , 2150.4 , 2457.6 , 2764.8 , 3072 , 3379.2 , 3686.4 , 3993.6 , 4300.8 , 4608 , 4915.2 , 5222.4 , 5529.6 , 5836.8 , 6144 , 6451.2 , 6758.4 , 7065.6 , 7372.8 , 7680 , 7987.2 , 8294.4 , 8601.6 , 8908.8 , 9216 , 9523.2 , 9830.4 , 10137.6 , 10444.8 , 10752 , 11059.2 }
 
+        ----------------------------------------------------------------
+        COMMUNICATION PERFORMANCE MODEL
+        ----------------------------------------------------------------
+        Code simulating on InfiniBand with IntelMPI library
+        Hockney model parameters (intra chip): 41185.7 [ns] latency, 0.079065 [s/GB] inverse bandwidth 
+        Hockney model parameters (inter chip): 64567.6 [ns] latency, 0.124122 [s/GB] inverse bandwidth 
+        Hockney model parameters (inter node): 47628.7 [ns] latency, 0.091516 [s/GB] inverse bandwidth 
+        Hockney model parameters (inter cluster): 47628.7 [ns] latency, 0.091516 [s/GB] inverse bandwidth 
+        LogGP model additional parameters (intra chip): 24429.9 [ns] o, 199.008 [ns] g, 0.065 [ns] O
+        LogGP model additional parameters (inter chip): 39748.3 [ns] o, 338.249 [ns] g, 0.085 [ns] O
+        LogGP model additional parameters (inter node): 47938.9 [ns] o, 4980.51 [ns] g, 0.084 [ns] O
+        LogGP model additional parameters (inter cluster): 47938.9 [ns] o, 4980.51 [ns] g, 0.084 [ns] O
+        Eager threshold: 65535 bytes
+
+        ----------------------------------------------------------------
+        Simulation runtime in DisCosTiC: 15.7239 [s]
+        ----------------------------------------------------------------
+
+        ----------------------------------------------------------------
+        FULL APPLICATION PERFORMANCE (for all MPI processes)
+        rank                         runtime [s]
+        ----------------------------------------------------------------
+        0                              2154.83
+        1                              2154.83
+        .                              .......
+        .                              .......
+        .                              .......
+        71                             2154.67
+        ----------------------------------------------------------------
 
 <a name="cluster-configuration"></a>
 ## 💻 System model
@@ -363,73 +377,75 @@ Machine files (YAML format)                 | Description
 `IvyBridgeEP_E5-2690v2`          |       10 core Intel(R) Xeon(R) IvyBridge EN/EP/EX E5-2690 v2 CPU @ 3.0 GHz
 `SandyBridgeEP_E5-2680`          |    8 core Intel(R) Xeon(R) SandyBridge EN/EP E5-2680 CPU @ 2.7 GHz   
 
+<a name="help"></a>    
+**[DisCostiC help**:thought_balloon:
 
 The help of DisCostiC (`./discostic --help`) lists as:
 
 ```
 Distributed Cost in Cluster (DisCostiC)
-Version : v1.0.0 (initial release)
+Version : v1.0.0
 Author : Ayesha Afzal <ayesha.afzal@fau.de>
-Copyright : 2023 HPC, FAU Erlangen-Nuremberg. All rights reserved
+Copyright : 2024 HPC, FAU Erlangen-Nuremberg. All rights reserved
 
-====================================
+------------------------------------
  Arguments for ./discostic
-====================================
-     --version, -v          show simulator's version number and exit
+------------------------------------
+     --version, -v          show simulator's version information and exit
      --help, -h             show this help message and exit
 
-====================================
+------------------------------------
  Application model for config.cfg
-====================================
+------------------------------------
      benchmark_kernel       name of the kernel used in the program
      kernel_mode            mode of the kernel (FILE, SRC, LBL, COMP)
 
-====================================
+------------------------------------
  Cluster model for config.cfg
-====================================
+------------------------------------
      heteregeneous          a bool flag to enable or disable the second system (1: enabled, 0: disabled)
      number_of_iterations   number of iterations of the program
      dim_x, dim_y, dim_z    problem size; high-dimensional parameters will be disregarded for low-dimensional problems.
      task_per_node          number of running processes on one node
      number_of_processes    total number of running processes
 
-====================================
+------------------------------------
  Interconnect model for config.cfg
-====================================
+------------------------------------
      interconnect           name of the interconnect
      MPI_library            name of the MPI library for the first system (IntelMPI, WaitIO)
-     comm_model             performance model for communication (0: LogGP, 1: HOCKNEY)
+     comm_model             performance model of communication (0: LogGP, 1: HOCKNEY)
      waitio_mode            mode of the WaitIO MPI library (socket, file or hybrid)
 
-====================================
+------------------------------------
  Node model for config.cfg
-====================================
+------------------------------------
      micro_architecture     name of the YAML machine file
-     compiler-flags         STD and SIMD optimizations for the first system (-03 -xCORE-AVX512 -qopt-zmm-usage=high, -03 -xHost -xAVX, -Kfast -DTOFU); If not set, flags are taken from the YAML formatted machine file.
-     pmodel                 performance model for computation for the first system (ECM, Roofline)
-     vvv                    a bool flag to enable or disable the verbose node output for the first system (0: disabled, 1: enabled)
-     cache-predictor        cache prediction with layer conditions or ache simulation with pycachesim for the first system (LC, SIM)
-     penalty                penalty for the computation model in nanoseconds, used only in LBL or COMP mode
+     compiler-flags         STD and SIMD optimizations (-03 -xCORE-AVX512 -qopt-zmm-usage=high, -03 -xHost -xAVX, -Kfast -DTOFU); If not set, flags are taken from the YAML formatted machine file.
+     pmodel                 performance model of computation (ECM, Roofline)
+     vvv                    a bool flag to enable or disable the verbose node output (0: disabled, 1: enabled)
+     cache-predictor        cache prediction with layer conditions or cache simulation with pycachesim (LC, SIM)
+     penalty                runtime penalty for the computation model in nanoseconds, used only in LBL or COMP mode
 
-====================================
+------------------------------------
  Delay injection mode for config.cfg
-====================================
+------------------------------------
      delay                  a bool flag to enable or disable the delay injection (0: disabled, 1: enabled)
      delay_intensity        intensity of delay as a multiple of computation time of one iteration
      delay_rank             process rank of the injected delay
      delay_timestep         iteration for the occurrence of the injected delay
 
-====================================
+------------------------------------
  Noise injection mode for config.cfg
-====================================
+------------------------------------
      noise                  a bool flag to enable or disable the noise injection (0: disabled, 1: enabled)
      noise_intensity        intensity of random noise, i.e., rand() % noise_intensity 
      noise_start_timestep   starting iteration for the injected noise
      noise_stop_timestep    ending iteration for the injected noise
 
-====================================
+------------------------------------
  Output for config.cfg
-====================================
+------------------------------------
      filename               output file name that contains details for the debug purpose
      chromevizfilename      output file name that contains all time-rank tracing data for visualization with Chrome tracing browser
      Verbose                a bool flag to enable or disable the verbose output (0: disabled, 1: enabled)
@@ -441,20 +457,20 @@ Copyright : 2023 HPC, FAU Erlangen-Nuremberg. All rights reserved
 To perform the static analysis, the following procedure must be followed before running the DisCostiC batch script:
 ```
 pip install -r staticanalysis/requirements.txt
-python staticanalysis/Convert-<program>.py
+python staticanalysis/Convert-<benchmark_kernel>.py
 ```
 
 Files                  | Description
 --------------------- | -------------
-`Convert-<program>.py`          | A helper script that takes the original code and, through annotation, locates code loops and communication and identifies user-defined variables, such as dim_x and dim_y in the Cartesian stencil heat.c code, and ultimately generates DSEL code.
-`requirements.txt`               | Each (sub)dependency is listed and pinned using "==" to specify a particular package version. This project makes use of the lightweight `Python tree data structure` [anytree==2.8.0](https://pypi.org/project/anytree) and `type hints for Python 3.7+` [typing_extensions==4.4.0](https://pypi.org/project/typing-extensions). These dependencies are later installed (normally in a virtual environment) through pip using the `pip install -r requirements.txt` command. The generated tree's syntax is the same as the original C/C++ code.
+`Convert-<benchmark_kernel>.py`          | A helper script that takes the original code and, through annotation, locates code loops and communication and identifies user-defined variables, such as dim_x and dim_y in the Cartesian stencil heat.c code, and ultimately generates DSEL code.
+`[requirements.txt](staticanalysis/requirements.txt)`               | Each (sub)dependency is listed and pinned using "==" to specify a particular package version. This project makes use of the lightweight `Python tree data structure` [anytree==2.8.0](https://pypi.org/project/anytree) and `type hints for Python 3.7+` [typing_extensions==4.4.0](https://pypi.org/project/typing-extensions). These dependencies are later installed (normally in a virtual environment) through pip using the `pip install -r staticanalysis/requirements.txt` command. The generated tree's syntax is the same as the original C/C++ code.
 
 For the specified program, this will produce the following files:
 
 Files                  | Location       |Description
 --------------------- | ------------- | -------------
-`<program>.c`          |  [nodelevel/kernels](nodelevel/kernels)  | It comprises only the generated computational loop kernel of the MPI parallel program.
-`<program>_<mode>.hpp`   |  [test](test)               | It includes the entire generated code expressed in DisCostiC DSEL language.
+`<benchmark_kernel>.c`          |  [nodelevel/kernels](nodelevel/kernels)  | It comprises only the generated computational loop kernel of the MPI parallel program.
+`<benchmark_kernel>_<kernel_mode>.hpp`   |  [test](test)               | It includes the entire generated code expressed in DisCostiC DSEL language.
 
 <a name="essential-routines"></a>
 📝 **Essential DisCostiC routines**:thought_balloon:
@@ -578,9 +594,9 @@ Metadata information | Description
 `mode`	|  mode of this current calling operation  
 
 ```cpp
-enum Mode_t {		| Mode_t defines the operation type for communication
-        NONBLOCKING, 	| Routines returning with the start of an operation so the next operation does not execute before starting the previous one; such as Isend, Irecv.
-        BLOCKING     	| Routines returning only on completion of operation so the next operation does not execute before finishing the previous one; such as Send, Recv.
+enum Mode_t {		| Mode_t defines the operation type of communication
+        NONBLOCKING, 	| Routines returning with the start of an operation so the next operation doesn't execute before starting the previous one; such as Isend, Irecv.
+        BLOCKING     	| Routines returning only on completion of operation so the next operation doesn't execute before finishing the previous one; such as Send, Recv.
 };
 ```
 

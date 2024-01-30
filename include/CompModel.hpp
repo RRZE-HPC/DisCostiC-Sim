@@ -75,16 +75,16 @@ namespace DisCosTiC {
         std::transform(cores.begin(), cores.end(), chip_max_perf_DP.begin(),
         std::bind(std::multiplies<real_t>(), std::placeholders::_1, max_perf_per_core_DP ));
 
-if (process_Rank == 0){      
-        std::cout << "\n\n----------------------------------------------------------------"<< std::endl;        
-        std::cout << "COMPUTATIONAL PERFORMANCE MODEL (Chip+Kernel):" << std::endl;
+if (process_Rank == 0){
+        std::cout << "\n----------------------------------------------------------------"<< std::endl;
+        std::cout << "COMPUTATIONAL PERFORMANCE MODEL" << std::endl;
         std::cout << "----------------------------------------------------------------"<< std::endl;
-        std::cout << "Core-bound workload on " << micro_architecture <<": " << std::endl;
-        std::cout << "cores: " ;
+        std::cout << "Code simulating on " << micro_architecture <<" chip of cores: "; //<< std::endl;
+        //std::cout << "cores: " ;
         print_vec1T(cores);
-        std::cout << "single-precision maximum chip performance [GF/s]: ";
+        std::cout << "Single-precision maximum chip performance [GF/s]: ";
         print_vec1T(chip_max_perf_SP);
-        std::cout << "double-precision maximum chip performance [GF/s]: ";
+        std::cout << "Double-precision maximum chip performance [GF/s]: ";
         print_vec1T(chip_max_perf_DP);
 }
         /**
@@ -169,9 +169,7 @@ if (process_Rank == 0){
                         std::bind(  std::multiplies<real_t>(),
                         			std::placeholders::_1,
                         			1000000000));
-if (process_Rank == 0){                        			       
-//        std::cout << "\nMemory-bound (" << benchmark_kernel << ") on " << micro_architecture <<": "  << std::endl;
-        std::cout << "\nCode running on " << micro_architecture <<": "  << std::endl;
+/*if (process_Rank == 0){
         std::cout << "bytes transfer [B]: " << bytes_transfered << std::endl;
         std::cout << "arithmetic intensity [F/B]: " << arith_intens_in_FLOPperB <<  std::endl;
         std::cout << "memory bandwidth [GB/s]: " << std::endl;
@@ -180,7 +178,7 @@ if (process_Rank == 0){
         print_vec1T(perf_in_FLOPpers);
         std::cout << "runtime [ns]: " << std::endl;
         print_vec1T(time_in_ns);
-}
+}*/
 	}
     };
     

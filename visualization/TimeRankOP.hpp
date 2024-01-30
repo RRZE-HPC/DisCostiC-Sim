@@ -309,11 +309,11 @@ namespace UserInterface {
                 // if(this->rank == (this->numRanks-1))
                 // {
                 //     ofs << "{}\n],"
-                //             << "\"Name\": \"Trace visualisation ofs DisCosTiC toolkit\", \n "
-                //             << "\"Full form\": \"Distributed CosT in Cluster\", \n "
-                //             << "\"Version\": \"v0.0.0 (initial release)\", \n "
+                //             << "\"Name\": \"Trace visualisation of DisCostiC simulation\", \n "
+                //             << "\"Full form\": \"Distributed Cost in Cluster\", \n "
+                //             << "\"Version\": \"v1.0.0\", \n "
                 //             << "\"Author\": \"Ayesha Afzal <ayesha.afzal@fau.de>\", \n "
-                //             << "\"Copyright\": \"© 2019 HPC, FAU Erlangen-Nuremberg. All rights reserved\" \n "
+                //             << "\"Copyright\": \"© 2024 HPC, FAU Erlangen-Nuremberg. All rights reserved\" \n "
                 //             << "}\n";
                     
                 // }

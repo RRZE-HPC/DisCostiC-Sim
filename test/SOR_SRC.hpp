@@ -58,7 +58,7 @@ namespace DisCosTiC
 
 			int local_system_size = system_number == 0 ? primary_processes : secondary_processes;
 
-			int jmaxLocal = imax / local_system_size + ((imax % local_system_size > rank) ? 1 : 0);
+			int jmaxLocal = imax / local_system_size;
 
 			int task_per_node_ = task_per_node;
 			int core = process_Rank;
@@ -69,32 +69,32 @@ namespace DisCosTiC
 			double src[imax + 2][jmaxLocal + 2];
 			double dst[imax + 2][jmaxLocal + 2];
 
-			assert(task_per_node_ <= YAML_args.cores_per_chip);
+            assert(task_per_node_ <= (YAML_args.cores_per_chip * YAML_args.chips_per_node));
 
-			if (task_per_node_ != 1)
-			{
-				if (local_system_size <= task_per_node_)
-				{
-					jmaxLocal = jmax;
-					ECM_core = task_per_node_;
-				}
-				else if (remainder_cores == 0)
-				{
-					jmaxLocal = jmaxLocal * task_per_node_;
-					ECM_core = task_per_node_;
-				}
-				else
-				{
-					if (core <= local_system_size - remainder_cores)
-					{
-						jmaxLocal = jmaxLocal * task_per_node_;
-						ECM_core = task_per_node_;
-					}
-					else
-					{
-						jmaxLocal = jmaxLocal * remainder_cores;
-						ECM_core = remainder_cores;
-					}
+            if (task_per_node_ != 1)
+            {
+                if (local_system_size <= task_per_node_)
+                {
+                    jmaxLocal = jmaxLocal * std::min(task_per_node_, cores_per_socket);
+                    ECM_core = std::min(task_per_node_, cores_per_socket);
+                }
+                else if (remainder_cores == 0)
+                {
+                    jmaxLocal = jmaxLocal * std::min(task_per_node_, cores_per_socket);
+                    ECM_core = std::min(task_per_node_, cores_per_socket);
+                }
+                else
+                {
+                    if (core <= local_system_size - remainder_cores)
+                    {
+                        jmaxLocal = jmaxLocal * std::min(task_per_node_, cores_per_socket);
+                        ECM_core = std::min(task_per_node_, cores_per_socket);
+                    }
+                    else
+                    {
+                        jmaxLocal = jmaxLocal * remainder_cores;
+                        ECM_core = remainder_cores;
+                    }
 				}
 			}
 

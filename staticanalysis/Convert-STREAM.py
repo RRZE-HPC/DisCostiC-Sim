@@ -50,7 +50,7 @@ def findFuncs(nodes):
         elif i.type=="funcCall":
             func=findFuncName(i.id)
             func+=".cpp"
-            for path, subdirs, files in os.walk(os.path.join(here,"codes")):
+            for path, subdirs, files in os.walk(os.path.join(here,"multicomm_STREAM")):
                 for name in files:
                     if name.strip() ==func:
                         code=getCode(name)

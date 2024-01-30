@@ -129,7 +129,19 @@ int main(int argc, char **argv)
     //                            Initailize config and YAML args                                           //
     //////////////////////////////////////////////////////////////////////////////////////////////////////////
     UserInterface::ConfigParser CFG_args("config.cfg");
-
+    if (process_Rank == 0)
+    {
+    std::cout << "\n----------------------------------------------------------------" << std::endl;
+    std::cout << "DisCostiC" << std::endl;
+    std::cout << "----------------------------------------------------------------" << std::endl;
+    std::cout << "Full form: Distributed Cost in Cluster" << std::endl; 
+    std::cout << "Version: v1.0.0" << std::endl; //!< print version number of toolkit
+    auto timestamp = system_clock::to_time_t(system_clock::now());
+    std::cout << "Timestamp: " << ctime(&timestamp); //!< print current date and time
+    std::cout << "Author: Ayesha Afzal <ayesha.afzal@fau.de>" << std::endl;
+    std::cout << "Copyright: © 2024 HPC, FAU Erlangen-Nuremberg. All rights reserved" << std::endl;
+    std::cout << "\n" << CFG_args.getValue<std::string>("benchmark_kernel") << " program in " << CFG_args.getValue<std::string>("kernel_mode") << " mode of kernel is simulated for " << CFG_args.getValue<DisCosTiC_Datatype>("number_of_iterations") << " iterations and " << CFG_args.getValue<DisCosTiC_Datatype>("number_of_processes") << " processes" << std::endl;
+    }
     heteregeneous_mode = CFG_args.getValue<DisCosTiC_Datatype>("heteregeneous");
 
     primary_processes = CFG_args.getValue<DisCosTiC_Datatype>("number_of_processes");
@@ -318,36 +330,21 @@ int main(int argc, char **argv)
     if (process_Rank == 0)
     {
         std::cout << "\n----------------------------------------------------------------" << std::endl;
-        std::cout << "DisCosTiC (Distributed CosT in Cluster):" << std::endl;
+        std::cout << "COMMUNICATION PERFORMANCE MODEL" << std::endl;
         std::cout << "----------------------------------------------------------------" << std::endl;
-        std::cout << "Version: v1.0" << std::endl; //!< print version number of toolkit
-        auto timestamp = system_clock::to_time_t(system_clock::now());
-        std::cout << "timestamp: " << ctime(&timestamp); //!< print current date and time
-        std::cout << "\n\n----------------------------------------------------------------" << std::endl;
-        std::cout << "GENERATED DEPENDENCY GRAPH (Directed Acyclic Benchmark (DisCosTiC)):" << std::endl;
-        std::cout << "----------------------------------------------------------------" << std::endl;
-        std::cout << "number of timesteps: " << nunmberofiter << std::endl;
-        std::cout << "OneWay_PosDist communetworkation pattern: number of Operation_t (send or recv or exec) per timestep per rank: " << 1 << std::endl;
-        std::cout << "\n\n----------------------------------------------------------------" << std::endl;
-        std::cout << "COMMUNICATION PERFORMANCE MODEL (Network+Systemtopology):" << std::endl;
-        std::cout << "----------------------------------------------------------------" << std::endl;
-        std::cout << "number of processes: " << numRanks << std::endl;
-        std::cout << "number of chips: " << numCores << std::endl;
-        std::cout << "SIMPLE LATENCY-BANDWIDTH MODEL:: intra chip latency [ns]: " << latency[INTRACHIP]
-                  << ", inter chip latency [ns]: " << latency[INTERCHIP]
-                  << ", inter node latency [ns]: " << latency[INTERNODE]
-                  << ", inter cluster latency [ns]: " << latency[INTERCLUSTER]
-                  << ", intra chip inverse bandwidth [s/GB]: " << inverse_bandwidth[INTRACHIP]
-                  << ", inter chip inverse bandwidth [s/GB]: " << inverse_bandwidth[INTERCHIP]
-                  << ", inter node inverse bandwidth [s/GB]: " << inverse_bandwidth[INTERNODE]
-                  << ", inter cluster inverse bandwidth [s/GB]: " << inverse_bandwidth[INTERCLUSTER] << std::endl;
-        std::cout << "LogGP MODEL additional parameters (Intra chip) :: o [ns]: " << o[INTRACHIP] << ", g [ns]: " << g[INTRACHIP] << ", O [ns]: " << O[INTRACHIP] << std::endl;
-        std::cout << "LogGP MODEL additional parameters (Inter chip) :: o [ns]: " << o[INTERCHIP] << ", g [ns]: " << g[INTERCHIP] << ", O [ns]: " << O[INTERCHIP] << std::endl;
-        std::cout << "LogGP MODEL additional parameters (Inter node) :: o [ns]: " << o[INTERNODE] << ", g [ns]: " << g[INTERNODE] << ", O [ns]: " << O[INTERNODE] << std::endl;
-        std::cout << "LogGP MODEL additional parameters (Inter cluster) :: o [ns]: " << o[INTERCLUSTER] << ", g [ns]: " << g[INTERCLUSTER] << ", O [ns]: " << O[INTERCLUSTER] << std::endl;
-
-        std::cout << "Eager limit: " << eagerLimit << " bytes" << std::endl;
-        std::cout << "num_synchronizations: " << hosqueueOpync.size() << std::endl;
+        //std::cout << "number of processes: " << numRanks << std::endl;
+        //std::cout << "number of chips: " << numCores << std::endl;
+        std::cout << "Code simulating on " << interconnect_name << " with " << MPIlibrary_name << " library" << std::endl;
+        std::cout << "Hockney model parameters (intra chip): " << latency[INTRACHIP] << " [ns] latency, " << inverse_bandwidth[INTRACHIP] << " [s/GB] inverse bandwidth " << std::endl;
+        std::cout << "Hockney model parameters (inter chip): " << latency[INTERCHIP] << " [ns] latency, " << inverse_bandwidth[INTERCHIP] << " [s/GB] inverse bandwidth " << std::endl;
+        std::cout << "Hockney model parameters (inter node): " << latency[INTERNODE] << " [ns] latency, " << inverse_bandwidth[INTERNODE] << " [s/GB] inverse bandwidth " << std::endl;
+        std::cout << "Hockney model parameters (inter cluster): " << latency[INTERCLUSTER] << " [ns] latency, " << inverse_bandwidth[INTERCLUSTER] << " [s/GB] inverse bandwidth " << std::endl;
+        std::cout << "LogGP model additional parameters (intra chip): " << o[INTRACHIP] << " [ns] o, " << g[INTRACHIP] << " [ns] g, " << O[INTRACHIP] << " [ns] O" << std::endl;
+        std::cout << "LogGP model additional parameters (inter chip): " << o[INTERCHIP] << " [ns] o, " << g[INTERCHIP] << " [ns] g, " << O[INTERCHIP] << " [ns] O" << std::endl;
+        std::cout << "LogGP model additional parameters (inter node): " << o[INTERNODE] << " [ns] o, " << g[INTERNODE] << " [ns] g, " << O[INTERNODE] << " [ns] O" << std::endl;
+        std::cout << "LogGP model additional parameters (inter cluster): " << o[INTERCLUSTER] << " [ns] o, " << g[INTERCLUSTER] << " [ns] g, " << O[INTERCLUSTER] << " [ns] O" << std::endl;
+        std::cout << "Eager threshold: " << eagerLimit << " bytes" << std::endl;
+        //std::cout << "num_synchronizations: " << hosqueueOpync.size() << std::endl;
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1210,12 +1207,12 @@ int main(int argc, char **argv)
         DisCosTiC_Timetype DisCosTiC = duration_cast<nanoseconds>(endTime - startTime).count();
         ;
 
-        std::cout << "\n\nDisCosTiC PERFORMANCE:" << std::endl;
+        std::cout << "\n----------------------------------------------------------------" << std::endl;
+        //std::cout << "Number of operations    	Runtime [s]       Speed [operations/ns]" << std::endl;
+        std::cout << "Simulation runtime in DisCosTiC: " << DisCosTiC / 1e9  << " [s]" << std::endl;
         std::cout << "----------------------------------------------------------------" << std::endl;
-        std::cout << "Number of operations    	Runtime [s]       Speed [operations/ns]" << std::endl;
-        std::cout << "----------------------------------------------------------------" << std::endl;
-        std::cout << numOpsInQueue << "     \t\t\t\t" << DisCosTiC / 1e9 << "   \t\t" << numOpsInQueue / DisCosTiC << std::endl;
-
+        //std::cout << numOpsInQueue << "     \t\t\t\t" << DisCosTiC / 1e9 << "   \t\t" << numOpsInQueue / DisCosTiC << std::endl;
+        
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //                                   /* \brief check if all queues are empty (debugging the queues) if true                //
         //    * so print finishing time (either for all ranks, or for only maximum rank with enabled batch mode)  */               //
@@ -1243,11 +1240,11 @@ int main(int argc, char **argv)
         ofs.open(filename, std::ios_base::app);
 
         ofs << "{}\n],"
-            << "\"Name\": \"Trace visualisation ofs DisCosTiC toolkit\", \n "
-            << "\"Full form\": \"Distributed CosT in Cluster\", \n "
-            << "\"Version\": \"v0.0.0 (initial release)\", \n "
+            << "\"Name\": \"Trace visualisation ofs DisCostiC toolkit\", \n "
+            << "\"Full form\": \"Distributed Cost in Cluster\", \n "
+            << "\"Version\": \"v1.0.0\", \n "
             << "\"Author\": \"Ayesha Afzal <ayesha.afzal@fau.de>\", \n "
-            << "\"Copyright\": \"© 2023 HPC, FAU Erlangen-Nuremberg. All rights reserved\" \n "
+            << "\"Copyright\": \"© 2024 HPC, FAU Erlangen-Nuremberg. All rights reserved\" \n "
             << "}\n";
         ofs.close();
 

@@ -2,7 +2,7 @@
 ///    \file
 ///    NODELVLSCG_HPP
 ///
-///    \Copyright © 2019 HPC, FAU Erlangen-Nuremberg. All rights reserved.
+///    \Copyright © 2024 HPC, FAU Erlangen-Nuremberg. All rights reserved.
 ///
 
 #ifndef NodeLvlScg_HPP

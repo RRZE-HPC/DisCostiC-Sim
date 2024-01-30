@@ -748,7 +748,7 @@ public:
             DisCosTiC_Timetype T_L3Mem = std::stod(opname.substr(begin, end - begin));
 
             DisCosTiC_Timetype T_ECM = std::max(T_OL, T_nOL + T_L1L2 + T_L2L3 + T_L3Mem);
-            NodeModel NM(&NodeCFG, YAML_args, T_OL, T_nOL, T_L1L2, T_L2L3, T_L3Mem, T_ECM);
+            NodeModel NM(&NodeCFG, YAML_args, T_OL, T_nOL, T_L1L2, T_L2L3, T_L3Mem, T_ECM, std::stod(ECM_core));
 
             DisCosTiC_Timetype *scaling_performance = (double *)malloc(NM.getMachine().cores_per_socket_ * sizeof(double));
             DisCosTiC_Timetype *scaling_numa = (double *)malloc(NM.getMachine().cores_per_socket_ * sizeof(double));
@@ -757,8 +757,6 @@ public:
 
             NM.setMultiCore(scaling_performance[std::stoi(ECM_core) - 1]);
 
-            // std::cerr.precision(2);
-            // std::cerr << "T_MECM: " << scaling_performance[NM.getMachine().n_cores_-1] << std::endl;
             estimation(NM, &perf_est, &runtime);
         }
         else if (opname.substr(0, n) == "SRC")
@@ -801,7 +799,7 @@ public:
                 std::string outputPath = "-o" + output;
                 std::string machine = "-m" + opname.substr(machinePos + 2, corePos - machinePos - 2);
                 std::string extras = "-extras" + opname.substr(corePos + 2, definePos - corePos - 2);
-                std::string cores = "-c1";
+                std::string cores = "-c" + std::to_string(cores_per_socket);
                 std::string defines = opname.substr(definePos + 2, opname.length());
                 std::string system_no = "-systemNo" + std::to_string(system_number);
 
@@ -878,7 +876,7 @@ public:
                 std::string outputPath = "-o" + output;
                 std::string machine = "-m" + opname.substr(machinePos + 2, corePos - machinePos - 2);
                 std::string extras = "-extras" + opname.substr(corePos + 2, definePos - corePos - 2);
-                std::string cores = "-c1";
+                std::string cores = "-c" + std::to_string(cores_per_socket);
                 std::string defines = opname.substr(definePos + 2, opname.length());
                 std::string system_no = "-systemNo" + std::to_string(system_number);
 
@@ -962,15 +960,31 @@ public:
             std::string ECM_core = extras.erase(0, 7);
             ECM_core = extras.substr(0, extras.find("+"));
 
+            std::string::size_type pos = opname.find("//BREAK:");
+
+            std::string source = "nodelevel/kernels/" + opname.substr(0, pos);
+
+            std::ifstream file;
+
+            file.open(source);
+
+            if (!file)
+            {
+                if (process_Rank == 0)
+                    std::cout << "File does not exists ! " << source;
+
+                file.close();
+                MPI_Finalize();
+                exit(0);
+            }
+            file.close();
+
             if (!kerncraftExecuted && process_Rank == 0)
             {
                 kerncraftExecuted = true;
                 std::string output = "nodelevel/configs/" + opname.substr(opos + 1, machinePos - opos - 1) + ".cfg";
 
                 system(("rm nodelevel/configs/" + opname.substr(opos + 1, machinePos - opos - 1) + ".cfg").c_str());
-
-                std::string::size_type pos = opname.find("//BREAK:");
-                std::string source = "nodelevel/kernels/" + opname.substr(0, pos);
 
                 std::string::size_type opos = opname.find(":");
                 std::string::size_type machinePos = opname.find("//", opos);
@@ -982,7 +996,7 @@ public:
                 std::string outputPath = "-o" + output;
                 std::string machine = "-m" + opname.substr(machinePos + 2, corePos - machinePos - 2);
                 std::string extras = "-extras" + opname.substr(corePos + 2, definePos - corePos - 2);
-                std::string cores = "-c1";
+                std::string cores = "-c" + std::to_string(cores_per_socket);
                 std::string defines = opname.substr(definePos + 2, opname.length());
                 std::string system_no = "-systemNo" + std::to_string(system_number);
 
@@ -1053,7 +1067,7 @@ public:
                 std::string outputPath = "-o" + output;
                 std::string machine = "-m" + opname.substr(machinePos + 2, corePos - machinePos - 2);
                 std::string extras = "-extras" + opname.substr(corePos + 2, definePos - corePos - 2);
-                std::string cores = "-c1";
+                std::string cores = "-c" + std::to_string(cores_per_socket);
                 std::string defines = opname.substr(definePos + 2, opname.length());
                 std::string system_no = "-systemNo" + std::to_string(system_number);
 

@@ -2,7 +2,7 @@
 ///    \file
 ///    NODELVLSCG_CPP
 ///
-///    \Copyright © 2019 HPC, FAU Erlangen-Nuremberg. All rights reserved.
+///    \Copyright © 2024 HPC, FAU Erlangen-Nuremberg. All rights reserved.
 ///
 
 #include "../include/NodeLvlScg.hpp"
