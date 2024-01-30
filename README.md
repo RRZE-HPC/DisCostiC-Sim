@@ -236,7 +236,7 @@ To convert an OTF2 file to a single Structured Trace File (STF) file format `Dis
 <a name="stat"></a>
 🗄️ **4. Statistical or log data**:thought_balloon:
 
-	      ----------------------------------------------------------------
+	     ----------------------------------------------------------------
         DisCostiC
         ----------------------------------------------------------------
         Full form: Distributed Cost in Cluster
