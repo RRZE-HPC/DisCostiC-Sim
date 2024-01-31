@@ -131,9 +131,9 @@ The [test](test) folder in DisCostiC offers multiple MPI-parallelized programs (
 --------------------- | -------------
 `HEAT`          |       Two-dimensional five-point Jacobi kernel with communication
 `SOR`          |    Gauss-Seidel Successive Over-Relaxation solver with communication
-``DMMM`               | Dense Matrix Matrix Multiplication kernel with communication
-``DMVM`               | Dense Matrix Vector Multiplication kernel with communication
-``DMVM-TRANSPOSE`     | Dense Matrix Transpose Vector Multiplication kernel with communication
+`DMMM`               | Dense Matrix Matrix Multiplication kernel with communication
+`DMVM`               | Dense Matrix Vector Multiplication kernel with communication
+`DMVM-TRANSPOSE`     | Dense Matrix Transpose Vector Multiplication kernel with communication
 `HEATHEAT`                | Back-to-back two HEAT kernels with communication
 `HEATSOR`                | Back-to-back HEAT and SOR kernels with communication
 `HEATDIVIDE`                | Back-to-back HEAT and DIVIDE kernels with communication
