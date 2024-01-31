@@ -107,7 +107,7 @@ namespace DisCosTiC
 
 				double buff;
 
-				comp = DisCosTiC->Exec("FILE:stream-triad.c//BREAK:" + CFG_args.getValue<std::string>("benchmark_kernel") + "//./nodelevel/machine-files/" + arch_name + ".yml//" + std::to_string(ECM_core) + "+" + std::to_string(remainder_cores) + "//-D N " + std::to_string(Nlocal) + " -D  s " + std::to_string(55), recv, YAML_args, process_Rank, N_size_Of_Cluster, comm);
+				comp = DisCosTiC->Exec("FILE:STREAM-TRIAD.c//BREAK:" + CFG_args.getValue<std::string>("benchmark_kernel") + "//./nodelevel/machine-files/" + arch_name + ".yml//" + std::to_string(ECM_core) + "+" + std::to_string(remainder_cores) + "//-D N " + std::to_string(Nlocal) + " -D  s " + std::to_string(55), recv, YAML_args, process_Rank, N_size_Of_Cluster, comm);
 
 				comp.second->bufSize = (comp.second->bufSize * Nlocal);
 

@@ -108,8 +108,8 @@ namespace DisCosTiC
 				double src[dim_x][dim_y_local];
 				MPI_Request requests[4] = {MPI_REQUEST_NULL, MPI_REQUEST_NULL, MPI_REQUEST_NULL, MPI_REQUEST_NULL};
 
-				compADD = DisCosTiC->Exec("FILE:heat.c//BREAK:" + CFG_args.getValue<std::string>("benchmark_kernel") + "//./nodelevel/machine-files/" + arch_name + ".yml//" + std::to_string(ECM_core) + "+" + std::to_string(remainder_cores) + "//-D dim_x " + std::to_string(dim_x) + " -D  dim_y " + std::to_string(dim_y_local), recv, YAML_args, process_Rank, N_size_Of_Cluster, comm);
-                comp = DisCosTiC->Exec("FILE:POISSONNS.c//BREAK:" + CFG_args.getValue<std::string>("benchmark_kernel") + "//./nodelevel/machine-files/" + arch_name + ".yml//" + std::to_string(ECM_core) + "+" + std::to_string(remainder_cores) + "//-D imax " + std::to_string(dim_x) + " -D  jmaxLocal " + std::to_string(dim_y_local), compADD, YAML_args, process_Rank, N_size_Of_Cluster, comm);
+				compADD = DisCosTiC->Exec("FILE:HEAT.c//BREAK:" + CFG_args.getValue<std::string>("benchmark_kernel") + "//./nodelevel/machine-files/" + arch_name + ".yml//" + std::to_string(ECM_core) + "+" + std::to_string(remainder_cores) + "//-D dim_x " + std::to_string(dim_x) + " -D  dim_y " + std::to_string(dim_y_local), recv, YAML_args, process_Rank, N_size_Of_Cluster, comm);
+                comp = DisCosTiC->Exec("FILE:SOR.c//BREAK:" + CFG_args.getValue<std::string>("benchmark_kernel") + "//./nodelevel/machine-files/" + arch_name + ".yml//" + std::to_string(ECM_core) + "+" + std::to_string(remainder_cores) + "//-D imax " + std::to_string(dim_x) + " -D  jmaxLocal " + std::to_string(dim_y_local), compADD, YAML_args, process_Rank, N_size_Of_Cluster, comm);
                 
 				comp.second->bufSize = (comp.second->bufSize * dim_x * dim_y_local);
 				compADD.second->bufSize = (compADD.second->bufSize * dim_x * dim_y_local);

@@ -129,10 +129,34 @@ The [test](test) folder in DisCostiC offers multiple MPI-parallelized programs (
 
 `benchmark_kernel`                 | Description
 --------------------- | -------------
-`HEAT`          |       Two-dimensional five-point Jacobi
-`STREAM`               | STREAM Triad
-`SOR`          |    Gauss-Seidel Successive Over-Relaxation solver
-`HPCG`               | High Performance Conjugate Gradients
+`HEAT`          |       Two-dimensional five-point Jacobi kernel with communication
+`SOR`          |    Gauss-Seidel Successive Over-Relaxation solver with communication
+``DMMM`               | Dense Matrix Matrix Multiplication kernel with communication
+``DMVM`               | Dense Matrix Vector Multiplication kernel with communication
+``DMVM-TRANSPOSE`     | Dense Matrix Transpose Vector Multiplication kernel with communication
+`HEATHEAT`                | Back-to-back two HEAT kernels with communication
+`HEATSOR`                | Back-to-back HEAT and SOR kernels with communication
+`HEATDIVIDE`                | Back-to-back HEAT and DIVIDE kernels with communication
+`HPCG`               | High Performance Conjugate Gradient
+`STENCIL-3D-7PT`                | Three-dimensional seven point stencil kernel with communication
+`STENCIL-3D-27PT`                | Three-dimensional twenty seven point stencil kernel with communication
+`STENCIL-UXX`                | UXX stencil kernel with communication
+`STENCIL-3D-LONGRANGE`                | 3D long range stencil kernel with communication
+`STENCIL-1D-3PT`                | One-dimensional three point stencil kernel with communication
+`STREAM`                | STREAM Triad kernel with communication
+`SCHOENAUER`                | SCHOENAUER Triad kernel with communication
+`SCHOENAUER-DIV`                | SCHOENAUER divide Triad kernel with communication
+`WAXPY`                | WAXPY kernel with communication
+`DAXPY`                | DAXPY kernel with communication
+`SUM`                | SUM kernel with communication
+`VECTOR-SUM`                | Vector SUM kernel with communication
+`ADD`                | ADD kernel with communication
+`DIVIDE`                | DIVIDE kernel with communication
+`SCALE`                | SCALE kernel with communication
+`COPY`                | COPY kernel with communication
+`KAHAN-DOT`                | KAHAN-DOT kernel with communication
+`SCALAR-PRODUCT`                | Scalar Product kernel with communication
+
 
 The following `kernel_mode` is exclusively offered for the flexibility of the framework; the simulator's prediction remains unaffected by the selection of the `kernel_mode`. Further explanation of this mode can be found in the [Essential DisCostiC routines](#essential-routines) section.
 
@@ -143,12 +167,13 @@ The following `kernel_mode` is exclusively offered for the flexibility of the fr
 `SRC`           |   [Kerncraft](https://github.com/RRZE-HPC/kerncraft) integrated      |  This directly embeds the source code of the computational kernel into the simulator.
 `FILE`          |   [Kerncraft](https://github.com/RRZE-HPC/kerncraft) integrated      |  This reads the source code for the computational kernel from an external file located at [nodelevel/kernels](nodelevel/kernels) folder. 
 
-The following `exchange_mode` is provided to enable model-based exploration through experimenting with various communication patterns in MPI applications. 
+The following `exchange_mode` is provided in LBL mode to enable model-based exploration through experimenting with various communication patterns in MPI applications. 
 
 `exchange_mode`                  | Description
 --------------------- | -------------
+`message_size`          |       It specifies the size of the message to be exchanged in bytes.
+`step_size`          |       It describes the step size of the message exchange as an int (1: distance one communication, 2: distance two communication, ...).
 `direction`          |       It specifies the direction of message exchange as an int (1: uni-directional upwards shift in only positive direction, 2: bi-directional upwards and downwards shift in both positive and negative directions).
-`stepsize`          |       It describes the step size of the message exchange as an int (1: distance one communication, 2: distance two communication, ...).
 `periodic`          |       It enables or disables the communication periodicity as a bool (0: false, 1: true).
 
 The `config.cfg` file can be edited to select the `benchmark_kernel` and `kernel_mode`. More information about this `config.cfg` file is available in the [DisCostiC help](#help) documentation.
@@ -236,7 +261,7 @@ To convert an OTF2 file to a single Structured Trace File (STF) file format `Dis
 <a name="stat"></a>
 🗄️ **4. Statistical or log data**:thought_balloon:
 
-	     ----------------------------------------------------------------
+	    ----------------------------------------------------------------
         DisCostiC
         ----------------------------------------------------------------
         Full form: Distributed Cost in Cluster

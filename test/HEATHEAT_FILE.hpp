@@ -108,8 +108,8 @@ namespace DisCosTiC
 				double src[dim_x][dim_y_local];
 				MPI_Request requests[4] = {MPI_REQUEST_NULL, MPI_REQUEST_NULL, MPI_REQUEST_NULL, MPI_REQUEST_NULL};
 
-				compADD = DisCosTiC->Exec("FILE:heat.c//BREAK:" + CFG_args.getValue<std::string>("benchmark_kernel") + "//./nodelevel/machine-files/" + arch_name + ".yml//" + std::to_string(ECM_core) + "+" + std::to_string(remainder_cores) + "//-D dim_x " + std::to_string(dim_x) + " -D  dim_y " + std::to_string(dim_y_local), recv, YAML_args, process_Rank, N_size_Of_Cluster, comm);
-        comp = DisCosTiC->Exec("FILE:heat.c//BREAK:" + CFG_args.getValue<std::string>("benchmark_kernel") + "//./nodelevel/machine-files/" + arch_name + ".yml//" + std::to_string(ECM_core) + "+" + std::to_string(remainder_cores) + "//-D dim_x " + std::to_string(dim_x) + " -D  dim_y " + std::to_string(dim_y_local), compADD, YAML_args, process_Rank, N_size_Of_Cluster, comm);
+				compADD = DisCosTiC->Exec("FILE:HEAT.c//BREAK:" + CFG_args.getValue<std::string>("benchmark_kernel") + "//./nodelevel/machine-files/" + arch_name + ".yml//" + std::to_string(ECM_core) + "+" + std::to_string(remainder_cores) + "//-D dim_x " + std::to_string(dim_x) + " -D  dim_y " + std::to_string(dim_y_local), recv, YAML_args, process_Rank, N_size_Of_Cluster, comm);
+        comp = DisCosTiC->Exec("FILE:HEAT.c//BREAK:" + CFG_args.getValue<std::string>("benchmark_kernel") + "//./nodelevel/machine-files/" + arch_name + ".yml//" + std::to_string(ECM_core) + "+" + std::to_string(remainder_cores) + "//-D dim_x " + std::to_string(dim_x) + " -D  dim_y " + std::to_string(dim_y_local), compADD, YAML_args, process_Rank, N_size_Of_Cluster, comm);
 
 				comp.second->bufSize = (comp.second->bufSize * dim_x * dim_y_local);
 				compADD.second->bufSize = (compADD.second->bufSize * dim_x * dim_y_local);
@@ -118,18 +118,18 @@ namespace DisCosTiC
 				{
 					int bottom = rank - 1;
 					// std::cout<<"Who is sending : "<<rank<<" to whom : "<<bottom<<std::endl;
-					send = DisCosTiC->Isend(&src[0], dim_x * 8, MPI_DOUBLE, bottom, 2, MPI_COMM_WORLD, &requests[2], comp); // [TODO: replace dim_x by dim_x*8B]
+					send = DisCosTiC->Isend(&src[0], dim_x * 8, MPI_DOUBLE, bottom, 2, MPI_COMM_WORLD, &requests[2], comp);
 					// std::cout<<"Who is receiving : "<<rank<<" from whom : "<<bottom<<std::endl;
 
-					recv = DisCosTiC->Irecv(&src[0], dim_x * 8, MPI_DOUBLE, bottom, 1, MPI_COMM_WORLD, &requests[3], comp); // [TODO: replace dim_x by dim_x*8B]
+					recv = DisCosTiC->Irecv(&src[0], dim_x * 8, MPI_DOUBLE, bottom, 1, MPI_COMM_WORLD, &requests[3], comp);
 				}
 				if (rank + 1 < systemsize)
 				{
 					int top = rank + 1;
 					// std::cout<<"Who is sending : "<<rank<<" to whom : "<<top<<std::endl;
-					send = DisCosTiC->Isend(&src[(dim_y - 1) * dim_x], dim_x * 8, MPI_DOUBLE, top, 1, MPI_COMM_WORLD, &requests[0], comp); // [TODO: replace dim_x by dim_x*8B]
+					send = DisCosTiC->Isend(&src[(dim_y - 1) * dim_x], dim_x * 8, MPI_DOUBLE, top, 1, MPI_COMM_WORLD, &requests[0], comp);
 					// std::cout<<"Who is receiving : "<<rank<<" from whom : "<<top<<std::endl;
-					recv = DisCosTiC->Irecv(&src[(dim_y - 1) * dim_x], dim_x * 8, MPI_DOUBLE, top, 2, MPI_COMM_WORLD, &requests[1], comp); // [TODO: replace dim_x by dim_x*8B]
+					recv = DisCosTiC->Irecv(&src[(dim_y - 1) * dim_x], dim_x * 8, MPI_DOUBLE, top, 2, MPI_COMM_WORLD, &requests[1], comp); 
 				}
 				// Simulating dummy send and recv for allgather
 				if (rank + 1 == systemsize)

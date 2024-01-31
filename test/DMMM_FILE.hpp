@@ -107,12 +107,10 @@ namespace DisCosTiC
 				double src[dim_x][dim_y_local];
 				MPI_Request requests[4] = {MPI_REQUEST_NULL, MPI_REQUEST_NULL, MPI_REQUEST_NULL, MPI_REQUEST_NULL};
 
-				comp = DisCosTiC->Exec("COMP:TOL=1.3||TnOL=1.0|TL1L2=4.0|TL2L3=12.0|TL3Mem=5.5|TOLSecondary=1.3||TnOLSecondary=1.0|TL1L2Secondary=4.0|TL2L3Secondary=12.0|TL3MemSecondary=5.5//" + std::to_string(ECM_core) + "+" + std::to_string(remainder_cores), recv, YAML_args, process_Rank, N_size_Of_Cluster, comm);
+				comp = DisCosTiC->Exec("FILE:DMMM.c//BREAK:" + CFG_args.getValue<std::string>("benchmark_kernel") + "//./nodelevel/machine-files/" + arch_name + ".yml//" + std::to_string(ECM_core) + "+" + std::to_string(remainder_cores) + "//-D M " + std::to_string(dim_x) + " -D  N " + std::to_string(dim_y_local), recv, YAML_args, process_Rank, N_size_Of_Cluster, comm);
 
-				comp.second->bufSize = (comp.second->bufSize * dim_x * dim_y_local) + CFG_args.getValue<DisCosTiC_Datatype>("penalty");
-				
+				comp.second->bufSize = (comp.second->bufSize * dim_x * dim_y_local);
 				// std::cout<<"Runtime : "<<comp.second->bufSize<<std::endl;
-				
 				if (rank > 0)
 				{
 					int bottom = rank - 1;

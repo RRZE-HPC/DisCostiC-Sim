@@ -114,7 +114,7 @@ namespace DisCosTiC
 
 				MPI_Request requests[4] = {MPI_REQUEST_NULL, MPI_REQUEST_NULL, MPI_REQUEST_NULL, MPI_REQUEST_NULL};
 
-				comp = DisCosTiC->Exec("FILE:POISSONNS.c//BREAK:" + CFG_args.getValue<std::string>("benchmark_kernel") + "//./nodelevel/machine-files/" + arch_name + ".yml//" + std::to_string(ECM_core) + "+" + std::to_string(remainder_cores) + "//-D imax " + std::to_string(imax) + " -D  jmaxLocal " + std::to_string(jmaxLocal), recv, YAML_args, process_Rank, N_size_Of_Cluster, comm);
+				comp = DisCosTiC->Exec("FILE:SOR.c//BREAK:" + CFG_args.getValue<std::string>("benchmark_kernel") + "//./nodelevel/machine-files/" + arch_name + ".yml//" + std::to_string(ECM_core) + "+" + std::to_string(remainder_cores) + "//-D imax " + std::to_string(imax) + " -D  jmaxLocal " + std::to_string(jmaxLocal), recv, YAML_args, process_Rank, N_size_Of_Cluster, comm);
 
 				// std::cout<<"Offered cycles : "<<comp.second->bufSize<<std::endl;
 
