@@ -31,7 +31,7 @@
     * [🗄️ 4. Statistical or log data](#stat)
   * [💻 System model](#cluster-configuration)
     * [🔌 Cluster model](#cluster)
-    * [🔌 Network model](#network)
+    * [🔌 Interconnect model](#interconnect)
     * [🔌 Node model](#node)
   * [👩‍💻 Automating DSEL generation through static analysis](#automating-dsel-generation-through-static-analysis)
     * [📝 Essential DisCostiC routines](#essential-routines)
@@ -126,54 +126,54 @@ One way to check the installation is to print the version and the help of the Di
 
 The [test](test) folder in DisCostiC offers multiple MPI-parallelized programs (`benchmark_kernel`) in distinct functionality for computation (`kernel_mode`) and communication (`exchange_mode`). For illustration, a few examples are given below:
 
-`benchmark_kernel`                 | Description
---------------------- | -------------
-`HEAT`          |       Two-dimensional five-point Jacobi kernel with communication
-`SOR`          |    Gauss-Seidel Successive Over-Relaxation solver with communication
-`DMMM`               | Dense Matrix Matrix Multiplication kernel with communication
-`DMVM`               | Dense Matrix Vector Multiplication kernel with communication
-`DMVM-TRANSPOSE`     | Dense Matrix Transpose Vector Multiplication kernel with communication
-`HEATHEAT`                | Back-to-back two HEAT kernels with communication
-`HEATSOR`                | Back-to-back HEAT and SOR kernels with communication
-`HEATDIVIDE`                | Back-to-back HEAT and DIVIDE kernels with communication
-`HPCG`               | High Performance Conjugate Gradient
-`STENCIL-3D-7PT`                | Three-dimensional seven point stencil kernel with communication
-`STENCIL-3D-27PT`                | Three-dimensional twenty seven point stencil kernel with communication
-`STENCIL-UXX`                | UXX stencil kernel with communication
-`STENCIL-3D-LONGRANGE`                | 3D long range stencil kernel with communication
-`STENCIL-1D-3PT`                | One-dimensional three point stencil kernel with communication
-`STREAM`                | STREAM Triad kernel with communication
-`SCHOENAUER`                | SCHOENAUER Triad kernel with communication
-`SCHOENAUER-DIV`                | SCHOENAUER divide Triad kernel with communication
-`WAXPY`                | WAXPY kernel with communication
-`DAXPY`                | DAXPY kernel with communication
-`SUM`                | SUM kernel with communication
-`VECTOR-SUM`                | Vector SUM kernel with communication
-`ADD`                | ADD kernel with communication
-`DIVIDE`                | DIVIDE kernel with communication
-`SCALE`                | SCALE kernel with communication
-`COPY`                | COPY kernel with communication
-`KAHAN-DOT`                | KAHAN-DOT kernel with communication
-`SCALAR-PRODUCT`                | Scalar Product kernel with communication
+|`benchmark_kernel`                 | Description   |
+|--------------------- | ------------- |
+|`HEAT`          |       Two-dimensional five-point Jacobi kernel with communication |
+|`SOR`          |    Gauss-Seidel Successive Over-Relaxation solver with communication |
+|`DMMM`               | Dense Matrix Matrix Multiplication kernel with communication |
+|`DMVM`               | Dense Matrix Vector Multiplication kernel with communication |
+|`DMVM-TRANSPOSE`     | Dense Matrix Transpose Vector Multiplication kernel with communication |
+|`HEATHEAT`                | Back-to-back two HEAT kernels with communication |
+|`HEATSOR`                | Back-to-back HEAT and SOR kernels with communication |
+|`HEATDIVIDE`                | Back-to-back HEAT and DIVIDE kernels with communication |
+|`HPCG`               | High Performance Conjugate Gradient |
+|`STENCIL-3D-7PT`                | Three-dimensional seven point stencil kernel with communication |
+|`STENCIL-3D-27PT`                | Three-dimensional twenty seven point stencil kernel with communication |
+|`STENCIL-UXX`                | UXX stencil kernel with communication |
+|`STENCIL-3D-LONGRANGE`                | 3D long range stencil kernel with communication |
+|`STENCIL-1D-3PT`                | One-dimensional three point stencil kernel with communication |
+|`STREAM`                | STREAM Triad kernel with communication |
+|`SCHOENAUER`                | SCHOENAUER Triad kernel with communication |
+|`SCHOENAUER-DIV`                | SCHOENAUER divide Triad kernel with communication |
+|`WAXPY`                | WAXPY kernel with communication |
+|`DAXPY`                | DAXPY kernel with communication |
+|`SUM`                | SUM kernel with communication |
+|`VECTOR-SUM`                | Vector SUM kernel with communication |
+|`ADD`                | ADD kernel with communication |
+|`DIVIDE`                | DIVIDE kernel with communication |
+|`SCALE`                | SCALE kernel with communication |
+|`COPY`                | COPY kernel with communication |
+|`KAHAN-DOT`                | KAHAN-DOT kernel with communication |
+|`SCALAR-PRODUCT`                | Scalar Product kernel with communication |
 
 
 The following `kernel_mode` is exclusively offered for the flexibility of the framework; the simulator's prediction remains unaffected by the selection of the `kernel_mode`. Further explanation of this mode can be found in the [Essential DisCostiC routines](#essential-routines) section.
 
-`kernel_mode`                 | Integrated tool | Description
---------------------- | ------------- | -------------
-`COMP`          |   no external tool integrated |  This directly embeds the single-core pre-recorded ECM performance model data of the computational kernel into the simulator. 
-`LBL`           |   no external tool integrated |  This reads the pre-recorded ECM performance model data for the computational kernel from an external file located at [nodelevel/configs](nodelevel/configs) folder.
-`SRC`           |   [Kerncraft](https://github.com/RRZE-HPC/kerncraft) integrated      |  This directly embeds the source code of the computational kernel into the simulator.
-`FILE`          |   [Kerncraft](https://github.com/RRZE-HPC/kerncraft) integrated      |  This reads the source code for the computational kernel from an external file located at [nodelevel/kernels](nodelevel/kernels) folder. 
+| `kernel_mode`                 | Integrated tool | Description |
+| --------------------- | ------------- | ------------- |
+| `COMP`          |   no external tool integrated |  This directly embeds the single-core pre-recorded ECM performance model data of the computational kernel into the simulator. |
+| `LBL`           |   no external tool integrated |  This reads the pre-recorded ECM performance model data for the computational kernel from an external file located at [nodelevel/configs](nodelevel/configs) folder. |
+| `SRC`           |   [Kerncraft](https://github.com/RRZE-HPC/kerncraft) integrated      |  This directly embeds the source code of the computational kernel into the simulator. |
+| `FILE`          |   [Kerncraft](https://github.com/RRZE-HPC/kerncraft) integrated      |  This reads the source code for the computational kernel from an external file located at [nodelevel/kernels](nodelevel/kernels) folder. |
 
 The following `exchange_mode` is provided in LBL mode to enable model-based exploration through experimenting with various communication patterns in MPI applications. 
 
-`exchange_mode`                  | Description
---------------------- | -------------
-`message_size`          |       It specifies the size of the message to be exchanged in bytes.
-`step_size`          |       It describes the step size of the message exchange as an int (1: distance one communication, 2: distance two communication, ...).
-`direction`          |       It specifies the direction of message exchange as an int (1: uni-directional upwards shift in only positive direction, 2: bi-directional upwards and downwards shift in both positive and negative directions).
-`periodic`          |       It enables or disables the communication periodicity as a bool (0: false, 1: true).
+| `exchange_mode`                  | Description |
+| --------------------- | ------------- |
+| `message_size`          |       It specifies the size of the message to be exchanged in bytes. |
+| `step_size`          |       It describes the step size of the message exchange as an int (1: distance one communication, 2: distance two communication, ...). |
+| `direction`          |       It specifies the direction of message exchange as an int (1: uni-directional upwards shift in only positive direction, 2: bi-directional upwards and downwards shift in both positive and negative directions). |
+| `periodic`          |       It enables or disables the communication periodicity as a bool (0: false, 1: true). |
 
 The [config.cfg](config.cfg) file can be edited to select the `benchmark_kernel` and `kernel_mode`. More information about this `config.cfg` file is available in the [DisCostiC help](#help) documentation.
 
@@ -182,12 +182,12 @@ The [config.cfg](config.cfg) file can be edited to select the `benchmark_kernel`
 
 The compilation offers the following choices to enable the output report's data format generation and to enable the tracing of the simulator's own implementation. An executable will be generated after compilation. 
 
-Command                  | Description
---------------------- | -------------
-`make`          | This enables JSON data format without ITAC profiling of simulator implementation.
-`make otf2`          | This enables both JSON and OTF2 data format without ITAC profiling of simulator implementation.
-`make trace_MPI`          | This enables JSON data format and the standard ITAC tracing mode of simulator implementation with the information about MPI call functions (enabled flag: `-trace`).
-`make trace_all`               | This enables JSON data format and the verbose ITAC tracing mode of simulator implementation with the information on both user-defined and MPI call functions (enabled flag: `-trace -tcollect flag`).
+| Command                  | Description |
+| --------------------- | ------------- |
+| `make`          | This enables JSON data format without ITAC profiling of simulator implementation. |
+| `make otf2`          | This enables both JSON and OTF2 data format without ITAC profiling of simulator implementation. |
+| `make trace_MPI`          | This enables JSON data format and the standard ITAC tracing mode of simulator implementation with the information about MPI call functions (enabled flag: `-trace`). |
+| `make trace_all`               | This enables JSON data format and the verbose ITAC tracing mode of simulator implementation with the information on both user-defined and MPI call functions (enabled flag: `-trace -tcollect flag`). |
 
 
 <a name="run"></a>
@@ -195,10 +195,10 @@ Command                  | Description
 
 In the batch script, the number of the simulator processes is configured as the number of simulated processes plus one. To run the batch script on any system, ITAC profiling can be enabled or disabled, which will or will not dump the simulator's own trace in ITAC:
 
-Command                  | Description
---------------------- | -------------
-`sbatch Run_Simulation.sh`          | This performs the simulation without tracing the own implementation of the simulator using ITAC.
-`sbatch Run_Simulation_ITAC.sh`          | This dumps the simulator's own trace into ITAC to investigate the implementation of the simulator. 
+| Command                  | Description |
+| --------------------- | ------------- |
+| `sbatch Run_Simulation.sh`          | This performs the simulation without tracing the own implementation of the simulator using ITAC. |
+| `sbatch Run_Simulation_ITAC.sh`          | This dumps the simulator's own trace into ITAC to investigate the implementation of the simulator. |
 
 
 The [Run_Simulation_ITAC.sh](Run_Simulation_ITAC.sh) script only generates a single STF file (`simulation.single.stf`) in the main directory due to the export of the following variables:
@@ -214,10 +214,10 @@ The formats, names and locations of output files in these environmental variable
 <a name="clean"></a>
 🔁 **Clean and uninstall**:thought_balloon:
 
-Command                  | Description
---------------------- | -------------
-`make clear`            |   This cleans up the working directory by removing all unnecessary DisCostiC files, such as *.dms, *.otf, *.csv files.
-`make uninstall`        |   This uninstalls the DisCostiC framework, including installed files and CMake-specific files.
+| Command                  | Description |
+| --------------------- | ------------- |
+| `make clear`            |   This cleans up the working directory by removing all unnecessary DisCostiC files, such as *.dms, *.otf, *.csv files. |
+| `make uninstall`        |   This uninstalls the DisCostiC framework, including installed files and CMake-specific files. |
 
 
 <a name="output"></a>
@@ -319,49 +319,49 @@ For the detailed documentation of the system model, please take a look at the [c
 
 The resource allocation, intercluster characteristics, and runtime modalities are all included in the cluster model.
 
-Metadata information                  | Description 
---------------------- | -------------
-`number_of_nodes`             		    | Number of utilizing nodes on a cluster 
-`task_per_node`			                | Number of utilizing cores on the node of a cluster 
-`number_of_processes`                   | Number of running processes on the cluster 
-`inter_cluster or heterogeneous`		    | Communication across clusters (0: inter cluster disabled; 1: inter cluster enabled)
-`number_of_iterations`                   | Number of iterations for the program run
-`dim_x, dim_y, dim_z`                   | Problem size for the program run; high-dimensional parameters will be disregarded for low-dimensional problems.
+| Metadata information                  | Description |
+| --------------------- | ------------- |
+| `number_of_nodes`             		    | Number of utilizing nodes on a cluster            |
+| `task_per_node`			                | Number of utilizing cores on the node of a cluster| 
+| `number_of_processes`                   | Number of running processes on the cluster          |
+| `inter_cluster or heterogeneous`		    | Communication across clusters (0: inter cluster disabled; 1: inter cluster enabled) |
+| `number_of_iterations`                   | Number of iterations for the program run |
+| `dim_x, dim_y, dim_z`                   | Problem size for the program run; high-dimensional parameters will be disregarded for low-dimensional problems. |
 
-<a name="network"></a>    
-🔌 **Network model**:thought_balloon:
+<a name="interconnect"></a>    
+🔌 **Interconnect model**:thought_balloon:
 
 The YAML formatted network files and the choice of performance model and mode of communication are included in the network model.
 
-Metadata information                  | Description
-------------------------------------- | -------------
-`name`                                      | Name of the YAML formatted interconnect file
-`intra_chip`							    | Communication inside chip
-`inter_chip`							    | Communication across chips
-`inter_node`							    | Communication across nodes
-`latency`							        | Latency in sec for various kinds of interconnects
-`bandwidth`							        | Bandwidth in GB/s for various kind of interconnects
-`eager_limit`							    | Data size in bytes at which communication mode changes from eager to rendezvous protocol
-`waitio_mode`                               | Mode of the WaitIO MPI library (socket, file or hybrid)
-`comm_model`                                | Performance model for communication (0: LogGP, 1: HOCKNEY)
+| Metadata information                  | Description | 
+| ------------------------------------- | ------------- | 
+| `name`                                      | Name of the YAML formatted interconnect file | 
+| `intra_chip`							    | Communication inside chip                      | 
+| `inter_chip`							    | Communication across chips                     | 
+| `inter_node`							    | Communication across nodes                        | 
+| `latency`							        | Latency in sec for various kinds of interconnects | 
+| `bandwidth`							        | Bandwidth in GB/s for various kind of interconnects | 
+| `eager_limit`							    | Data size in bytes at which communication mode changes from eager to rendezvous protocol | 
+| `waitio_mode`                               | Mode of the WaitIO MPI library (socket, file or hybrid) | 
+| `comm_model`                                | Performance model for communication (0: LogGP, 1: HOCKNEY) | 
 
 For illustration, a few examples of available [network files](interconnectlevel/network-files) are given below:
 
-Network files (YAML format)                 | Description
---------------------- | -------------
-[InfiniBand_WaitIO_intercluster](interconnectlevel/network-files/A64FX_InfiniBand_WaitIO_socket_intercluster.cfg)          |       Communication across clusters for WaitIO MPI library and InfiniBand interconnect
-[InfiniBand_WaitIO_internode](interconnectlevel/network-files/IcelakeSP_Platinum-8360Y_InfiniBand_WaitIO_socket_internode.cfg)          |       Communication across nodes for WaitIO MPI library and InfiniBand interconnect
-[InfiniBand_WaitIO_interchip](interconnectlevel/network-files/IcelakeSP_Platinum-8360Y_InfiniBand_WaitIO_socket_interchip.cfg)          |       Communication across chips for WaitIO MPI library and InfiniBand interconnect
-[InfiniBand_WaitIO_intrachip](interconnectlevel/network-files/IcelakeSP_Platinum-8360Y_InfiniBand_WaitIO_socket_intrachip.cfg)          |       Communication inside the chip for WaitIO MPI library and InfiniBand interconnect
-[Tofu-D_WaitIO_internode](interconnectlevel/network-files/A64FX_Tofu-D_WaitIO_socket_internode.cfg)          |       Communication across nodes for WaitIO MPI library and Tofu-D interconnect
-[Tofu-D_WaitIO_interchip](interconnectlevel/network-files/A64FX_Tofu-D_WaitIO_socket_interchip.cfg)          |       Communication across chips for WaitIO MPI library and Tofu-D interconnect
-[Tofu-D_WaitIO_intrachip](interconnectlevel/network-files/A64FX_Tofu-D_WaitIO_socket_intrachip.cfg)          |       Communication inside the chip for WaitIO MPI library and Tofu-D interconnect
-[InfiniBand_IntelMPI_internode](interconnectlevel/network-files/IcelakeSP_Platinum-8360Y_InfiniBand_IntelMPI_internode.cfg)          |       Communication across nodes for Intel MPI library and InfiniBand interconnect
-[InfiniBand_IntelMPI_interchip](interconnectlevel/network-files/IcelakeSP_Platinum-8360Y_InfiniBand_IntelMPI_interchip.cfg)          |       Communication across chips for Intel MPI library and InfiniBand interconnect
-[InfiniBand_IntelMPI_intrachip](interconnectlevel/network-files/IcelakeSP_Platinum-8360Y_InfiniBand_IntelMPI_intrachip.cfg)          |       Communication inside the chip for Intel MPI library and InfiniBand interconnect
-[OmniPath_IntelMPI_internode](interconnectlevel/network-files/BroadwellEP_E5-2630v4_OmniPath_IntelMPI_internode.cfg)          |       Communication across nodes for Intel MPI library and Omni-Path interconnect
-[OmniPath_IntelMPI_interchip](interconnectlevel/network-files/BroadwellEP_E5-2630v4_OmniPath_IntelMPI_interchip.cfg)          |       Communication across chips for Intel MPI library and Omni-Path interconnect
-[OmniPath_IntelMPI_intrachip](interconnectlevel/network-files/BroadwellEP_E5-2630v4_OmniPath_IntelMPI_intrachip.cfg)          |       Communication inside the chip for Intel MPI library and Omni-Path interconnect
+| Network files (YAML format)                 | Description | 
+| --------------------- | ------------- | 
+| [InfiniBand_WaitIO_intercluster](interconnectlevel/network-files/A64FX_InfiniBand_WaitIO_socket_intercluster.cfg)          |       Communication across clusters for WaitIO MPI library and InfiniBand interconnect | 
+| [InfiniBand_WaitIO_internode](interconnectlevel/network-files/IcelakeSP_Platinum-8360Y_InfiniBand_WaitIO_socket_internode.cfg)          |       Communication across nodes for WaitIO MPI library and InfiniBand interconnect | 
+| [InfiniBand_WaitIO_interchip](interconnectlevel/network-files/IcelakeSP_Platinum-8360Y_InfiniBand_WaitIO_socket_interchip.cfg)          |       Communication across chips for WaitIO MPI library and InfiniBand interconnect | 
+| [InfiniBand_WaitIO_intrachip](interconnectlevel/network-files/IcelakeSP_Platinum-8360Y_InfiniBand_WaitIO_socket_intrachip.cfg)          |       Communication inside the chip for WaitIO MPI library and InfiniBand interconnect | 
+| [Tofu-D_WaitIO_internode](interconnectlevel/network-files/A64FX_Tofu-D_WaitIO_socket_internode.cfg)          |       Communication across nodes for WaitIO MPI library and Tofu-D interconnect    | 
+| [Tofu-D_WaitIO_interchip](interconnectlevel/network-files/A64FX_Tofu-D_WaitIO_socket_interchip.cfg)          |       Communication across chips for WaitIO MPI library and Tofu-D interconnect    | 
+| [Tofu-D_WaitIO_intrachip](interconnectlevel/network-files/A64FX_Tofu-D_WaitIO_socket_intrachip.cfg)          |       Communication inside the chip for WaitIO MPI library and Tofu-D interconnect | 
+| [InfiniBand_IntelMPI_internode](interconnectlevel/network-files/IcelakeSP_Platinum-8360Y_InfiniBand_IntelMPI_internode.cfg)          |       Communication across nodes for Intel MPI library and InfiniBand interconnect | 
+| [InfiniBand_IntelMPI_interchip](interconnectlevel/network-files/IcelakeSP_Platinum-8360Y_InfiniBand_IntelMPI_interchip.cfg)          |       Communication across chips for Intel MPI library and InfiniBand interconnect | 
+| [InfiniBand_IntelMPI_intrachip](interconnectlevel/network-files/IcelakeSP_Platinum-8360Y_InfiniBand_IntelMPI_intrachip.cfg)          |       Communication inside the chip for Intel MPI library and InfiniBand interconnect  | 
+| [OmniPath_IntelMPI_internode](interconnectlevel/network-files/BroadwellEP_E5-2630v4_OmniPath_IntelMPI_internode.cfg)          |       Communication across nodes for Intel MPI library and Omni-Path interconnect     | 
+| [OmniPath_IntelMPI_interchip](interconnectlevel/network-files/BroadwellEP_E5-2630v4_OmniPath_IntelMPI_interchip.cfg)          |       Communication across chips for Intel MPI library and Omni-Path interconnect     | 
+| [OmniPath_IntelMPI_intrachip](interconnectlevel/network-files/BroadwellEP_E5-2630v4_OmniPath_IntelMPI_intrachip.cfg)          |       Communication inside the chip for Intel MPI library and Omni-Path interconnect | 
 
 
 <a name="node"></a>    
@@ -369,37 +369,37 @@ Network files (YAML format)                 | Description
 
 The machine files in YAML format, the selection of compiler settings and the performance model of computation are included in the node model.
 
-Metadata information                  | Description
---------------------- | -------------
-`name`                                      | Name of the YAML formatted processor file 
-`sockets_per_node`                          | Number of sockets in one node 
-`ccNUMA_domains_per_socket`                 | Number of ccNUMA domains in one socket 
-`cores_per_ccNUMA_domain`                   | Number of cores in one ccNUMA domain 
-`FP_instructions_per_cycle`					| Floating point instructions (ADD, MUL) per cycle 
-`FP_operations_per_instruction_(SP/DP)`		| Single or double precision floating point operations per instruction
-`clock_frequency`							| Clock frequency in GHz
-`memory_bandwidth`							| Memory bandwidth in GB/s
-`compiler-flags`                            | STD and SIMD optimizations of the compiler
-`pmodel`                                | Performance model for computation (Roofline, ECM)
+| Metadata information                  | Description | 
+| --------------------- | ------------- | 
+| `name`                                      | Name of the YAML formatted processor file | 
+| `sockets_per_node`                          | Number of sockets in one node | 
+| `ccNUMA_domains_per_socket`                 | Number of ccNUMA domains in one socket | 
+| `cores_per_ccNUMA_domain`                   | Number of cores in one ccNUMA domain | 
+| `FP_instructions_per_cycle`					| Floating point instructions (ADD, MUL) per cycle | 
+| `FP_operations_per_instruction_(SP/DP)`		| Single or double precision floating point operations per instruction | 
+| `clock_frequency`							| Clock frequency in GHz | 
+| `memory_bandwidth`							| Memory bandwidth in GB/s | 
+| `compiler-flags`                            | STD and SIMD optimizations of the compiler | 
+| `pmodel`                                | Performance model for computation (Roofline, ECM) | 
 
 For illustration, a few examples of available [machine files](nodelevel/machine-files) are given below:
 
-Machine files (YAML format)                 | Description
---------------------- | -------------
-[A64FX](nodelevel/machine-files/A64FX.yml)           |       48 core Fujitsu A64FX FX1000 CPU @ 1.8 GHz
-[IcelakeSP_Platinum-8360Y](nodelevel/machine-files/IcelakeSP_Platinum-8360Y.yml)          |      36 core Intel(R) Xeon(R) Icelake SP Platinum 8360Y CPU @ 2.4 GHz 
-[CascadelakeSP_Gold-6248_SNC](nodelevel/machine-files/CascadelakeSP_Gold-6248_SNC.yml)           |   20 core Intel(R) Xeon(R) Cascadelake SP Gold 6248 CPU @ 2.5 GHz  
-[SkylakeSP_Gold-5122](nodelevel/machine-files/SkylakeSP_Gold-5122.yml)           |       4 core Intel(R) Xeon(R) Skylake SP Gold 5122 CPU @ 3.6 GHz
-[SkylakeSP_Gold-6148](nodelevel/machine-files/SkylakeSP_Gold-6148.yml)           |       20 core Intel(R) Xeon(R) Skylake SP Gold 6148 CPU @ 2.4 GHz
-[SkylakeSP_Gold-6148_SNC](nodelevel/machine-files/SkylakeSP_Gold-6148_SNC.yml)           |    20 core Intel(R) Xeon(R) Skylake SP Gold 6148 CPU with SNC enabled @ 2.4 GHz   
-[SkylakeSP_Platinum-8147](nodelevel/machine-files/SkylakeSP_Platinum-8147_2.7GHz.yml)           |      24 core Intel(R) Xeon(R) Skylake SP Platinum 8174 CPU @ 3.1 GHz (2.7 GHz used)
-[BroadwellEP_E5-2630v4](nodelevel/machine-files/BroadwellEP_E5-2630v4.yml)           |       18 core Intel(R) Xeon(R) Broadwell EN/EP/EX E5-2697 v4 CPU @ 2.3 GHz
-[BroadwellEP_E5-2697v4_CoD](nodelevel/machine-files/BroadwellEP_E5-2697v4_CoD.yml)           |       18 core Intel(R) Xeon(R) Broadwell EN/EP/EX E5-2697 v4 CPU with CoD enabled @ 2.3 GHz
-[HaswellEP_E5-2695v3](nodelevel/machine-files/HaswellEP_E5-2695v3.yml)           |       14 core Intel(R) Xeon(R) Haswell EN/EP/EX E5-2695 v3 CPU @ 2.3 GHz
-[HaswellEP_E5-2695v3_CoD](nodelevel/machine-files/HaswellEP_E5-2695v3_CoD.yml)           |       14 core Intel(R) Xeon(R) Haswell EN/EP/EX E5-2695 v3 CPU with CoD enabled @ 2.3 GHz
-[IvyBridgeEP_E5-2660v2](nodelevel/machine-files/IvyBridgeEP_E5-2660v2.yml)           |       10 core Intel(R) Xeon(R) IvyBridge EN/EP/EX E5-2660 v2 CPU @ 2.2 GHz
-[IvyBridgeEP_E5-2690v2](nodelevel/machine-files/IvyBridgeEP_E5-2690v2.yml)           |       10 core Intel(R) Xeon(R) IvyBridge EN/EP/EX E5-2690 v2 CPU @ 3.0 GHz
-[SandyBridgeEP_E5-2680](nodelevel/machine-files/SandyBridgeEP_E5-2680.yml)           |    8 core Intel(R) Xeon(R) SandyBridge EN/EP E5-2680 CPU @ 2.7 GHz   
+| Machine files (YAML format)                 | Description | 
+| --------------------- | ------------- | 
+| [A64FX](nodelevel/machine-files/A64FX.yml)           |       48 core Fujitsu A64FX FX1000 CPU @ 1.8 GHz   | 
+| [IcelakeSP_Platinum-8360Y](nodelevel/machine-files/IcelakeSP_Platinum-8360Y.yml)          |      36 core Intel(R) Xeon(R) Icelake SP Platinum 8360Y CPU @ 2.4 GHz         | 
+| [CascadelakeSP_Gold-6248_SNC](nodelevel/machine-files/CascadelakeSP_Gold-6248_SNC.yml)           |   20 core Intel(R) Xeon(R) Cascadelake SP Gold 6248 CPU @ 2.5 GHz      | 
+| [SkylakeSP_Gold-5122](nodelevel/machine-files/SkylakeSP_Gold-5122.yml)           |       4 core Intel(R) Xeon(R) Skylake SP Gold 5122 CPU @ 3.6 GHz  |  
+| [SkylakeSP_Gold-6148](nodelevel/machine-files/SkylakeSP_Gold-6148.yml)           |       20 core Intel(R) Xeon(R) Skylake SP Gold 6148 CPU @ 2.4 GHz  | 
+| [SkylakeSP_Gold-6148_SNC](nodelevel/machine-files/SkylakeSP_Gold-6148_SNC.yml)           |    20 core Intel(R) Xeon(R) Skylake SP Gold 6148 CPU with SNC enabled @ 2.4 GHz   |   
+| [SkylakeSP_Platinum-8147](nodelevel/machine-files/SkylakeSP_Platinum-8147_2.7GHz.yml)           |      24 core Intel(R) Xeon(R) Skylake SP Platinum 8174 CPU @ 3.1 GHz (2.7 GHz used)     | 
+| [BroadwellEP_E5-2630v4](nodelevel/machine-files/BroadwellEP_E5-2630v4.yml)           |       18 core Intel(R) Xeon(R) Broadwell EN/EP/EX E5-2697 v4 CPU @ 2.3 GHz | 
+| [BroadwellEP_E5-2697v4_CoD](nodelevel/machine-files/BroadwellEP_E5-2697v4_CoD.yml)           |       18 core Intel(R) Xeon(R) Broadwell EN/EP/EX E5-2697 v4 CPU with CoD enabled @ 2.3 GHz | 
+| [HaswellEP_E5-2695v3](nodelevel/machine-files/HaswellEP_E5-2695v3.yml)           |       14 core Intel(R) Xeon(R) Haswell EN/EP/EX E5-2695 v3 CPU @ 2.3 GHz | 
+| [HaswellEP_E5-2695v3_CoD](nodelevel/machine-files/HaswellEP_E5-2695v3_CoD.yml)           |       14 core Intel(R) Xeon(R) Haswell EN/EP/EX E5-2695 v3 CPU with CoD enabled @ 2.3 GHz  | 
+| [IvyBridgeEP_E5-2660v2](nodelevel/machine-files/IvyBridgeEP_E5-2660v2.yml)           |       10 core Intel(R) Xeon(R) IvyBridge EN/EP/EX E5-2660 v2 CPU @ 2.2 GHz | 
+| [IvyBridgeEP_E5-2690v2](nodelevel/machine-files/IvyBridgeEP_E5-2690v2.yml)           |       10 core Intel(R) Xeon(R) IvyBridge EN/EP/EX E5-2690 v2 CPU @ 3.0 GHz | 
+| [SandyBridgeEP_E5-2680](nodelevel/machine-files/SandyBridgeEP_E5-2680.yml)           |    8 core Intel(R) Xeon(R) SandyBridge EN/EP E5-2680 CPU @ 2.7 GHz   | 
 
 <a name="help"></a>    
 **DisCostiC help**:thought_balloon:
@@ -484,17 +484,17 @@ pip install -r staticanalysis/requirements.txt
 python staticanalysis/Convert-<benchmark_kernel>.py
 ```
 
-Files                  | Description
---------------------- | -------------
-`Convert-<benchmark_kernel>.py`          | A helper script that takes the original code and, through annotation, locates code loops and communication and identifies user-defined variables, such as dim_x and dim_y in the Cartesian stencil heat.c code, and ultimately generates DSEL code.
-`requirements.txt`               | Each (sub)dependency is listed and pinned using "==" to specify a particular package version; see [requirements.txt](staticanalysis/requirements.txt). This project makes use of the lightweight `Python tree data structure` [anytree==2.8.0](https://pypi.org/project/anytree) and `type hints for Python 3.7+` [typing_extensions==4.4.0](https://pypi.org/project/typing-extensions). These dependencies are later installed (normally in a virtual environment) through pip using the `pip install -r staticanalysis/requirements.txt` command. The generated tree's syntax is the same as the original C/C++ code.
+| Files                  | Description | 
+| --------------------- | ------------- | 
+| `Convert-<benchmark_kernel>.py`          | A helper script that takes the original code and, through annotation, locates code loops and communication and identifies user-defined variables, such as dim_x and dim_y in the Cartesian stencil heat.c code, and ultimately generates DSEL code. | 
+| `requirements.txt`               | Each (sub)dependency is listed and pinned using "==" to specify a particular package version; see [requirements.txt](staticanalysis/requirements.txt). This project makes use of the lightweight `Python tree data structure` [anytree==2.8.0](https://pypi.org/project/anytree) and `type hints for Python 3.7+` [typing_extensions==4.4.0](https://pypi.org/project/typing-extensions). These dependencies are later installed (normally in a virtual environment) through pip using the `pip install -r staticanalysis/requirements.txt` command. The generated tree's syntax is the same as the original C/C++ code. | 
 
 For the specified program, this will produce the following files:
 
-Files                  | Location       |Description
---------------------- | ------------- | -------------
-`<benchmark_kernel>.c`          |  [nodelevel/kernels](nodelevel/kernels)  | It comprises only the generated computational loop kernel of the MPI parallel program.
-`<benchmark_kernel>_<kernel_mode>.hpp`   |  [test](test)               | It includes the entire generated code expressed in DisCostiC DSEL language.
+| Files                  | Location       |Description | 
+| --------------------- | ------------- | ------------- | 
+| `<benchmark_kernel>.c`          |  [nodelevel/kernels](nodelevel/kernels)  | It comprises only the generated computational loop kernel of the MPI parallel program. | 
+| `<benchmark_kernel>_<kernel_mode>.hpp`   |  [test](test)               | It includes the entire generated code expressed in DisCostiC DSEL language. | 
 
 <a name="essential-routines"></a>
 📝 **Essential DisCostiC routines**:thought_balloon:
@@ -588,21 +588,21 @@ To read the HTML and LaTeX documentation, point to a web browser at [doc/html/in
 
 * **Single Operation**: accessors for local operations and their individual information at a certain grid point
 
-Metadata information                  | Description
-------------------------------------- | -------------
-`bufSize`						| Number of bytes (data size) transmitted in the communication operation (no real buffer size for comp, just added for completeness)
-`DepOperations`				| Dependencies for blocking routines, i.e., other operations that depend on this current operation
-`IdepOperations`				| Dependencies for non-blocking routines, i.e., other operations that depend on the current operation
-`depCount`					| Number of dependencies for this current operation
-`label`						| Index/identifier of this current operation for each rack
-`target` 						| Rank of target/partner (source for recv or destination for send or no real target for comp but added for completeness)
-`rank`      					| Owning rank of this current operation
-`tag`							| Tag of this current operation	(no real tag for comp, just added for completeness)
-`node`						| Node or processing element for this current operation						
-`network`						| Type of network for this current operation
-`time`						|	Ending time of this current operation
-`starttime`					|	Starting time of this current operation
-`type`								| Type of this current operation
+| Metadata information                  | Description   | 
+| ------------------------------------- | ------------- | 
+| `bufSize`						| Number of bytes (data size) transmitted in the communication operation (no real buffer size for comp, just added for completeness)        | 
+| `DepOperations`				| Dependencies for blocking routines, i.e., other operations that depend on this current operation      | 
+| `IdepOperations`				| Dependencies for non-blocking routines, i.e., other operations that depend on the current operation   | 
+| `depCount`					| Number of dependencies for this current operation             | 
+| `label`						| Index/identifier of this current operation for each rack      | 
+| `target` 						| Rank of target/partner (source for recv or destination for send or no real target for comp but added for completeness)    | 
+| `rank`      					| Owning rank of this current operation     | 
+| `tag`							| Tag of this current operation	(no real tag for comp, just added for completeness) | 
+| `node`						| Node or processing element for this current operation		    | 				
+| `network`						| Type of network for this current operation    | 
+| `time`						|	Ending time of this current operation   | 
+| `starttime`					|	Starting time of this current operation | 
+| `type`								| Type of this current operation    | 
 
 ```cpp
 enum Operation_t {		| Operation_t defines different operation types of entities
@@ -614,9 +614,9 @@ enum Operation_t {		| Operation_t defines different operation types of entities
 ```
 
   				
-Metadata information | Description 
---------------------- | -------------   
-`mode`	|  mode of this current calling operation  
+| Metadata information | Description | 
+| --------------------- | -------------  |  
+| `mode`	|  mode of this current calling operation |  
 
 ```cpp
 enum Mode_t {		| Mode_t defines the operation type of communication
@@ -627,9 +627,9 @@ enum Mode_t {		| Mode_t defines the operation type of communication
 
 * **Performance model**
 
-Metadata information     | Description
---------------------- | -------------
-`model`				| Analytic first-principle performance model for computation and communication
+| Metadata information     | Description | 
+| --------------------- | ------------- | 
+| `model`				| Analytic first-principle performance model for computation and communication | 
 
 ```cpp
 enum Model_t {		| Mode_t defines the used performance model 
@@ -658,11 +658,11 @@ enum Model_t {		| Mode_t defines the used performance model
 
 The underlying principle of parallel simulation is that each operation's entire data is transmitted via blocking or non-blocking MPI routines to the processes it communicates with.
 
-Terms                  | Description
---------------------- | -------------
-`simulated processes P_i`    | processes from the application point of view
-`simulator processes Q_i`    | processes from the parallel simulation framework point of view
-`master simulator process Q_0`  | master process from the parallel simulation framework point of view
+| Terms                  | Description | 
+| --------------------- | ------------- | 
+| `simulated processes P_i`    | processes from the application point of view | 
+| `simulator processes Q_i`    | processes from the parallel simulation framework point of view | 
+| `master simulator process Q_0`  | master process from the parallel simulation framework point of view | 
 
 
 **Initialization**:thought_balloon:

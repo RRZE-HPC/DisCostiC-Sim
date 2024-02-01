@@ -1,0 +1,27 @@
+{
+  "title": "DisCostiC",
+  "description": "Distributed Cost in Cluster (DisCostiC): A cross-architecture resource-based parallel simulation framework that can efficiently predict the performance of real or hypothetical massively parallel MPI programs on current and future heterogeneous systems.",
+  "creators": [
+    {
+      "affiliation": "Erlangen National High Performance Computing Center (NHR@FAU), Friedrich-Alexander-Universität Erlangen-Nürnberg",
+      "name": "Ayesha Afzal",
+      "orcid": "0000-0001-5061-0438"
+    }
+  ],
+  "upload_type": "software",
+  "license": "AGPL-3.0",
+  "access_right": "open",
+  "keywords": [
+    "performance-simulation",
+    "performance-engineering",
+    "performance-analysis",
+    "parallel-computing",
+    "current-clusters",
+    "future-clusters",
+    "open-source"
+  ],
+  "notes": "This research was partly supported by the Competence Network for Scientific High-Performance Computing in Bavaria (KONWIHR) under project ``OMI4Papps.'' ",
+  "communities": [
+    {"identifier": "fau"}
+  ]
+}
