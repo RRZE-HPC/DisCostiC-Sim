@@ -1,11 +1,11 @@
 # DisCostiC: Distributed Cost in Cluster
 
-  </a><a href="https://github.com/RRZE-HPC/DisCostiC-Sim/tree/main/doc/html/index.html">
-  <img alt="HTML Doxygen doc" src="https://img.shields.io/badge/read-the_docs-red" />
+  </a><a href="https://htmlpreview.github.io/?https://github.com/RRZE-HPC/DisCostiC-Sim/tree/main/doc/html/index.html">
+  <img alt="HTML Doxygen doc" src="https://img.shields.io/badge/HTML%20Doxygen%20Documentation%20-Read%20now!-red" />
   </a><a href="https://github.com/RRZE-HPC/DisCostiC-Sim/tree/main/doc/DisCostiC.pdf">
-  <img alt="LaTeX Doxygen doc" src="https://img.shields.io/badge/read-the_docs-blue" />
+  <img alt="LaTeX Doxygen doc" src="https://img.shields.io/badge/LaTeX%20Doxygen%20Documentation%20-Read%20now!-green" />
   </a><a href="https://matrix.to/#/!OeNPngEkrqRRkBJjwz:gwaaf.rrze.fau.de?via=gwaaf.rrze.fau.de">
-  <img alt="Join the discussion on Matrix" src="https://img.shields.io/badge/Discussions%20%26%20Support-Chat%20now!-blue" />
+  <img alt="Join the discussion on Matrix" src="https://img.shields.io/badge/Discussions%20%26%20Support-Chat%20now!-yellow" />
   </a><a href="https://www.linkedin.com/in/ayeshaafzal-/" target="\_parent">
   <img alt="linkedin" src="https://i.stack.imgur.com/gVE0j.png" />
   <a href="https://github.com/AyeshaAfzal91" target="\_parent">
