@@ -1,6 +1,6 @@
 # DisCostiC: Distributed Cost in Cluster
 
-  </a><a href="http://htmlpreview.github.io/?https://github.com/RRZE-HPC/DisCostiC-Sim/blob/main/doc/html/index.html">
+  </a><a href="https://rrze-hpc.github.io/DisCostiC-Sim/doc/html/index.html">
   <img alt="HTML Doxygen doc" src="https://img.shields.io/badge/HTML%20Doxygen%20Doc%20-Read%20now!-red" />
   </a><a href="https://github.com/RRZE-HPC/DisCostiC-Sim/tree/main/doc/DisCostiC.pdf">
   <img alt="LaTeX Doxygen doc" src="https://img.shields.io/badge/LaTeX%20Doxygen%20Doc%20-Read%20now!-green" />
