@@ -14,6 +14,8 @@
   <img alt="" src="https://img.shields.io/twitter/follow/AyeshaHamad4.svg?style=social&label=Follow" />
   </a><a href="https://doi.org/10.5281/zenodo.10606291">
   <img alt="DisCostiC Zenodo release" src="https://zenodo.org/badge/DOI/Zenodo%20Release.svg" />
+  </a><a href="https://github.com/RRZE-HPC/DisCostiC-Sim/releases">
+  <img alt="HTML Doxygen doc" src="https://img.shields.io/badge/GitHub%20Release%20-See%20now!-purple" />
 
 ## Table of Contents
 
