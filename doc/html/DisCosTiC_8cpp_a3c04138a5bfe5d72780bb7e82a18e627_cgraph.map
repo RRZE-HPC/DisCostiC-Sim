@@ -1,0 +1,29 @@
+<map id="main" name="main">
+<area shape="rect" id="node1" title=" " alt="" coords="5,631,56,658"/>
+<area shape="rect" id="node2" href="$classUserInterface_1_1ChromeTraceViz.html#a392b6eb013d01b11acf856a579a9baa2" title=" " alt="" coords="121,5,309,47"/>
+<area shape="rect" id="node3" href="$classUserInterface_1_1ChromeTraceViz.html#a8861084e865e3f60d5e146ae30b9ce0b" title=" " alt="" coords="121,71,309,112"/>
+<area shape="rect" id="node4" href="$classUserInterface_1_1TimeRankOP.html#a4d86cc4afa20a03fda9a84886a71434a" title="print time taken by execution to output file" alt="" coords="121,136,309,177"/>
+<area shape="rect" id="node5" href="$classUserInterface_1_1ChromeTraceViz.html#a35769a5592e7aeee292e77eaf414eaec" title=" " alt="" coords="121,201,309,243"/>
+<area shape="rect" id="node6" href="$DisCosTiC_8cpp.html#a6e1c00956a876e48be99e9bd01a70d44" title=" " alt="" coords="189,267,240,294"/>
+<area shape="rect" id="node7" href="$DisCosTiC_8cpp.html#ade96a80435c6f4e8a524980262a7d921" title=" " alt="" coords="183,318,246,345"/>
+<area shape="rect" id="node8" href="$classUserInterface_1_1ChromeTraceViz.html#ae4c9903adea98b5dc353fc054c7e2f0e" title=" " alt="" coords="121,369,309,411"/>
+<area shape="rect" id="node9" href="$classUserInterface_1_1ChromeTraceViz.html#a0500ef2f580167a9977b913f8279fd85" title=" " alt="" coords="121,435,309,476"/>
+<area shape="rect" id="node10" href="$classDisCosTiC_1_1Benchmark.html#aa042d196d06e6aff9c846ec46247b22e" title="the maximum number of the nodes" alt="" coords="134,500,295,541"/>
+<area shape="rect" id="node11" href="$classDisCosTiC_1_1Benchmark.html#a5410a9000fc79006e18a96a827177c6a" title="the maximum number of the network interface controller" alt="" coords="134,565,295,607"/>
+<area shape="rect" id="node12" href="$classDisCosTiC_1_1Grid.html#ad1fba65d7e273b386d017c07432866a9" title="default constructor" alt="" coords="116,631,313,658"/>
+<area shape="rect" id="node13" href="$namespaceDisCosTiC.html#afb9417161e6b74620c53e917e655e1b2" title=" " alt="" coords="396,745,547,771"/>
+<area shape="rect" id="node14" href="$classDisCosTiC_1_1Grid.html#ab30f91b4ded705e208d87c8978e08a19" title="get the initial root operations ordered by their type for all ranks and time steps" alt="" coords="123,733,306,775"/>
+<area shape="rect" id="node15" href="$classDisCosTiC_1_1Grid.html#a7a28fe5411bec669ddc0c348d78990f3" title="get the all operations ordered by their type for all ranks and time steps" alt="" coords="128,799,301,840"/>
+<area shape="rect" id="node16" href="$classUserInterface_1_1ConfigParser.html#a666972bbb29c3b07fa9cd17bbd2b8976" title="a function that retrieves the value of a specific key" alt="" coords="122,864,307,905"/>
+<area shape="rect" id="node18" href="$classUserInterface_1_1NetworkConfigParser.html#a5c5a470b443cd22910ca8b3bd01ad4e8" title="a function that retrieves the value of a specific key" alt="" coords="117,929,313,971"/>
+<area shape="rect" id="node20" href="$classUserInterface_1_1TimeRankOP.html#ad78a19db1313b4e09b86fe63d65fa0f1" title="print time taken by message transmission to output file" alt="" coords="104,995,325,1022"/>
+<area shape="rect" id="node21" href="$classUserInterface_1_1TimeRankOP.html#a47cc4ec01d71b0375ec41a338977ccc5" title="print time taken by overhead at receiver side to output file" alt="" coords="121,1047,309,1088"/>
+<area shape="rect" id="node22" href="$classUserInterface_1_1TimeRankOP.html#a4c0ce302bf4a019b00b3d22ba8ab9458" title="print time taken by overhead at sender side to output file" alt="" coords="121,1112,309,1153"/>
+<area shape="rect" id="node23" href="$classUserInterface_1_1NetworkConfigParser.html#aeda0acb9575397eb45293aff9f1eb942" title=" " alt="" coords="117,1177,313,1219"/>
+<area shape="rect" id="node27" href="$classUserInterface_1_1NetworkConfigParser.html#ad554c1e96fff315889f87ae38e4b89a4" title=" " alt="" coords="117,1243,313,1284"/>
+<area shape="rect" id="node17" href="$classUserInterface_1_1ConfigParser.html#a9e7ab9cdb6f91f2ffeb1eeddb1455935" title="a function for finding the key" alt="" coords="379,864,564,905"/>
+<area shape="rect" id="node19" href="$classUserInterface_1_1NetworkConfigParser.html#a0c417a92d7425166adb803434e0e317d" title=" " alt="" coords="373,929,569,971"/>
+<area shape="rect" id="node24" href="$classUserInterface_1_1NetworkConfigParser.html#a6a2f72bd0ca9e36d3e2c8bfd212e679c" title="a function that parse the line by calling above mentioed functions" alt="" coords="373,1112,569,1153"/>
+<area shape="rect" id="node25" href="$classUserInterface_1_1NetworkConfigParser.html#a818ea46e6c0c0fac637abc4c83596b24" title="a function that removes everything from the semicolon (including it) to the end of the line." alt="" coords="373,1177,569,1219"/>
+<area shape="rect" id="node26" href="$classUserInterface_1_1NetworkConfigParser.html#a646cbf92b80976f6b75553c3d2b336af" title="a function that returns false if a non&#45;space character was found, true otherwise. The function is &quot;co..." alt="" coords="373,1243,569,1284"/>
+</map>

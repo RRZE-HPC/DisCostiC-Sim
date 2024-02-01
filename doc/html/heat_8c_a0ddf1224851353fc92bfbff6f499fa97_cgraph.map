@@ -1,0 +1,10 @@
+<map id="main" name="main">
+<area shape="rect" id="node1" title=" " alt="" coords="5,56,56,83"/>
+<area shape="rect" id="node2" href="$heat_8c.html#a2aa970e7d7da8734a9a168d7a53b61c4" title="Deinitialize and free resources associated with domain." alt="" coords="107,5,160,32"/>
+<area shape="rect" id="node3" href="$heat_8c.html#a3d53f9648a889e8d3e2d505c9bbf2d87" title="Allocate and initialize domain and grids. Aborts on error." alt="" coords="114,56,153,83"/>
+<area shape="rect" id="node6" href="$heat_8c.html#a30ccc4fe6c893f98279038b8af2cb245" title="Perform a fixed amount of iterations over given domain." alt="" coords="104,107,163,133"/>
+<area shape="rect" id="node4" href="$heat_8c.html#a692fee39f53941850b3782dfbf7ecbc2" title="Initialize grid @grid_idx in domain." alt="" coords="211,5,309,32"/>
+<area shape="rect" id="node5" href="$heat_8c.html#a94f155fcce337a2b9d4719ed8042cbbe" title=" " alt="" coords="226,56,294,83"/>
+<area shape="rect" id="node7" href="$heat_8c.html#a32d45bf6ecbd66243a65ef9b6a360006" title="Exchange ghost cells." alt="" coords="221,107,299,133"/>
+<area shape="rect" id="node8" href="$heat_8c.html#a8f46bc0c0569fa9c523455f729af2cbb" title="Perform one sweep over the domain." alt="" coords="235,157,285,184"/>
+</map>

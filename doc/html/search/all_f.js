@@ -1,0 +1,19 @@
+var searchData=
+[
+  ['ofs_417',['ofs',['../classUserInterface_1_1ChromeTraceViz.html#aff7632f2378f90bcc0ebaaeb706d0df9',1,'UserInterface::ChromeTraceViz']]],
+  ['oldrtz_418',['oldrtz',['../HPCG_8c.html#a16b73a73a4d673ba05426e3070fe2a2c',1,'HPCG.c']]],
+  ['omega_419',['omega',['../structSolver.html#a0826c5948b9bb7566324989602eaec43',1,'Solver::omega()'],['../SOR-LINEAR_8c.html#a98ecc32b7ac0cf654d9f883cbe5cab35',1,'omega():&#160;SOR-LINEAR.c'],['../SOR_8c.html#a98ecc32b7ac0cf654d9f883cbe5cab35',1,'omega():&#160;SOR.c']]],
+  ['operation_5ft_420',['Operation_t',['../group__DisCosTiC.html#gabf0efd29df4692ca78a929b750cb8f0d',1,'DisCosTiC']]],
+  ['operations_421',['Operations',['../namespaceDisCosTiC.html#a4b6ce2f5f3618a7ee94d9e4c4dec76b3',1,'DisCosTiC']]],
+  ['operator_21_3d_422',['operator!=',['../structDisCosTiC_1_1std__iter.html#a839c087f2a1e80e3a06d5d31f05538e9',1,'DisCosTiC::std_iter::operator!=()'],['../structDisCosTiC_1_1iteratorRange_1_1iteratorRangeStep_1_1iter.html#a6e529522faa09d9d61ae9993f29935f7',1,'DisCosTiC::iteratorRange::iteratorRangeStep::iter::operator!=()']]],
+  ['operator_28_29_423',['operator()',['../structDisCosTiC_1_1OpTimeComparator.html#a6a9d1a76cc4022e9a6f2310bb1a9fa5c',1,'DisCosTiC::OpTimeComparator']]],
+  ['operator_2a_424',['operator*',['../structDisCosTiC_1_1std__iter.html#a57e56c43879d19afde666204d4322216',1,'DisCosTiC::std_iter']]],
+  ['operator_2b_2b_425',['operator++',['../structDisCosTiC_1_1std__iter.html#a20a758f60f9ad000e04ef595b04fd4e9',1,'DisCosTiC::std_iter::operator++()'],['../structDisCosTiC_1_1std__iter.html#adf3b8c716d9ecebfa22ba9ce9c58cf1f',1,'DisCosTiC::std_iter::operator++(int)'],['../structDisCosTiC_1_1iteratorRange_1_1iteratorRangeStep_1_1iter.html#ab5857993f9383f91f2e5b6fd84ce0c44',1,'DisCosTiC::iteratorRange::iteratorRangeStep::iter::operator++()'],['../structDisCosTiC_1_1iteratorRange_1_1iteratorRangeStep_1_1iter.html#aad2ce8ff26d43d7caefd301353ff0a95',1,'DisCosTiC::iteratorRange::iteratorRangeStep::iter::operator++(int)']]],
+  ['operator_2d_3e_426',['operator-&gt;',['../structDisCosTiC_1_1std__iter.html#ae7253b012c4579dc14d8c2340a03ba51',1,'DisCosTiC::std_iter']]],
+  ['operator_3d_427',['operator=',['../classDataType_1_1vector3T.html#aba3cd04845d2d9c84d2f47047b7bdb2d',1,'DataType::vector3T']]],
+  ['operator_3d_3d_428',['operator==',['../structDisCosTiC_1_1std__iter.html#aac5ccbf97357ab98acf9f351d58c652f',1,'DisCosTiC::std_iter::operator==()'],['../structDisCosTiC_1_1iteratorRange_1_1iteratorRangeStep_1_1iter.html#abfc4ea1e086506672e6b5c61f42f7eef',1,'DisCosTiC::iteratorRange::iteratorRangeStep::iter::operator==()']]],
+  ['opmatcher_429',['OpMatcher',['../structDisCosTiC_1_1OpMatcher.html',1,'DisCosTiC']]],
+  ['optimecomparator_430',['OpTimeComparator',['../structDisCosTiC_1_1OpTimeComparator.html',1,'DisCosTiC']]],
+  ['orecv_431',['orecv',['../classUserInterface_1_1TimeRankOP.html#a47cc4ec01d71b0375ec41a338977ccc5',1,'UserInterface::TimeRankOP']]],
+  ['osend_432',['osend',['../classUserInterface_1_1TimeRankOP.html#a4c0ce302bf4a019b00b3d22ba8ab9458',1,'UserInterface::TimeRankOP']]]
+];

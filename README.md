@@ -1,15 +1,14 @@
 # DisCostiC: Distributed Cost in Cluster
 
-  </a><a href="https://DisCostiC-Sim.readthedocs.io/">
-  <img alt="Docs" src="https://img.shields.io/badge/read-the_docs-blue" />
+  </a><a href="https://github.com/RRZE-HPC/DisCostiC-Sim/tree/main/doc/html/index.html">
+  <img alt="HTML Doxygen doc" src="https://img.shields.io/badge/read-the_docs-red" />
+  </a><a href="https://github.com/RRZE-HPC/DisCostiC-Sim/tree/main/doc/DisCostiC.pdf">
+  <img alt="LaTeX Doxygen doc" src="https://img.shields.io/badge/read-the_docs-blue" />
   </a><a href="https://matrix.to/#/!OeNPngEkrqRRkBJjwz:gwaaf.rrze.fau.de?via=gwaaf.rrze.fau.de">
   <img alt="Join the discussion on Matrix" src="https://img.shields.io/badge/Discussions%20%26%20Support-Chat%20now!-blue" />
-  </a><a href="https://www.linkedin.com/in/ayeshaafzal-/">
-    <img alt="linkedin" src="https://i.stack.imgur.com/gVE0j.png" />
-  <a href="https://github.com/AyeshaAfzal91" rel="nofollow noreferrer">
-    <img alt="github" src="https://i.stack.imgur.com/tskMh.png">
-  </a>
-  </a><a href="https://matrix.to/#/!OeNPngEkrqRRkBJjwz:gwaaf.rrze.fau.de?via=gwaaf.rrze.fau.de" target="\_parent">
+  </a><a href="https://www.linkedin.com/in/ayeshaafzal-/" target="\_parent">
+  <img alt="linkedin" src="https://i.stack.imgur.com/gVE0j.png" />
+  <a href="https://github.com/AyeshaAfzal91" target="\_parent">
   <img alt="" src="https://img.shields.io/github/stars/tanstack/react-table.svg?style=social&label=Star" />
   </a><a href="https://twitter.com/AyeshaHamad4" target="\_parent">
   <img alt="" src="https://img.shields.io/twitter/follow/AyeshaHamad4.svg?style=social&label=Follow" />
@@ -176,7 +175,7 @@ The following `exchange_mode` is provided in LBL mode to enable model-based expl
 `direction`          |       It specifies the direction of message exchange as an int (1: uni-directional upwards shift in only positive direction, 2: bi-directional upwards and downwards shift in both positive and negative directions).
 `periodic`          |       It enables or disables the communication periodicity as a bool (0: false, 1: true).
 
-The `config.cfg` file can be edited to select the `benchmark_kernel` and `kernel_mode`. More information about this `config.cfg` file is available in the [DisCostiC help](#help) documentation.
+The [config.cfg](config.cfg) file can be edited to select the `benchmark_kernel` and `kernel_mode`. More information about this `config.cfg` file is available in the [DisCostiC help](#help) documentation.
 
 <a name="compilation"></a>
 🥅 **Compilation**:thought_balloon:
@@ -202,7 +201,7 @@ Command                  | Description
 `sbatch Run_Simulation_ITAC.sh`          | This dumps the simulator's own trace into ITAC to investigate the implementation of the simulator. 
 
 
-The `Run_Simulation_ITAC.sh` script only generates a single STF file (`simulation.single.stf`) in the main directory due to the export of the following variables:
+The [Run_Simulation_ITAC.sh](Run_Simulation_ITAC.sh) script only generates a single STF file (`simulation.single.stf`) in the main directory due to the export of the following variables:
 
 ```
 export VT_LOGFILE_FORMAT=SINGLESTF
@@ -350,19 +349,19 @@ For illustration, a few examples of available [network files](interconnectlevel/
 
 Network files (YAML format)                 | Description
 --------------------- | -------------
-`InfiniBand_WaitIO_intercluster`          |       Communication across clusters for WaitIO MPI library and InfiniBand interconnect
-`InfiniBand_WaitIO_internode`          |       Communication across nodes for WaitIO MPI library and InfiniBand interconnect
-`InfiniBand_WaitIO_interchip`          |       Communication across chips for WaitIO MPI library and InfiniBand interconnect
-`InfiniBand_WaitIO_intrachip`          |       Communication inside the chip for WaitIO MPI library and InfiniBand interconnect
-`Tofu-D_WaitIO_internode`          |       Communication across nodes for WaitIO MPI library and Tofu-D interconnect
-`Tofu-D_WaitIO_interchip`          |       Communication across chips for WaitIO MPI library and Tofu-D interconnect
-`Tofu-D_WaitIO_intrachip`          |       Communication inside the chip for WaitIO MPI library and Tofu-D interconnect
-`InfiniBand_IntelMPI_internode`          |       Communication across nodes for Intel MPI library and InfiniBand interconnect
-`InfiniBand_IntelMPI_interchip`          |       Communication across chips for Intel MPI library and InfiniBand interconnect
-`InfiniBand_IntelMPI_intrachip`          |       Communication inside the chip for Intel MPI library and InfiniBand interconnect
-`OmniPath_IntelMPI_internode`          |       Communication across nodes for Intel MPI library and Omni-Path interconnect
-`OmniPath_IntelMPI_interchip`          |       Communication across chips for Intel MPI library and Omni-Path interconnect
-`OmniPath_IntelMPI_intrachip`          |       Communication inside the chip for Intel MPI library and Omni-Path interconnect
+[InfiniBand_WaitIO_intercluster](interconnectlevel/network-files/A64FX_InfiniBand_WaitIO_socket_intercluster.cfg)          |       Communication across clusters for WaitIO MPI library and InfiniBand interconnect
+[InfiniBand_WaitIO_internode](interconnectlevel/network-files/IcelakeSP_Platinum-8360Y_InfiniBand_WaitIO_socket_internode.cfg)          |       Communication across nodes for WaitIO MPI library and InfiniBand interconnect
+[InfiniBand_WaitIO_interchip](interconnectlevel/network-files/IcelakeSP_Platinum-8360Y_InfiniBand_WaitIO_socket_interchip.cfg)          |       Communication across chips for WaitIO MPI library and InfiniBand interconnect
+[InfiniBand_WaitIO_intrachip](interconnectlevel/network-files/IcelakeSP_Platinum-8360Y_InfiniBand_WaitIO_socket_intrachip.cfg)          |       Communication inside the chip for WaitIO MPI library and InfiniBand interconnect
+[Tofu-D_WaitIO_internode](interconnectlevel/network-files/A64FX_Tofu-D_WaitIO_socket_internode.cfg)          |       Communication across nodes for WaitIO MPI library and Tofu-D interconnect
+[Tofu-D_WaitIO_interchip](interconnectlevel/network-files/A64FX_Tofu-D_WaitIO_socket_interchip.cfg)          |       Communication across chips for WaitIO MPI library and Tofu-D interconnect
+[Tofu-D_WaitIO_intrachip](interconnectlevel/network-files/A64FX_Tofu-D_WaitIO_socket_intrachip.cfg)          |       Communication inside the chip for WaitIO MPI library and Tofu-D interconnect
+[InfiniBand_IntelMPI_internode](interconnectlevel/network-files/IcelakeSP_Platinum-8360Y_InfiniBand_IntelMPI_internode.cfg)          |       Communication across nodes for Intel MPI library and InfiniBand interconnect
+[InfiniBand_IntelMPI_interchip](interconnectlevel/network-files/IcelakeSP_Platinum-8360Y_InfiniBand_IntelMPI_interchip.cfg)          |       Communication across chips for Intel MPI library and InfiniBand interconnect
+[InfiniBand_IntelMPI_intrachip](interconnectlevel/network-files/IcelakeSP_Platinum-8360Y_InfiniBand_IntelMPI_intrachip.cfg)          |       Communication inside the chip for Intel MPI library and InfiniBand interconnect
+[OmniPath_IntelMPI_internode](interconnectlevel/network-files/BroadwellEP_E5-2630v4_OmniPath_IntelMPI_internode.cfg)          |       Communication across nodes for Intel MPI library and Omni-Path interconnect
+[OmniPath_IntelMPI_interchip](interconnectlevel/network-files/BroadwellEP_E5-2630v4_OmniPath_IntelMPI_interchip.cfg)          |       Communication across chips for Intel MPI library and Omni-Path interconnect
+[OmniPath_IntelMPI_intrachip](interconnectlevel/network-files/BroadwellEP_E5-2630v4_OmniPath_IntelMPI_intrachip.cfg)          |       Communication inside the chip for Intel MPI library and Omni-Path interconnect
 
 
 <a name="node"></a>    
@@ -387,20 +386,20 @@ For illustration, a few examples of available [machine files](nodelevel/machine-
 
 Machine files (YAML format)                 | Description
 --------------------- | -------------
-`A64FX`          |       48 core Fujitsu A64FX FX1000 CPU @ 1.8 GHz
-`IcelakeSP_Platinum-8360Y`          |      36 core Intel(R) Xeon(R) Icelake SP Platinum 8360Y CPU @ 2.4 GHz 
-`CascadelakeSP_Gold-6248_SNC`          |   20 core Intel(R) Xeon(R) Cascadelake SP Gold 6248 CPU @ 2.5 GHz  
-`SkylakeSP_Gold-5122`          |       4 core Intel(R) Xeon(R) Skylake SP Gold 5122 CPU @ 3.6 GHz
-`SkylakeSP_Gold-6148`          |       20 core Intel(R) Xeon(R) Skylake SP Gold 6148 CPU @ 2.4 GHz
-`SkylakeSP_Gold-6148_SNC`          |    20 core Intel(R) Xeon(R) Skylake SP Gold 6148 CPU with SNC enabled @ 2.4 GHz   
-`SkylakeSP_Platinum-8147_2.7GHz`          |      24 core Intel(R) Xeon(R) Skylake SP Platinum 8174 CPU @ 3.1 GHz
-`BroadwellEP_E5-2630v4`          |       18 core Intel(R) Xeon(R) Broadwell EN/EP/EX E5-2697 v4 CPU @ 2.3 GHz
-`BroadwellEP_E5-2697v4_CoD`          |       18 core Intel(R) Xeon(R) Broadwell EN/EP/EX E5-2697 v4 CPU with CoD enabled @ 2.3 GHz
-`HaswellEP_E5-2695v3`          |       14 core Intel(R) Xeon(R) Haswell EN/EP/EX E5-2695 v3 CPU @ 2.3 GHz
-`HaswellEP_E5-2695v3_CoD`          |       14 core Intel(R) Xeon(R) Haswell EN/EP/EX E5-2695 v3 CPU with CoD enabled @ 2.3 GHz
-`IvyBridgeEP_E5-2660v2`          |       10 core Intel(R) Xeon(R) IvyBridge EN/EP/EX E5-2660 v2 CPU @ 2.2 GHz
-`IvyBridgeEP_E5-2690v2`          |       10 core Intel(R) Xeon(R) IvyBridge EN/EP/EX E5-2690 v2 CPU @ 3.0 GHz
-`SandyBridgeEP_E5-2680`          |    8 core Intel(R) Xeon(R) SandyBridge EN/EP E5-2680 CPU @ 2.7 GHz   
+[A64FX](nodelevel/machine-files/A64FX.yml)           |       48 core Fujitsu A64FX FX1000 CPU @ 1.8 GHz
+[IcelakeSP_Platinum-8360Y](nodelevel/machine-files/IcelakeSP_Platinum-8360Y.yml)          |      36 core Intel(R) Xeon(R) Icelake SP Platinum 8360Y CPU @ 2.4 GHz 
+[CascadelakeSP_Gold-6248_SNC](nodelevel/machine-files/CascadelakeSP_Gold-6248_SNC.yml)           |   20 core Intel(R) Xeon(R) Cascadelake SP Gold 6248 CPU @ 2.5 GHz  
+[SkylakeSP_Gold-5122](nodelevel/machine-files/SkylakeSP_Gold-5122.yml)           |       4 core Intel(R) Xeon(R) Skylake SP Gold 5122 CPU @ 3.6 GHz
+[SkylakeSP_Gold-6148](nodelevel/machine-files/SkylakeSP_Gold-6148.yml)           |       20 core Intel(R) Xeon(R) Skylake SP Gold 6148 CPU @ 2.4 GHz
+[SkylakeSP_Gold-6148_SNC](nodelevel/machine-files/SkylakeSP_Gold-6148_SNC.yml)           |    20 core Intel(R) Xeon(R) Skylake SP Gold 6148 CPU with SNC enabled @ 2.4 GHz   
+[SkylakeSP_Platinum-8147](nodelevel/machine-files/SkylakeSP_Platinum-8147_2.7GHz.yml)           |      24 core Intel(R) Xeon(R) Skylake SP Platinum 8174 CPU @ 3.1 GHz (2.7 GHz used)
+[BroadwellEP_E5-2630v4](nodelevel/machine-files/BroadwellEP_E5-2630v4.yml)           |       18 core Intel(R) Xeon(R) Broadwell EN/EP/EX E5-2697 v4 CPU @ 2.3 GHz
+[BroadwellEP_E5-2697v4_CoD](nodelevel/machine-files/BroadwellEP_E5-2697v4_CoD.yml)           |       18 core Intel(R) Xeon(R) Broadwell EN/EP/EX E5-2697 v4 CPU with CoD enabled @ 2.3 GHz
+[HaswellEP_E5-2695v3](nodelevel/machine-files/HaswellEP_E5-2695v3.yml)           |       14 core Intel(R) Xeon(R) Haswell EN/EP/EX E5-2695 v3 CPU @ 2.3 GHz
+[HaswellEP_E5-2695v3_CoD](nodelevel/machine-files/HaswellEP_E5-2695v3_CoD.yml)           |       14 core Intel(R) Xeon(R) Haswell EN/EP/EX E5-2695 v3 CPU with CoD enabled @ 2.3 GHz
+[IvyBridgeEP_E5-2660v2](nodelevel/machine-files/IvyBridgeEP_E5-2660v2.yml)           |       10 core Intel(R) Xeon(R) IvyBridge EN/EP/EX E5-2660 v2 CPU @ 2.2 GHz
+[IvyBridgeEP_E5-2690v2](nodelevel/machine-files/IvyBridgeEP_E5-2690v2.yml)           |       10 core Intel(R) Xeon(R) IvyBridge EN/EP/EX E5-2690 v2 CPU @ 3.0 GHz
+[SandyBridgeEP_E5-2680](nodelevel/machine-files/SandyBridgeEP_E5-2680.yml)           |    8 core Intel(R) Xeon(R) SandyBridge EN/EP E5-2680 CPU @ 2.7 GHz   
 
 <a name="help"></a>    
 **DisCostiC help**:thought_balloon:
@@ -580,11 +579,12 @@ for (auto rank : DisCostiC::getRange(systemsize))
 <a name="documentation"></a>    
 📝 **Code documentation: suite of C++ data structures and enumerated types**:thought_balloon:
 
-The HTML documentation can be generated by [doxygen](http://www.doxygen.nl). To build the documentation, navigate to the `Doxyfile` file available in the current directory and run the command:
+The HTML and LaTeX documentation can be generated by [doxygen](http://www.doxygen.nl). To build the documentation, navigate to the [Doxyfile](Doxyfile) file available in the current directory and run the command:
 
-`doxygen Doxyfile`
-
-To read the documentation, point to a web browser at `html/index.html`.
+```
+doxygen Doxyfile
+```
+To read the HTML and LaTeX documentation, point to a web browser at [doc/html/index.html](https://github.com/RRZE-HPC/DisCostiC-Sim/tree/main/doc/html/index.html) and read [doc/DisCostiC.pdf](doc/DisCostiC.pdf), respectively.
 
 * **Single Operation**: accessors for local operations and their individual information at a certain grid point
 

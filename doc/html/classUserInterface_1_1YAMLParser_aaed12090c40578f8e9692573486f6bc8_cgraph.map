@@ -1,0 +1,6 @@
+<map id="UserInterface::YAMLParser::YAMLParser" name="UserInterface::YAMLParser::YAMLParser">
+<area shape="rect" id="node1" title="a class to set the name of the configuration file and extracts and parses the data" alt="" coords="5,71,187,112"/>
+<area shape="rect" id="node2" href="$classUserInterface_1_1YAMLParser.html#ae8f251884bae7d210911d01b3406524d" title="a function that extracts the key from the pair of key = value" alt="" coords="235,5,416,47"/>
+<area shape="rect" id="node3" href="$classUserInterface_1_1YAMLParser.html#ac14df2314eef4c1adf082b2e4271b4b1" title="a function that removes everything from the semicolon (including it) to the end of the line." alt="" coords="235,71,416,112"/>
+<area shape="rect" id="node4" href="$classUserInterface_1_1YAMLParser.html#a39a0acf407d535de460661ede17203a5" title="a function that returns false if a non&#45;space character was found, true otherwise. The function is &quot;co..." alt="" coords="235,136,416,177"/>
+</map>

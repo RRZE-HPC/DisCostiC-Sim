@@ -1,0 +1,19 @@
+var searchData=
+[
+  ['r_1231',['r',['../namespaceConvert-HEAT.html#a82968fd6b2fca67778d2f1b1b5ad6a1d',1,'Convert-HEAT.r()'],['../namespaceConvert-POISSONNS.html#a1b44a487c4bbeb9ba20c8c7c30b1b030',1,'Convert-POISSONNS.r()'],['../HPCG_8c.html#a5a186b055e50cb5c267250d1806f6e97',1,'r():&#160;HPCG.c']]],
+  ['r1_1232',['r1',['../SOR-LINEAR_8c.html#a636240abcfe01b37aedcf389075c0916',1,'r1():&#160;SOR-LINEAR.c'],['../SOR_8c.html#a636240abcfe01b37aedcf389075c0916',1,'r1():&#160;SOR.c']]],
+  ['rank_1233',['rank',['../classAST.html#ac808eaf7dcc5a43222f20f99cf6b6210',1,'AST::rank()'],['../structDisCosTiC_1_1DisCosTiC__OP.html#add74ac1a5c4c6c2dc35dc2efb8c1bfb5',1,'DisCosTiC::DisCosTiC_OP::rank()'],['../structSolver.html#a6dd052fabd7bca2fdb4cdbc417dedde2',1,'Solver::rank()'],['../classUserInterface_1_1ChromeTraceViz.html#a600d0b0808ee0577b9a348dc07cca67d',1,'UserInterface::ChromeTraceViz::rank()']]],
+  ['rankcount_1234',['rankCount',['../classAST.html#add69798854f7b3daad0fbe88f44b0995',1,'AST']]],
+  ['ranks_5finit_1235',['ranks_init',['../classAST.html#aae6fbca315ad373d67db48d838e6d3e1',1,'AST']]],
+  ['rc_1236',['rc',['../HPCG_8c.html#a14e8ceba4c992810fb866a5c742d0587',1,'HPCG.c']]],
+  ['recvcount_1237',['recvCount',['../classAST.html#aae0eb0a3ee82dab2a9fd069cc5ac166e',1,'AST']]],
+  ['res_1238',['res',['../SOR-LINEAR_8c.html#a11e9f14fdb17beb1cde942a84bcd1edb',1,'res():&#160;SOR-LINEAR.c'],['../SOR_8c.html#a11e9f14fdb17beb1cde942a84bcd1edb',1,'res():&#160;SOR.c'],['../namespaceConvert-HEAT.html#a143dce79ff1b3d5955d1711cefb09f2b',1,'Convert-HEAT.res()'],['../namespaceConvert-POISSONNS.html#ace77e96c1dc2d135d10cef811c1afa1e',1,'Convert-POISSONNS.res()']]],
+  ['result_1239',['result',['../namespaceConvert-HEAT.html#a1f36723a6ceb8df497a5e88daafec7d6',1,'Convert-HEAT.result()'],['../namespaceConvert-POISSONNS.html#a2b1766e835619bea35d192d8df5f3ee5',1,'Convert-POISSONNS.result()']]],
+  ['return_1240',['return',['../HPCG_8c.html#a9717e7bbecb906637e86cef6da3d83c2',1,'HPCG.c']]],
+  ['rho_1241',['rho',['../structSolver.html#af997b2d10c44a07d9815df4427115778',1,'Solver']]],
+  ['rhs_1242',['rhs',['../structSolver.html#aa7b4c517074b95dc79a9812f90193b2a',1,'Solver::rhs()'],['../SOR-LINEAR_8c.html#ada9e4da51dc2c2b7705a504e0267f05f',1,'rhs():&#160;SOR-LINEAR.c'],['../SOR_8c.html#a09d77dd836fd920577711230fda48954',1,'rhs():&#160;SOR.c']]],
+  ['right_1243',['right',['../classConvert-HEAT_1_1newNode.html#a5e023410317584e268f294bb20089c6a',1,'Convert-HEAT.newNode.right()'],['../classConvert-POISSONNS_1_1newNode.html#a9ae321e75e1976ec7e5d887fd80345d7',1,'Convert-POISSONNS.newNode.right()']]],
+  ['roc_1244',['ROC',['../STENCIL-3D-LONGRANGE_8c.html#a58cf37ff30a703a090ce0145d1788043',1,'STENCIL-3D-LONGRANGE.c']]],
+  ['rootnodes_1245',['RootNodes',['../classAST.html#a84f05da595415c1dc0fe8bea1bf7ae1e',1,'AST']]],
+  ['rtz_1246',['rtz',['../HPCG_8c.html#ae858bf7c8d7573d61a04a5c0e99a453c',1,'HPCG.c']]]
+];
