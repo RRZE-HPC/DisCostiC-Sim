@@ -12,6 +12,8 @@
   <img alt="" src="https://img.shields.io/github/stars/tanstack/react-table.svg?style=social&label=Star" />
   </a><a href="https://twitter.com/AyeshaHamad4" target="\_parent">
   <img alt="" src="https://img.shields.io/twitter/follow/AyeshaHamad4.svg?style=social&label=Follow" />
+  </a><a href="https://doi.org/10.5281/zenodo.10606291">
+  <img alt="DisCostiC Zenodo release" src="https://zenodo.org/badge/DOI/Zenodo%20Release.svg" />
 
 ## Table of Contents
 
