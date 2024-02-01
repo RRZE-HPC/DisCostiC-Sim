@@ -4,6 +4,8 @@
   <img alt="HTML Doxygen doc" src="https://img.shields.io/badge/HTML%20Doxygen%20Doc%20-Read%20now!-red" />
   </a><a href="https://github.com/RRZE-HPC/DisCostiC-Sim/tree/main/doc/DisCostiC.pdf">
   <img alt="LaTeX Doxygen doc" src="https://img.shields.io/badge/LaTeX%20Doxygen%20Doc%20-Read%20now!-green" />
+  </a><a href="https://github.com/RRZE-HPC/DisCostiC-Sim/wiki/DisCostiC">
+  <img alt="Wiki Page" src="https://img.shields.io/badge/Wiki%20Page%20-Read%20now!-pink" />
   </a><a href="https://matrix.to/#/!OeNPngEkrqRRkBJjwz:gwaaf.rrze.fau.de?via=gwaaf.rrze.fau.de">
   <img alt="Join the discussion on Matrix" src="https://img.shields.io/badge/Discussions%20%26%20Support-Chat%20now!-yellow" />
   </a><a href="https://www.linkedin.com/in/ayeshaafzal-/" target="\_parent">
