@@ -1,10 +1,9 @@
 
 ///    \file
-///    NODELVLSCG_CPP
-///
+///    NODELVLSCG_HPP
+///    \Author: Ayesha Afzal <ayesha.afzal@fau.de>
 ///    \Copyright © 2024 HPC, FAU Erlangen-Nuremberg. All rights reserved.
 ///
-
 #include "../include/NodeLvlScg.hpp"
 
 int bound = 0;
@@ -24,6 +23,7 @@ extern int socket;
 extern int primary_processes;
 extern int secondary_processes;
 extern int heteregeneous_mode;
+extern int cacheline_size;
 extern std::string arch_name;
 
 enum bound_type
@@ -39,14 +39,15 @@ void estimation(NodeModel &NM, DisCosTiC_Timetype *perf_est, DisCosTiC_Timetype 
 	DisCosTiC_Datatype flops = NM.getFlops();
 	*perf_est = (flops / ecm.T_MECM_) * (machine.f_core_ * 1000); // This gives me the MFlop/s
 
-	if (ecm.T_OL_ == ecm.T_ECM_ || NM.benchmark_kernel == "POISSONNS")
+	if (ecm.T_OL_ == ecm.T_ECM_)
 	{
-		*runtime = ecm.T_ECM_ / (machine.f_core_ * 8 * 1e9);
+		*runtime = ecm.T_ECM_ / (machine.f_core_ * (machine.cachelinesize / 8) * 1e9);
 		bound = COMPUTE;
 	}
 	else
 	{
-		*runtime = ecm.T_MECM_ / (machine.f_core_ * 8 * 1e9);
+
+		*runtime = ecm.T_MECM_ / (machine.f_core_ * (machine.cachelinesize / 8) * 1e9);
 		bound = MEMORY;
 	}
 }
@@ -134,4 +135,14 @@ void executeKerncraft(char *argV[], int size)
 	system(execCommand.c_str());
 
 	return;
+}
+
+double maximum_time(double *array, int size)
+{
+	int temp = 0;
+	for (int i = 0; i < size; ++size)
+	{
+		temp = std::max<double>(array[i], temp);
+	}
+	return temp;
 }
