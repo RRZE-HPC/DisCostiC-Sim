@@ -1,7 +1,7 @@
 
 ///    \file
 ///    NODEMODEL_HPP
-///
+///    \Author: Ayesha Afzal <ayesha.afzal@fau.de>
 ///    \Copyright © 2024 HPC, FAU Erlangen-Nuremberg. All rights reserved.
 ///
 
@@ -43,6 +43,7 @@ struct Machine
 	DisCosTiC_Timetype f_core_nom_;
 	DisCosTiC_Timetype alpha_;
 	DisCosTiC_Timetype task_;
+	DisCosTiC_Timetype cachelinesize;
 };
 
 //===ECM Model===//
@@ -69,13 +70,15 @@ private:
 public:
 	//===Constructor===//
 	NodeModel() = default;
-	std::string benchmark_kernel;
+	std::string benchmark_kernel1;
+    std::string benchmark_kernel2;
 
 	NodeModel(Machine &machine, ECM &ecm, DisCosTiC_Datatype flops, std::string &filename) : machine_(machine), ecm_(ecm), flops_(flops), filename_(filename) {}
 
 	NodeModel(UserInterface::ConfigParser *CFG_args, UserInterface::YAMLParser YAML_args, UserInterface::ConfigParser *CFG_args2, std::string ECM_core)
 	{
 		machine_.n_cores_ = YAML_args.cores_per_chip * YAML_args.chips_per_node;
+		machine_.cachelinesize = YAML_args.cachelinesize;
 
 		machine_.cores_per_numa_domain_ = YAML_args.cores_per_numa_domain;
 		machine_.cores_per_socket_ = YAML_args.cores_per_chip;
@@ -112,7 +115,8 @@ public:
 		}
 		filename_ = CFG_args->getValue<std::string>("filename");
 		flops_ = CFG_args->getValue<DisCosTiC_Datatype>("FLOPs_per_iteration");
-		benchmark_kernel = CFG_args->getValue<std::string>("benchmark_kernel");
+		benchmark_kernel1 = CFG_args->getValue<std::string>("part1");
+        benchmark_kernel2 = CFG_args->getValue<std::string>("part2");
 	}
 	NodeModel(UserInterface::ConfigParser *CFG_args, UserInterface::YAMLParser YAML_args, DisCosTiC_Timetype T_OL, DisCosTiC_Timetype T_nOL, DisCosTiC_Timetype T_L1L2, DisCosTiC_Timetype T_L2L3, DisCosTiC_Timetype T_L3Mem, DisCosTiC_Timetype T_ECM, DisCosTiC_Timetype ECM_core)
 	{
@@ -122,7 +126,7 @@ public:
 		machine_.cores_per_socket_ = YAML_args.cores_per_chip;
 		machine_.sockets_ = YAML_args.chips_per_node;
 		machine_.task_ = task_per_node;
-
+		machine_.cachelinesize = YAML_args.cachelinesize;
 		machine_.f_core_ = YAML_args.clk_freq_in_GHz;
 
 		ecm_.T_OL_ = T_OL;
