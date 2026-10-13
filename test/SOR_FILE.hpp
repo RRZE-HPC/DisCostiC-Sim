@@ -39,22 +39,21 @@ namespace DisCosTiC
 		Benchmark(UserInterface::ConfigParser *CFG_args)
 		{
 			systemsize = CFG_args->getValue<DisCosTiC_Datatype>("number_of_processes");
-			numTimesteps = CFG_args->getValue<DisCosTiC_Datatype>("number_of_iterations");
+			numTimesteps = CFG_args->getValue<DisCosTiC_Datatype>("number_of_timesteps");
 			nodesCount = 0;
 			networksCount = 0;
 		}
 
 		/*DisCosTiC::tupleIdNodePair*/
-		DisCosTiC::idNodeTypePair Oneway_PositiveDisplacement(DisCosTiC_Datatype process_Rank, UserInterface::YAMLParser YAML_args, DisCosTiC_Datatype N_size_Of_Cluster, MPI_Comm comm)
+		DisCosTiC::idNodeTypePair Oneway_PositiveDisplacement(AST *DisCosTiC, DisCosTiC_Datatype process_Rank, UserInterface::YAMLParser YAML_args, DisCosTiC_Datatype N_size_Of_Cluster, MPI_Comm comm)
 		{
-			DisCosTiC = new AST(&CFG_args, systemsize);
 			DisCosTiC::Event recv, send, comp;
 			DisCosTiC::idNodeTypePair ID(systemsize);
 			// DisCosTiC::AST_OP root_Node;
 			// DisCosTiC::idNodePair compIDs(systemsize), sendIDs(systemsize), recvIDs(systemsize);
 
-			long int imax = system_number == 0 ? CFG_args.getValue<long int>("dim_x") : CFG_args.getValue<long int>("secondary_dim_x");
-			long int jmax = system_number == 0 ? CFG_args.getValue<long int>("dim_y") : CFG_args.getValue<long int>("secondary_dim_y");
+			long int imax = system_number == 0 ? CFG_args.getValue<long int>("imax") : CFG_args.getValue<long int>("secondary_imax");
+			long int jmax = system_number == 0 ? CFG_args.getValue<long int>("jmax") : CFG_args.getValue<long int>("secondary_jmax");
 
 			int local_system_size = system_number == 0 ? primary_processes : secondary_processes;
 
@@ -69,32 +68,32 @@ namespace DisCosTiC
 			double src[imax + 2][jmaxLocal + 2];
 			double dst[imax + 2][jmaxLocal + 2];
 
-            assert(task_per_node_ <= (YAML_args.cores_per_chip * YAML_args.chips_per_node));
+			assert(task_per_node_ <= (YAML_args.cores_per_chip * YAML_args.chips_per_node));
 
-            if (task_per_node_ != 1)
-            {
-                if (local_system_size <= task_per_node_)
-                {
-                    jmaxLocal = jmaxLocal * std::min(task_per_node_, cores_per_socket);
-                    ECM_core = std::min(task_per_node_, cores_per_socket);
-                }
-                else if (remainder_cores == 0)
-                {
-                    jmaxLocal = jmaxLocal * std::min(task_per_node_, cores_per_socket);
-                    ECM_core = std::min(task_per_node_, cores_per_socket);
-                }
-                else
-                {
-                    if (core <= local_system_size - remainder_cores)
-                    {
-                        jmaxLocal = jmaxLocal * std::min(task_per_node_, cores_per_socket);
-                        ECM_core = std::min(task_per_node_, cores_per_socket);
-                    }
-                    else
-                    {
-                        jmaxLocal = jmaxLocal * remainder_cores;
-                        ECM_core = remainder_cores;
-                    }
+			if (task_per_node_ != 1)
+			{
+				if (local_system_size <= task_per_node_)
+				{
+					jmaxLocal = jmaxLocal * std::min(task_per_node_, cores_per_socket);
+					ECM_core = std::min(task_per_node_, cores_per_socket);
+				}
+				else if (remainder_cores == 0)
+				{
+					jmaxLocal = jmaxLocal * std::min(task_per_node_, cores_per_socket);
+					ECM_core = std::min(task_per_node_, cores_per_socket);
+				}
+				else
+				{
+					if (core <= local_system_size - remainder_cores)
+					{
+						jmaxLocal = jmaxLocal * std::min(task_per_node_, cores_per_socket);
+						ECM_core = std::min(task_per_node_, cores_per_socket);
+					}
+					else
+					{
+						jmaxLocal = jmaxLocal * remainder_cores;
+						ECM_core = remainder_cores;
+					}
 				}
 			}
 
@@ -114,26 +113,41 @@ namespace DisCosTiC
 
 				MPI_Request requests[4] = {MPI_REQUEST_NULL, MPI_REQUEST_NULL, MPI_REQUEST_NULL, MPI_REQUEST_NULL};
 
-				comp = DisCosTiC->Exec("FILE:SOR.c//BREAK:" + CFG_args.getValue<std::string>("benchmark_kernel") + "//./nodelevel/machine-files/" + arch_name + ".yml//" + std::to_string(ECM_core) + "+" + std::to_string(remainder_cores) + "//-D imax " + std::to_string(imax) + " -D  jmaxLocal " + std::to_string(jmaxLocal), recv, YAML_args, process_Rank, N_size_Of_Cluster, comm);
+				comp = DisCosTiC->Exec("FILE:POISSONNS.c//BREAK:" + CFG_args.getValue<std::string>("benchmark_kernel") + "//./nodelevel/machine-files/" + arch_name + ".yml//" + std::to_string(ECM_core) + "+" + std::to_string(remainder_cores) + "//-D imax " + std::to_string(imax) + " -D  jmaxLocal " + std::to_string(jmaxLocal), recv, YAML_args, process_Rank, N_size_Of_Cluster, comm);
+				jmaxLocal = jmax / local_system_size;
 
-				// std::cout<<"Offered cycles : "<<comp.second->bufSize<<std::endl;
+				// if(virtual_rank == 52) std::cout<<"Offered cycles : "<<comp.second->bufSize<<" imax : "<<imax<<" jmax : "<<jmaxLocal<<std::endl;
 
 				comp.second->bufSize = (comp.second->bufSize * imax * jmaxLocal);
-				// std::cout<<"Time : "<<comp.second->bufSize<<std::endl;
+				// if(virtual_rank == 52) std::cout<<"´Time : "<<comp.second->bufSize<<" imax : "<<imax<<" jmax : "<<jmaxLocal<<std::endl;
 
-				// if (rank + 1 < systemsize)
-				// {
-				int top = (rank == systemsize - 1 ? 0 : rank + 1);
-				int bottom = (rank == 0 ? systemsize - 1 : rank - 1);
-				send = DisCosTiC->Isend(&src[(jmaxLocal) * (imax + 2) + 1], imax *10 * 8, MPI_DOUBLE, top, 1, MPI_COMM_WORLD, &requests[0], comp);
-				recv = DisCosTiC->Irecv(&dst[(jmaxLocal + 1) * (imax + 2) + 1], imax *10* 8, MPI_DOUBLE, top, 2, MPI_COMM_WORLD, &requests[1], comp);
-				// }
-				// if (rank > 0)
-				// {
-				// 	int bottom = rank - 1;
-				send = DisCosTiC->Isend(&src[(imax + 2) + 1], imax  *10* 8, MPI_DOUBLE, bottom, 2, MPI_COMM_WORLD, &requests[2], comp);
-				recv = DisCosTiC->Irecv(&dst[1], imax *10* 8, MPI_DOUBLE, bottom, 1, MPI_COMM_WORLD, &requests[3], comp);
-				// }
+				if (rank + 1 < systemsize)
+				{
+					int top = rank + 1;
+					send = DisCosTiC->Isend(&src[(jmaxLocal) * (imax + 2) + 1], imax * 8, MPI_DOUBLE, top, 1, MPI_COMM_WORLD, &requests[0], comp);
+					recv = DisCosTiC->Irecv(&dst[(jmaxLocal + 1) * (imax + 2) + 1], imax * 8, MPI_DOUBLE, top, 2, MPI_COMM_WORLD, &requests[1], comp);
+				}
+
+				if (rank > 0)
+				{
+					int bottom = rank - 1;
+					send = DisCosTiC->Isend(&src[(imax + 2) + 1], imax * 8, MPI_DOUBLE, bottom, 2, MPI_COMM_WORLD, &requests[2], comp);
+					recv = DisCosTiC->Irecv(&dst[1], imax * 8, MPI_DOUBLE, bottom, 1, MPI_COMM_WORLD, &requests[3], comp);
+				}
+
+				// Simulating dummy send and recv for allgather
+				if (rank + 1 == systemsize)
+				{
+
+					send = DisCosTiC->Isend(&rank, 0, MPI_DOUBLE, 0, 1, MPI_COMM_WORLD, &requests[0], comp);
+					recv = DisCosTiC->Irecv(&rank, 0, MPI_DOUBLE, 0, 2, MPI_COMM_WORLD, &requests[1], comp);
+				}
+				if (rank == 0)
+				{
+					send = DisCosTiC->Isend(&rank, 0, MPI_DOUBLE, systemsize, 2, MPI_COMM_WORLD, &requests[2], comp);
+					recv = DisCosTiC->Irecv(&rank, 0, MPI_DOUBLE, systemsize, 1, MPI_COMM_WORLD, &requests[3], comp);
+				}
+
 				//!< end of loop over time step
 				numOperations = DisCosTiC->getNumOps(); // DisCosTiC->allNodes.size(); //15
 				ID[rank].resize(numOperations);
@@ -160,6 +174,7 @@ namespace DisCosTiC
 					N.node = (**it).node;
 					N.network = (**it).network;
 					N.label = (**it).label;
+					N.mode = (**it).mode;
 					N.depsCount = (**it).DepOperations.size();
 					N.depApdxStartLabel = count;
 					count += (**it).DepOperations.size();
@@ -172,8 +187,8 @@ namespace DisCosTiC
 
 				DisCosTiC->Rank_Finalize();
 			} //!< end of loop over rank
-			// DisCosTiC->File_Write();
-			delete DisCosTiC;
+			DisCosTiC->File_Write();
+			// delete DisCosTiC;
 			/*print_pairedVec_NonPointer2T(ID);
 			print_pairedVec2T(compIDs);
 			print_pairedVec2T(sendIDs);
@@ -214,7 +229,7 @@ namespace DisCosTiC
 		DisCosTiC_Datatype numOperations;
 
 	private:
-		AST *DisCosTiC;
+		// AST *DisCosTiC;
 		DisCosTiC::VecDeserialNode Nodes;
 
 		DisCosTiC_Datatype datasize;

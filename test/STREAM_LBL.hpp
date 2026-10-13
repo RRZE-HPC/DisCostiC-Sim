@@ -39,56 +39,54 @@ namespace DisCosTiC
 		Benchmark(UserInterface::ConfigParser *CFG_args)
 		{
 			systemsize = heteregeneous_mode == 0 ? primary_processes : primary_processes + secondary_processes;
-			numTimesteps = CFG_args->getValue<DisCosTiC_Datatype>("number_of_iterations");
+			numTimesteps = CFG_args->getValue<DisCosTiC_Datatype>("number_of_timesteps");
 			nodesCount = 0;
 			networksCount = 0;
 		}
 
 		/*DisCosTiC::tupleIdNodePair*/
-		DisCosTiC::idNodeTypePair Oneway_PositiveDisplacement(DisCosTiC_Datatype process_Rank, UserInterface::YAMLParser YAML_args, DisCosTiC_Datatype N_size_Of_Cluster, MPI_Comm comm)
+		DisCosTiC::idNodeTypePair Oneway_PositiveDisplacement(AST *DisCosTiC, DisCosTiC_Datatype process_Rank, UserInterface::YAMLParser YAML_args, DisCosTiC_Datatype N_size_Of_Cluster, MPI_Comm comm)
 		{
-			DisCosTiC = new AST(&CFG_args, systemsize);
 			DisCosTiC::Event recv, send, comp;
 			DisCosTiC::idNodeTypePair ID(systemsize);
 			// DisCosTiC::AST_OP root_Node;
 			// DisCosTiC::idNodePair compIDs(systemsize), sendIDs(systemsize), recvIDs(systemsize);
 
-			long int N_ = system_number == 0 ? CFG_args.getValue<long int>("dim_x") : CFG_args.getValue<long int>("secondary_dim_x");
-            double message_size = CFG_args.getValue<long int>("message_size");
+			long int N_ = system_number == 0 ? CFG_args.getValue<long int>("N") : CFG_args.getValue<long int>("secondary_N");
 
-			int Nlocal = system_number == 0 ? N_ / primary_processes : N_ / secondary_processes;
+			long int Nlocal = system_number == 0 ? N_ / primary_processes : N_ / secondary_processes;
 
 			int task_per_node_ = task_per_node;
 			int core = process_Rank;
 			int remainder_cores = systemsize > task_per_node_ ? systemsize % task_per_node_ : 0;
 			int ECM_core = 1;
 
-            assert(task_per_node_ <= (YAML_args.cores_per_chip * YAML_args.chips_per_node));
+			assert(task_per_node_ <= (YAML_args.cores_per_chip * YAML_args.chips_per_node));
 
-            if (task_per_node_ != 1)
-            {
-                if (systemsize <= task_per_node_)
-                {
-                    Nlocal = Nlocal * std::min(task_per_node_, cores_per_socket);;
-                    ECM_core = std::min(task_per_node_, cores_per_socket);
-                }
-                else if (remainder_cores == 0)
-                {
-                    Nlocal = Nlocal * std::min(task_per_node_, cores_per_socket);
-                    ECM_core = std::min(task_per_node_, cores_per_socket);
-                }
-                else
-                {
-                    if (core <= systemsize - remainder_cores)
-                    {
-                        Nlocal = Nlocal * std::min(task_per_node_, cores_per_socket);
-                        ECM_core = std::min(task_per_node_, cores_per_socket);
-                    }
-                    else
-                    {
-                        Nlocal = Nlocal * remainder_cores;
-                        ECM_core = remainder_cores;
-                    }
+			if (task_per_node_ != 1)
+			{
+				if (systemsize <= task_per_node_)
+				{
+					Nlocal = Nlocal * std::min(task_per_node_, cores_per_socket);;
+					ECM_core = std::min(task_per_node_, cores_per_socket);
+				}
+				else if (remainder_cores == 0)
+				{
+					Nlocal = Nlocal * std::min(task_per_node_, cores_per_socket);
+					ECM_core = std::min(task_per_node_, cores_per_socket);
+				}
+				else
+				{
+					if (core <= systemsize - remainder_cores)
+					{
+						Nlocal = Nlocal * std::min(task_per_node_, cores_per_socket);
+						ECM_core = std::min(task_per_node_, cores_per_socket);
+					}
+					else
+					{
+						Nlocal = Nlocal * remainder_cores;
+						ECM_core = remainder_cores;
+					}
 				}
 			}
 
@@ -109,23 +107,18 @@ namespace DisCosTiC
 				double buff;
 
 				comp = DisCosTiC->Exec("LBL:" + CFG_args.getValue<std::string>("benchmark_kernel") + "//" + std::to_string(ECM_core) + "+" + std::to_string(remainder_cores), recv, YAML_args, process_Rank, N_size_Of_Cluster, comm);
-				// std::cout<<"Offered cycles : "<<comp.second->bufSize<<std::endl;
 
-				comp.second->bufSize = (comp.second->bufSize * Nlocal) + +CFG_args.getValue<DisCosTiC_Datatype>("penalty");
+				comp.second->bufSize = (comp.second->bufSize * Nlocal)+CFG_args.getValue<DisCosTiC_Datatype>("penalty");;
+
 				// std::cout<<"Time : "<<comp.second->bufSize<<std::endl;
-
-				// if (rank + 1 < systemsize)
-				// {
+				
 				int top = (rank == systemsize - 1 ? 0 : rank + 1);
-				send = DisCosTiC->Isend(&rank, message_size, MPI_DOUBLE, top, 1, MPI_COMM_WORLD, &requests[0], comp);
-				recv = DisCosTiC->Irecv(&rank, message_size, MPI_DOUBLE, top, 2, MPI_COMM_WORLD, &requests[1], comp);
-				// }
-				// if (rank > 0)
-				// {
+				send = DisCosTiC->Isend(&rank, 20000 * 8, MPI_DOUBLE, top, 1, MPI_COMM_WORLD, &requests[0], comp);
+				recv = DisCosTiC->Irecv(&rank, 20000 * 8, MPI_DOUBLE, top, 2, MPI_COMM_WORLD, &requests[1], comp);
+
 				int bottom = (rank == 0 ? systemsize - 1 : rank - 1);
-				send = DisCosTiC->Isend(&rank, message_size, MPI_DOUBLE, bottom, 2, MPI_COMM_WORLD, &requests[2], comp);
-				recv = DisCosTiC->Irecv(&rank, message_size, MPI_DOUBLE, bottom, 1, MPI_COMM_WORLD, &requests[3], comp);
-				// }
+				send = DisCosTiC->Isend(&rank, 20000 * 8, MPI_DOUBLE, bottom, 2, MPI_COMM_WORLD, &requests[2], comp);
+				recv = DisCosTiC->Irecv(&rank, 20000 * 8, MPI_DOUBLE, bottom, 1, MPI_COMM_WORLD, &requests[3], comp);
 
 				numOperations = DisCosTiC->getNumOps(); // DisCosTiC->allNodes.size(); //15
 				ID[rank].resize(numOperations);
@@ -152,6 +145,7 @@ namespace DisCosTiC
 					N.node = (**it).node;
 					N.network = (**it).network;
 					N.label = (**it).label;
+					N.mode = (**it).mode;
 					N.depsCount = (**it).DepOperations.size();
 					N.depApdxStartLabel = count;
 					count += (**it).DepOperations.size();
@@ -165,7 +159,7 @@ namespace DisCosTiC
 				DisCosTiC->Rank_Finalize();
 			} //!< end of loop over rank
 			DisCosTiC->File_Write();
-			delete DisCosTiC;
+			// delete DisCosTiC;
 			/*print_pairedVec_NonPointer2T(ID);
 			print_pairedVec2T(compIDs);
 			print_pairedVec2T(sendIDs);
@@ -179,7 +173,8 @@ namespace DisCosTiC
 		/**
 		 * \brief the maximum number of the nodes
 		 */
-		uint8_t GetNumCores()
+		uint8_t
+		GetNumCores()
 		{
 			return nodesCount + 1;
 		}
@@ -206,7 +201,7 @@ namespace DisCosTiC
 		DisCosTiC_Datatype numOperations;
 
 	private:
-		AST *DisCosTiC;
+		// AST *DisCosTiC;
 		DisCosTiC::VecDeserialNode Nodes;
 
 		DisCosTiC_Datatype datasize;

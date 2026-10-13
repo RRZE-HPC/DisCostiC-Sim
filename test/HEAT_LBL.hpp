@@ -39,15 +39,14 @@ namespace DisCosTiC
 		Benchmark(UserInterface::ConfigParser *CFG_args)
 		{
 			systemsize = heteregeneous_mode == 0 ? primary_processes : primary_processes + secondary_processes;
-			numTimesteps = CFG_args->getValue<DisCosTiC_Datatype>("number_of_iterations");
+			numTimesteps = CFG_args->getValue<DisCosTiC_Datatype>("number_of_timesteps");
 			nodesCount = 0;
 			networksCount = 0;
 		}
 
 		/*DisCosTiC::tupleIdNodePair*/
-		DisCosTiC::idNodeTypePair Oneway_PositiveDisplacement(DisCosTiC_Datatype process_Rank, UserInterface::YAMLParser YAML_args, DisCosTiC_Datatype N_size_Of_Cluster, MPI_Comm comm)
+		DisCosTiC::idNodeTypePair Oneway_PositiveDisplacement(AST *DisCosTiC, DisCosTiC_Datatype process_Rank, UserInterface::YAMLParser YAML_args, DisCosTiC_Datatype N_size_Of_Cluster, MPI_Comm comm)
 		{
-			DisCosTiC = new AST(&CFG_args, systemsize);
 			DisCosTiC::Event recv, send, comp;
 			DisCosTiC::idNodeTypePair ID(systemsize);
 
@@ -61,35 +60,37 @@ namespace DisCosTiC
 			int task_per_node_ = task_per_node;
 			int core = process_Rank;
 
+			double penalty = system_number == 0 ? CFG_args.getValue<double>("penalty") : CFG_args.getValue<double>("secondary_penalty");
+
 			int remainder_cores = local_system_size > task_per_node_ ? local_system_size % task_per_node_ : 0;
 			int ECM_core = 1;
 
-            assert(task_per_node_ <= (YAML_args.cores_per_chip * YAML_args.chips_per_node));
+			assert(task_per_node_ <= (YAML_args.cores_per_chip * YAML_args.chips_per_node));
 
-            if (task_per_node_ != 1)
-            {
-                if (local_system_size <= task_per_node_)
-                {
-                    dim_y_local = dim_y_local * std::min(task_per_node_, cores_per_socket);
-                    ECM_core = std::min(task_per_node_, cores_per_socket);
-                }
-                else if (remainder_cores == 0)
-                {
-                    dim_y_local = dim_y_local * std::min(task_per_node_, cores_per_socket);
-                    ECM_core = std::min(task_per_node_, cores_per_socket);
-                }
-                else
-                {
-                    if (core <= local_system_size - remainder_cores)
-                    {
-                        dim_y_local = dim_y_local * std::min(task_per_node_, cores_per_socket);
-                        ECM_core = std::min(task_per_node_, cores_per_socket);
-                    }
-                    else
-                    {
-                        dim_y_local = dim_y_local * remainder_cores;
-                        ECM_core = remainder_cores;
-                    }
+			if (task_per_node_ != 1)
+			{
+				if (local_system_size <= task_per_node_)
+				{
+					dim_y_local = dim_y_local * std::min(task_per_node_, cores_per_socket);
+					ECM_core = std::min(task_per_node_, cores_per_socket);
+				}
+				else if (remainder_cores == 0)
+				{
+					dim_y_local = dim_y_local * std::min(task_per_node_, cores_per_socket);
+					ECM_core = std::min(task_per_node_, cores_per_socket);
+				}
+				else
+				{
+					if (core <= local_system_size - remainder_cores)
+					{
+						dim_y_local = dim_y_local * std::min(task_per_node_, cores_per_socket);
+						ECM_core = std::min(task_per_node_, cores_per_socket);
+					}
+					else
+					{
+						dim_y_local = dim_y_local * remainder_cores;
+						ECM_core = remainder_cores;
+					}
 				}
 			}
 
@@ -109,39 +110,44 @@ namespace DisCosTiC
 
 				comp = DisCosTiC->Exec("LBL:" + CFG_args.getValue<std::string>("benchmark_kernel") + "//" + std::to_string(ECM_core) + "+" + std::to_string(remainder_cores), recv, YAML_args, process_Rank, N_size_Of_Cluster, comm);
 
-				comp.second->bufSize = (comp.second->bufSize * dim_x * dim_y_local) + CFG_args.getValue<DisCosTiC_Datatype>("penalty");
+				// if (virtual_rank == 1 || virtual_rank == 49)
+				// 	std::cout << "system number : " << system_number << " ECM core : " << ECM_core << " dim x : " << dim_x << " dim y : " << dim_y << " dim_y_local : " << dim_y_local << " ECM value : " << comp.second->bufSize << std::endl;
 
-				if (rank > 0)
-				{
-					int bottom = rank - 1;
-					// std::cout<<"Who is sending : "<<rank<<" to whom : "<<bottom<<std::endl;
-					send = DisCosTiC->Isend(&src[0], dim_x * 8, MPI_DOUBLE, bottom, 2, MPI_COMM_WORLD, &requests[2], comp);
-					// std::cout<<"Who is receiving : "<<rank<<" from whom : "<<bottom<<std::endl;
+				comp.second->bufSize = (comp.second->bufSize * dim_x * dim_y_local) + penalty;
 
-					recv = DisCosTiC->Irecv(&src[0], dim_x * 8, MPI_DOUBLE, bottom, 1, MPI_COMM_WORLD, &requests[3], comp);
-				}
+				// if (virtual_rank == 1 || virtual_rank == 49)
+				// 	std::cout << "system number : " << system_number << " ECM core : " << ECM_core << " dim x : " << dim_x << " dim y : " << dim_y << " dim_y_local : " << dim_y_local << " penalty : " << penalty << " ECM value : " << comp.second->bufSize << std::endl;
+
 				if (rank + 1 < systemsize)
 				{
 					int top = rank + 1;
 					// std::cout<<"Who is sending : "<<rank<<" to whom : "<<top<<std::endl;
-					send = DisCosTiC->Isend(&src[(dim_y - 1) * dim_x], dim_x * 8, MPI_DOUBLE, top, 1, MPI_COMM_WORLD, &requests[0], comp);
+					send = DisCosTiC->Send(&src[(dim_y - 1) * dim_x], dim_x * 8, MPI_DOUBLE, top, 1, MPI_COMM_WORLD, &requests[0], comp); // [TODO: replace dim_x by dim_x*8B]
 					// std::cout<<"Who is receiving : "<<rank<<" from whom : "<<top<<std::endl;
-					recv = DisCosTiC->Irecv(&src[(dim_y - 1) * dim_x], dim_x * 8, MPI_DOUBLE, top, 2, MPI_COMM_WORLD, &requests[1], comp); 
+					recv = DisCosTiC->Recv(&src[(dim_y - 1) * dim_x], dim_x * 8, MPI_DOUBLE, top, 2, MPI_COMM_WORLD, &requests[1], comp); // [TODO: replace dim_x by dim_x*8B]
+				}
+				if (rank > 0)
+				{
+					int bottom = rank - 1;
+					// std::cout<<"Who is sending : "<<rank<<" to whom : "<<bottom<<std::endl;
+					send = DisCosTiC->Send(&src[0], dim_x * 8, MPI_DOUBLE, bottom, 2, MPI_COMM_WORLD, &requests[2], comp); // [TODO: replace dim_x by dim_x*8B]
+
+					recv = DisCosTiC->Recv(&src[0], dim_x * 8, MPI_DOUBLE, bottom, 1, MPI_COMM_WORLD, &requests[3], comp); // [TODO: replace dim_x by dim_x*8B]
 				}
 				// Simulating dummy send and recv for allgather
 				if (rank + 1 == systemsize)
 				{
 					int top = rank + 1;
 
-					send = DisCosTiC->Isend(&rank, 0, MPI_DOUBLE, top, 1, MPI_COMM_WORLD, &requests[0], comp);
-					recv = DisCosTiC->Irecv(&rank, 0, MPI_DOUBLE, top, 2, MPI_COMM_WORLD, &requests[1], comp);
+					send = DisCosTiC->Send(&rank, 0, MPI_DOUBLE, top, 1, MPI_COMM_WORLD, &requests[0], comp);
+					recv = DisCosTiC->Recv(&rank, 0, MPI_DOUBLE, top, 2, MPI_COMM_WORLD, &requests[1], comp);
 				}
 				if (rank == 0)
 				{
 					int bottom = rank - 1;
 
-					send = DisCosTiC->Isend(&rank, 0, MPI_DOUBLE, bottom, 2, MPI_COMM_WORLD, &requests[2], comp);
-					recv = DisCosTiC->Irecv(&rank, 0, MPI_DOUBLE, bottom, 1, MPI_COMM_WORLD, &requests[3], comp);
+					send = DisCosTiC->Send(&rank, 0, MPI_DOUBLE, bottom, 2, MPI_COMM_WORLD, &requests[2], comp);
+					recv = DisCosTiC->Recv(&rank, 0, MPI_DOUBLE, bottom, 1, MPI_COMM_WORLD, &requests[3], comp);
 				}
 				//!< end of loop over time step
 				numOperations = DisCosTiC->getNumOps(); // DisCosTiC->allNodes.size(); //15
@@ -169,6 +175,7 @@ namespace DisCosTiC
 					N.node = (**it).node;
 					N.network = (**it).network;
 					N.label = (**it).label;
+					N.mode = (**it).mode;
 					N.depsCount = (**it).DepOperations.size();
 					N.depApdxStartLabel = count;
 					count += (**it).DepOperations.size();
@@ -188,7 +195,7 @@ namespace DisCosTiC
 			} //!< end of loop over rank
 
 			DisCosTiC->File_Write();
-			delete DisCosTiC;
+			// delete DisCosTiC;
 			/*print_pairedVec_NonPointer2T(ID);
 			print_pairedVec2T(compIDs);
 			print_pairedVec2T(sendIDs);
@@ -229,7 +236,7 @@ namespace DisCosTiC
 		DisCosTiC_Datatype numOperations;
 
 	private:
-		AST *DisCosTiC;
+		// AST *DisCosTiC;
 		DisCosTiC::VecDeserialNode Nodes;
 
 		DisCosTiC_Datatype datasize;
