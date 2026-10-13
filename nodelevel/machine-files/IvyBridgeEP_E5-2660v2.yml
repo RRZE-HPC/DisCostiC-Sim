@@ -900,8 +900,7 @@ benchmarks:
       1:
         cores: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
         results:
-          copy: [9.58 GB/s, 18.01 GB/s, 23.92 GB/s, 26.17 GB/s, 27.01 GB/s, 27.12
-              GB/s, 27.42 GB/s, 27.25 GB/s, 27.02 GB/s, 26.88 GB/s]
+          copy: [9.58 GB/s, 18.01 GB/s, 23.92 GB/s, 26.17 GB/s, 27.01 GB/s, 27.12 GB/s, 27.42 GB/s, 27.25 GB/s, 27.02 GB/s, 26.88 GB/s]
           daxpy: [13.88 GB/s, 25.73 GB/s, 34.47 GB/s, 38.44 GB/s, 40.12 GB/s, 40.62
               GB/s, 40.75 GB/s, 40.88 GB/s, 40.82 GB/s, 40.60 GB/s]
           load: [11.87 GB/s, 21.99 GB/s, 31.32 GB/s, 38.41 GB/s, 43.40 GB/s, 46.05

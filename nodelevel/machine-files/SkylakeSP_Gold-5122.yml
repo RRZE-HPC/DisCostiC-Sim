@@ -535,11 +535,7 @@ benchmarks:
           - 24.38 GB/s
           - 34.83 GB/s
           - 45.05 GB/s
-          copy:
-          - 12.32 GB/s
-          - 24.40 GB/s
-          - 32.82 GB/s
-          - 37.00 GB/s
+          copy: [12.32 GB/s, 24.40 GB/s, 32.82 GB/s,37.00 GB/s]
           update:
           - 20.83 GB/s
           - 40.25 GB/s

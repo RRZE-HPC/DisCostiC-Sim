@@ -62,7 +62,7 @@ memory hierarchy:
     load_from: L2
     store_to: L2
   size per group: 48 kB
-  groups: 36
+  groups: 72
   cores per group: 1
   threads per group: 1
   upstream throughput: [architecture code analyzer, [2D, 3D]]
@@ -86,7 +86,7 @@ memory hierarchy:
     victims_to: L3  # all victims, modified or not are passed onto L3
     store_to: L3
   size per group: 1.25 MB
-  groups: 36
+  groups: 72
   cores per group: 1
   threads per group: 1 # It was 2 thread previously. Changed it to 1.
 - level: L3
@@ -108,7 +108,7 @@ memory hierarchy:
     evicts: (CAS_COUNT_WR:MBOX0C[0-3] + CAS_COUNT_WR:MBOX1C[0-3] + CAS_COUNT_WR:MBOX2C[0-3]
       + CAS_COUNT_WR:MBOX3C[0-3] + CAS_COUNT_WR:MBOX4C[0-3] + CAS_COUNT_WR:MBOX5C[0-3])
   size per group: 27.00 MB
-  threads per group: 36
+  threads per group: 18
 - level: MEM
   cores per group: 36
   upstream throughput: [full socket memory bandwidth, half-duplex]
