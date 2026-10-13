@@ -1,6 +1,9 @@
-#!/usr/bin/env python3
-"""Comand line interface of Kerncraft."""
-# Version check
+#    \file
+#    Comand line interface of Kerncraft.
+#
+#    \Author: Ayesha Afzal <ayesha.afzal@fau.de>
+#    \Copyright © 2024 HPC, FAU Erlangen-Nuremberg. All rights reserved.
+#
 import copy
 import sys
 import argparse
@@ -380,6 +383,16 @@ def run(parser, args, extras, system_number, output_file=sys.stdout):
     return result_storage
 
 def report(model, extras, system_number, output_file):
+    
+    if("-vvv" in sys.argv):
+        print("\nVerbose Kerncraft information --- \n\n")
+        print(model.results['in-core model output'])
+        print("port cycles : " + str(model.results['port cycles']))
+        print("elements_per_block :" + str(model.results['elements_per_block']))
+        print("pointer_increment : " +  str(model.results['pointer_increment']))
+        print("verbose infos : " + str(model.results['verbose infos']))
+
+
     with open(output_file, 'a') as f:
         if(system_number == "0"):
             print("", file=f)
@@ -430,14 +443,17 @@ def main():
 
     remove_list = []
 
-    for el in sys.argv:
+    for i, el in enumerate(sys.argv):
         if "-extras" in el:
             extras = el
             remove_list.append(el)
         elif "-systemNo" in el:
             system_number = copy.deepcopy(el)
             remove_list.append(el)
+        elif "--compiler-flags" in el:
+            sys.argv[i] = el.replace('_',' ')
 
+    print(sys.argv)
 
 
     sys.argv = list(filterfalse(remove_list.__contains__, sys.argv))
