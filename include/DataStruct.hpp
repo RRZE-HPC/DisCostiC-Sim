@@ -1,3 +1,9 @@
+///    \file
+///    DATASTRUCT_HPP
+///
+///    \Author: Ayesha Afzal <ayesha.afzal@fau.de>
+///    \Copyright © 2024 HPC, FAU Erlangen-Nuremberg. All rights reserved.
+///
 
 #ifndef Node_t_HPP
 #define Node_t_HPP
@@ -26,6 +32,10 @@ namespace DisCosTiC
         DisCosTiC_Indextype network; //!< type of network for this operation
         char type;                   //!< type of AST_OP send, receive or computation
         char mode;                   //!< TODO: add blocking/non-blocking mode
+        uint8_t algorithm;           //!< algo choice for collective
+        uint8_t collectiveType;      //!< collective operation type
+        DisCosTiC_Indextype collectiveRoot;     //!< root rank for collectives which have root (-1 if no root)
+        DisCosTiC_Indextype collectiveNumRanks; //!< nubmer of ranks participating in collective
     };
 
     struct AST_OP_
@@ -43,6 +53,10 @@ namespace DisCosTiC
         DisCosTiC_Indextype idepsCount;
         DisCosTiC_Indextype idepApdxStartLabel;
         char mode; //!< TODO: add blocking/non-blocking mode
+        uint8_t algorithm;           //!< algo choice for collective
+        uint8_t collectiveType;      //!< collective operation type
+        DisCosTiC_Indextype collectiveRoot;     //!< root rank for collectives which have root (-1 if no root)
+        DisCosTiC_Indextype collectiveNumRanks; //!< nubmer of ranks participating in collective
     };
 
     struct AST_OP_TYPE
@@ -58,6 +72,10 @@ namespace DisCosTiC
         DisCosTiC_Indextype network;
         char type;
         char mode; //!< TODO: add blocking/non-blocking mode
+        uint8_t algorithm;           //!< algo choice for collective
+        uint8_t collectiveType;      //!< collective operation type
+        DisCosTiC_Indextype collectiveRoot;     //!< root rank for collectives which have root (-1 if no root)
+        DisCosTiC_Indextype collectiveNumRanks; //!< nubmer of ranks participating in collective
     };
 
     struct DisCosTiC_OP
@@ -75,6 +93,10 @@ namespace DisCosTiC
         DisCosTiC_Indextype network;
         char type;
         char mode; //!< TODO: add blocking/non-blocking mode
+        uint8_t algorithm;           //!< algo choice for collective
+        uint8_t collectiveType;      //!< collective operation type
+        DisCosTiC_Indextype collectiveRoot;     //!< root rank for collectives which have root (-1 if no root)
+        DisCosTiC_Indextype collectiveNumRanks; //!< nubmer of ranks participating in collective
     };
 
     struct DisCosTiC_queueOP
@@ -113,7 +135,8 @@ namespace DisCosTiC
     using tupleIdNodePair = std::tuple<idNodePair, idNodePair, idNodePair>;
     // using Networktype			= std::tuple<DisCosTiC_Timetype,DisCosTiC_Timetype,DisCosTiC_Timetype>;
     using Networktype = std::array<DisCosTiC_Timetype, 4>;
-
+    using NCMIntraAndInterNodeData = std::map<std::string, std::map<std::string, std::set<int>>>;
+    using NCMInterClusterData = std::map<std::string, std::set<int>>;
     /**
      * \brief this matches and removes operations from list if found, otherwise returns false
      */

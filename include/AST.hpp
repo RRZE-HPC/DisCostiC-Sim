@@ -1,3 +1,10 @@
+///    \file
+///    AST_HPP
+///
+///    \Author: Ayesha Afzal <ayesha.afzal@fau.de>
+///    \Copyright © 2024 HPC, FAU Erlangen-Nuremberg. All rights reserved.
+///
+
 #ifndef AST_HPP
 #define AST_HPP
 
@@ -16,8 +23,13 @@
 #include "YAMLParser.hpp"
 
 UserInterface::ConfigParser CFG_args("config.cfg");
-static bool Verbose = CFG_args.getValue<DisCosTiC_Datatype>("Verbose");
 static bool kerncraftExecuted = false;
+static bool Verbose = CFG_args.getValue<DisCosTiC_Datatype>("Verbose");
+static bool kerncraftExecuted_1 = false;
+static bool kerncraftExecuted_2 = false;
+static bool kernel_1 = false;
+static bool kernel_2 = false;
+static int kerncraft_count = 0;
 static bool barrier = false;
 static bool barrier_hetero = false;
 
@@ -36,6 +48,10 @@ extern int socket;
 extern int primary_processes;
 extern int secondary_processes;
 extern int heteregeneous_mode;
+extern int primary_cores_per_socket;
+extern int secondary_cores_per_socket;
+extern int primary_task_per_node;
+extern int secondary_task_per_node;
 extern std::string arch_name;
 
 class AST
@@ -43,6 +59,11 @@ class AST
 public:
     std::vector<DisCosTiC::AST_OP *> allNodes;
     std::vector<DisCosTiC::AST_OP *> RootNodes;
+
+    // New datastructures to store data about ranks communicating in the network. Required for network contention models.
+    DisCosTiC::NCMIntraAndInterNodeData intraAndInterNodeRanks;
+    DisCosTiC::NCMInterClusterData interClusterRanks;
+
     // DisCosTiC_Datatype nodesCount, networksCount;
 
     /// private variables required for nonblocking calls
@@ -64,7 +85,7 @@ private:
 
     DisCosTiC_Datatype mode;
     DisCosTiC_Timetype execsize;
-    std::string func;
+    //std::string func;
 
 public:
     /**
@@ -87,12 +108,15 @@ public:
         AppendString(ss.str(), content);
         this->rankCount = numRanks;
         this->node = CFG_args->getValue<DisCosTiC_Datatype>("node");
-        this->func = CFG_args->getValue<std::string>("benchmark_kernel");
+        //this->func = CFG_args->getValue<std::string>("benchmark_kernel");
         this->execsize = CFG_args->getValue<DisCosTiC_Datatype>("balance_comp_size_in_ns");
         this->timeunit_conv = CFG_args->getValue<DisCosTiC_Datatype>("timeunit_conv");
         // this->ranks_init.resize(numRanks);
         // std::fill(this->ranks_init.begin(), this->ranks_init.end(), false);
         // if(!ranks_init[rank])  {do something; ranks_init[rank] = true;}
+
+        intraAndInterNodeRanks.insert(std::pair<std::string, std::map<std::string, std::set<int>>>("system0", {}));
+        intraAndInterNodeRanks.insert(std::pair<std::string, std::map<std::string, std::set<int>>>("system1", {}));
     }
 
     /**
@@ -301,6 +325,102 @@ public:
         return this->allNodes.size();
     }
 
+    inline void insertInNetwork(int src, int dst)
+    {
+        int src_system = src < primary_processes ? 0 : 1;
+        int dst_system = dst < primary_processes ? 0 : 1;
+        int src_socket = src_system == 0 ? std::floor(src / primary_cores_per_socket) : std::floor((src - primary_processes) / secondary_cores_per_socket);
+        int dst_socket = dst_system == 0 ? std::floor(dst / primary_cores_per_socket) : std::floor((dst - primary_processes) / secondary_cores_per_socket);
+        int src_node = src_system == 0 ? std::floor(src / primary_task_per_node) : std::floor((src - primary_processes) / secondary_task_per_node);
+        int dst_node = dst_system == 0 ? std::floor(dst / primary_task_per_node) : std::floor((dst - primary_processes) / secondary_task_per_node);
+
+        if (src_system != dst_system)
+        {
+            // if (virtual_rank == 0 && system_number == 0)
+            //     std::cout << "Starting intercluster for rank " << src << " ! " << std::endl;
+
+            if (interClusterRanks.count("intercluster") == 0)
+            {
+                interClusterRanks.insert(std::pair<std::string, std::set<int>>("intercluster", {}));
+            }
+            interClusterRanks.at("intercluster").insert(src);
+            // if (virtual_rank == 0 && system_number == 0)
+
+            //     std::cout << "Done intercluster for rank " << src << " ! " << std::endl;
+        }
+        else if (src_node != dst_node)
+        {
+            // if (virtual_rank == 0 && system_number == 0)
+
+            //     std::cout << "Starting internode for rank " << src << " ! " << std::endl;
+
+            if (intraAndInterNodeRanks.at("system" + std::to_string(src_system)).count("internode" + std::to_string(src_node) + std::to_string(dst_node)) == 0)
+            {
+                intraAndInterNodeRanks.at("system" + std::to_string(src_system)).insert(std::pair<std::string, std::set<int>>("internode" + std::to_string(src_node) + std::to_string(dst_node), {}));
+            }
+            intraAndInterNodeRanks.at("system" + std::to_string(src_system)).at("internode" + std::to_string(src_node) + std::to_string(dst_node)).insert(src);
+            // if (virtual_rank == 0 && system_number == 0)
+
+            //     std::cout << "Done internode for rank " << src << " ! " << std::endl;
+        }
+        else if (src_socket != dst_socket)
+        {
+            // if (virtual_rank == 0 && system_number == 0)
+            //     std::cout << "Starting intranode for rank " << src << " ! " << std::endl;
+
+            if (intraAndInterNodeRanks.at("system" + std::to_string(src_system)).count("intranode" + std::to_string(src_node)) == 0)
+            {
+                intraAndInterNodeRanks.at("system" + std::to_string(src_system)).insert(std::pair<std::string, std::set<int>>("intranode" + std::to_string(src_node), {}));
+            }
+            intraAndInterNodeRanks.at("system" + std::to_string(src_system)).at("intranode" + std::to_string(src_node)).insert(src);
+            // if (virtual_rank == 0 && system_number == 0)
+            //     std::cout << "Done intranode for rank " << src << " ! " << std::endl;
+        }
+        else
+        {
+            // if (virtual_rank == 0 && system_number == 0)
+            //     std::cout << "Starting intrasocket for rank " << src << " ! " << std::endl;
+
+            if (intraAndInterNodeRanks.at("system" + std::to_string(src_system)).count("intrasocket" + std::to_string(src_socket)) == 0)
+            {
+                intraAndInterNodeRanks.at("system" + std::to_string(src_system)).insert(std::pair<std::string, std::set<int>>("intrasocket" + std::to_string(src_socket), {}));
+            }
+            intraAndInterNodeRanks.at("system" + std::to_string(src_system)).at("intrasocket" + std::to_string(src_socket)).insert(src);
+            // if (virtual_rank == 0 && system_number == 0)
+            //     std::cout << "Done intrasocket for rank " << src << " ! " << std::endl;
+        }
+    }
+
+    void printNCMRanks()
+    {
+        for (const auto &outer_pair : interClusterRanks)
+        {
+            std::cout << std::endl
+                      << outer_pair.first << " : ";
+            for (const auto elem : outer_pair.second)
+            {
+                std::cout << "  " << elem;
+            }
+        }
+        std::cout << std::endl;
+
+        for (const auto &outer_pair : intraAndInterNodeRanks)
+        {
+            std::cout << std::endl
+                      << outer_pair.first << " : " << std::endl;
+            for (const auto &inner_pair : outer_pair.second)
+            {
+                std::cout << std::endl
+                          << inner_pair.first << " : ";
+                for (const auto elem : inner_pair.second)
+                {
+                    std::cout << "  " << elem;
+                }
+            }
+        }
+        std::cout << std::endl;
+    }
+
     /**
      * \brief perform a message sending operation
      * \param [in] the number of sending buffer elements (bufsize) of integer datatype of each send buffer element
@@ -330,7 +450,13 @@ public:
         MaxCPU(0 /*node*/);
         Maxnetwork(0 /*network*/);
 
-        this->mode = DisCosTiC::Mode_t::BLOCKING;
+        if (bufsize != 0)
+        {
+            insertInNetwork(this->rank, dst);
+            bytes_to_send = bufsize;
+        }
+
+        n->mode = DisCosTiC::Mode_t::BLOCKING;
         blockingDep(std::make_pair(this->count, n), depOP);
 
         return std::make_pair(this->count, n);
@@ -361,12 +487,21 @@ public:
         n->tag = curtag;
         n->node = 0 /*node*/;
         n->network = 0 /*network*/;
+        n->algorithm = 0; //no algorithm for P2P operations
+        n->collectiveType = 0;
+        n->collectiveRoot = 0;
+        n->collectiveNumRanks = 0;
         n->bufSize = bufsize;
 
         MaxCPU(0 /*node*/);
         Maxnetwork(0 /*network*/);
 
-        this->mode = DisCosTiC::Mode_t::BLOCKING;
+        if (bufsize != 0)
+        {
+            insertInNetwork(this->rank, dst);
+            bytes_to_send = bufsize;
+        }
+        n->mode = DisCosTiC::Mode_t::BLOCKING;
         blockingDep(std::make_pair(this->count, n), depOP);
 
         return std::make_pair(this->count, n);
@@ -398,10 +533,15 @@ public:
         n->network = 0 /*network*/;
         n->bufSize = bufsize;
 
+        if (bufsize != 0)
+        {
+            insertInNetwork(this->rank, dst);
+            bytes_to_send = bufsize;
+        }
         MaxCPU(0 /*node*/);
         Maxnetwork(0 /*network*/);
 
-        this->mode = DisCosTiC::Mode_t::NONBLOCKING;
+        n->mode = DisCosTiC::Mode_t::NONBLOCKING;
         nonBlockingDep(std::make_pair(this->count, n), depOP);
 
         return std::make_pair(this->count, n);
@@ -418,7 +558,6 @@ public:
     {
         this->sendCount++;
         this->count++;
-        bytes_to_send = bufsize;
         std::stringstream ss;
         ss << "l" << this->count << ": send " << bufsize << "b to " << dst << " tag " << tag << std::endl;
         AppendString(ss.str(), content);
@@ -433,12 +572,21 @@ public:
         n->tag = tag;
         n->node = 0 /*node*/;
         n->network = 0 /*network*/;
+        n->algorithm = 0; //no algorithm for P2P operations
+        n->collectiveType = 0;
+        n->collectiveRoot = 0;
+        n->collectiveNumRanks = 0;
         n->bufSize = bufsize;
 
+        if (bufsize != 0)
+        {
+            insertInNetwork(this->rank, dst);
+            bytes_to_send = bufsize;
+        }
         MaxCPU(0 /*node*/);
         Maxnetwork(0 /*network*/);
 
-        this->mode = DisCosTiC::Mode_t::NONBLOCKING;
+        n->mode = DisCosTiC::Mode_t::NONBLOCKING;
         nonBlockingDep(std::make_pair(this->count, n), depOP);
 
         return std::make_pair(this->count, n);
@@ -467,12 +615,16 @@ public:
         n->tag = curtag;
         n->node = 0 /*node*/;
         n->network = 0 /*network*/;
+        n->algorithm = 0; //no algorithm for P2P operations
+        n->collectiveType = 0;
+        n->collectiveRoot = 0;
+        n->collectiveNumRanks = 0;
         n->bufSize = bufsize;
 
         MaxCPU(0 /*node*/);
         Maxnetwork(0 /*network*/);
 
-        this->mode = DisCosTiC::Mode_t::BLOCKING;
+        n->mode = DisCosTiC::Mode_t::BLOCKING;
         blockingDep(std::make_pair(this->count, n), depOP);
 
         return std::make_pair(this->count, n);
@@ -502,12 +654,16 @@ public:
         n->tag = curtag;
         n->node = 0 /*node*/;
         n->network = 0 /*network*/;
+        n->algorithm = 0; //no algorithm for P2P operations
+        n->collectiveType = 0;
+        n->collectiveRoot = 0;
+        n->collectiveNumRanks = 0;
         n->bufSize = bufsize;
 
         MaxCPU(0 /*node*/);
         Maxnetwork(0 /*network*/);
 
-        this->mode = DisCosTiC::Mode_t::BLOCKING;
+        n->mode = DisCosTiC::Mode_t::BLOCKING;
         blockingDep(std::make_pair(this->count, n), depOP);
 
         return std::make_pair(this->count, n);
@@ -536,12 +692,16 @@ public:
         n->tag = curtag;
         n->node = 0 /*node*/;
         n->network = 0 /*network*/;
+        n->algorithm = 0; //no algorithm for P2P operations
+        n->collectiveType = 0;
+        n->collectiveRoot = 0;
+        n->collectiveNumRanks = 0;
         n->bufSize = bufsize;
 
         MaxCPU(0 /*node*/);
         Maxnetwork(0 /*network*/);
 
-        this->mode = DisCosTiC::Mode_t::NONBLOCKING;
+        n->mode = DisCosTiC::Mode_t::NONBLOCKING;
         nonBlockingDep(std::make_pair(this->count, n), depOP);
 
         return std::make_pair(this->count, n);
@@ -571,12 +731,16 @@ public:
         n->tag = tag;
         n->node = 0 /*node*/;
         n->network = 0 /*network*/;
+        n->algorithm = 0; //no algorithm for P2P operations
+        n->collectiveType = 0;
+        n->collectiveRoot = 0;
+        n->collectiveNumRanks = 0;
         n->bufSize = bufsize;
 
         MaxCPU(0 /*node*/);
         Maxnetwork(0 /*network*/);
 
-        this->mode = DisCosTiC::Mode_t::NONBLOCKING;
+        n->mode = DisCosTiC::Mode_t::NONBLOCKING;
         nonBlockingDep(std::make_pair(this->count, n), depOP);
 
         return std::make_pair(this->count, n);
@@ -601,7 +765,7 @@ public:
         this->compCount++;
         this->count++;
         this->execsize = runTime;
-        // std::cout<<"Execsize : "<<this->execsize<<std::endl;
+        // std::cout << "Execsize : " << execsize << std::endl;
 
         std::stringstream ss;
         ss << "l" << this->count << ": calc " << execsize * timeunit_conv /* bufSize*/ << " node " << node << std::endl;
@@ -609,18 +773,24 @@ public:
 
         // return this->count;
         DisCosTiC::AST_OP *n = addNode();
-
-        n->type = DisCosTiC::Operation_t::COMP;
+        if (opname.find(CFG_args.getValue<std::string>("part1")) != std::string::npos)
+            n->type = DisCosTiC::Operation_t::COMP;
+        if (CFG_args.getValue<std::string>("part2") != "0" && opname.find(CFG_args.getValue<std::string>("part2")) != std::string::npos)
+            n->type = DisCosTiC::Operation_t::COMPADD;
         n->target = 0;
         n->tag = 0;
         n->node = 0; // node;
         n->network = 0 /*network*/;
+        n->algorithm = 0; //no algorithm for P2P operations
+        n->collectiveType = 0;
+        n->collectiveRoot = 0;
+        n->collectiveNumRanks = 0;
         n->bufSize = execsize * timeunit_conv; // bufSize;
 
         MaxCPU(0 /*node*/);
         Maxnetwork(0 /*network*/);
 
-        this->mode = DisCosTiC::Mode_t::BLOCKING;
+        n->mode = DisCosTiC::Mode_t::BLOCKING;
         blockingDep(std::make_pair(this->count, n), depOP1);
 
         return std::make_pair(this->count, n);
@@ -655,17 +825,68 @@ public:
         n->tag = 0;
         n->node = 0; // node;
         n->network = 0 /*network*/;
+        n->algorithm = 0; //no algorithm for COMP operations
+        n->collectiveType = 0;
+        n->collectiveRoot = 0;
+        n->collectiveNumRanks = 0;
         n->bufSize = execsize * timeunit_conv; // bufSize;
 
         MaxCPU(0 /*node*/);
         Maxnetwork(0 /*network*/);
 
-        this->mode = DisCosTiC::Mode_t::NONBLOCKING;
+        n->mode = DisCosTiC::Mode_t::NONBLOCKING;
         nonBlockingDep(std::make_pair(this->count, n), depOP1);
         //  nonBlockingDep(std::make_pair (this->count,n), depOP2);
 
         return std::make_pair(this->count, n);
     }
+
+
+    inline DisCosTiC::Event Collective(DisCosTiC::CollectiveType collectiveType,
+                                       DisCosTiC_Datatype root, DisCosTiC_Datatype bufsize,
+                                       DisCosTiC_Datatype myRank, DisCosTiC_Datatype numRanks,
+                                       DisCosTiC::Event depOP,
+                                       uint8_t algorithm = 0)
+    {
+        this->count++;
+
+        // string for collective types
+        std::stringstream ss;
+        ss << "l" << this->count << ": ";
+        switch(collectiveType) {
+            case DisCosTiC::COLL_BCAST:
+                ss << "bcast " << bufsize << "b from root " << root;
+                break;
+            case DisCosTiC::COLL_REDUCE:
+                ss << "reduce " << bufsize << "b to root " << root;
+                break;
+            case DisCosTiC::COLL_ALLREDUCE:
+                ss << "allreduce " << bufsize << "b";
+                break;
+        }
+        ss << " rank " << myRank << " of " << numRanks << std::endl;
+        AppendString(ss.str(), content);
+
+        DisCosTiC::AST_OP *n = addNode();
+        n->type = DisCosTiC::Operation_t::COLLECTIVE;
+        //store collective info in fields
+        n->collectiveType = static_cast<uint8_t>(collectiveType);
+        n->collectiveRoot = root;
+        n->collectiveNumRanks = numRanks;
+        n->algorithm = algorithm;
+        //reset P2P fields to defaults
+        n->target = 0;
+        n->tag = 0;
+        n->node = 0;  //CPU 0 for viz
+        n->network = 0;
+        n->bufSize = bufsize;
+        n->mode = DisCosTiC::Mode_t::BLOCKING; //collectives are all blocking
+
+        blockingDep(std::make_pair(this->count, n), depOP);
+        return std::make_pair(this->count, n);
+    }
+
+
 
     inline void execNodeLVL(std::string &opname, UserInterface::YAMLParser YAML_args, DisCosTiC_Timetype *rt, DisCosTiC_Datatype process_Rank, DisCosTiC_Datatype N_size_Of_Cluster, MPI_Comm comm)
     {
@@ -674,29 +895,52 @@ public:
         std::string::size_type n = opname.find(":");
         if (opname.substr(0, n) == "LBL")
         {
+            //std::cout << "Check: " << opname << std::endl;
             opname.erase(0, n + 1);
+            //std::cout << "opname: " << opname << std::endl;
             std::string::size_type opos = opname.find(":");
             std::string::size_type extrasPos = opname.find("//");
 
             std::string extras = "-extras" + opname.substr(extrasPos + 2, opname.length());
+            //std::cout << "extras: " << extras << std::endl;
 
             std::string ECM_core = extras.erase(0, 7);
+            //std::cout << "ecm_core: " << ECM_core << std::endl;
             ECM_core = extras.substr(0, extras.find("+"));
+            //std::cout << "ecm_core: " << ECM_core << std::endl;
 
-            if (this->func != opname.substr(opos + 1, extrasPos - opos - 1))
-                throw std::runtime_error("computation operation NOT YET IMPLEMENTED\n");
+            //if (this->func != opname.substr(opos + 1, extrasPos - opos - 1))
+                //throw std::runtime_error("computation operation NOT YET IMPLEMENTED\n");
 
-            if (process_Rank == 0 && !barrier)
+            std::string str_part1 = CFG_args.getValue<std::string>("part1");
+            std::string str_part2 = CFG_args.getValue<std::string>("part2");
+
+            // Copy per-rank ECM cfgs once per kernel, not once per modeled rank.
+            bool already_copied = false;
+            if (opname.find(str_part1) != std::string::npos)
+                already_copied = kernel_1;
+            else if (str_part2 != "0" && opname.find(str_part2) != std::string::npos)
+                already_copied = kernel_2;
+            else
+                already_copied = kernel_1;
+
+            if (!already_copied && process_Rank == 0)
             {
+                if (opname.find(str_part1) != std::string::npos)
+                    kernel_1 = true;
+                if (str_part2 == "0" || opname.find(str_part2) != std::string::npos)
+                    kernel_2 = true;
+                if (opname.find(str_part1) == std::string::npos &&
+                    !(str_part2 != "0" && opname.find(str_part2) != std::string::npos))
+                    kernel_1 = true;
+                
                 system(("for num in {0.." + std::to_string(N_size_Of_Cluster) + "}; do cp config.cfg config$num.cfg; done").c_str());
                 system(("for num in {0.." + std::to_string(N_size_Of_Cluster) + "}; do cp ./nodelevel/configs/" + opname.substr(opos + 1, extrasPos - opos - 1) + ".cfg ./nodelevel/configs/" + opname.substr(opos + 1, extrasPos - opos - 1) + "$num.cfg; done").c_str());
             }
 
-            if (!barrier)
-            {
-                MPI_Barrier(comm);
-                barrier = true;
-            }
+            // Sync after each LBL cfg copy so all ranks see the files.
+            MPI_Barrier(comm);
+            barrier = true;
 
             UserInterface::ConfigParser NodeCFG("./nodelevel/configs/" + opname.substr(opos + 1, extrasPos - opos - 1) + std::to_string(process_Rank) + ".cfg");
             UserInterface::ConfigParser config("./config" + std::to_string(process_Rank) + ".cfg");
@@ -765,8 +1009,8 @@ public:
             std::string::size_type opos = opname.find(":");
             std::string::size_type machinePos = opname.find("//", opos);
 
-            if (this->func != opname.substr(opos + 1, machinePos - opos - 1))
-                throw std::runtime_error("computation operation NOT YET IMPLEMENTED\n");
+            //if (this->func != opname.substr(opos + 1, machinePos - opos - 1))
+                //throw std::runtime_error("computation operation NOT YET IMPLEMENTED\n");
 
             std::string output = "nodelevel/configs/" + opname.substr(opos + 1, machinePos - opos - 1) + std::to_string(process_Rank) + ".cfg";
 
@@ -794,21 +1038,23 @@ public:
                 std::string::size_type corePos = opname.find("//", machinePos + 2);
                 std::string::size_type definePos = opname.find("//", corePos + 2);
 
-                std::string script("./kerncraftintegration/diskern.py");
-                std::string model("-pECM");
+                std::string script("python3 ./kerncraftintegration/diskern.py");
                 std::string outputPath = "-o" + output;
                 std::string machine = "-m" + opname.substr(machinePos + 2, corePos - machinePos - 2);
                 std::string extras = "-extras" + opname.substr(corePos + 2, definePos - corePos - 2);
                 std::string cores = "-c" + std::to_string(cores_per_socket);
                 std::string defines = opname.substr(definePos + 2, opname.length());
                 std::string system_no = "-systemNo" + std::to_string(system_number);
+                std::string compiler_flag = "--compiler-flags=\"" + CFG_args.getValue<std::string>("compiler_flags") + "\"";
+                std::string verbose_flag = "-vvv";
+                std::string pmodel = "-p" + CFG_args.getValue<std::string>("pmodel");
+                std::string cache_predictor = "-P" + CFG_args.getValue<std::string>("cache_predictor");
 
                 std::ofstream sF;
                 sF.open(source);
                 sF << opname.substr(0, pos) << std::endl;
                 sF.close();
                 char scriptPath[script.length() + 1];
-                char modelType[model.length() + 1];
                 char outputFile[outputPath.length() + 1];
                 char machineFile[machine.length() + 1];
                 char coreNumber[cores.length() + 1];
@@ -816,9 +1062,12 @@ public:
                 char sourceFile[source.length() + 1];
                 char extrasVal[extras.length() + 1];
                 char system_number_val[system_no.length() + 1];
+                char compilerFlags[compiler_flag.length() + 1];
+                char pModel[pmodel.length() + 1];
+                char versboseFlag[verbose_flag.length() + 1];
+                char cachePredictor[cache_predictor.length() + 1];
 
                 std::strcpy(scriptPath, script.c_str());
-                std::strcpy(modelType, model.c_str());
                 std::strcpy(outputFile, outputPath.c_str());
                 std::strcpy(machineFile, machine.c_str());
                 std::strcpy(coreNumber, cores.c_str());
@@ -826,8 +1075,21 @@ public:
                 std::strcpy(sourceFile, source.c_str());
                 std::strcpy(extrasVal, extras.c_str());
                 std::strcpy(system_number_val, system_no.c_str());
+                std::strcpy(compilerFlags, compiler_flag.c_str());
+                std::strcpy(pModel, pmodel.c_str());
+                std::strcpy(versboseFlag, verbose_flag.c_str());
+                std::strcpy(cachePredictor, cache_predictor.c_str());
 
-                std::vector<char *> argVek{scriptPath, modelType, machineFile, coreNumber, outputFile, extrasVal, system_number_val};
+                std::vector<char *> argVek{scriptPath, machineFile, coreNumber, outputFile, extrasVal, system_number_val, pModel, cachePredictor};
+
+                if (CFG_args.getValue<DisCosTiC_Datatype>("vvv") == 1)
+                {
+                    argVek.insert(argVek.end(), versboseFlag);
+                }
+                if (!CFG_args.getValue<std::string>("compiler_flags").empty())
+                {
+                    argVek.insert(argVek.end(), compilerFlags);
+                }
 
                 char *token = std::strtok(keyValues, " ");
                 while (token != NULL)
@@ -854,7 +1116,7 @@ public:
             }
 
             if (!kerncraftExecuted &&
-                process_Rank == (CFG_args.getValue<DisCosTiC_Datatype>("secondary_number_of_processes") + 2) &&
+                process_Rank == (CFG_args.getValue<DisCosTiC_Datatype>("number_of_processes") + 2) &&
                 (CFG_args.getValue<DisCosTiC_Datatype>("heteregeneous") == 1))
             {
                 kerncraftExecuted = true;
@@ -871,21 +1133,23 @@ public:
                 std::string::size_type corePos = opname.find("//", machinePos + 2);
                 std::string::size_type definePos = opname.find("//", corePos + 2);
 
-                std::string script("./kerncraftintegration/diskern.py");
-                std::string model("-pECM");
+                std::string script("python3 ./kerncraftintegration/diskern.py");
                 std::string outputPath = "-o" + output;
                 std::string machine = "-m" + opname.substr(machinePos + 2, corePos - machinePos - 2);
                 std::string extras = "-extras" + opname.substr(corePos + 2, definePos - corePos - 2);
                 std::string cores = "-c" + std::to_string(cores_per_socket);
                 std::string defines = opname.substr(definePos + 2, opname.length());
                 std::string system_no = "-systemNo" + std::to_string(system_number);
+                std::string compiler_flag = "--compiler-flags=\"" + CFG_args.getValue<std::string>("secondary_compiler_flags") + "\"";
+                std::string verbose_flag = "-vvv";
+                std::string pmodel = "-p" + CFG_args.getValue<std::string>("secondary_pmodel");
+                std::string cache_predictor = "-P" + CFG_args.getValue<std::string>("secondary_cache_predictor");
 
                 std::ofstream sF;
                 sF.open(source);
                 sF << opname.substr(0, pos) << std::endl;
                 sF.close();
                 char scriptPath[script.length() + 1];
-                char modelType[model.length() + 1];
                 char outputFile[outputPath.length() + 1];
                 char machineFile[machine.length() + 1];
                 char coreNumber[cores.length() + 1];
@@ -893,9 +1157,12 @@ public:
                 char sourceFile[source.length() + 1];
                 char extrasVal[extras.length() + 1];
                 char system_number_val[system_no.length() + 1];
+                char compilerFlags[compiler_flag.length() + 1];
+                char pModel[pmodel.length() + 1];
+                char versboseFlag[verbose_flag.length() + 1];
+                char cachePredictor[cache_predictor.length() + 1];
 
                 std::strcpy(scriptPath, script.c_str());
-                std::strcpy(modelType, model.c_str());
                 std::strcpy(outputFile, outputPath.c_str());
                 std::strcpy(machineFile, machine.c_str());
                 std::strcpy(coreNumber, cores.c_str());
@@ -903,8 +1170,21 @@ public:
                 std::strcpy(sourceFile, source.c_str());
                 std::strcpy(extrasVal, extras.c_str());
                 std::strcpy(system_number_val, system_no.c_str());
+                std::strcpy(compilerFlags, compiler_flag.c_str());
+                std::strcpy(pModel, pmodel.c_str());
+                std::strcpy(versboseFlag, verbose_flag.c_str());
+                std::strcpy(cachePredictor, cache_predictor.c_str());
 
-                std::vector<char *> argVek{scriptPath, modelType, machineFile, coreNumber, outputFile, extrasVal, system_number_val};
+                std::vector<char *> argVek{scriptPath, machineFile, coreNumber, outputFile, extrasVal, system_number_val, pModel, cachePredictor};
+
+                if (CFG_args.getValue<DisCosTiC_Datatype>("secondary_vvv") == 1)
+                {
+                    argVek.insert(argVek.end(), versboseFlag);
+                }
+                if (!CFG_args.getValue<std::string>("secondary_compiler_flags").empty())
+                {
+                    argVek.insert(argVek.end(), compilerFlags);
+                }
 
                 char *token = std::strtok(keyValues, " ");
                 while (token != NULL)
@@ -943,19 +1223,23 @@ public:
         else if (opname.substr(0, n) == "FILE")
         {
 
+            //std::cout << "FILE Check opname: " << opname << std::endl;
             opname.erase(0, n + 1);
+            //std::cout << "Check opname: " << opname << std::endl;
             std::string::size_type opos = opname.find(":");
             std::string::size_type machinePos = opname.find("//", opos);
 
-            if (this->func != opname.substr(opos + 1, machinePos - opos - 1))
-                throw std::runtime_error("computation operation NOT YET IMPLEMENTED\n");
+            //if (this->func != opname.substr(opos + 1, machinePos - opos - 1))
+                //throw std::runtime_error("computation operation NOT YET IMPLEMENTED\n");
 
             std::string output = "nodelevel/configs/" + opname.substr(opos + 1, machinePos - opos - 1) + std::to_string(process_Rank) + ".cfg";
 
+            //std::cout << "cfg: " << output << std::endl;
             std::string::size_type corePos = opname.find("//", machinePos + 2);
             std::string::size_type definePos = opname.find("//", corePos + 2);
 
             std::string extras = "-extras" + opname.substr(corePos + 2, definePos - corePos - 2);
+            //std::cout << "extras: " << extras << std::endl;
 
             std::string ECM_core = extras.erase(0, 7);
             ECM_core = extras.substr(0, extras.find("+"));
@@ -979,8 +1263,25 @@ public:
             }
             file.close();
 
-            if (!kerncraftExecuted && process_Rank == 0)
+
+            std::string str_part1 = CFG_args.getValue<std::string>("part1");
+            std::string str_part2 = CFG_args.getValue<std::string>("part2");
+
+            // Run Kerncraft once per kernel, not once per modeled rank.
+            bool already_done = false;
+            if (opname.find(str_part1) != std::string::npos)
+                already_done = kerncraftExecuted_1;
+            else if (str_part2 != "0" && opname.find(str_part2) != std::string::npos)
+                already_done = kerncraftExecuted_2;
+            else
+                already_done = kerncraftExecuted;
+
+            if (!already_done && process_Rank == 0)
             {
+                if (opname.find(str_part1) != std::string::npos)
+                    kerncraftExecuted_1 = true;
+                if (str_part2 == "0" || opname.find(str_part2) != std::string::npos)
+                    kerncraftExecuted_2 = true;
                 kerncraftExecuted = true;
                 std::string output = "nodelevel/configs/" + opname.substr(opos + 1, machinePos - opos - 1) + ".cfg";
 
@@ -991,17 +1292,20 @@ public:
                 std::string::size_type corePos = opname.find("//", machinePos + 2);
                 std::string::size_type definePos = opname.find("//", corePos + 2);
 
-                std::string script("./kerncraftintegration/diskern.py");
-                std::string model("-pECM");
+                std::string script("python3 ./kerncraftintegration/diskern.py");
                 std::string outputPath = "-o" + output;
                 std::string machine = "-m" + opname.substr(machinePos + 2, corePos - machinePos - 2);
                 std::string extras = "-extras" + opname.substr(corePos + 2, definePos - corePos - 2);
                 std::string cores = "-c" + std::to_string(cores_per_socket);
                 std::string defines = opname.substr(definePos + 2, opname.length());
+                //std::cout << "defines: " << defines << std::endl;
                 std::string system_no = "-systemNo" + std::to_string(system_number);
+                std::string compiler_flag = "--compiler-flags=\"" + CFG_args.getValue<std::string>("compiler_flags") + "\"";
+                std::string verbose_flag = "-vvv";
+                std::string pmodel = "-p" + CFG_args.getValue<std::string>("pmodel");
+                std::string cache_predictor = "-P" + CFG_args.getValue<std::string>("cache_predictor");
 
                 char scriptPath[script.length() + 1];
-                char modelType[model.length() + 1];
                 char outputFile[outputPath.length() + 1];
                 char machineFile[machine.length() + 1];
                 char coreNumber[cores.length() + 1];
@@ -1009,18 +1313,36 @@ public:
                 char sourceFile[source.length() + 1];
                 char extrasVal[extras.length() + 1];
                 char system_number_val[system_no.length() + 1];
+                char compilerFlags[compiler_flag.length() + 1];
+                char pModel[pmodel.length() + 1];
+                char versboseFlag[verbose_flag.length() + 1];
+                char cachePredictor[cache_predictor.length() + 1];
 
                 std::strcpy(scriptPath, script.c_str());
-                std::strcpy(modelType, model.c_str());
                 std::strcpy(outputFile, outputPath.c_str());
                 std::strcpy(machineFile, machine.c_str());
                 std::strcpy(coreNumber, cores.c_str());
                 std::strcpy(keyValues, defines.c_str());
+                //std::cout << "keyValues: " << keyValues << std::endl;
                 std::strcpy(sourceFile, source.c_str());
                 std::strcpy(extrasVal, extras.c_str());
                 std::strcpy(system_number_val, system_no.c_str());
+                std::strcpy(compilerFlags, compiler_flag.c_str());
+                std::strcpy(pModel, pmodel.c_str());
+                std::strcpy(versboseFlag, verbose_flag.c_str());
+                std::strcpy(cachePredictor, cache_predictor.c_str());
 
-                std::vector<char *> argVek{scriptPath, modelType, machineFile, coreNumber, outputFile, extrasVal, system_number_val};
+                std::vector<char *> argVek{scriptPath, machineFile, coreNumber, outputFile, extrasVal, system_number_val, pModel, cachePredictor};
+
+                if (CFG_args.getValue<DisCosTiC_Datatype>("vvv") == 1)
+                {
+                    argVek.insert(argVek.end(), versboseFlag);
+                }
+                if (!CFG_args.getValue<std::string>("compiler_flags").empty())
+                {
+                    argVek.insert(argVek.end(), compilerFlags);
+                }
+
                 char *token = std::strtok(keyValues, " ");
                 while (token != NULL)
                 {
@@ -1031,6 +1353,7 @@ public:
                 char *argV[argVek.size() + 1];
                 for (std::size_t i = 0; i < argVek.size(); ++i)
                 {
+                    //std::cout << "argVek:- idx: " << i << ",Value: " << argVek[i] << std::endl;
                     argV[i] = argVek[i];
                 }
                 argV[argVek.size()] = NULL;
@@ -1040,6 +1363,7 @@ public:
                 system(("for num in {0.." + std::to_string(N_size_Of_Cluster) + "}; do cp config.cfg config$num.cfg; done").c_str());
                 system(("for num in {0.." + std::to_string(N_size_Of_Cluster) + "}; do cp ./nodelevel/configs/" + opname.substr(opos + 1, machinePos - opos - 1) + ".cfg ./nodelevel/configs/" + opname.substr(opos + 1, machinePos - opos - 1) + "$num.cfg; done").c_str());
             }
+            // std::cout << "process_Rank: " << process_Rank << ", opname: " <<  opname.substr(opos + 1, machinePos - opos - 1) +  ".cfg ./nodelevel/configs/" + opname.substr(opos + 1, machinePos - opos - 1) << std::endl;
 
             if (!barrier)
             {
@@ -1048,7 +1372,7 @@ public:
             }
 
             if (!kerncraftExecuted &&
-                process_Rank == (CFG_args.getValue<DisCosTiC_Datatype>("secondary_number_of_processes") + 2) &&
+                process_Rank == (CFG_args.getValue<DisCosTiC_Datatype>("number_of_processes") + 2) &&
                 (CFG_args.getValue<DisCosTiC_Datatype>("heteregeneous") == 1))
             {
                 kerncraftExecuted = true;
@@ -1062,17 +1386,19 @@ public:
                 std::string::size_type corePos = opname.find("//", machinePos + 2);
                 std::string::size_type definePos = opname.find("//", corePos + 2);
 
-                std::string script("./kerncraftintegration/diskern.py");
-                std::string model("-pECM");
+                std::string script("python3 ./kerncraftintegration/diskern.py");
                 std::string outputPath = "-o" + output;
                 std::string machine = "-m" + opname.substr(machinePos + 2, corePos - machinePos - 2);
                 std::string extras = "-extras" + opname.substr(corePos + 2, definePos - corePos - 2);
                 std::string cores = "-c" + std::to_string(cores_per_socket);
                 std::string defines = opname.substr(definePos + 2, opname.length());
                 std::string system_no = "-systemNo" + std::to_string(system_number);
+                std::string compiler_flag = "--compiler-flags=\"" + CFG_args.getValue<std::string>("secondary_compiler_flags") + "\"";
+                std::string verbose_flag = "-vvv";
+                std::string pmodel = "-p" + CFG_args.getValue<std::string>("secondary_pmodel");
+                std::string cache_predictor = "-P" + CFG_args.getValue<std::string>("secondary_cache_predictor");
 
                 char scriptPath[script.length() + 1];
-                char modelType[model.length() + 1];
                 char outputFile[outputPath.length() + 1];
                 char machineFile[machine.length() + 1];
                 char coreNumber[cores.length() + 1];
@@ -1080,9 +1406,12 @@ public:
                 char sourceFile[source.length() + 1];
                 char extrasVal[extras.length() + 1];
                 char system_number_val[system_no.length() + 1];
+                char compilerFlags[compiler_flag.length() + 1];
+                char pModel[pmodel.length() + 1];
+                char versboseFlag[verbose_flag.length() + 1];
+                char cachePredictor[cache_predictor.length() + 1];
 
                 std::strcpy(scriptPath, script.c_str());
-                std::strcpy(modelType, model.c_str());
                 std::strcpy(outputFile, outputPath.c_str());
                 std::strcpy(machineFile, machine.c_str());
                 std::strcpy(coreNumber, cores.c_str());
@@ -1090,9 +1419,24 @@ public:
                 std::strcpy(sourceFile, source.c_str());
                 std::strcpy(extrasVal, extras.c_str());
                 std::strcpy(system_number_val, system_no.c_str());
+                std::strcpy(compilerFlags, compiler_flag.c_str());
+                std::strcpy(pModel, pmodel.c_str());
+                std::strcpy(versboseFlag, verbose_flag.c_str());
+                std::strcpy(cachePredictor, cache_predictor.c_str());
 
-                std::vector<char *> argVek{scriptPath, modelType, machineFile, coreNumber, outputFile, extrasVal, system_number_val};
+                std::vector<char *> argVek{scriptPath, machineFile, coreNumber, outputFile, extrasVal, system_number_val, pModel, cachePredictor};
+
+                if (CFG_args.getValue<DisCosTiC_Datatype>("secondary_vvv") == 1)
+                {
+                    argVek.insert(argVek.end(), versboseFlag);
+                }
+                if (!CFG_args.getValue<std::string>("secondary_compiler_flags").empty())
+                {
+                    argVek.insert(argVek.end(), compilerFlags);
+                }
+
                 char *token = std::strtok(keyValues, " ");
+
                 while (token != NULL)
                 {
                     argVek.push_back(token);

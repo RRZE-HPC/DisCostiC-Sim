@@ -1,5 +1,5 @@
 ///    \file
-///    CONFIGPARSER_HPP
+///    NETWORKCONFIGPARSER_HPP
 ///
 ///    \Author: Ayesha Afzal <ayesha.afzal@fau.de>
 ///    \Copyright © 2024 HPC, FAU Erlangen-Nuremberg. All rights reserved.
@@ -14,8 +14,11 @@
 #include <fstream>
 #include <map>
 #include <typeinfo>
+#include <climits>
+#include <cstdlib>
 #include <mpi.h>
 #include "macro.hpp"
+#include "DataStruct.hpp"
 
 /**
  *\brief it parses the user-defined configuration file (.cfg)
@@ -30,7 +33,7 @@ namespace UserInterface
     {
     private:
         int dataCounter = 0;
-        double networkFileData[400][8] = {0};
+        double networkFileData[1000][8] = {0};
         std::map<std::string, std::string> data; //!< which will hold pairs of key-value
         std::string fileName;                    //!< As member variables, we will only have a std::string, which will hold the name of the configuration file
 
@@ -144,34 +147,64 @@ namespace UserInterface
             fileclose(file, fileName);
         }
 
-        void setData(const int buffersize)
+        void setData(const int numberOfConcurrentConnection, const int buffersize, DisCosTiC::Networktype &latency, DisCosTiC::Networktype &inverse_bandwidth, DisCosTiC::Networktype &o, DisCosTiC::Networktype &O, DisCosTiC::Networktype &g, DisCosTiC::Networktype &G, DisCosTiC_Datatype &eagerLimit, const int mode)
         {
             int index = 0;
-            for (int i = 0; i < dataCounter - 1; ++i)
+            int bestIndex = 0;
+            int minDiff = INT_MAX;
+            bool foundConnectionMatch = false;
+
+            //find entries matching the connection count and get the closest message size
+            for (int i = 0; i < dataCounter; ++i)
             {
-                if (networkFileData[i][0] < buffersize && buffersize < networkFileData[i + 1][0])
+                if (networkFileData[i][0] >= numberOfConcurrentConnection)
                 {
-                    if ((buffersize - networkFileData[i][0]) < (networkFileData[i + 1][0] - buffersize))
+                    foundConnectionMatch = true;
+
+                    //exact match for message size
+                    if (networkFileData[i][1] == buffersize)
                     {
                         index = i;
+                        break;
                     }
-                    else
+
+                    //track closest message size
+                    int diff = abs((int)(networkFileData[i][1] - buffersize));
+                    if (diff < minDiff)
                     {
-                        index = i + 1;
+                        minDiff = diff;
+                        bestIndex = i;
                     }
-                }
-                else
-                {
-                    index = dataCounter - 1;
                 }
             }
-            data.insert(std::pair<std::string, std::string>("latency_in_ns", std::to_string(networkFileData[index][1])));
-            data.insert(std::pair<std::string, std::string>("G_in_ns", std::to_string(networkFileData[index][4])));
-            data.insert(std::pair<std::string, std::string>("inverse_bandwidth", std::to_string(networkFileData[index][2])));
-            data.insert(std::pair<std::string, std::string>("comm_o_in_ns", std::to_string(networkFileData[index][5])));
-            data.insert(std::pair<std::string, std::string>("comm_O_in_ns", std::to_string(networkFileData[index][7])));
-            data.insert(std::pair<std::string, std::string>("comm_g_in_ns", std::to_string(networkFileData[index][6])));
-            data.insert(std::pair<std::string, std::string>("comm_eagerlimit_in_bytes", std::to_string(networkFileData[index][3])));
+
+            //use closest match if no exact match found
+            if (!foundConnectionMatch)
+            {
+                //no connection match. use first entry
+                index = 0;
+            }
+            else if (networkFileData[index][1] != buffersize)
+            {
+                // no exact match, use closest message size
+                index = bestIndex;
+            }
+
+            latency[mode] = networkFileData[index][2];
+            inverse_bandwidth[mode] = networkFileData[index][3];
+            eagerLimit = networkFileData[index][4];
+            G[mode] = networkFileData[index][5];
+            o[mode] = networkFileData[index][6];
+            g[mode] = networkFileData[index][7];
+            O[mode] = networkFileData[index][8];
+
+            // data.insert(std::pair<std::string, std::string>("latency_in_ns", std::to_string(networkFileData[index][2])));
+            // data.insert(std::pair<std::string, std::string>("G_in_ns", std::to_string(networkFileData[index][3])));
+            // data.insert(std::pair<std::string, std::string>("inverse_bandwidth", std::to_string(networkFileData[index][3])));
+            // data.insert(std::pair<std::string, std::string>("comm_o_in_ns", std::to_string(networkFileData[index][5])));
+            // data.insert(std::pair<std::string, std::string>("comm_O_in_ns", std::to_string(networkFileData[index][7])));
+            // data.insert(std::pair<std::string, std::string>("comm_g_in_ns", std::to_string(networkFileData[index][6])));
+            // data.insert(std::pair<std::string, std::string>("comm_eagerlimit_in_bytes", std::to_string(networkFileData[index][4])));
         }
         bool getKey(const std::string &key) const
         {

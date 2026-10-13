@@ -1,4 +1,9 @@
-
+///    \file
+///    GRID_HPP
+///
+///    \Author: Ayesha Afzal <ayesha.afzal@fau.de>
+///    \Copyright © 2024 HPC, FAU Erlangen-Nuremberg. All rights reserved.
+///
 #ifndef Grid_HPP
 #define Grid_HPP
 
@@ -14,7 +19,7 @@
 
 namespace DisCosTiC
 {
-    // Benchmark benchmark(&CFG_args); 
+    // Benchmark benchmark(&CFG_args);
 
     class Grid
     {
@@ -63,9 +68,14 @@ namespace DisCosTiC
             N.target = Nodeee.target;
             N.bufSize = Nodeee.bufSize;
             N.tag = Nodeee.tag;
+            N.mode = Nodeee.mode;
             N.node = Nodeee.node;
             N.network = Nodeee.network;
             N.label = Nodeee.label;
+            N.algorithm = Nodeee.algorithm;
+            N.collectiveType = Nodeee.collectiveType;
+            N.collectiveRoot = Nodeee.collectiveRoot;
+            N.collectiveNumRanks = Nodeee.collectiveNumRanks;
             for (auto i : DisCosTiC::getRange(Nodeee.depsCount)) // DepOperations.size()/depsCount: 2 for comp, 0 for send, 1 for recv (2..2 2201..2201 001..001 1212..1212 2201..2201 001..001 1212..1212 2201..2201  001..001 1212..1212)
             {
                 DisCosTiC_Datatype depnode = Nodeee.depApdxStartLabel + i + 1; // 12,45,78,1011,1314 for comp 3,6,9,12 for recv (depApdxStartLabel: 0,3,6,9,12 for comp, 2,5,8,11,14 for send, 1 for recv)
@@ -113,6 +123,12 @@ namespace DisCosTiC
                 op.bufSize = Nodes[i].bufSize;
                 op.tag = Nodes[i].tag;
                 op.node = Nodes[i].node;
+                op.mode = Nodes[i].mode;
+                op.algorithm = Nodes[i].algorithm;
+                op.collectiveType = Nodes[i].collectiveType;
+                op.collectiveRoot = Nodes[i].collectiveRoot;
+                op.collectiveNumRanks = Nodes[i].collectiveNumRanks;
+
                 op.network = Nodes[i].network;
                 op.type = Nodes[i].type;
                 op.label = Nodes[i].label;
@@ -125,7 +141,14 @@ namespace DisCosTiC
 
             /**
              * \brief this is a sort operation that can be used to compare DisCosTiC_OP by type and sort them with respect with that respect
-             */ 
+             */
+
+            // std::sort(opVec.begin(), opVec.end(), [](DisCosTiC::DisCosTiC_OP a, DisCosTiC::DisCosTiC_OP b)
+            //           { 
+        	// 		if(a.target > b.target) 
+        	// 			return true; 
+        	// 		return false; });
+
             std::sort(opVec.begin(), opVec.end(), [](DisCosTiC::DisCosTiC_OP a, DisCosTiC::DisCosTiC_OP b)
                       { 
         			if(a.type < b.type) 
@@ -146,6 +169,10 @@ namespace DisCosTiC
             op.network = Nodes[0].network;
             op.type = Nodes[0].type;
             op.label = Nodes[0].label;
+            op.algorithm = Nodes[0].algorithm;
+            op.collectiveType = Nodes[0].collectiveType;
+            op.collectiveRoot = Nodes[0].collectiveRoot;
+            op.collectiveNumRanks = Nodes[0].collectiveNumRanks;
             op.rank = myRank;
             op.time = 0;
             opVec.push_back(op);

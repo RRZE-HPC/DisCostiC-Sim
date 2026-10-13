@@ -1,3 +1,10 @@
+///    \file
+///    GRIDINIT_HPP
+///
+///    \Author: Ayesha Afzal <ayesha.afzal@fau.de>
+///    \Copyright © 2024 HPC, FAU Erlangen-Nuremberg. All rights reserved.
+///
+
 #ifndef GRIDINIT_HPP
 #define GRIDINIT_HPP
 

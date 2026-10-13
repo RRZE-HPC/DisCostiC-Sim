@@ -34,7 +34,7 @@ namespace UserInterface
         DisCosTiC_Datatype FP_ops_per_instruction_SP;
         DisCosTiC_Datatype FP_ops_per_instruction_DP;
         real_t clk_freq_in_GHz;
-        DisCosTiC_Datatype cores_per_chip, chips_per_node, cores_per_numa_domain;
+        DisCosTiC_Datatype cores_per_chip, chips_per_node, cores_per_numa_domain, cachelinesize;
         std::vector<real_t> MEM_bandwidth;
         bool flag;
 
@@ -81,6 +81,9 @@ namespace UserInterface
 
             if (line.find("sockets:") != std::string::npos)
                 chips_per_node = std::stoi(line.substr(line.find(":") + 1, 3));
+
+            if (line.find("cacheline size:") != std::string::npos)
+                cachelinesize = std::stoi(line.substr(line.find(":") + 1, 4));
 
             if (line.find(" MEM:") != std::string::npos)
             {
