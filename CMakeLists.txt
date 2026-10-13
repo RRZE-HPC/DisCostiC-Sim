@@ -101,6 +101,7 @@ set (DisCostiC_HEADERS
 		${DisCostiC_INC_DIR}/Grid.hpp
 		${DisCostiC_INC_DIR}/GridInit.hpp
 		${DisCostiC_DIR}/visualization/TimeRankOP.hpp
+		${DisCostiC_DIR}/visualization/ItacVtf.hpp
 		${DisCostiC_INC_DIR}/enum.hpp
 		${DisCostiC_DIR}/visualization/json.hpp
 		${DisCostiC_INC_DIR}/macro.hpp
@@ -113,6 +114,7 @@ message (STATUS "===== INSTALL TARGET =====")
 set(INCLUDE_INSTALL_DIR include)
 install ( FILES ${DisCostiC_DIR}/visualization/json.hpp DESTINATION ${INCLUDE_INSTALL_DIR} )
 install ( FILES ${DisCostiC_DIR}/visualization/TimeRankOP.hpp DESTINATION ${INCLUDE_INSTALL_DIR} )
+install ( FILES ${DisCostiC_DIR}/visualization/ItacVtf.hpp DESTINATION ${INCLUDE_INSTALL_DIR} )
 install ( DIRECTORY ${DisCostiC_INC_DIR} DESTINATION ${INCLUDE_INSTALL_DIR} )
 install ( FILES ${DisCostiC_DIR}/nodelevel/include/NodeLvlScg.hpp DESTINATION ${INCLUDE_INSTALL_DIR} )
 install ( FILES ${DisCostiC_DIR}/nodelevel/include/NodeModel.hpp DESTINATION ${INCLUDE_INSTALL_DIR} )
@@ -146,7 +148,7 @@ add_custom_target(uninstall
 		COMMAND rm -rf cmake_install.cmake
 		COMMAND rm -rf cmake_uninstall.cmake
 		COMMAND rm -f otf2.* config.log config.status config.summary
-		COMMAND rm -f user_provided_configure_args otf2-mini.*
+		COMMAND rm -f user_provided_configure_args otf2-mini.* DisCosTiC.single.stf
 		COMMAND rm -rf Makefile
 		)
 
@@ -154,7 +156,7 @@ add_custom_target(uninstall
 add_custom_target(clear
 		WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
 		COMMAND make clean
-		COMMAND bash -c [[rm -f discostic.* *.o *.csv *.out *.viz *.dms *.stf *.prot]])
+		COMMAND bash -c [[rm -f DisCostiC_Simulation.* *.o *.csv *.out *.viz *.dms *.avt Exec.* *.stf *.prot *.single.stf]])
 
 add_custom_target(trace_MPI
 		WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
@@ -171,8 +173,14 @@ add_custom_target(trace_all
 
 add_custom_target(otf2
 		WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-		COMMAND python visualization/chrome2otf2.py -i DisCosTiC.dms -o DisCosTiC -c)	
+		COMMAND python visualization/chrome2otf2.py -i DisCosTiC.dms -o DisCosTiC -c)
 
+add_custom_target(stf
+		WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+		COMMAND bash visualization/convert_itac_stf.sh DisCosTiC.avt DisCosTiC.single.stf)
+
+# Visualization path is ITAC STF (make stf). Do not fail configure if the otf2
+# Python package is missing; convert_itac_stf.sh installs it when converting.
 execute_process(
 	COMMAND pip show six
 	RESULT_VARIABLE SIX_EXIT_CODE
@@ -184,30 +192,11 @@ if (NOT ${SIX_EXIT_CODE} EQUAL 0)
 	execute_process(
 		COMMAND pip install ${_pip_args} six
 		RESULT_VARIABLE SIX_INSTALL_CODE)
-	if (NOT ${SIX_EXITSIX_INSTALL_CODE_CODE} EQUAL 0)
+	if (NOT ${SIX_INSTALL_CODE} EQUAL 0)
 		message(FATAL_ERROR "The python module six installation failed" )
 	else()
 		message(STATUS "six package installed")
 	endif()
-endif()
-
-execute_process(
-		COMMAND pip show otf2
-		RESULT_VARIABLE OTF2_EXIT_CODE
-		OUTPUT_QUIET
-)
-
-if (NOT ${OTF2_EXIT_CODE} EQUAL 0)
-	message("The python module otf2 is not installed. Attempting to install them." )
-	execute_process(
-		COMMAND pip install ${_pip_args} otf2
-		RESULT_VARIABLE SIX_INSTALL_CODE)
-	if (NOT ${OTF2_INSTALL_CODE} EQUAL 0)
-		message(FATAL_ERROR "The python module otf2 installation failed" )
-	else()
-		message(STATUS "otf2 package installed")
-	endif()
-
 endif()
 
 # cmake -DCMAKE_INSTALL_PREFIX=~/.local . && make all install
