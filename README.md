@@ -169,13 +169,13 @@ The formats, names and locations of output files in these environmental variable
 <a name="acknowledgement"></a>
 ## 🔗 Acknowledgement
 
-This work is funded by the **[KONWHIR](https://www.konwihr.de)** project **OMI4PAPPS**.
+This work is funded by the **[DFG MOD4COMP RESEARCH UNIT](https://www.mod4comp.de)** "Holistic Energy and Performance Modeling for Sustainable Computing".
 
 <a name="contact"></a>
 ## 📱Contact
 
 [<img src="https://github.com/AyeshaAfzal91.png?size=115" width=115><br><sub>@AyeshaAfzal91</sub>](https://github.com/AyeshaAfzal91) <br><br> 
-Ayesha Afzal, Erlangen National High Performance Computing Center (NHR@FAU)
+[Ayesha Afzal](https://hpc.fau.de/faudir/ayesha-afzal), Erlangen National High Performance Computing Center (NHR@FAU)
 
 mailto: [ayesha.afzal@fau.de](mailto:ayesha.afzal@fau.de)
 
