@@ -1,0 +1,3 @@
+Vendored from https://bitbucket.org/Afzal91/performance-analysis-of-a-parallel-optical-flow-solver
+(path: ray-tracing-optical-flow-solver/src), for measured RT+OF runs in this demo.
+Local full clone cache: DisCostiC-demo/_upstream_optical_flow/
