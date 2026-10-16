@@ -3,9 +3,6 @@
 <a href="https://rrze-hpc.github.io/DisCostiC-Sim/doc/html/index.html">
   <img alt="HTML Doxygen doc" src="https://img.shields.io/badge/HTML%20Doxygen%20Doc%20-Read%20now!-red" />
 </a>
-<a href="doc/Documentation.pdf">
-  <img alt="Documentation PDF" src="https://img.shields.io/badge/Documentation%20PDF-Read%20now!-green" />
-</a>
 <a href="https://github.com/RRZE-HPC/DisCostiC-Sim/wiki/DisCostiC">
   <img alt="Wiki Page" src="https://img.shields.io/badge/Wiki%20Page%20-Read%20now!-pink" />
 </a>
