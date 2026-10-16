@@ -5,7 +5,7 @@ project (DisCostiC)
 
 set (Test on)
 set (DisCostiC_VERSION_IDENTIFIER)
-set (DisCostiC_VERSION "0.1.0.0")
+set (DisCostiC_VERSION "v2.0.0")
 set (CMAKE_CXX_STANDARD 17)
 set (CMAKE_BUILD_TYPE Release)
 set (CMAKE_C_COMPILER icx)
