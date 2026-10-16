@@ -384,7 +384,7 @@ int main(int argc, char **argv)
         std::cout << "\n----------------------------------------------------------------" << std::endl;
         std::cout << "DisCosTiC (Distributed CosT in Cluster):" << std::endl;
         std::cout << "----------------------------------------------------------------" << std::endl;
-        std::cout << "Version: v1.0" << std::endl; //!< print version number of toolkit
+        std::cout << "Version: v2.0.0" << std::endl; //!< print version number of toolkit
         auto timestamp = system_clock::to_time_t(system_clock::now());
         std::cout << "timestamp: " << ctime(&timestamp); //!< print current date and time
         std::cout << "\n\n----------------------------------------------------------------" << std::endl;
@@ -1974,7 +1974,7 @@ int main(int argc, char **argv)
         ofs << "{}\n],"
             << "\"Name\": \"Trace visualisation ofs DisCosTiC toolkit\", \n "
             << "\"Full form\": \"Distributed CosT in Cluster\", \n "
-            << "\"Version\": \"v0.0.0 (initial release)\", \n "
+            << "\"Version\": \"v2.0.0 (second release)\", \n "
             << "\"Author\": \"Ayesha Afzal <ayesha.afzal@fau.de>\", \n "
             << "\"Copyright\": \"© 2023 HPC, FAU Erlangen-Nuremberg. All rights reserved\" \n "
             << "}\n";
