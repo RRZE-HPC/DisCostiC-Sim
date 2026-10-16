@@ -11,16 +11,19 @@
   "upload_type": "software",
   "license": "AGPL-3.0",
   "access_right": "open",
+  "version": "2.0.0",
   "keywords": [
     "performance-simulation",
     "performance-engineering",
     "performance-analysis",
     "parallel-computing",
+    "MPI-collectives",
+    "heterogeneous-systems",
     "current-clusters",
     "future-clusters",
     "open-source"
   ],
-  "notes": "This research was partly supported by the Competence Network for Scientific High-Performance Computing in Bavaria (KONWIHR) under project ``OMI4Papps.'' ",
+  "notes": "This research was partly supported by the DFG MOD4COMP RESEARCH UNIT ``Holistic Energy and Performance Modeling for Sustainable Computing''.",
   "communities": [
     {"identifier": "fau"}
   ]
