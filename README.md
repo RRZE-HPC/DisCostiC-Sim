@@ -31,16 +31,16 @@
 
 ## Table of Contents
 
-  * [💡Description](doc/README_DESCRIPTION.md#description)
   * [:octocat: Compilation and build](#compilation-and-build)
   * [📖 Further reading](#further-reading)
-  * [:signal_strength: DisCostiC output](doc/README_OUTPUT.md#output)
-  * [💻 System model](doc/README_MODEL.md#cluster-configuration)
-  * [👩‍💻 Automating DSEL generation through static analysis](doc/README_MODEL.md#automating-dsel-generation-through-static-analysis)
-  * [🧭 Modes](doc/README_COLLECTIVE.md#modes)
-  * [🧐 MPI-parallelized DisCostiC implementation](doc/README_MPI.md#mpi-parallelized-implementation)
-  * [🚀 Planned features for further development](#library-limitations)
-  * [📚 References about the theory of potential application scenarios for DisCostiC](#references)
+    * [💡Description](doc/README_DESCRIPTION.md#description)
+    * [:signal_strength: DisCostiC output](doc/README_OUTPUT.md#output)
+    * [💻 System model](doc/README_MODEL.md#cluster-configuration)
+    * [👩‍💻 Automating DSEL generation through static analysis](doc/README_MODEL.md#automating-dsel-generation-through-static-analysis)
+    * [🧭 Modes](doc/README_COLLECTIVE.md#modes)
+    * [🧐 MPI-parallelized DisCostiC implementation](doc/README_MPI.md#mpi-parallelized-implementation)
+    * [🚀 Planned features for further development](doc/README_TODO.md#library-limitations)
+    * [📚 References about the theory of potential application scenarios for DisCostiC](doc/README_REF.md#references)
   * [🔒 License](#license)
   * [:warning: Disclaimer](#disclaimer)
   * [🔗 Acknowledgement](#acknowledgement)
@@ -152,31 +152,8 @@ The formats, names and locations of output files in these environmental variable
   * [💻 System model, DSEL, and data structures](doc/README_MODEL.md)
   * [🧭 Modes: kernel, collective, multi-kernel, and heterogeneous](doc/README_COLLECTIVE.md)
   * [🧐 MPI-parallelized DisCostiC implementation](doc/README_MPI.md)
-
-
-<a name="library-limitations"></a>
-## 🚀 Planned features for further development
-
-* Threading model beyond message passing
-* Networking-level contention model
-* Energy consumption model
-
-<a name="references"></a>
-## 📚 References about the theory of potential application scenarios for DisCostiC
-
-[1]: A. Afzal et al.: Propagation and Decay of Injected One-Off Delays on Clusters: A Case Study. [DOI:10.1109/CLUSTER.2019.8890995](https://doi.org/10.1109/CLUSTER.2019.8890995)
-
-[2]: A. Afzal et al.: Desynchronization and Wave Pattern Formation in MPI-Parallel and Hybrid Memory-Bound Programs. [DOI:10.1007/978-3-030-50743-5_20](https://doi.org/10.1007/978-3-030-50743-5_20)
-
-[3]: A. Afzal et al.: Analytic Modeling of Idle Waves in Parallel Programs: Communication, Cluster Topology, and Noise Impact. [DOI:10.1007/978-3-030-78713-4_19](https://doi.org/10.1007/978-3-030-78713-4_19)
-
-[4]: A. Afzal et al.: The Role of Idle Waves, Desynchronization, and Bottleneck Evasion in the Performance of Parallel Programs. [DOI:10.1109/TPDS.2022.3221085](https://doi.org/10.1109/TPDS.2022.3221085)
-
-[5]: A. Afzal et al.: Analytic performance model for parallel overlapping memory-bound kernels. [DOI:10.1002/cpe.6816](https://doi.org/10.1002/cpe.6816)
-
-[6]: A. Afzal et al.: Exploring Techniques for the Analysis of Spontaneous Asynchronicity in MPI-Parallel Applications. [DOI:10.1007/978-3-031-30442-2_12](https://doi.org/10.1007/978-3-031-30442-2_12)
-
-[7]: A. Afzal et al.: Making applications faster by asynchronous execution: Slowing down processes or relaxing MPI collectives. [DOI:10.1016/j.future.2023.06.017](https://10.1016/j.future.2023.06.017)
+  * [🚀 Planned features for further development](doc/README_TODO.md)
+  * [📚 References about the theory of potential application scenarios for DisCostiC](doc/README_REF.md)
 
 <a name="license"></a>
 ## 🔒 License
