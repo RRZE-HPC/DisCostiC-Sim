@@ -30,21 +30,12 @@ Two different ITAC products exist.
 
 The modeled application is traced inside the simulator when `USE_ITACVIZ` is enabled. Rank files are merged to `DisCosTiC.avt`. `make stf` runs [visualization/convert_itac_stf.sh](../visualization/convert_itac_stf.sh) on that file and writes `DisCosTiC.single.stf`.
 
-Separately, `make trace_MPI` or `make trace_all` rebuilds the simulator with Intel `-trace` so ITAC records the simulator process itself. Then run [Run_Simulation_ITAC.sh](../Run_Simulation_ITAC.sh) after editing that script for the target machine. The script writes one STF file because it exports:
-
-```
-export VT_LOGFILE_FORMAT=SINGLESTF
-export VT_LOGFILE_NAME=simulation
-export VT_LOGFILE_PREFIX=$SLURM_SUBMIT_DIR
-export VT_FLUSH_PREFIX=/tmp
-```
-
-Open `simulation.single.stf` in [Intel Trace Analyzer](https://www.intel.com/content/www/us/en/developer/tools/oneapi/trace-analyzer.html).
+Separately, `make trace_MPI` or `make trace_all` rebuilds the simulator with Intel `-trace` so ITAC can record the simulator process itself. There is no separate launch script for that trace. Open the resulting STF file in [Intel Trace Analyzer](https://www.intel.com/content/www/us/en/developer/tools/oneapi/trace-analyzer.html).
 
 <a name="stat"></a>
 🗄️ **4. Statistical or log data**:thought_balloon:
 
-With `Verbose = 1` in [config.cfg](../config.cfg), DisCostiC prints per-rank runtimes and the computation and communication model parameters. The listing below is an example of that log. The current binary prints `Version : v1.0 (initial release)`.
+With `Verbose = 1` in [config.cfg](../config.cfg), DisCostiC prints per-rank runtimes and the computation and communication model parameters. The listing below is an example of that log. The current binary prints `Version : v2.0.0 (Second release)`.
 
 ```text
     ----------------------------------------------------------------

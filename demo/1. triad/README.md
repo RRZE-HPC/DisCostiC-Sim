@@ -30,7 +30,7 @@ The `-O1` binaries use the same flags with `-O1`.
 ## Layout
 
 ```
-streamtriad-demo/
+1. triad/
 ├── shared/benchmarks/mpi_stream_bench_comm.c
 ├── shared/scripts/                  # build, measured helpers, DisCostiC, traces, figures
 ├── stageN-*/configs/                # -O3
@@ -54,7 +54,7 @@ streamtriad-demo/
 ## Run
 
 ```bash
-cd streamtriad-demo/
+cd "demo/1. triad/"
 bash setup_output_dirs.sh
 module load intel/2023.2.1 intelmpi/2021.16.0 python git cmake likwid
 # fallback: intel/2025.2.0 intelmpi/2021.16.0
@@ -64,7 +64,7 @@ python3 run_job_chain.py --stages 1,2,3,4,5
 python3 shared/scripts/generate_figures.py --stages 1,2,3,4,5
 ```
 
-Submit SLURM jobs from inside `streamtriad-demo/`. The chain runs `-O3`, then `-O1` for stages 2–3, then stages 4 and 5. Use `--force` to re-run a step that already verifies.
+Submit SLURM jobs from inside `demo/1. triad/`. The chain runs `-O3`, then `-O1` for stages 2–3, then stages 4 and 5. Use `--force` to re-run a step that already verifies.
 
 Job time limits use a 10-minute floor. When a previous run of the same job took more than 5 minutes, `--time` is twice that elapsed time. The stage-4 measured trace job is 20 minutes. Stage 5 trace conversion is capped at 180 seconds so it does not exhaust the scoring job.
 

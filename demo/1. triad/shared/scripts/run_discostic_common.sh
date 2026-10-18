@@ -19,7 +19,7 @@ JOB_CFG="${TC_ROOT}/job_configs/job_${JOB_ID}.cfg"
 module load python git cmake likwid intel/2023.2.1 intelmpi/2021.16.0 2>/dev/null \
     || module load python git cmake likwid intel/2025.2.0 intelmpi/2021.16.0
 VENV="${ROOT}/.venv-discostic"
-[ ! -d "$VENV" ] && python -m venv "$VENV"
+[ ! -d "$VENV" ] && /usr/bin/python3 -m venv "$VENV"
 source "$VENV/bin/activate"
 python -c "import kerncraft" 2>/dev/null || python -m pip install --quiet kerncraft numpy osaca
 

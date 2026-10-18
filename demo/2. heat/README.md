@@ -34,7 +34,7 @@ DisCostiC sets `number_of_processes = ntasks - 1` (socket 35, full node 71, and 
 ## Layout
 
 ```
-heat-demo/
+2. heat/
 ├── shared/benchmarks/heat.c
 ├── shared/scripts/                  # build, measured helpers, DisCostiC, traces
 ├── stageN-*/configs/                # O3, penalty = 0
@@ -60,7 +60,7 @@ Penalty is simulator-only: `HEAT_FILE.hpp` adds `penalty` nanoseconds to each ti
 ## Run
 
 ```bash
-cd heat-demo/
+cd "demo/2. heat/"
 bash setup_output_dirs.sh
 module load intel/2023.2.1 intelmpi/2021.16.0 python git cmake likwid
 # fallback: intel/2025.2.0 intelmpi/2021.16.0
@@ -70,7 +70,7 @@ python3 run_job_chain.py --stages 1,2,3,4,5
 python3 generate_figures.py --stages 1,2,3,4,5
 ```
 
-Submit SLURM jobs from inside `heat-demo/`. The chain runs the base campaign (`penalty = 0`), then `calibrate_penalties.py`, then penalty simulations for pairs listed in `penalty_active.tsv`. Use `--force` to re-run a step that already verifies.
+Submit SLURM jobs from inside `demo/2. heat/`. The chain runs the base campaign (`penalty = 0`), then `calibrate_penalties.py`, then penalty simulations for pairs listed in `penalty_active.tsv`. Use `--force` to re-run a step that already verifies.
 
 Job time limits use a 10-minute floor. When a previous run of the same job took more than 5 minutes, `--time` is twice that elapsed time.
 

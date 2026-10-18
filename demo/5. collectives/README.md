@@ -43,7 +43,7 @@ IMB jobs use `-iter 10000 -iter_policy dynamic`, `-npmin 72`, and `-msglen share
 ## Layout
 
 ```
-collectives-demo/
+5. collectives/
 ├── shared/
 │   ├── sizes.txt                # IMB -msglen list, in bytes
 │   └── scripts/                 # DisCostiC and IMB helpers
@@ -57,7 +57,7 @@ collectives-demo/
 ## Run
 
 ```bash
-cd collectives-demo/
+cd "demo/5. collectives/"
 bash setup_output_dirs.sh
 module load intel/2023.2.1 intelmpi/2021.16.0 python git cmake likwid
 
@@ -66,7 +66,7 @@ python3 run_job_chain.py --stages 1,2
 python3 generate_figures.py --stages 1
 ```
 
-Submit SLURM jobs from inside `collectives-demo/`. The chain skips steps whose artifacts already verify. Use `--force` to re-run them.
+Submit SLURM jobs from inside `demo/5. collectives/`. The chain skips steps whose artifacts already verify. Use `--force` to re-run them.
 
 Stage 2 traces:
 

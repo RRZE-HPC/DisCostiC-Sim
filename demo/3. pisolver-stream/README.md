@@ -24,7 +24,7 @@ An optional stage-2 full-node test (1 node × 72 ranks) is kept under `jobs/meas
 ## Layout
 
 ```
-pisolver-stream-demo/
+3. pisolver-stream/
 ├── shared/
 │   ├── pisolver-triad-bench/    # measured MPI binary and configs
 │   └── scripts/                 # build, measured helpers, DisCostiC, traces
@@ -48,7 +48,7 @@ Two behaviors in the DisCostiC tree are required for this kernel to finish:
 ## Run
 
 ```bash
-cd pisolver-stream-demo/
+cd "demo/3. pisolver-stream/"
 bash setup_output_dirs.sh
 module load intel/2023.2.1 intelmpi/2021.16.0 python git cmake likwid
 bash shared/scripts/build_benchmark.sh
@@ -58,7 +58,7 @@ python3 run_job_chain.py --stages 1,2,3,4,5
 python3 generate_figures.py --stages 1,2,3,4,5
 ```
 
-Submit SLURM jobs from inside `pisolver-stream-demo/`. The chain skips steps whose artifacts already verify. Use `--force` to re-run them.
+Submit SLURM jobs from inside `demo/3. pisolver-stream/`. The chain skips steps whose artifacts already verify. Use `--force` to re-run them.
 
 Optional full-node test, not part of the chain:
 

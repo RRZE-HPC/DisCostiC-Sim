@@ -70,7 +70,7 @@ One way to check the installation is to print the version and the help of the Di
 <a name="configuration"></a>
 ⏱️ **Configuration settings**:thought_balloon:
 
-The [test](test) folder holds one header per benchmark and kernel mode. [Run_Simulation.sh](Run_Simulation.sh) copies `test/<benchmark_kernel>.hpp` to `test/P2P.hpp`, so `benchmark_kernel` is the header name without `.hpp`. The shipped [config.cfg](config.cfg) sets `benchmark_kernel = STREAM_COLLECTIVE`. [Run_Simulation_ITAC.sh](Run_Simulation_ITAC.sh) instead copies `test/<benchmark_kernel>_<kernel_mode>.hpp`. That script reads `kernel_mode`, which is not set in the shipped `config.cfg`. Examples of headers:
+The [test](test) folder holds one header per benchmark and kernel mode. [Run_Simulation.sh](Run_Simulation.sh) copies `test/<benchmark_kernel>.hpp` to `test/P2P.hpp`, so `benchmark_kernel` is the header name without `.hpp`. The shipped [config.cfg](config.cfg) sets `benchmark_kernel = STREAM_COLLECTIVE`. Examples of headers:
 
 | Header name (`benchmark_kernel`) | Description |
 | --------------------- | ------------- |
@@ -94,7 +94,7 @@ The [test](test) folder holds one header per benchmark and kernel mode. [Run_Sim
 
 Some `*_LBL.hpp` headers read `message_size` from [config.cfg](config.cfg) and use it as the byte count of the point-to-point exchange. `step_size`, `direction`, and `periodic` are not read by the headers on this tree.
 
-The shipped [config.cfg](config.cfg) selects the header with `benchmark_kernel`. `kernel_mode` is only needed by [Run_Simulation_ITAC.sh](Run_Simulation_ITAC.sh), and it is not set in that file. The keys `./discostic --help` actually prints are listed in [DisCostiC help](doc/README_MODEL.md#help).
+The shipped [config.cfg](config.cfg) selects the header with `benchmark_kernel`. `FILE` and `SRC` headers run Kerncraft. `LBL` and `COMP` headers use recorded ECM numbers. The keys `./discostic --help` actually prints are listed in [DisCostiC help](doc/README_MODEL.md#help).
 
 <a name="compilation"></a>
 🥅 **Compilation**:thought_balloon:
@@ -114,23 +114,11 @@ The compilation offers the following choices to enable the output report's data 
 <a name="run"></a>
 :green_circle: **Run**:thought_balloon:
 
-In the batch script, the number of the simulator processes is configured as the number of simulated processes plus one. To run the batch script on any system, ITAC profiling can be enabled or disabled, which will or will not dump the simulator's own trace in ITAC:
+[Run_Simulation.sh](Run_Simulation.sh) reads [config.cfg](config.cfg) in place and launches `number_of_processes + 1` ranks on Fritz (`singlenode`). Submit it from the repository root. The allocation must be at least that many tasks.
 
 | Command                  | Description |
 | --------------------- | ------------- |
-| `sbatch Run_Simulation.sh`          | This performs the simulation without tracing the own implementation of the simulator using ITAC. |
-| `sbatch Run_Simulation_ITAC.sh`          | This dumps the simulator's own trace into ITAC to investigate the implementation of the simulator. |
-
-
-The [Run_Simulation_ITAC.sh](Run_Simulation_ITAC.sh) script only generates a single STF file (`simulation.single.stf`) in the main directory due to the export of the following variables:
-
-```
-export VT_LOGFILE_FORMAT=SINGLESTF
-export VT_LOGFILE_NAME=simulation
-export VT_LOGFILE_PREFIX=$SLURM_SUBMIT_DIR
-export VT_FLUSH_PREFIX=/tmp
-```
-The formats, names and locations of output files in these environmental variables can be adjusted as desired.
+| `sbatch Run_Simulation.sh`          | This runs the simulation described by the current `config.cfg`. |
 
 <a name="clean"></a>
 🔁 **Clean and uninstall**:thought_balloon:

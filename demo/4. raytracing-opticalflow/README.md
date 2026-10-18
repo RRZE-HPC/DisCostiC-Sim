@@ -26,7 +26,7 @@ Suite overview: [`../README.md`](../README.md).
 ## Layout
 
 ```
-raytracing-opticalflow-demo/
+4. raytracing-opticalflow/
 ├── shared/
 │   ├── rt-of-bench/             # measured solver and Makefile
 │   └── scripts/                 # build, measured helpers, DisCostiC, traces
@@ -43,7 +43,7 @@ raytracing-opticalflow-demo/
 ## Run
 
 ```bash
-cd raytracing-opticalflow-demo/
+cd "demo/4. raytracing-opticalflow/"
 bash setup_output_dirs.sh
 module load intel/2023.2.1 intelmpi/2021.16.0 python git cmake likwid
 bash shared/scripts/build_benchmark.sh
@@ -53,7 +53,7 @@ python3 run_job_chain.py --stages 1,2,3,4,5
 python3 generate_figures.py --stages 1,2,3,4,5
 ```
 
-Submit SLURM jobs from inside `raytracing-opticalflow-demo/`. The chain skips steps whose artifacts already verify. Use `--force` to re-run them.
+Submit SLURM jobs from inside `demo/4. raytracing-opticalflow/`. The chain skips steps whose artifacts already verify. Use `--force` to re-run them.
 
 ### Measured command line
 
