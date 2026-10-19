@@ -16,8 +16,8 @@ from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
 
-TC = Path(__file__).resolve().parent                                          # streamtriad-demo/
-ROOT = Path(os.environ.get("DISCOSTIC_EXTENSION_ROOT", str(TC.parent.parent)))  # discostic-extension/
+TC = Path(__file__).resolve().parent                                          # 1-triad/
+ROOT = Path(os.environ.get("DISCOSTIC_EXTENSION_ROOT", str(TC.parent.parent)))  # DisCostiC-Sim
 BENCH_BIN = TC / "shared/benchmarks/mpi_stream_bench_comm"
 
 # Still in queue or on nodes — keep polling.
