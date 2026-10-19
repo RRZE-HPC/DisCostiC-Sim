@@ -11,5 +11,5 @@
 | File | Content | Background |
 |------|---------|------------|
 | `DisCostiC-logo-black.png` | Symbol, name and tagline | Dark |
-| `DisCostiC-logo-trans.png` | Symbol, name and tagline | Light |
+| `DisCostiC-logo-trans.png` | Symbol, name and tagline | Transparent |
 | `DisCostiC-symbol.png` | Symbol only | Transparent |
