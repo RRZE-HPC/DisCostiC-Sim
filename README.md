@@ -1,4 +1,8 @@
-# DisCostiC: Distributed Cost in Cluster
+<p align="center">
+  <img src="doc/Logo/DisCostiC-symbol.png" alt="DisCostiC logo" width="140">
+</p>
+
+<h1 align="center">DisCostiC: Distributed Cost in Cluster</h1>
 
 <a href="https://rrze-hpc.github.io/DisCostiC-Sim/doc/html/index.html">
   <img alt="HTML Doxygen doc" src="https://img.shields.io/badge/HTML%20Doxygen%20Doc%20-Read%20now!-red" />
