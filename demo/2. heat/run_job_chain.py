@@ -16,8 +16,8 @@ from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
 
-TC = Path(__file__).resolve().parent                                          # heat-demo/
-ROOT = Path(os.environ.get("DISCOSTIC_EXTENSION_ROOT", str(TC.parent.parent)))  # discostic-extension/
+TC = Path(__file__).resolve().parent                                          # 2-heat/
+ROOT = Path(os.environ.get("DISCOSTIC_EXTENSION_ROOT", str(TC.parent.parent)))  # DisCostiC-Sim/
 BENCH_BIN = TC / "shared/benchmarks/heat"
 
 # Still in queue or on nodes — keep polling.
