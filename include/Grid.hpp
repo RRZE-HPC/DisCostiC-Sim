@@ -2,7 +2,7 @@
 ///    GRID_HPP
 ///
 ///    \Author: Ayesha Afzal <ayesha.afzal@fau.de>
-///    \Copyright © 2024 HPC, FAU Erlangen-Nuremberg. All rights reserved.
+///    \Copyright © 2026 HPC, FAU Erlangen-Nuremberg. All rights reserved.
 ///
 #ifndef Grid_HPP
 #define Grid_HPP
