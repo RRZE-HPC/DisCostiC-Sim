@@ -569,7 +569,7 @@ static const DisCosTiC_Indextype MPI_ANY_TA = ~0;
 #define version()                                                                                      \
 	{                                                                                                  \
 		std::cout << "\nDistributed CosT in Cluster ( DisCosTiC )" << std::endl;                       \
-		std::cout << "Version : v2.0.0 (Second release)" << std::endl;                                  \
+		std::cout << "Version : v2.0.0 (second release)" << std::endl;                                  \
 		std::cout << "Author : Ayesha Afzal <ayesha.afzal@fau.de>" << std::endl;                       \
 		std::cout << "Copyright : 2023 HPC, FAU Erlangen-Nuremberg. All rights reserved" << std::endl; \
 	}
