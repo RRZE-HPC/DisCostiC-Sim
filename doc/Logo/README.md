@@ -1,6 +1,6 @@
 # DisCostiC logo
 
-<p align="center">
+<p align="left">
   <img src="DisCostiC-logo-black.png" alt="DisCostiC logo, dark" width="260">
   &nbsp;&nbsp;
   <img src="DisCostiC-logo-trans.png" alt="DisCostiC logo, light" width="200">
