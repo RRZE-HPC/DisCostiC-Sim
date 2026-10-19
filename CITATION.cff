@@ -1,0 +1,13 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+  - family-names: Afzal
+    given-names: Ayesha
+orcid: "https://orcid.org/0000-0001-5061-0438"
+affiliation: "Erlangen National High Performance Computing Center (NHR@FAU), Friedrich-Alexander-Universität Erlangen-Nürnberg"
+title: "DisCostiC: Distributed Cost in Cluster"
+version: 2.0.0
+date-released: 2026-10-19
+doi: 10.5281/zenodo.23471394
+license: AGPL-3.0
+repository-code: "https://github.com/RRZE-HPC/DisCostiC-Sim"
