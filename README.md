@@ -18,8 +18,8 @@
 <a href="https://twitter.com/AyeshaHamad4" target="_parent">
   <img alt="" src="https://img.shields.io/twitter/follow/AyeshaHamad4.svg?style=social&label=Follow" />
 </a>
-<a href="https://doi.org/10.5281/zenodo.10606291">
-  <img alt="DisCostiC Zenodo release" src="https://zenodo.org/badge/DOI/10.5281/zenodo.10606291.svg" />
+<a href="https://doi.org/10.5281/zenodo.10606290">
+  <img alt="DisCostiC Zenodo release" src="https://zenodo.org/badge/DOI/10.5281/zenodo.10606290.svg" />
 </a>
 <a href="https://github.com/RRZE-HPC/DisCostiC-Sim/releases">
   <img alt="GitHub Release" src="https://img.shields.io/badge/GitHub%20Release%20-See%20now!-purple" />
