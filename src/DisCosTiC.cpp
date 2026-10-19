@@ -2,7 +2,7 @@
 ///    \file
 ///    DISCOSTIC_HPP
 ///    \Author: Ayesha Afzal <ayesha.afzal@fau.de>
-///    \Copyright © 2024 HPC, FAU Erlangen-Nuremberg. All rights reserved.
+///    \Copyright © 2026 HPC, FAU Erlangen-Nuremberg. All rights reserved.
 ///
 
 #include <iostream>
@@ -1972,11 +1972,11 @@ int main(int argc, char **argv)
         ofs.open(filename, std::ios_base::app);
 
         ofs << "{}\n],"
-            << "\"Name\": \"Trace visualisation ofs DisCosTiC toolkit\", \n "
-            << "\"Full form\": \"Distributed CosT in Cluster\", \n "
+            << "\"Name\": \"Trace visualisation ofs DisCostiC toolkit\", \n "
+            << "\"Full form\": \"Distributed Cost in Cluster\", \n "
             << "\"Version\": \"v2.0.0 (second release)\", \n "
             << "\"Author\": \"Ayesha Afzal <ayesha.afzal@fau.de>\", \n "
-            << "\"Copyright\": \"© 2023 HPC, FAU Erlangen-Nuremberg. All rights reserved\" \n "
+            << "\"Copyright\": \"© 2026 HPC, FAU Erlangen-Nuremberg. All rights reserved\" \n "
             << "}\n";
         ofs.close();
 
