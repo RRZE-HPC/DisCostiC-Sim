@@ -8,6 +8,6 @@ affiliation: "Erlangen National High Performance Computing Center (NHR@FAU), Fri
 title: "DisCostiC: Distributed Cost in Cluster"
 version: 2.0.0
 date-released: 2026-10-19
-doi: 10.5281/zenodo.23471394
+doi: 10.5281/zenodo.10606290
 license: AGPL-3.0
 repository-code: "https://github.com/RRZE-HPC/DisCostiC-Sim"
