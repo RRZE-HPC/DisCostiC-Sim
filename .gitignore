@@ -56,11 +56,11 @@ build/
 # Demo build and runtime artifacts
 __pycache__/
 *.lock
-demo/1. triad/shared/benchmarks/mpi_stream_bench_comm
-demo/1. triad/shared/benchmarks/mpi_stream_bench_comm_O1
-demo/2. heat/shared/benchmarks/heat
-demo/3. pisolver-stream/shared/pisolver-triad-bench/bin/plain-mpi
-demo/4. raytracing-opticalflow/shared/rt-of-bench/bin/
+demo/1_triad/shared/benchmarks/mpi_stream_bench_comm
+demo/1_triad/shared/benchmarks/mpi_stream_bench_comm_O1
+demo/2_heat/shared/benchmarks/heat
+demo/3_pisolver-stream/shared/pisolver-triad-bench/bin/plain-mpi
+demo/4_raytracing-opticalflow/shared/rt-of-bench/bin/
 
 _archive/
 
@@ -78,17 +78,17 @@ _archive/
 **/results/measured-trace/**/*-measured
 **/*-spr-measured
 
-demo/1. triad/job_configs/
-demo/3. pisolver-stream/job_configs/
-demo/4. raytracing-opticalflow/job_configs/
-demo/2. heat/job_configs/
-demo/5. collectives/job_configs/
+demo/1_triad/job_configs/
+demo/3_pisolver-stream/job_configs/
+demo/4_raytracing-opticalflow/job_configs/
+demo/2_heat/job_configs/
+demo/5_collectives/job_configs/
 
-demo/3. pisolver-stream/**/results/measured/run.*/
-demo/3. pisolver-stream/**/results/measured/tsv_fragments/
-demo/4. raytracing-opticalflow/**/results/measured/run.*/
-demo/4. raytracing-opticalflow/**/results/measured/tsv_fragments/
-demo/2. heat/**/results/measured/tsv_fragments/
+demo/3_pisolver-stream/**/results/measured/run.*/
+demo/3_pisolver-stream/**/results/measured/tsv_fragments/
+demo/4_raytracing-opticalflow/**/results/measured/run.*/
+demo/4_raytracing-opticalflow/**/results/measured/tsv_fragments/
+demo/2_heat/**/results/measured/tsv_fragments/
 
 _upstream_optical_flow/
 
