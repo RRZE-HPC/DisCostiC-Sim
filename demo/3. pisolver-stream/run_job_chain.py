@@ -16,8 +16,8 @@ from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
 
-TC = Path(__file__).resolve().parent                                          # pisolver-stream-demo/
-ROOT = Path(os.environ.get("DISCOSTIC_EXTENSION_ROOT", str(TC.parent.parent)))  # discostic-extension/
+TC = Path(__file__).resolve().parent                                          # 3-pisolver-stream/
+ROOT = Path(os.environ.get("DISCOSTIC_EXTENSION_ROOT", str(TC.parent.parent)))  # DisCostiC-Sim/
 BENCH_BIN = TC / "shared/pisolver-triad-bench/bin/plain-mpi"
 
 # Still in queue or on nodes — keep polling.
