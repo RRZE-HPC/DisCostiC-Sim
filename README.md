@@ -1,4 +1,4 @@
-# <img src="https://raw.githubusercontent.com/RRZE-HPC/DisCostiC-Sim/main/doc/Logo/DisCostiC-symbol.png" alt="DisCostiC logo" height="40" align="center"> DisCostiC: Distributed Cost in Cluster
+# <img src="https://raw.githubusercontent.com/RRZE-HPC/DisCostiC-Sim/main/doc/Logo/DisCostiC-symbol.png" alt="DisCostiC logo" height="45" align="center"> DisCostiC: Distributed Cost in Cluster
 
 <a href="https://rrze-hpc.github.io/DisCostiC-Sim/doc/html/index.html">
   <img alt="HTML Doxygen doc" src="https://img.shields.io/badge/HTML%20Doxygen%20Doc%20-Read%20now!-red" />
@@ -14,9 +14,6 @@
 </a>
 <a href="https://github.com/AyeshaAfzal91" target="_parent">
   <img alt="" src="https://img.shields.io/github/stars/tanstack/react-table.svg?style=social&label=Star" />
-</a>
-<a href="https://twitter.com/AyeshaHamad4" target="_parent">
-  <img alt="" src="https://img.shields.io/twitter/follow/AyeshaHamad4.svg?style=social&label=Follow" />
 </a>
 <a href="https://doi.org/10.5281/zenodo.10606290">
   <img alt="DisCostiC Zenodo release" src="https://zenodo.org/badge/DOI/10.5281/zenodo.10606290.svg" />
