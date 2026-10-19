@@ -1,0 +1,9 @@
+<map id="DisCosTiC::Grid::getOp" name="DisCosTiC::Grid::getOp">
+<area shape="rect" id="Node000001" title="get the nodes" alt="" coords="239,70,409,95"/>
+<area shape="rect" id="Node000002" href="$classDisCosTiC_1_1Grid__Init.html#adfce3baf55f74984f8164cb97380722b" title="constructor that initializes the variables." alt="" coords="23,5,173,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="259,69,173,47,174,42,261,64"/>
+<area shape="rect" id="Node000003" href="$classDisCosTiC_1_1Grid.html#a277c6d672ef26aac2792671abadd19d1" title="set the operation, if started" alt="" coords="13,70,183,95"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="225,85,183,85,183,80,225,80"/>
+<area shape="rect" id="Node000004" href="$classDisCosTiC_1_1Grid.html#a06ec2d68512f4added30bfc93bccf374" title="un set the operation, if completed" alt="" coords="5,119,191,145"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="252,101,158,122,156,117,251,96"/>
+</map>

@@ -1,0 +1,9 @@
+<map id="UserInterface::YAMLParser::YAMLParser" name="UserInterface::YAMLParser::YAMLParser">
+<area shape="rect" id="Node000001" title="a class to set the name of the configuration file and extracts and parses the data" alt="" coords="5,69,199,109"/>
+<area shape="rect" id="Node000002" href="$classUserInterface_1_1YAMLParser.html#ae8f251884bae7d210911d01b3406524d" title="a function that extracts the key from the pair of key = value" alt="" coords="247,5,440,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="178,67,254,46,255,51,179,72"/>
+<area shape="rect" id="Node000003" href="$classUserInterface_1_1YAMLParser.html#ac14df2314eef4c1adf082b2e4271b4b1" title="a function that removes everything from the semicolon (including it) to the end of the line." alt="" coords="247,69,440,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="199,87,233,87,233,92,199,92"/>
+<area shape="rect" id="Node000004" href="$classUserInterface_1_1YAMLParser.html#a39a0acf407d535de460661ede17203a5" title="a function that returns false if a non&#45;space character was found, true otherwise. The function is &quot;co..." alt="" coords="247,133,440,173"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="179,107,255,127,254,132,178,112"/>
+</map>

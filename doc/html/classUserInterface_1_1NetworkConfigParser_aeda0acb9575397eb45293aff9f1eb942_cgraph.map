@@ -1,0 +1,9 @@
+<map id="UserInterface::NetworkConfigParser::readData" name="UserInterface::NetworkConfigParser::readData">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,69,220,109"/>
+<area shape="rect" id="Node000002" href="$classUserInterface_1_1NetworkConfigParser.html#a6a2f72bd0ca9e36d3e2c8bfd212e679c" title="a function that parse the line by calling above mentioed functions" alt="" coords="268,5,483,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="195,67,279,46,280,51,196,72"/>
+<area shape="rect" id="Node000003" href="$classUserInterface_1_1NetworkConfigParser.html#a818ea46e6c0c0fac637abc4c83596b24" title="a function that removes everything from the semicolon (including it) to the end of the line." alt="" coords="268,69,483,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="220,87,254,87,254,92,220,92"/>
+<area shape="rect" id="Node000004" href="$classUserInterface_1_1NetworkConfigParser.html#a646cbf92b80976f6b75553c3d2b336af" title="a function that returns false if a non&#45;space character was found, true otherwise. The function is &quot;co..." alt="" coords="268,133,483,173"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="196,107,280,127,279,133,195,112"/>
+</map>

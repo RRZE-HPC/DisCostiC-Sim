@@ -1,0 +1,15 @@
+<map id="UserInterface::ConfigParser::ConfigParser" name="UserInterface::ConfigParser::ConfigParser">
+<area shape="rect" id="Node000001" title="a class to set the name of the configuration file and extracts and parses the data" alt="" coords="5,133,204,173"/>
+<area shape="rect" id="Node000002" href="$classUserInterface_1_1ConfigParser.html#ad511ee0fab8e2ce4ccde22ba0757df57" title="a function that parse the line by calling above mentioed functions" alt="" coords="252,69,451,109"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="182,131,260,110,261,115,183,136"/>
+<area shape="rect" id="Node000006" href="$classUserInterface_1_1ConfigParser.html#ad85fa6208f3f88bee456192f6f8ae118" title="a function that removes everything from the semicolon (including it) to the end of the line." alt="" coords="252,133,451,173"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="204,151,238,151,238,156,204,156"/>
+<area shape="rect" id="Node000007" href="$classUserInterface_1_1ConfigParser.html#a5a841e46a88419399821ec7e11c6b369" title="a function that returns false if a non&#45;space character was found, true otherwise. The function is &quot;co..." alt="" coords="252,197,451,237"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="183,171,261,191,260,196,182,176"/>
+<area shape="rect" id="Node000003" href="$classUserInterface_1_1ConfigParser.html#ab5508f0f5bf0b45a02cafdbbf6d04c0a" title="a function that extracts the key from the pair of key = value" alt="" coords="499,5,697,45"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="429,67,507,46,508,51,430,72"/>
+<area shape="rect" id="Node000004" href="$classUserInterface_1_1ConfigParser.html#a40043d16f3700a0103d3a43449f37a63" title="a function that extracts the value from the pair of key = value" alt="" coords="499,69,697,109"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="451,87,485,87,485,92,451,92"/>
+<area shape="rect" id="Node000005" href="$classUserInterface_1_1ConfigParser.html#a9e7ab9cdb6f91f2ffeb1eeddb1455935" title="a function for finding the key" alt="" coords="499,133,697,173"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="430,107,508,127,507,132,429,112"/>
+</map>

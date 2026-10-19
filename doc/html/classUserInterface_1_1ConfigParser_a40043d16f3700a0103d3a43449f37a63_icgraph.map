@@ -1,0 +1,7 @@
+<map id="UserInterface::ConfigParser::extractValue" name="UserInterface::ConfigParser::extractValue">
+<area shape="rect" id="Node000001" title="a function that extracts the value from the pair of key = value" alt="" coords="499,5,697,45"/>
+<area shape="rect" id="Node000002" href="$classUserInterface_1_1ConfigParser.html#ad511ee0fab8e2ce4ccde22ba0757df57" title="a function that parse the line by calling above mentioed functions" alt="" coords="252,5,451,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="485,28,451,28,451,23,485,23"/>
+<area shape="rect" id="Node000003" href="$classUserInterface_1_1ConfigParser.html#aaa2f0b0ea3e9ddd8051844eb68dbc3b9" title="a class to set the name of the configuration file and extracts and parses the data" alt="" coords="5,5,204,45"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="238,28,204,28,204,23,238,23"/>
+</map>

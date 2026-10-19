@@ -1,0 +1,8 @@
+<map id="DisCosTiC::Grid_Init::Grid_Init" name="DisCosTiC::Grid_Init::Grid_Init">
+<area shape="rect" id="Node000001" title="constructor that initializes the variables." alt="" coords="5,23,156,63"/>
+<area shape="rect" id="Node000002" href="$classDisCosTiC_1_1Grid.html#a59b6156b7b902517274ddef38e5cf7aa" title="get the nodes" alt="" coords="204,5,375,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="156,32,190,27,191,33,157,37"/>
+<area shape="rect" id="Node000003" href="$namespaceDisCosTiC.html#ad3af5880f11ee13905c3b10a5bbbc4fc" title=" " alt="" coords="423,31,581,56"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="156,41,409,41,409,46,156,46"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="375,26,410,30,409,35,375,31"/>
+</map>

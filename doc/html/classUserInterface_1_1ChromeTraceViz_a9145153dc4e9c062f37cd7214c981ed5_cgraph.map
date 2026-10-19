@@ -1,0 +1,13 @@
+<map id="UserInterface::ChromeTraceViz::ChromeTraceViz" name="UserInterface::ChromeTraceViz::ChromeTraceViz">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,69,208,109"/>
+<area shape="rect" id="Node000002" href="$classUserInterface_1_1ChromeTraceViz.html#a1c3f7f3bbe1d9afa2531b82c96c44f0f" title=" " alt="" coords="256,5,459,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="185,67,265,46,266,51,186,72"/>
+<area shape="rect" id="Node000003" href="$classUserInterface_1_1ChromeTraceViz.html#a55b02734b5444e3f869a501f067b2ff1" title=" " alt="" coords="256,69,459,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="208,87,242,87,242,92,208,92"/>
+<area shape="rect" id="Node000004" href="$classUserInterface_1_1ConfigParser.html#a666972bbb29c3b07fa9cd17bbd2b8976" title="a function that retrieves the value of a specific key" alt="" coords="258,133,457,173"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="186,107,266,127,265,133,185,112"/>
+<area shape="rect" id="Node000005" href="$classUserInterface_1_1ConfigParser.html#a9e7ab9cdb6f91f2ffeb1eeddb1455935" title="a function for finding the key" alt="" coords="507,101,705,141"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="457,138,493,133,493,138,457,143"/>
+<area shape="rect" id="Node000006" href="$classUserInterface_1_1Conversion.html#a2024f68803b2afb80f6cef18ea75e2da" title=" " alt="" coords="511,165,701,205"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="457,163,498,169,497,174,457,169"/>
+</map>

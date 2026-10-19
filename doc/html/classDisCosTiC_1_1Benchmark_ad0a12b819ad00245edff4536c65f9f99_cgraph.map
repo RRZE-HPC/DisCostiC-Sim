@@ -1,0 +1,9 @@
+<map id="DisCosTiC::Benchmark::Benchmark" name="DisCosTiC::Benchmark::Benchmark">
+<area shape="rect" id="Node000001" title="constructor that initializes the coordinates" alt="" coords="5,37,176,77"/>
+<area shape="rect" id="Node000002" href="$classUserInterface_1_1ConfigParser.html#a666972bbb29c3b07fa9cd17bbd2b8976" title="a function that retrieves the value of a specific key" alt="" coords="224,37,423,77"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="176,55,210,55,210,60,176,60"/>
+<area shape="rect" id="Node000003" href="$classUserInterface_1_1ConfigParser.html#a9e7ab9cdb6f91f2ffeb1eeddb1455935" title="a function for finding the key" alt="" coords="471,5,669,45"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="423,42,457,37,457,43,423,47"/>
+<area shape="rect" id="Node000004" href="$classUserInterface_1_1Conversion.html#a2024f68803b2afb80f6cef18ea75e2da" title=" " alt="" coords="475,69,665,109"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="423,68,462,73,461,78,423,73"/>
+</map>

@@ -1,0 +1,91 @@
+<map id="main" name="main">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,865,60,890"/>
+<area shape="rect" id="Node000002" href="$classUserInterface_1_1ChromeTraceViz.html#a392b6eb013d01b11acf856a579a9baa2" title=" " alt="" coords="123,21,325,61"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="32,864,37,708,50,456,59,326,72,210,87,121,96,91,106,72,110,67,114,71,110,75,101,93,92,122,77,210,65,326,55,456,42,709,37,865"/>
+<area shape="rect" id="Node000003" href="$classDisCosTiC_1_1CollectiveModel.html#abbed778228e8339081ba26a39daf99e4" title=" " alt="" coords="123,85,325,125"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="32,864,38,719,51,487,74,262,88,181,97,153,106,136,110,131,114,134,110,139,102,155,94,182,79,263,57,488,43,719,37,864"/>
+<area shape="rect" id="Node000008" href="$classUserInterface_1_1ChromeTraceViz.html#a8861084e865e3f60d5e146ae30b9ce0b" title=" " alt="" coords="123,149,325,189"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="32,864,39,730,53,519,76,314,90,241,97,215,106,200,110,196,114,199,110,203,102,218,95,242,81,315,59,519,44,731,37,865"/>
+<area shape="rect" id="Node000009" href="$classUserInterface_1_1ItacVtf.html#a390f86c25449eca34f269b1f81612c7a" title=" " alt="" coords="143,213,305,253"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="31,864,31,750,37,570,46,475,60,387,79,314,92,285,106,264,128,246,132,250,110,267,96,288,84,316,65,388,51,475,43,570,36,750,36,864"/>
+<area shape="rect" id="Node000010" href="$classUserInterface_1_1ItacVtf.html#a8ec41491d4931cc994e6a3f0257b5260" title=" " alt="" coords="143,277,305,317"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="31,865,32,761,41,600,50,515,63,437,81,372,93,347,106,328,129,310,132,314,110,331,98,350,86,374,68,438,55,516,46,601,38,761,37,865"/>
+<area shape="rect" id="Node000013" href="$classUserInterface_1_1ItacVtf.html#a248232e421f3a776c8804119c64b601e" title=" " alt="" coords="143,341,305,381"/>
+<area shape="poly" id="edge12_Node000001_Node000013" title=" " alt="" coords="31,864,34,771,45,630,54,555,67,487,84,431,106,392,129,374,132,378,110,395,89,433,72,488,59,556,50,630,40,772,37,864"/>
+<area shape="rect" id="Node000014" href="$classUserInterface_1_1TimeRankOP.html#a4d86cc4afa20a03fda9a84886a71434a" title="print time taken by execution to output file" alt="" coords="123,533,325,573"/>
+<area shape="poly" id="edge15_Node000001_Node000014" title=" " alt="" coords="33,864,41,805,56,721,78,638,91,606,106,584,110,580,114,584,110,587,96,608,83,640,62,722,47,806,38,865"/>
+<area shape="rect" id="Node000015" href="$classUserInterface_1_1ChromeTraceViz.html#a55329e338c8fa276b06750da094ac4b7" title=" " alt="" coords="123,597,325,637"/>
+<area shape="poly" id="edge16_Node000001_Node000015" title=" " alt="" coords="32,864,35,823,45,764,67,702,85,673,106,647,111,643,114,647,110,651,89,676,72,704,50,766,40,823,37,865"/>
+<area shape="rect" id="Node000016" href="$DisCosTiC_8cpp.html#a6e1c00956a876e48be99e9bd01a70d44" title=" " alt="" coords="197,662,251,687"/>
+<area shape="poly" id="edge17_Node000001_Node000016" title=" " alt="" coords="33,864,38,830,51,785,72,737,88,715,106,697,124,685,144,678,183,671,184,677,145,683,126,690,110,701,92,719,77,740,56,787,43,832,38,865"/>
+<area shape="rect" id="Node000017" href="$DisCosTiC_8cpp.html#afb93bd633b37cca64b221f78ac1a224a" title=" " alt="" coords="189,711,259,737"/>
+<area shape="poly" id="edge18_Node000001_Node000017" title=" " alt="" coords="35,863,58,807,79,775,106,747,140,731,175,723,176,728,142,736,110,752,83,778,63,809,40,865"/>
+<area shape="rect" id="Node000018" href="$classUserInterface_1_1ChromeTraceViz.html#ae4c9903adea98b5dc353fc054c7e2f0e" title=" " alt="" coords="123,761,325,801"/>
+<area shape="poly" id="edge19_Node000001_Node000018" title=" " alt="" coords="43,863,71,837,107,811,121,804,123,809,109,816,74,841,47,867"/>
+<area shape="rect" id="Node000019" href="$classUserInterface_1_1ChromeTraceViz.html#a0500ef2f580167a9977b913f8279fd85" title=" " alt="" coords="123,825,325,865"/>
+<area shape="poly" id="edge20_Node000001_Node000019" title=" " alt="" coords="60,870,109,862,110,867,61,876"/>
+<area shape="rect" id="Node000020" href="$classDisCosTiC_1_1Benchmark.html#aa042d196d06e6aff9c846ec46247b22e" title="the maximum number of the nodes" alt="" coords="139,889,309,929"/>
+<area shape="poly" id="edge21_Node000001_Node000020" title=" " alt="" coords="61,879,126,890,125,895,60,884"/>
+<area shape="rect" id="Node000021" href="$classDisCosTiC_1_1Benchmark.html#a5410a9000fc79006e18a96a827177c6a" title="the maximum number of the network interface controller" alt="" coords="139,953,309,993"/>
+<area shape="poly" id="edge22_Node000001_Node000021" title=" " alt="" coords="47,888,74,914,109,939,127,947,125,952,107,944,71,918,43,892"/>
+<area shape="rect" id="Node000022" href="$classDisCosTiC_1_1Grid.html#ad1fba65d7e273b386d017c07432866a9" title="default constructor" alt="" coords="120,1018,328,1043"/>
+<area shape="poly" id="edge23_Node000001_Node000022" title=" " alt="" coords="40,889,63,945,83,977,110,1003,121,1010,118,1015,106,1007,79,980,58,948,35,891"/>
+<area shape="rect" id="Node000023" href="$namespaceDisCosTiC.html#ad3af5880f11ee13905c3b10a5bbbc4fc" title=" " alt="" coords="428,1126,587,1151"/>
+<area shape="poly" id="edge24_Node000001_Node000023" title=" " alt="" coords="38,890,44,923,56,968,77,1014,92,1035,109,1052,229,1080,429,1121,428,1126,227,1085,107,1057,88,1038,73,1017,51,970,38,925,33,891"/>
+<area shape="rect" id="Node000024" href="$classDisCosTiC_1_1Grid.html#ab30f91b4ded705e208d87c8978e08a19" title="get the initial root operations ordered by their type for all ranks and time steps" alt="" coords="127,1297,321,1337"/>
+<area shape="poly" id="edge25_Node000001_Node000024" title=" " alt="" coords="37,890,43,968,56,1084,77,1200,92,1246,110,1277,122,1288,118,1292,106,1280,87,1248,72,1202,50,1085,38,969,32,890"/>
+<area shape="rect" id="Node000025" href="$classDisCosTiC_1_1Grid.html#a7a28fe5411bec669ddc0c348d78990f3" title="get the all operations ordered by their type for all ranks and time steps" alt="" coords="133,1119,315,1159"/>
+<area shape="poly" id="edge26_Node000001_Node000025" title=" " alt="" coords="37,890,41,930,52,986,74,1046,90,1074,110,1098,124,1110,121,1114,106,1102,85,1077,69,1048,47,987,36,931,32,891"/>
+<area shape="rect" id="Node000026" href="$classUserInterface_1_1ConfigParser.html#a666972bbb29c3b07fa9cd17bbd2b8976" title="a function that retrieves the value of a specific key" alt="" coords="408,1212,607,1252"/>
+<area shape="poly" id="edge28_Node000001_Node000026" title=" " alt="" coords="37,890,42,962,54,1067,64,1121,76,1169,91,1208,110,1233,147,1256,187,1271,231,1279,276,1281,320,1278,363,1272,438,1253,439,1259,364,1277,321,1283,276,1286,230,1284,186,1276,144,1261,106,1237,87,1211,71,1171,59,1122,49,1068,37,963,32,890"/>
+<area shape="rect" id="Node000029" href="$DisCosTiC_8cpp.html#ad8a72bd59b7b1e52477d8751931a0266" title=" " alt="" coords="149,1362,299,1387"/>
+<area shape="poly" id="edge31_Node000001_Node000029" title=" " alt="" coords="37,890,40,981,50,1119,59,1191,72,1257,89,1311,110,1348,123,1358,138,1365,135,1370,120,1362,106,1351,84,1314,67,1259,54,1192,44,1120,34,981,31,890"/>
+<area shape="rect" id="Node000030" href="$classDisCosTiC_1_1Benchmark.html#a9db6f0b0a60b16610f219cb81d52cc76" title="end of Oneway_PositiveDisplacement" alt="" coords="108,1183,340,1223"/>
+<area shape="poly" id="edge32_Node000001_Node000030" title=" " alt="" coords="38,890,46,949,62,1034,83,1116,96,1148,110,1169,114,1172,110,1176,106,1172,91,1150,78,1117,56,1035,41,950,33,891"/>
+<area shape="rect" id="Node000031" href="$classUserInterface_1_1TimeRankOP.html#a47cc4ec01d71b0375ec41a338977ccc5" title="print time taken by overhead at receiver side to output file" alt="" coords="123,1412,325,1452"/>
+<area shape="poly" id="edge35_Node000001_Node000031" title=" " alt="" coords="37,890,39,989,48,1142,57,1222,70,1295,88,1356,98,1379,110,1397,115,1402,111,1406,106,1400,94,1382,83,1358,65,1297,52,1223,43,1142,33,990,31,890"/>
+<area shape="rect" id="Node000032" href="$classUserInterface_1_1TimeRankOP.html#a4c0ce302bf4a019b00b3d22ba8ab9458" title="print time taken by overhead at sender side to output file" alt="" coords="123,1476,325,1516"/>
+<area shape="poly" id="edge36_Node000001_Node000032" title=" " alt="" coords="36,890,37,1000,44,1173,53,1263,66,1347,85,1416,97,1442,110,1462,114,1466,110,1470,106,1466,92,1445,80,1418,61,1348,48,1264,39,1173,31,1001,31,890"/>
+<area shape="rect" id="Node000033" href="$classAST.html#a61197b52efbd1af65001b06bb073db9b" title=" " alt="" coords="147,1541,301,1566"/>
+<area shape="poly" id="edge37_Node000001_Node000033" title=" " alt="" coords="37,890,44,1020,59,1223,81,1419,95,1489,102,1513,110,1526,135,1544,132,1548,106,1530,97,1515,90,1491,76,1420,53,1224,39,1020,32,891"/>
+<area shape="rect" id="Node000034" href="$classUserInterface_1_1NetworkConfigParser.html#aeda0acb9575397eb45293aff9f1eb942" title=" " alt="" coords="117,1591,331,1631"/>
+<area shape="poly" id="edge38_Node000001_Node000034" title=" " alt="" coords="37,890,44,1028,58,1247,80,1459,94,1535,102,1561,110,1576,114,1580,110,1584,106,1579,97,1563,89,1536,75,1460,53,1247,38,1028,32,890"/>
+<area shape="rect" id="Node000038" href="$classUserInterface_1_1ItacVtf.html#af2a6e0aac8430f65569339398d3d1050" title=" " alt="" coords="143,405,305,445"/>
+<area shape="poly" id="edge42_Node000001_Node000038" title=" " alt="" coords="32,864,36,782,48,660,58,596,71,537,86,489,106,456,129,438,132,443,110,459,91,491,76,539,63,597,54,660,42,783,37,865"/>
+<area shape="rect" id="Node000040" href="$classUserInterface_1_1ItacVtf.html#a64a51233b6343b1fc07b3b28e7b339f4" title=" " alt="" coords="143,469,305,509"/>
+<area shape="poly" id="edge45_Node000001_Node000040" title=" " alt="" coords="32,864,39,793,52,690,74,588,89,547,106,520,129,503,132,507,110,523,94,550,79,589,58,691,44,794,38,865"/>
+<area shape="rect" id="Node000041" href="$classUserInterface_1_1NetworkConfigParser.html#a66787bdbff2a60ee248ad2bbd9871817" title=" " alt="" coords="117,1655,331,1695"/>
+<area shape="poly" id="edge48_Node000001_Node000041" title=" " alt="" coords="37,890,43,1039,56,1279,66,1403,78,1513,93,1596,101,1624,110,1641,113,1644,109,1648,106,1644,96,1626,88,1598,73,1513,61,1403,51,1280,37,1040,32,890"/>
+<area shape="rect" id="Node000004" href="$classDisCosTiC_1_1CollectiveModel.html#a2b1c33ddcf348c2dce172c223c0e6ed8" title=" " alt="" coords="407,5,608,45"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="299,83,339,71,387,55,416,46,417,52,389,60,341,76,300,88"/>
+<area shape="rect" id="Node000005" href="$classDisCosTiC_1_1CollectiveModel.html#a041f14cc31cf59054d07d217fed07e7b" title=" " alt="" coords="388,69,627,109"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="325,97,374,94,374,100,325,102"/>
+<area shape="rect" id="Node000006" href="$classDisCosTiC_1_1CollectiveModel.html#a9df35a4e453f6b1fcc160d6b4550c075" title=" " alt="" coords="396,133,619,173"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="325,120,383,130,382,135,324,125"/>
+<area shape="rect" id="Node000007" href="$classDisCosTiC_1_1CollectiveModel.html#a1c72f1cb84f3754431b6da5a4cb8e08b" title=" " alt="" coords="407,197,608,237"/>
+<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="316,123,341,135,357,147,366,160,375,172,389,183,402,190,399,194,387,188,371,175,362,163,353,151,339,140,314,128"/>
+<area shape="rect" id="Node000011" href="$classUserInterface_1_1ItacVtf.html#af7663a74a5fc0d4f6311806b33baeb46" title=" " alt="" coords="427,381,588,421"/>
+<area shape="poly" id="edge10_Node000010_Node000011" title=" " alt="" coords="304,315,341,327,453,373,451,378,339,332,302,320"/>
+<area shape="rect" id="Node000012" href="$classUserInterface_1_1ItacVtf.html#a1d3fc4f075f973367e21a0fcd98b82a9" title=" " alt="" coords="427,293,588,333"/>
+<area shape="poly" id="edge11_Node000010_Node000012" title=" " alt="" coords="305,299,413,305,413,311,305,305"/>
+<area shape="poly" id="edge13_Node000013_Node000011" title=" " alt="" coords="305,370,413,385,413,391,305,375"/>
+<area shape="poly" id="edge14_Node000013_Node000012" title=" " alt="" coords="305,345,413,327,414,332,305,350"/>
+<area shape="poly" id="edge27_Node000025_Node000023" title=" " alt="" coords="316,1136,414,1136,414,1141,316,1141"/>
+<area shape="rect" id="Node000027" href="$classUserInterface_1_1ConfigParser.html#a9e7ab9cdb6f91f2ffeb1eeddb1455935" title="a function for finding the key" alt="" coords="675,1180,873,1220"/>
+<area shape="poly" id="edge29_Node000026_Node000027" title=" " alt="" coords="607,1217,660,1211,661,1216,607,1223"/>
+<area shape="rect" id="Node000028" href="$classUserInterface_1_1Conversion.html#a2024f68803b2afb80f6cef18ea75e2da" title=" " alt="" coords="679,1244,869,1284"/>
+<area shape="poly" id="edge30_Node000026_Node000028" title=" " alt="" coords="607,1241,666,1248,665,1254,607,1247"/>
+<area shape="poly" id="edge33_Node000030_Node000023" title=" " alt="" coords="313,1180,436,1152,437,1157,314,1185"/>
+<area shape="poly" id="edge34_Node000030_Node000026" title=" " alt="" coords="341,1212,395,1218,394,1223,340,1217"/>
+<area shape="rect" id="Node000035" href="$classUserInterface_1_1NetworkConfigParser.html#a6a2f72bd0ca9e36d3e2c8bfd212e679c" title="a function that parse the line by calling above mentioed functions" alt="" coords="400,1527,615,1567"/>
+<area shape="poly" id="edge39_Node000034_Node000035" title=" " alt="" coords="313,1588,405,1567,406,1572,314,1593"/>
+<area shape="rect" id="Node000036" href="$classUserInterface_1_1NetworkConfigParser.html#a818ea46e6c0c0fac637abc4c83596b24" title="a function that removes everything from the semicolon (including it) to the end of the line." alt="" coords="400,1591,615,1631"/>
+<area shape="poly" id="edge40_Node000034_Node000036" title=" " alt="" coords="331,1608,386,1608,386,1613,331,1613"/>
+<area shape="rect" id="Node000037" href="$classUserInterface_1_1NetworkConfigParser.html#a646cbf92b80976f6b75553c3d2b336af" title="a function that returns false if a non&#45;space character was found, true otherwise. The function is &quot;co..." alt="" coords="400,1655,615,1695"/>
+<area shape="poly" id="edge41_Node000034_Node000037" title=" " alt="" coords="314,1628,406,1649,405,1654,313,1633"/>
+<area shape="poly" id="edge43_Node000038_Node000011" title=" " alt="" coords="305,416,413,407,413,412,305,421"/>
+<area shape="rect" id="Node000039" href="$classUserInterface_1_1ItacVtf.html#ac266be75ee60b2147ecff779b987e956" title=" " alt="" coords="427,457,588,497"/>
+<area shape="poly" id="edge44_Node000038_Node000039" title=" " alt="" coords="305,437,414,458,413,463,305,443"/>
+<area shape="poly" id="edge46_Node000040_Node000011" title=" " alt="" coords="299,467,339,455,435,423,437,428,341,460,300,472"/>
+<area shape="poly" id="edge47_Node000040_Node000039" title=" " alt="" coords="305,483,413,479,413,484,305,489"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="UserInterface::ConfigParser::whitespace" name="UserInterface::ConfigParser::whitespace">
+<area shape="rect" id="Node000001" title="a function that returns false if a non&#45;space character was found, true otherwise. The function is &quot;co..." alt="" coords="252,5,451,45"/>
+<area shape="rect" id="Node000002" href="$classUserInterface_1_1ConfigParser.html#aaa2f0b0ea3e9ddd8051844eb68dbc3b9" title="a class to set the name of the configuration file and extracts and parses the data" alt="" coords="5,5,204,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="238,28,204,28,204,23,238,23"/>
+</map>

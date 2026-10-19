@@ -92,3 +92,6 @@ demo/2. heat/**/results/measured/tsv_fragments/
 
 _upstream_optical_flow/
 
+
+# Doxygen warnings log
+doc/doxygen/doxygen-warnings.log

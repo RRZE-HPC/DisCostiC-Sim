@@ -1,0 +1,11 @@
+<map id="DisCosTiC::CollectiveModel::calculateCollectiveTime" name="DisCosTiC::CollectiveModel::calculateCollectiveTime">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,101,207,141"/>
+<area shape="rect" id="Node000002" href="$classDisCosTiC_1_1CollectiveModel.html#a2b1c33ddcf348c2dce172c223c0e6ed8" title=" " alt="" coords="273,5,475,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="148,99,254,55,278,47,280,52,256,60,150,104"/>
+<area shape="rect" id="Node000003" href="$classDisCosTiC_1_1CollectiveModel.html#a041f14cc31cf59054d07d217fed07e7b" title=" " alt="" coords="255,69,493,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="207,107,241,103,241,108,207,112"/>
+<area shape="rect" id="Node000004" href="$classDisCosTiC_1_1CollectiveModel.html#a9df35a4e453f6b1fcc160d6b4550c075" title=" " alt="" coords="263,133,485,173"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="207,131,249,136,249,141,207,136"/>
+<area shape="rect" id="Node000005" href="$classDisCosTiC_1_1CollectiveModel.html#a1c72f1cb84f3754431b6da5a4cb8e08b" title=" " alt="" coords="273,197,475,237"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="150,139,256,183,280,191,278,196,254,188,148,144"/>
+</map>

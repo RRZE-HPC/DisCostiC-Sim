@@ -1,0 +1,14 @@
+/* DisCostiC overrides for doxygen-awesome-css. Colours follow the NHR@FAU blue. */
+html {
+  --primary-color: #04316a;
+  --primary-dark-color: #032552;
+  --primary-light-color: #4a78b5;
+  --content-maxwidth: 1100px;
+}
+html.dark-mode {
+  --primary-color: #7fa8e0;
+  --primary-dark-color: #a9c4ec;
+  --primary-light-color: #4a78b5;
+}
+/* README badges sit on one line instead of stacking */
+.contents p a img { display: inline-block; margin: 0 2px 4px 0; vertical-align: middle; }

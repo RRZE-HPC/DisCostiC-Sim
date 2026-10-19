@@ -1,0 +1,28 @@
+var searchData=
+[
+  ['about_20the_20theory_20of_20potential_20application_20scenarios_20for_20discostic_0',['📚 References about the theory of potential application scenarios for DisCostiC',['../readme_ref.html',1,'']]],
+  ['acknowledgement_1',['🔗 Acknowledgement',['../index.html#autotoc_md6',1,'']]],
+  ['addnode_2',['addNode',['../classAST.html#a4bf837c8362a137e9ab47429dc77ad77',1,'AST']]],
+  ['addr_3',['addr',['../classDataType_1_1vector3T.html#abe52482843ee2e0a9f1c1eafaf5aaef2',1,'DataType::vector3T']]],
+  ['algorithm_4',['algorithm',['../structDisCosTiC_1_1AST__OP.html#ac457e6a844f4aa2f93251d63d79f9e1a',1,'DisCosTiC::AST_OP::algorithm'],['../structDisCosTiC_1_1AST__OP__.html#acf85e8078617905f49f1e4ec06d59932',1,'DisCosTiC::AST_OP_::algorithm'],['../structDisCosTiC_1_1AST__OP__TYPE.html#a20435437d87e6abfc7624888a33822c9',1,'DisCosTiC::AST_OP_TYPE::algorithm'],['../structDisCosTiC_1_1DisCosTiC__OP.html#a1048179259aa4292fcc9e768833fcb3c',1,'DisCosTiC::DisCosTiC_OP::algorithm']]],
+  ['allnodes_5',['allNodes',['../classAST.html#a71615de3f44e148afb0499b3d33bcd65',1,'AST']]],
+  ['allrankstime_6',['allRanksTime',['../macro_8hpp.html#a6e646da47356d230dab13fbd86c770d0',1,'macro.hpp']]],
+  ['allreduce_5frecursive_5fdoubling_7',['ALLREDUCE_RECURSIVE_DOUBLING',['../namespaceDisCosTiC.html#a5082b44b0a5cf4483317c346e1c856c2ac09067d18c3a3ef6f8b867c0d3174772',1,'DisCosTiC']]],
+  ['allreducealgorithm_8',['AllreduceAlgorithm',['../namespaceDisCosTiC.html#a5082b44b0a5cf4483317c346e1c856c2',1,'DisCosTiC']]],
+  ['alpha_5f_9',['alpha_',['../structMachine.html#a0a605ba1a7c74c31dcdec8c078fd660a',1,'Machine']]],
+  ['analysis_10',['👩‍💻 Automating DSEL generation through static analysis',['../readme_model.html#autotoc_md8',1,'']]],
+  ['and_20build_11',['🐙 Compilation and build',['../index.html#autotoc_md2',1,'']]],
+  ['appendstring_12',['AppendString',['../macro_8hpp.html#ae0d056569fa6ddcbf3ba201147eb2e4f',1,'macro.hpp']]],
+  ['application_20scenarios_20for_20discostic_13',['📚 References about the theory of potential application scenarios for DisCostiC',['../readme_ref.html',1,'']]],
+  ['arc_14',['arc',['../classUserInterface_1_1ChromeTraceViz.html#a629e8e8b2074594891390d14359e6ca5',1,'UserInterface::ChromeTraceViz']]],
+  ['arch_5fname_15',['arch_name',['../DisCosTiC_8cpp.html#adb266ccd776bba89281ddc4916546f1f',1,'arch_name:&#160;DisCosTiC.cpp'],['../AST_8hpp.html#adb266ccd776bba89281ddc4916546f1f',1,'arch_name:&#160;DisCosTiC.cpp'],['../NodeModel_8hpp.html#adb266ccd776bba89281ddc4916546f1f',1,'arch_name:&#160;DisCosTiC.cpp'],['../NodeLvlScg_8cpp.html#adb266ccd776bba89281ddc4916546f1f',1,'arch_name:&#160;DisCosTiC.cpp'],['../STREAM__COLLECTIVE_8hpp.html#adb266ccd776bba89281ddc4916546f1f',1,'arch_name:&#160;DisCosTiC.cpp']]],
+  ['args_16',['args',['../classUserInterface_1_1ChromeTraceViz.html#a392b6eb013d01b11acf856a579a9baa2',1,'UserInterface::ChromeTraceViz']]],
+  ['argument_17',['Positional script argument',['../likwid_bench_auto_machinefile_guide.html#autotoc_md14',1,'']]],
+  ['ast_18',['AST',['../classAST.html',1,'AST'],['../classAST.html#aac85da54cdf1aedfb0bb5d9a0cd217f7',1,'AST::AST()']]],
+  ['ast_2ehpp_19',['AST.hpp',['../AST_8hpp.html',1,'']]],
+  ['ast_5fop_20',['AST_OP',['../structDisCosTiC_1_1AST__OP.html',1,'DisCosTiC']]],
+  ['ast_5fop_5f_21',['AST_OP_',['../structDisCosTiC_1_1AST__OP__.html',1,'DisCosTiC']]],
+  ['ast_5fop_5ftype_22',['AST_OP_TYPE',['../structDisCosTiC_1_1AST__OP__TYPE.html',1,'DisCosTiC']]],
+  ['automatic_20reformatting_23',['Post-processing — automatic reformatting',['../likwid_bench_auto_machinefile_guide.html#autotoc_md18',1,'']]],
+  ['automating_20dsel_20generation_20through_20static_20analysis_24',['👩‍💻 Automating DSEL generation through static analysis',['../readme_model.html#autotoc_md8',1,'']]]
+];

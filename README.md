@@ -149,7 +149,7 @@ The compilation offers the following choices to enable the output report's data 
 ## :warning: Disclaimer
 
 > [!NOTE]
-> A note to the reader: Please report any bugs to the issue tracker or contact [ayesha.afzal@fau.de](ayesha.afzal@fau.de).
+> A note to the reader: Please report any bugs to the issue tracker or contact [ayesha.afzal@fau.de](mailto:ayesha.afzal@fau.de).
 
 <a name="acknowledgement"></a>
 ## 🔗 Acknowledgement

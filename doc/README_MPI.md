@@ -5,7 +5,7 @@ Part of the [main README](../README.md#further-reading).
 
 DisCostiC is itself an MPI program. Launch it with `number_of_processes + 1` ranks: one controller rank (`Q_0`) and one simulator rank (`Q_i`) for each simulated application rank (`P_i`). `MPI_Comm_split` puts the controller on its own side of the communicator. The remaining ranks advance the discrete-event schedule and exchange serialized operation metadata with blocking or non-blocking MPI. The controller merges trace output and prints verbose logs.
 
-Simulator process count follows the simulated rank count. Very large runs may need distributed event scheduling; that limit is listed under [Planned features](../README.md#library-limitations).
+Simulator process count follows the simulated rank count. Very large runs may need distributed event scheduling; that limit is listed under [Planned features](README_TODO.md#library-limitations).
 
 The underlying principle of parallel simulation is that each operation's entire data is transmitted via blocking or non-blocking MPI routines to the processes it communicates with.
 
