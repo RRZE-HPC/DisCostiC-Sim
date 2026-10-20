@@ -151,7 +151,7 @@ The compilation offers the following choices to enable the output report's data 
 <a name="acknowledgement"></a>
 ## 🔗 Acknowledgement
 
-This work is funded by the **[DFG MOD4COMP RESEARCH UNIT](https://www.mod4comp.de)** "Holistic Energy and Performance Modeling for Sustainable Computing".
+This work is funded by the **[DFG research unit MOD4COMP](https://www.mod4comp.de)** "Holistic Energy and Performance Modeling for Sustainable Computing", within subproject **SP3** "Simulator framework for runtime and energy prediction of massively parallel message-passing programs". The principal investigators of SP3 are [Ayesha Afzal](https://hpc.fau.de/faudir/ayesha-afzal/) and [Gerhard Wellein](https://hpc.fau.de/faudir/prof-dr-gerhard-wellein/).
 
 <a name="contact"></a>
 ## 📱Contact
